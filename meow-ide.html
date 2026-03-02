@@ -1,1302 +1,2161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEOW IDE</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Josefin+Sans:wght@700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0d0d14;
-    --bg2: #12121c;
-    --bg3: #1a1a28;
-    --bg4: #222236;
-    --border: #2e2e4a;
-    --orange: #ff8c42;
-    --orange2: #ffb347;
-    --orange3: #ffd580;
-    --purple: #9b59b6;
-    --blue: #5b9cf6;
-    --green: #6bcf7f;
-    --red: #ff6b6b;
-    --pink: #ff79c6;
-    --text: #e8e8f0;
-    --text2: #9a9ab8;
-    --text3: #5a5a7a;
-    --glow: rgba(255,140,66,0.15);
-    --glow2: rgba(255,140,66,0.35);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEOW IDE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Josefin+Sans:wght@700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d14;
+      --bg2: #12121c;
+      --bg3: #1a1a28;
+      --bg4: #222236;
+      --border: #2e2e4a;
+      --orange: #ff8c42;
+      --orange2: #ffb347;
+      --orange3: #ffd580;
+      --purple: #9b59b6;
+      --blue: #5b9cf6;
+      --green: #6bcf7f;
+      --red: #ff6b6b;
+      --pink: #ff79c6;
+      --text: #e8e8f0;
+      --text2: #9a9ab8;
+      --text3: #5a5a7a;
+      --glow: rgba(255, 140, 66, 0.15);
+      --glow2: rgba(255, 140, 66, 0.35);
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Fira Code', monospace;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    cursor: default;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+    }
 
-  /* --- HEADER --- */
-  .header {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 0 16px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-  }
+    /* --- HEADER --- */
+    .header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--orange), var(--orange2), var(--orange3), var(--orange), transparent);
-    animation: scanline 3s linear infinite;
-  }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), var(--orange2), var(--orange3), var(--orange), transparent);
+      animation: scanline 3s linear infinite;
+    }
 
-  @keyframes scanline {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
+    @keyframes scanline {
+      0% {
+        transform: translateX(-100%);
+      }
 
-  .logo {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--orange);
-    letter-spacing: 4px;
-    text-shadow: 0 0 20px var(--glow2);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
+      100% {
+        transform: translateX(100%);
+      }
+    }
 
-  .logo .cat-icon { font-size: 20px; animation: catblink 4s infinite; }
-  @keyframes catblink { 0%,90%,100% { opacity:1; } 92%,98% { opacity:0; } }
+    .logo {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px var(--glow2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
 
-  .logo .version {
-    font-family: 'Fira Code', monospace;
-    font-size: 10px;
-    color: var(--text3);
-    font-weight: 300;
-    letter-spacing: 1px;
-    background: var(--bg4);
-    padding: 2px 6px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-  }
+    .logo .cat-icon {
+      font-size: 20px;
+      animation: catblink 4s infinite;
+    }
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-  }
+    @keyframes catblink {
 
-  .btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: 6px;
-    border: none;
-    font-family: 'Fira Code', monospace;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.5px;
-  }
+      0%,
+      90%,
+      100% {
+        opacity: 1;
+      }
 
-  .btn-run {
-    background: var(--orange);
-    color: #111;
-    font-weight: 600;
-    box-shadow: 0 0 16px rgba(255,140,66,0.4);
-  }
-  .btn-run:hover {
-    background: var(--orange2);
-    box-shadow: 0 0 24px rgba(255,140,66,0.6);
-    transform: translateY(-1px);
-  }
-  .btn-run:active { transform: translateY(0); }
+      92%,
+      98% {
+        opacity: 0;
+      }
+    }
 
-  .btn-clear {
-    background: var(--bg4);
-    color: var(--text2);
-    border: 1px solid var(--border);
-  }
-  .btn-clear:hover {
-    background: var(--bg3);
-    color: var(--text);
-    border-color: var(--orange);
-  }
+    .logo .version {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      font-weight: 300;
+      letter-spacing: 1px;
+      background: var(--bg4);
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
 
-  .btn-example {
-    background: var(--bg4);
-    color: var(--orange3);
-    border: 1px solid var(--border);
-  }
-  .btn-example:hover {
-    background: var(--bg3);
-    border-color: var(--orange3);
-  }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
 
-  /* --- MAIN LAYOUT --- */
-  .main {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.5px;
+    }
 
-  /* --- SIDEBAR --- */
-  .sidebar {
-    width: 220px;
-    background: var(--bg2);
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
+    .btn-run {
+      background: var(--orange);
+      color: #111;
+      font-weight: 600;
+      box-shadow: 0 0 16px rgba(255, 140, 66, 0.4);
+    }
 
-  .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-track { background: transparent; }
-  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .btn-run:hover {
+      background: var(--orange2);
+      box-shadow: 0 0 24px rgba(255, 140, 66, 0.6);
+      transform: translateY(-1px);
+    }
 
-  .sidebar-section {
-    padding: 12px;
-    border-bottom: 1px solid var(--border);
-  }
+    .btn-run:active {
+      transform: translateY(0);
+    }
 
-  .sidebar-title {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text3);
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
+    .btn-docs {
+      border-style: solid;
+      border-color: var(--orange2);
+      background-color: var(--orange2);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(255, 140, 66, 0.4);
+    }
 
-  .example-item {
-    padding: 7px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 11px;
-    color: var(--text2);
-    transition: all 0.1s;
-    margin-bottom: 2px;
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+    .btn-docs:hover {
+      background: var(--orange2);
+      box-shadow: 0 0 24px rgba(255, 140, 66, 0.6);
+      transform: translateY(-1px);
+    }
 
-  .example-item:hover {
-    background: var(--bg3);
-    color: var(--orange);
-    border-color: var(--border);
-  }
+    .btn-docs:active {
+      transform: translateY(0);
+    }
 
-  .keyword-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 8px;
-    margin: 2px;
-    border-radius: 4px;
-    font-size: 10px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    cursor: default;
-    transition: all 0.15s;
-  }
+    .btn-clear {
+      background: var(--bg4);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
 
-  .keyword-chip:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-  }
+    .btn-clear:hover {
+      background: var(--bg3);
+      color: var(--text);
+      border-color: var(--orange);
+    }
 
-  .kw-purr { color: var(--orange); }
-  .kw-meow { color: var(--green); }
-  .kw-hiss { color: var(--blue); }
-  .kw-stalk { color: var(--purple); }
-  .kw-pounce { color: var(--orange2); }
-  .kw-claw { color: var(--pink); }
-  .kw-paw { color: var(--orange3); }
+    .btn-example {
+      background: var(--bg4);
+      color: var(--orange3);
+      border: 1px solid var(--border);
+    }
 
-  /* --- EDITOR AREA --- */
-  .editor-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
+    .btn-example:hover {
+      background: var(--bg3);
+      border-color: var(--orange3);
+    }
 
-  .editor-tabs {
-    display: flex;
-    align-items: center;
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    padding: 0 8px;
-    height: 36px;
-    gap: 2px;
-  }
+    /* --- MAIN LAYOUT --- */
+    .main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
 
-  .tab {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 12px;
-    height: 28px;
-    border-radius: 5px 5px 0 0;
-    font-size: 11px;
-    color: var(--text2);
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-bottom: none;
-    margin-bottom: -1px;
-    transition: all 0.1s;
-  }
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 220px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .tab.active {
-    background: var(--bg3);
-    border-color: var(--border);
-    color: var(--orange);
-    border-bottom-color: var(--bg3);
-  }
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
 
-  .editor-wrapper {
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    background: var(--bg);
-  }
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-  .line-numbers {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 44px;
-    background: var(--bg2);
-    border-right: 1px solid var(--border);
-    overflow: hidden;
-    padding-top: 14px;
-    font-size: 12px;
-    line-height: 22px;
-    text-align: right;
-    padding-right: 8px;
-    color: var(--text3);
-    user-select: none;
-    pointer-events: none;
-    z-index: 1;
-    font-family: 'Fira Code', monospace;
-  }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
 
-  .editor-inner {
-    position: absolute;
-    left: 44px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
-  }
+    .sidebar-section {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
 
-  .editor-inner::-webkit-scrollbar { width: 6px; height: 6px; }
-  .editor-inner::-webkit-scrollbar-track { background: var(--bg2); }
-  .editor-inner::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  .editor-inner::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+    .sidebar-title {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text3);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-  .highlight-layer {
-    position: absolute;
-    top: 0; left: 0;
-    padding: 14px 16px;
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    line-height: 22px;
-    white-space: pre;
-    pointer-events: none;
-    z-index: 1;
-    min-width: 100%;
-    min-height: 100%;
-  }
+    .example-item {
+      padding: 7px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--text2);
+      transition: all 0.1s;
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  #code-editor {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    padding: 14px 16px;
-    font-family: 'Fira Code', monospace;
-    font-size: 13px;
-    line-height: 22px;
-    background: transparent;
-    color: transparent;
-    caret-color: var(--orange2);
-    border: none;
-    outline: none;
-    resize: none;
-    white-space: pre;
-    overflow-wrap: normal;
-    overflow-x: auto;
-    tab-size: 2;
-    z-index: 2;
-    spellcheck: false;
-  }
+    .example-item:hover {
+      background: var(--bg3);
+      color: var(--orange);
+      border-color: var(--border);
+    }
 
-  /* --- OUTPUT PANEL --- */
-  .output-panel {
-    width: 360px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg2);
-    border-left: 1px solid var(--border);
-  }
+    /* --- EDITOR AREA --- */
+    .editor-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
 
-  .output-header {
-    padding: 0 14px;
-    height: 36px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--text3);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
+    .editor-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
 
-  .status-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--text3);
-    transition: all 0.3s;
-    flex-shrink: 0;
-  }
-  .status-dot.running { background: var(--orange); box-shadow: 0 0 8px var(--orange); animation: pulse 0.8s infinite; }
-  .status-dot.success { background: var(--green); box-shadow: 0 0 8px var(--green); }
-  .status-dot.error { background: var(--red); box-shadow: 0 0 8px var(--red); }
+    .line-numbers {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 44px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      padding-top: 14px;
+      font-size: 12px;
+      line-height: 22px;
+      text-align: right;
+      padding-right: 8px;
+      color: var(--text3);
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      font-family: 'Fira Code', monospace;
+    }
 
-  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    .editor-inner {
+      position: absolute;
+      left: 44px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      overflow: auto;
+    }
 
-  #output {
-    flex: 1;
-    overflow-y: auto;
-    padding: 14px;
-    font-size: 12.5px;
-    line-height: 1.8;
-  }
+    .editor-inner::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
 
-  #output::-webkit-scrollbar { width: 4px; }
-  #output::-webkit-scrollbar-track { background: transparent; }
-  #output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .editor-inner::-webkit-scrollbar-track {
+      background: var(--bg2);
+    }
 
-  .output-line {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 2px 0;
-  }
+    .editor-inner::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
 
-  .output-prefix {
-    color: var(--orange);
-    opacity: 0.7;
-    flex-shrink: 0;
-    font-size: 11px;
-    margin-top: 2px;
-  }
+    .editor-inner::-webkit-scrollbar-thumb:hover {
+      background: var(--text3);
+    }
 
-  .output-text { color: var(--text); word-break: break-all; }
+    .highlight-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 14px 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 22px;
+      white-space: pre;
+      pointer-events: none;
+      z-index: 1;
+      min-width: 100%;
+      min-height: 100%;
+    }
 
-  .output-error {
-    color: var(--red);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 8px 10px;
-    background: rgba(255,107,107,0.08);
-    border-radius: 5px;
-    border-left: 2px solid var(--red);
-    margin: 4px 0;
-    font-size: 12px;
-    line-height: 1.6;
-  }
+    #code-editor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      padding: 14px 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 22px;
+      background: transparent;
+      color: transparent;
+      caret-color: var(--orange2);
+      border: none;
+      outline: none;
+      resize: none;
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: auto;
+      tab-size: 2;
+      z-index: 2;
+      spellcheck: false;
+    }
 
-  .output-system {
-    color: var(--text3);
-    font-style: italic;
-    font-size: 11px;
-    padding: 4px 0;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
+    /* --- OUTPUT PANEL --- */
+    .output-panel {
+      width: 360px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+    }
 
-  .output-time {
-    font-size: 10px;
-    color: var(--text3);
-    padding: 6px 0 2px;
-    border-top: 1px solid var(--border);
-    margin-top: 6px;
-    text-align: right;
-  }
+    .output-header {
+      padding: 0 14px;
+      height: 36px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
 
-  .output-placeholder {
-    color: var(--text3);
-    font-size: 12px;
-    padding: 20px;
-    text-align: center;
-    line-height: 1.8;
-  }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text3);
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
 
-  /* --- STATUS BAR --- */
-  .statusbar {
-    height: 24px;
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    gap: 16px;
-    font-size: 10px;
-    color: var(--text3);
-    flex-shrink: 0;
-  }
+    .status-dot.running {
+      background: var(--orange);
+      box-shadow: 0 0 8px var(--orange);
+      animation: pulse 0.8s infinite;
+    }
 
-  .statusbar span { display: flex; align-items: center; gap: 4px; }
-  .statusbar .accent { color: var(--orange); }
+    .status-dot.success {
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
 
-  /* --- SYNTAX COLORS --- */
-  .hl-keyword { color: var(--orange); font-weight: 500; }
-  .hl-string { color: var(--green); }
-  .hl-number { color: var(--orange2); }
-  .hl-comment { color: var(--text3); font-style: italic; }
-  .hl-bool { color: var(--purple); }
-  .hl-func { color: var(--pink); }
-  .hl-ident { color: var(--text); }
-  .hl-op { color: var(--blue); }
-  .hl-paren { color: var(--orange3); }
-  .hl-bracket { color: var(--orange3); }
+    .status-dot.error {
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+    }
 
-  /* --- MODAL OVERLAY --- */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    width: 620px;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px var(--glow);
-    transform: translateY(10px);
-    transition: transform 0.2s;
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal h2 { font-family: 'Josefin Sans', sans-serif; color: var(--orange); margin-bottom: 16px; font-size: 18px; letter-spacing: 2px; }
-  .modal-close { float: right; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 18px; }
-  .modal-close:hover { color: var(--orange); }
+    @keyframes pulse {
 
-  .ref-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
-  .ref-table th { text-align: left; padding: 6px 10px; background: var(--bg3); color: var(--text2); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
-  .ref-table td { padding: 7px 10px; border-bottom: 1px solid rgba(46,46,74,0.5); vertical-align: top; line-height: 1.6; }
-  .ref-table tr:hover td { background: var(--bg3); }
-  .ref-table .kw { color: var(--orange); font-weight: 500; }
-  .ref-table .desc { color: var(--text2); }
-  .ref-table .ex { color: var(--green); font-size: 11px; }
+      0%,
+      100% {
+        opacity: 1;
+      }
 
-  /* scrollbar thin everywhere */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-</style>
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    #output {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      font-size: 12.5px;
+      line-height: 1.8;
+    }
+
+    #output::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    #output::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #output::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .output-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .output-prefix {
+      color: var(--orange);
+      opacity: 0.7;
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .output-text {
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .output-error {
+      color: var(--red);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(255, 107, 107, 0.08);
+      border-radius: 5px;
+      border-left: 2px solid var(--red);
+      margin: 4px 0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .output-system {
+      color: var(--text3);
+      font-style: italic;
+      font-size: 11px;
+      padding: 4px 0;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .output-time {
+      font-size: 10px;
+      color: var(--text3);
+      padding: 6px 0 2px;
+      border-top: 1px solid var(--border);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    .output-placeholder {
+      color: var(--text3);
+      font-size: 12px;
+      padding: 20px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* --- STATUS BAR --- */
+    .statusbar {
+      height: 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 16px;
+      font-size: 10px;
+      color: var(--text3);
+      flex-shrink: 0;
+    }
+
+    .statusbar span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .statusbar .accent {
+      color: var(--orange);
+    }
+
+    /* --- SYNTAX COLORS --- */
+    .hl-keyword {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .hl-string {
+      color: var(--green);
+    }
+
+    .hl-number {
+      color: var(--orange2);
+    }
+
+    .hl-comment {
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    .hl-bool {
+      color: var(--purple);
+    }
+
+    .hl-func {
+      color: var(--pink);
+    }
+
+    .hl-ident {
+      color: var(--text);
+    }
+
+    .hl-op {
+      color: var(--blue);
+    }
+
+    .hl-paren {
+      color: var(--orange3);
+    }
+
+    .hl-bracket {
+      color: var(--orange3);
+    }
+
+    /* --- MODAL OVERLAY --- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 620px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px var(--glow);
+      transform: translateY(10px);
+      transition: transform 0.2s;
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+
+    .modal h2 {
+      font-family: 'Josefin Sans', sans-serif;
+      color: var(--orange);
+      margin-bottom: 16px;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-close:hover {
+      color: var(--orange);
+    }
+
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .ref-table th {
+      text-align: left;
+      padding: 6px 10px;
+      background: var(--bg3);
+      color: var(--text2);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ref-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(46, 46, 74, 0.5);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .ref-table tr:hover td {
+      background: var(--bg3);
+    }
+
+    .ref-table .kw {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .ref-table .desc {
+      color: var(--text2);
+    }
+
+    .ref-table .ex {
+      color: var(--green);
+      font-size: 11px;
+    }
+
+    /* scrollbar thin everywhere */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    /* --- TABS ENHANCED --- */
+    .editor-tabs {
+      display: flex;
+      align-items: center;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 4px;
+      height: 36px;
+      gap: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-shrink: 0;
+    }
+
+    .editor-tabs::-webkit-scrollbar {
+      height: 2px;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      height: 28px;
+      border-radius: 5px 5px 0 0;
+      font-size: 11px;
+      color: var(--text2);
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      margin-bottom: -1px;
+      transition: all 0.1s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+      user-select: none;
+    }
+
+    .tab.active {
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--orange);
+      border-bottom-color: var(--bg);
+    }
+
+    .tab:not(.active):hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .tab-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      font-size: 10px;
+      color: var(--text3);
+      cursor: pointer;
+      margin-left: 2px;
+      transition: all 0.1s;
+      line-height: 1;
+    }
+
+    .tab-close:hover {
+      background: rgba(255, 107, 107, 0.2);
+      color: var(--red);
+    }
+
+    .tab-modified::after {
+      content: '●';
+      font-size: 7px;
+      color: var(--orange2);
+      margin-left: 3px;
+      vertical-align: middle;
+    }
+
+    .tab-add {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      margin-left: 4px;
+      font-size: 16px;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all 0.1s;
+      flex-shrink: 0;
+      border: 1px dashed transparent;
+    }
+
+    .tab-add:hover {
+      color: var(--orange);
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    /* --- SNIPPET CHIPS (clickable) --- */
+    .keyword-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      margin: 2px;
+      border-radius: 4px;
+      font-size: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .keyword-chip:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(255, 140, 66, 0.2);
+    }
+
+    .keyword-chip:active {
+      transform: translateY(0);
+    }
+
+    .keyword-chip[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 9px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    /* --- SNIPPET SECTION --- */
+    .snippet-item {
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10.5px;
+      color: var(--text3);
+      transition: all 0.1s;
+      margin-bottom: 1px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      line-height: 1.3;
+    }
+
+    .snippet-item:hover {
+      background: var(--bg3);
+      color: var(--orange3);
+      border-color: var(--border);
+    }
+
+    .snippet-item .sn-icon {
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .snippet-item .sn-name {
+      color: var(--text2);
+      font-size: 11px;
+    }
+
+    .snippet-item .sn-desc {
+      font-size: 9.5px;
+      color: var(--text3);
+    }
+
+    /* --- NEW FILE BUTTON --- */
+    .btn-new {
+      background: linear-gradient(135deg, var(--bg3), var(--bg4));
+      color: var(--orange3);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 rgba(255, 213, 128, 0.05);
+    }
+
+    .btn-new:hover {
+      background: var(--bg3);
+      border-color: var(--orange3);
+      box-shadow: 0 0 12px rgba(255, 213, 128, 0.15);
+    }
+
+    /* --- EDITOR PLACEHOLDER --- */
+    .editor-placeholder {
+      position: absolute;
+      top: 14px;
+      left: 60px;
+      color: var(--text3);
+      font-size: 13px;
+      line-height: 22px;
+      pointer-events: none;
+      z-index: 0;
+      font-family: 'Fira Code', monospace;
+      white-space: pre;
+      opacity: 0.5;
+    }
+
+    /* --- RENAME INPUT --- */
+    .tab-rename-input {
+      background: var(--bg4);
+      border: 1px solid var(--orange);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      padding: 1px 5px;
+      width: 90px;
+      outline: none;
+    }
+
+    /* --- INSERT TOAST --- */
+    .insert-toast {
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      color: var(--orange3);
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: all 0.25s;
+      pointer-events: none;
+      z-index: 50;
+      white-space: nowrap;
+    }
+
+    .insert-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Unsaved dot on tab title */
+    .tab-dot-unsaved {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--orange2);
+      flex-shrink: 0;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="logo">
-    <span class="cat-icon">🐱</span>
-    MEOW
-    <span class="version">v1.0.0</span>
-  </div>
-  <div style="width:1px;height:20px;background:var(--border)"></div>
-  <span style="font-size:11px;color:var(--text3);">The Cat Programming Language</span>
-  <div class="header-actions">
-    <button class="btn btn-example" onclick="showRef()">📖 Language Ref</button>
-    <button class="btn btn-clear" onclick="clearOutput()">🗑 Clear</button>
-    <button class="btn btn-run" onclick="runCode()">▶ Run (Ctrl+Enter)</button>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-title">🐾 Examples</div>
-      <div class="example-item" onclick="loadExample('hello')">🐱 Hello World</div>
-      <div class="example-item" onclick="loadExample('fibonacci')">🔢 Fibonacci</div>
-      <div class="example-item" onclick="loadExample('fizzbuzz')">🎉 FizzBuzz</div>
-      <div class="example-item" onclick="loadExample('functions')">🪄 Functions</div>
-      <div class="example-item" onclick="loadExample('arrays')">📦 Arrays</div>
-      <div class="example-item" onclick="loadExample('factorial')">❕ Factorial</div>
-      <div class="example-item" onclick="loadExample('loop')">🔄 Loops</div>
-      <div class="example-item" onclick="loadExample('strings')">🧵 Strings</div>
-      <div class="example-item" onclick="loadExample('catlife')">😺 Cat Life</div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <span class="cat-icon">🐱</span>
+      MEOW
+      <span class="version">v1.0.0</span>
     </div>
+    <div style="width:1px;height:20px;background:var(--border)"></div>
+    <span style="font-size:11px;color:var(--text3);">The Cat Programming Language</span>
+    <div class="header-actions">
+      <a class="btn btn-docs" href="index.html">📖 DOCS</a>
+      <button class="btn btn-new" onclick="newFile()" title="Open a blank file to write your own code">✨ New
+        File</button>
+      <button class="btn btn-example" onclick="showRef()">🗒️ Language Ref</button>
+      <button class="btn btn-clear" onclick="clearOutput()">🗑 Clear Output</button>
+      <button class="btn btn-run" onclick="runCode()">▶ Run (Ctrl+Enter)</button>
+    </div>
+  </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">💡 Keywords</div>
-      <div>
-        <span class="keyword-chip"><span class="kw-purr">purr</span> var</span>
-        <span class="keyword-chip"><span class="kw-meow">meow</span> print</span>
-        <span class="keyword-chip"><span class="kw-hiss">hiss</span> if</span>
-        <span class="keyword-chip"><span class="kw-stalk">stalk</span> while</span>
-        <span class="keyword-chip"><span class="kw-pounce">pounce</span> for</span>
-        <span class="keyword-chip"><span class="kw-claw">claw</span> func</span>
-        <span class="keyword-chip"><span class="kw-paw">paw</span> return</span>
-        <span class="keyword-chip" style="color:var(--purple)">pawsitive</span>
-        <span class="keyword-chip" style="color:var(--purple)">clawful</span>
-        <span class="keyword-chip" style="color:var(--text3)">nap</span>
-        <span class="keyword-chip" style="color:var(--orange3)">litter[]</span>
-        <span class="keyword-chip" style="color:var(--blue)">else</span>
-        <span class="keyword-chip" style="color:var(--blue)">and</span>
-        <span class="keyword-chip" style="color:var(--blue)">or</span>
-        <span class="keyword-chip" style="color:var(--blue)">not</span>
-        <span class="keyword-chip" style="color:var(--red)">scratch</span>
-        <span class="keyword-chip" style="color:var(--green)">knead</span>
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">🐾 Examples</div>
+        <div class="example-item" onclick="loadExample('hello')">🐱 Hello World</div>
+        <div class="example-item" onclick="loadExample('fibonacci')">🔢 Fibonacci</div>
+        <div class="example-item" onclick="loadExample('fizzbuzz')">🎉 FizzBuzz</div>
+        <div class="example-item" onclick="loadExample('functions')">🪄 Functions</div>
+        <div class="example-item" onclick="loadExample('arrays')">📦 Arrays</div>
+        <div class="example-item" onclick="loadExample('factorial')">❕ Factorial</div>
+        <div class="example-item" onclick="loadExample('loop')">🔄 Loops</div>
+        <div class="example-item" onclick="loadExample('strings')">🧵 Strings</div>
+        <div class="example-item" onclick="loadExample('catlife')">😺 Cat Life</div>
+        <div class="example-item" onclick="loadExample('bubbleSort')">🫧 Bubble Sort</div>
+        <div class="example-item" onclick="loadExample('recursion')">🌀 Recursion</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">🧩 Snippets <span
+            style="font-size:9px;color:var(--text3);font-weight:400;letter-spacing:0">(click to insert)</span></div>
+        <div class="snippet-item" onclick="insertSnippet('var')"><span class="sn-icon">🟠</span>
+          <div>
+            <div class="sn-name">Variable</div>
+            <div class="sn-desc">purr name = value</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('print')"><span class="sn-icon">🟢</span>
+          <div>
+            <div class="sn-name">Print</div>
+            <div class="sn-desc">meow "..."</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('if')"><span class="sn-icon">🔵</span>
+          <div>
+            <div class="sn-name">If / Else</div>
+            <div class="sn-desc">hiss (...) { } else { }</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('while')"><span class="sn-icon">🟣</span>
+          <div>
+            <div class="sn-name">While Loop</div>
+            <div class="sn-desc">stalk (cond) { }</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('for')"><span class="sn-icon">🟡</span>
+          <div>
+            <div class="sn-name">For Loop</div>
+            <div class="sn-desc">pounce (i from 1 to 10)</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('func')"><span class="sn-icon">🩷</span>
+          <div>
+            <div class="sn-name">Function</div>
+            <div class="sn-desc">claw name(args) { paw }</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('array')"><span class="sn-icon">📦</span>
+          <div>
+            <div class="sn-name">Array</div>
+            <div class="sn-desc">purr arr = litter [...]</div>
+          </div>
+        </div>
+        <div class="snippet-item" onclick="insertSnippet('forEach')"><span class="sn-icon">🔄</span>
+          <div>
+            <div class="sn-name">Array Loop</div>
+            <div class="sn-desc">pounce over array indices</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">💡 Keywords <span
+            style="font-size:9px;color:var(--text3);font-weight:400;letter-spacing:0">(click to insert)</span></div>
+        <div>
+          <span class="keyword-chip" title="Declare variable" onclick="insertWord('purr ')"><span
+              class="kw-purr">purr</span></span>
+          <span class="keyword-chip" title="Print output" onclick="insertWord('meow ')"><span
+              class="kw-meow">meow</span></span>
+          <span class="keyword-chip" title="If statement" onclick="insertWord('hiss ')"><span
+              class="kw-hiss">hiss</span></span>
+          <span class="keyword-chip" title="While loop" onclick="insertWord('stalk ')"><span
+              class="kw-stalk">stalk</span></span>
+          <span class="keyword-chip" title="For loop" onclick="insertWord('pounce ')"><span
+              class="kw-pounce">pounce</span></span>
+          <span class="keyword-chip" title="Define function" onclick="insertWord('claw ')"><span
+              class="kw-claw">claw</span></span>
+          <span class="keyword-chip" title="Return value" onclick="insertWord('paw ')"><span
+              class="kw-paw">paw</span></span>
+          <span class="keyword-chip" title="True" style="color:var(--purple)"
+            onclick="insertWord('pawsitive')">pawsitive</span>
+          <span class="keyword-chip" title="False" style="color:var(--purple)"
+            onclick="insertWord('clawful')">clawful</span>
+          <span class="keyword-chip" title="Null" style="color:var(--text3)" onclick="insertWord('nap')">nap</span>
+          <span class="keyword-chip" title="Array literal" style="color:var(--orange3)"
+            onclick="insertWord('litter []')">litter[]</span>
+          <span class="keyword-chip" title="Else branch" style="color:var(--blue)"
+            onclick="insertWord('else ')">else</span>
+          <span class="keyword-chip" title="Logical AND" style="color:var(--blue)"
+            onclick="insertWord(' and ')">and</span>
+          <span class="keyword-chip" title="Logical OR" style="color:var(--blue)" onclick="insertWord(' or ')">or</span>
+          <span class="keyword-chip" title="Logical NOT" style="color:var(--blue)"
+            onclick="insertWord('not ')">not</span>
+          <span class="keyword-chip" title="Break loop" style="color:var(--red)"
+            onclick="insertWord('scratch')">scratch</span>
+          <span class="keyword-chip" title="Continue loop" style="color:var(--green)"
+            onclick="insertWord('knead')">knead</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">🔧 Builtins <span
+            style="font-size:9px;color:var(--text3);font-weight:400;letter-spacing:0">(click to insert)</span></div>
+        <div style="font-size:10px;color:var(--text3);line-height:1.9">
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('fur()')"><span
+              style="color:var(--orange2)">fur(x)</span> <span style="margin-left:4px">— length</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('whisker()')"><span
+              style="color:var(--orange2)">whisker(x)</span> <span style="margin-left:4px">— to string</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('paw_num()')"><span
+              style="color:var(--orange2)">paw_num(x)</span> <span style="margin-left:4px">— to number</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('chase(, )')"><span
+              style="color:var(--orange2)">chase(arr,x)</span> <span style="margin-left:4px">— push</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('nuzzle(, )')"><span
+              style="color:var(--orange2)">nuzzle(arr,sep)</span> <span style="margin-left:4px">— join</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('catnap()')"><span
+              style="color:var(--orange2)">catnap(n)</span> <span style="margin-left:4px">— random 0..n</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('kibble()')"><span
+              style="color:var(--orange2)">kibble(x)</span> <span style="margin-left:4px">— floor</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('treat()')"><span
+              style="color:var(--orange2)">treat(x)</span> <span style="margin-left:4px">— round</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('claw_up()')"><span
+              style="color:var(--orange2)">claw_up(x)</span> <span style="margin-left:4px">— ceil</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('pounce_sqrt()')"><span
+              style="color:var(--orange2)">pounce_sqrt(x)</span> <span style="margin-left:4px">— sqrt</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('meow_upper()')"><span
+              style="color:var(--orange2)">meow_upper(x)</span> <span style="margin-left:4px">— uppercase</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('meow_lower()')"><span
+              style="color:var(--orange2)">meow_lower(x)</span> <span style="margin-left:4px">— lowercase</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('scratch_split(, )')"><span
+              style="color:var(--orange2)">scratch_split(s,d)</span> <span style="margin-left:4px">— split</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('tail_slice(, , )')"><span
+              style="color:var(--orange2)">tail_slice(a,s,e)</span> <span style="margin-left:4px">— slice</span></div>
+          <div class="snippet-item" style="padding:3px 6px" onclick="insertWord('sniff()')"><span
+              style="color:var(--orange2)">sniff(x)</span> <span style="margin-left:4px">— typeof</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">🔧 Builtins</div>
-      <div style="font-size:10px;color:var(--text3);line-height:1.9">
-        <div><span style="color:var(--orange2)">fur(x)</span> — length</div>
-        <div><span style="color:var(--orange2)">whisker(x)</span> — to string</div>
-        <div><span style="color:var(--orange2)">paw_num(x)</span> — to number</div>
-        <div><span style="color:var(--orange2)">chase(arr,x)</span> — push</div>
-        <div><span style="color:var(--orange2)">nuzzle(arr,sep)</span> — join</div>
-        <div><span style="color:var(--orange2)">catnap(n)</span> — random 0..n</div>
-        <div><span style="color:var(--orange2)">kibble(x)</span> — floor</div>
-        <div><span style="color:var(--orange2)">treat(x)</span> — round</div>
-        <div><span style="color:var(--orange2)">pounce_sqrt(x)</span> — sqrt</div>
-        <div><span style="color:var(--orange2)">meow_upper(x)</span> — uppercase</div>
-        <div><span style="color:var(--orange2)">meow_lower(x)</span> — lowercase</div>
-        <div><span style="color:var(--orange2)">scratch_split(s,d)</span> — split</div>
-        <div><span style="color:var(--orange2)">tail_slice(a,s,e)</span> — slice</div>
-        <div><span style="color:var(--orange2)">sniff(x)</span> — typeof</div>
+    <!-- EDITOR -->
+    <div class="editor-area">
+      <div class="editor-tabs" id="editor-tabs">
+        <!-- tabs rendered by JS -->
+        <div class="tab-add" id="tab-add-btn" onclick="newFile()" title="New file">＋</div>
+      </div>
+      <div class="editor-wrapper">
+        <div class="line-numbers" id="line-numbers">1</div>
+        <div class="editor-inner" id="editor-inner">
+          <div class="editor-placeholder" id="editor-placeholder"># Start typing your MEOW code here...
+            # Or click a snippet/keyword in the sidebar to insert it!
+
+            meow "Hello, World! 🐱"</div>
+          <div class="highlight-layer" id="highlight-layer"></div>
+          <textarea id="code-editor" spellcheck="false" autocomplete="off" autocorrect="off"
+            autocapitalize="off"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="output-panel">
+      <div class="output-header">
+        <div class="status-dot" id="status-dot"></div>
+        <span>Output</span>
+        <span style="margin-left:auto;font-size:10px" id="exec-time"></span>
+      </div>
+      <div id="output">
+        <div class="output-placeholder">
+          🐱 Write some MEOW code and press<br>
+          <span style="color:var(--orange)">▶ Run</span> to see the output here.<br><br>
+          <span style="font-size:11px;color:var(--text3)">Try an example from the sidebar →</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- EDITOR -->
-  <div class="editor-area">
-    <div class="editor-tabs">
-      <div class="tab active">🐾 main.meow</div>
-    </div>
-    <div class="editor-wrapper">
-      <div class="line-numbers" id="line-numbers">1</div>
-      <div class="editor-inner">
-        <div class="highlight-layer" id="highlight-layer"></div>
-        <textarea id="code-editor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+  <!-- STATUSBAR -->
+  <div class="statusbar">
+    <span>🐱 MEOW Language <span class="accent">v1.0</span></span>
+    <span>Ln <span class="accent" id="sb-line">1</span> Col <span class="accent" id="sb-col">1</span></span>
+    <span id="sb-count"></span>
+    <span style="margin-left:auto">Ctrl+Enter to Run</span>
+  </div>
+
+  <!-- REF MODAL -->
+  <div class="modal-overlay" id="ref-modal">
+    <div class="modal" style="width: 800px; max-width: 90vw;">
+      <button class="modal-close" onclick="closeRef()">✕</button>
+      <h2 style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 24px;">🐱</span> MEOW Language Reference
+      </h2>
+
+      <div style="margin-bottom: 24px;">
+        <h3
+          style="color: var(--orange2); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 4px;">
+          🐾 All Keywords</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px;">
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              purr</div>
+            <div style="color: var(--text3); font-size: 10px;">Declare variable</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              meow</div>
+            <div style="color: var(--text3); font-size: 10px;">Print output</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              hiss</div>
+            <div style="color: var(--text3); font-size: 10px;">If statement</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              else</div>
+            <div style="color: var(--text3); font-size: 10px;">Else branch</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              stalk</div>
+            <div style="color: var(--text3); font-size: 10px;">While loop</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              pounce</div>
+            <div style="color: var(--text3); font-size: 10px;">For range loop</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              from / to</div>
+            <div style="color: var(--text3); font-size: 10px;">Range bounds</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              claw</div>
+            <div style="color: var(--text3); font-size: 10px;">Define function</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              paw</div>
+            <div style="color: var(--text3); font-size: 10px;">Return value</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--orange); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              litter</div>
+            <div style="color: var(--text3); font-size: 10px;">Create array</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--purple); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              pawsitive</div>
+            <div style="color: var(--text3); font-size: 10px;">Boolean: true</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--purple); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              clawful</div>
+            <div style="color: var(--text3); font-size: 10px;">Boolean: false</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--text3); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              nap</div>
+            <div style="color: var(--text3); font-size: 10px;">Null value</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--red); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              scratch</div>
+            <div style="color: var(--text3); font-size: 10px;">Break loop</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--green); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">
+              knead</div>
+            <div style="color: var(--text3); font-size: 10px;">Continue loop</div>
+          </div>
+          <div style="background: var(--bg3); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);">
+            <div style="color: var(--blue); font-family: 'Fira Code', monospace; font-weight: 600; font-size: 13px;">and
+              / or / not</div>
+            <div style="color: var(--text3); font-size: 10px;">Logic ops</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3
+          style="color: var(--orange2); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 4px;">
+          🔧 Built-in Functions</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="font-size: 11px; color: var(--text2); line-height: 1.6;">
+            <div><span style="color: var(--orange2); font-weight: 600;">fur(x)</span> — Length of array or string</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">whisker(x)</span> — Convert to string</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">paw_num(x)</span> — Convert to number</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">sniff(x)</span> — Return type of value</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">chase(arr, v)</span> — Append to array</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">nuzzle(arr, s)</span> — Join array with
+              separator</div>
+          </div>
+          <div style="font-size: 11px; color: var(--text2); line-height: 1.6;">
+            <div><span style="color: var(--orange2); font-weight: 600;">catnap(n)</span> — Random int 0 to n-1</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">kibble(x)</span> — Floor (round down)</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">treat(x)</span> — Round to nearest</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">claw_up(x)</span> — Ceiling (round up)</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">pounce_sqrt(x)</span> — Square root</div>
+            <div><span style="color: var(--orange2); font-weight: 600;">meow_upper(s)</span> — To uppercase</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3
+          style="color: var(--orange2); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 4px;">
+          📐 Grammar (EBNF)</h3>
+        <pre
+          style="background: var(--bg3); padding: 12px; border-radius: 6px; font-size: 10px; color: var(--text2); line-height: 1.5; border: 1px solid var(--border); overflow-x: auto; white-space: pre-wrap;">
+<span style="color: var(--orange);">program</span> ::= statement*
+<span style="color: var(--orange);">statement</span> ::= declaration | assignment | meow_stmt | if_stmt | while_stmt | for_stmt | func_decl | return_stmt | break_stmt | continue_stmt | expr_stmt
+<span style="color: var(--orange);">declaration</span> ::= "purr" IDENT "=" expr
+<span style="color: var(--orange);">if_stmt</span> ::= "hiss" "(" expr ")" block ("else" (if_stmt | block))?
+<span style="color: var(--orange);">for_stmt</span> ::= "pounce" "(" IDENT "from" expr "to" expr ")" block
+<span style="color: var(--orange);">func_decl</span> ::= "claw" IDENT "(" params ")" block
+<span style="color: var(--orange);">array_lit</span> ::= "litter" "[" (expr ("," expr)*)? "]"</pre>
+      </div>
+
+      <div
+        style="padding:12px;background:var(--bg3);border-radius:6px;font-size:12px;color:var(--text3);line-height:1.8; border: 1px dashed var(--border);">
+        <span style="color:var(--orange2)">🐾 Fun fact:</span> The word <span
+          style="color:var(--orange);font-weight:600">MEOW</span> is the center of this language —
+        it powers all output. Every <span style="color:var(--green)">meow</span> call is a cat speaking to the world!
       </div>
     </div>
   </div>
 
-  <!-- OUTPUT -->
-  <div class="output-panel">
-    <div class="output-header">
-      <div class="status-dot" id="status-dot"></div>
-      <span>Output</span>
-      <span style="margin-left:auto;font-size:10px" id="exec-time"></span>
-    </div>
-    <div id="output">
-      <div class="output-placeholder">
-        🐱 Write some MEOW code and press<br>
-        <span style="color:var(--orange)">▶ Run</span> to see the output here.<br><br>
-        <span style="font-size:11px;color:var(--text3)">Try an example from the sidebar →</span>
-      </div>
-    </div>
-  </div>
-</div>
+  <!-- INSERT TOAST -->
+  <div class="insert-toast" id="insert-toast"></div>
 
-<!-- STATUSBAR -->
-<div class="statusbar">
-  <span>🐱 MEOW Language <span class="accent">v1.0</span></span>
-  <span>Ln <span class="accent" id="sb-line">1</span> Col <span class="accent" id="sb-col">1</span></span>
-  <span id="sb-count"></span>
-  <span style="margin-left:auto">Ctrl+Enter to Run</span>
-</div>
+  <script>
+    // ============================================================
+    // MEOW LANGUAGE — LEXER
+    // ============================================================
+    const KEYWORDS = {
+      'purr': 'PURR', 'meow': 'MEOW', 'hiss': 'HISS', 'else': 'ELSE',
+      'stalk': 'STALK', 'pounce': 'POUNCE', 'claw': 'CLAW', 'paw': 'PAW',
+      'from': 'FROM', 'to': 'TO', 'litter': 'LITTER',
+      'pawsitive': 'PAWSITIVE', 'clawful': 'CLAWFUL', 'nap': 'NAP',
+      'and': 'AND', 'or': 'OR', 'not': 'NOT',
+      'scratch': 'SCRATCH', 'knead': 'KNEAD'
+    };
 
-<!-- REF MODAL -->
-<div class="modal-overlay" id="ref-modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeRef()">✕</button>
-    <h2>🐱 MEOW Language Reference</h2>
-    <table class="ref-table">
-      <tr><th>Keyword</th><th>Meaning</th><th>Example</th></tr>
-      <tr><td class="kw">purr</td><td class="desc">Declare a variable</td><td class="ex">purr x = 42</td></tr>
-      <tr><td class="kw">meow</td><td class="desc">Print to output</td><td class="ex">meow "Hello!"</td></tr>
-      <tr><td class="kw">hiss</td><td class="desc">If statement</td><td class="ex">hiss (x > 0) { ... }</td></tr>
-      <tr><td class="kw">else</td><td class="desc">Else branch</td><td class="ex">} else { ... }</td></tr>
-      <tr><td class="kw">stalk</td><td class="desc">While loop</td><td class="ex">stalk (x < 10) { ... }</td></tr>
-      <tr><td class="kw">pounce</td><td class="desc">For range loop</td><td class="ex">pounce (i from 1 to 5) { ... }</td></tr>
-      <tr><td class="kw">claw</td><td class="desc">Define function</td><td class="ex">claw add(a, b) { paw a + b }</td></tr>
-      <tr><td class="kw">paw</td><td class="desc">Return value</td><td class="ex">paw result</td></tr>
-      <tr><td class="kw">litter</td><td class="desc">Array literal</td><td class="ex">purr arr = litter [1, 2, 3]</td></tr>
-      <tr><td class="kw">pawsitive</td><td class="desc">True</td><td class="ex">purr alive = pawsitive</td></tr>
-      <tr><td class="kw">clawful</td><td class="desc">False</td><td class="ex">purr done = clawful</td></tr>
-      <tr><td class="kw">nap</td><td class="desc">Null</td><td class="ex">purr nothing = nap</td></tr>
-      <tr><td class="kw">scratch</td><td class="desc">Break loop</td><td class="ex">scratch</td></tr>
-      <tr><td class="kw">knead</td><td class="desc">Continue loop</td><td class="ex">knead</td></tr>
-      <tr><td class="kw">and / or / not</td><td class="desc">Logical operators</td><td class="ex">hiss (a and b) { ... }</td></tr>
-      <tr><td class="kw"># comment</td><td class="desc">Line comment</td><td class="ex"># This is a comment</td></tr>
-      <tr><td class="kw">arr[0]</td><td class="desc">Array indexing</td><td class="ex">meow arr[0]</td></tr>
-    </table>
-    <div style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:6px;font-size:12px;color:var(--text3);line-height:1.8">
-      <span style="color:var(--orange2)">🐾 Fun fact:</span> The word <span style="color:var(--orange);font-weight:600">MEOW</span> is the center of this language — 
-      it powers all output. Every <span style="color:var(--green)">meow</span> call is a cat speaking to the world!
-    </div>
-  </div>
-</div>
+    class Lexer {
+      constructor(src) { this.src = src; this.pos = 0; this.line = 1; this.col = 1; }
 
-<script>
-// ============================================================
-// MEOW LANGUAGE — LEXER
-// ============================================================
-const KEYWORDS = {
-  'purr':'PURR','meow':'MEOW','hiss':'HISS','else':'ELSE',
-  'stalk':'STALK','pounce':'POUNCE','claw':'CLAW','paw':'PAW',
-  'from':'FROM','to':'TO','litter':'LITTER',
-  'pawsitive':'PAWSITIVE','clawful':'CLAWFUL','nap':'NAP',
-  'and':'AND','or':'OR','not':'NOT',
-  'scratch':'SCRATCH','knead':'KNEAD'
-};
-
-class Lexer {
-  constructor(src) { this.src = src; this.pos = 0; this.line = 1; this.col = 1; }
-
-  tokenize() {
-    const tokens = [];
-    while (this.pos < this.src.length) {
-      this.skipWS();
-      if (this.pos >= this.src.length) break;
-      const ch = this.src[this.pos];
-      if (ch === '#') { while (this.pos < this.src.length && this.src[this.pos] !== '\n') this.pos++; continue; }
-      if (ch === '"' || ch === "'") { tokens.push(this.readStr(ch)); continue; }
-      if (/\d/.test(ch)) { tokens.push(this.readNum()); continue; }
-      if (/[a-zA-Z_]/.test(ch)) { tokens.push(this.readIdent()); continue; }
-      const l = this.line, c = this.col;
-      const next = this.src[this.pos+1];
-      if (ch==='+'){tokens.push({t:'PLUS',l,c});this.pos++;this.col++;}
-      else if (ch==='-'){tokens.push({t:'MINUS',l,c});this.pos++;this.col++;}
-      else if (ch==='*'){tokens.push({t:'MUL',l,c});this.pos++;this.col++;}
-      else if (ch==='/'){tokens.push({t:'DIV',l,c});this.pos++;this.col++;}
-      else if (ch==='%'){tokens.push({t:'MOD',l,c});this.pos++;this.col++;}
-      else if (ch==='('){tokens.push({t:'LP',l,c});this.pos++;this.col++;}
-      else if (ch===')'){tokens.push({t:'RP',l,c});this.pos++;this.col++;}
-      else if (ch==='{'){tokens.push({t:'LB',l,c});this.pos++;this.col++;}
-      else if (ch==='}'){tokens.push({t:'RB',l,c});this.pos++;this.col++;}
-      else if (ch==='['){tokens.push({t:'LBK',l,c});this.pos++;this.col++;}
-      else if (ch===']'){tokens.push({t:'RBK',l,c});this.pos++;this.col++;}
-      else if (ch===','){tokens.push({t:'COMMA',l,c});this.pos++;this.col++;}
-      else if (ch==='=' && next==='='){tokens.push({t:'EQ',l,c});this.pos+=2;this.col+=2;}
-      else if (ch==='=' && next!=='='){tokens.push({t:'ASSIGN',l,c});this.pos++;this.col++;}
-      else if (ch==='!' && next==='='){tokens.push({t:'NEQ',l,c});this.pos+=2;this.col+=2;}
-      else if (ch==='<' && next==='='){tokens.push({t:'LTE',l,c});this.pos+=2;this.col+=2;}
-      else if (ch==='<'){tokens.push({t:'LT',l,c});this.pos++;this.col++;}
-      else if (ch==='>' && next==='='){tokens.push({t:'GTE',l,c});this.pos+=2;this.col+=2;}
-      else if (ch==='>'){tokens.push({t:'GT',l,c});this.pos++;this.col++;}
-      else throw new Error(`Unexpected char '${ch}' at line ${l}`);
-    }
-    tokens.push({t:'EOF',l:this.line,c:this.col});
-    return tokens;
-  }
-
-  skipWS() {
-    while (this.pos < this.src.length && /\s/.test(this.src[this.pos])) {
-      if (this.src[this.pos]==='\n'){this.line++;this.col=1;}
-      else this.col++;
-      this.pos++;
-    }
-  }
-
-  readStr(q) {
-    const l=this.line,c=this.col; this.pos++;this.col++;
-    let v='';
-    while (this.pos<this.src.length && this.src[this.pos]!==q) {
-      if (this.src[this.pos]==='\\') {
-        this.pos++;this.col++;
-        const e=this.src[this.pos];
-        v+=(e==='n'?'\n':e==='t'?'\t':e);
-      } else v+=this.src[this.pos];
-      this.pos++;this.col++;
-    }
-    if (this.pos<this.src.length){this.pos++;this.col++;}
-    return {t:'STR',v,l,c};
-  }
-
-  readNum() {
-    const l=this.line,c=this.col;
-    let s='';
-    while (this.pos<this.src.length && /[\d.]/.test(this.src[this.pos])){s+=this.src[this.pos];this.pos++;this.col++;}
-    return {t:'NUM',v:parseFloat(s),l,c};
-  }
-
-  readIdent() {
-    const l=this.line,c=this.col;
-    let s='';
-    while (this.pos<this.src.length && /[a-zA-Z0-9_]/.test(this.src[this.pos])){s+=this.src[this.pos];this.pos++;this.col++;}
-    const t=KEYWORDS[s]||'IDENT';
-    return {t,v:s,l,c};
-  }
-}
-
-// ============================================================
-// MEOW LANGUAGE — PARSER
-// ============================================================
-class Parser {
-  constructor(tokens) { this.tok = tokens; this.pos = 0; }
-  peek() { return this.tok[this.pos]; }
-  adv() { return this.tok[this.pos++]; }
-  check(t) { return this.peek().t === t; }
-  expect(t) {
-    const tk=this.adv();
-    if (tk.t!==t) throw new Error(`Expected ${t} but got '${tk.v||tk.t}' at line ${tk.l}`);
-    return tk;
-  }
-
-  parse() {
-    const stmts=[];
-    while (!this.check('EOF')) stmts.push(this.stmt());
-    return {T:'Prog',stmts};
-  }
-
-  stmt() {
-    const t=this.peek();
-    const t2=this.tok[this.pos+1];
-    // Assignment: IDENT =
-    if (t.t==='IDENT' && t2?.t==='ASSIGN') {
-      const name=this.adv().v; this.adv();
-      return {T:'Assign',name,val:this.expr()};
-    }
-    switch(t.t) {
-      case 'PURR': { this.adv(); const name=this.expect('IDENT').v; this.expect('ASSIGN'); return {T:'Decl',name,val:this.expr()}; }
-      case 'MEOW': { this.adv(); return {T:'Print',e:this.expr()}; }
-      case 'HISS': return this.ifStmt();
-      case 'STALK': return this.whileStmt();
-      case 'POUNCE': return this.forStmt();
-      case 'CLAW': return this.funcDecl();
-      case 'PAW': { this.adv(); return {T:'Ret',e:this.expr()}; }
-      case 'SCRATCH': { this.adv(); return {T:'Brk'}; }
-      case 'KNEAD': { this.adv(); return {T:'Cont'}; }
-      default: return {T:'ExprS',e:this.expr()};
-    }
-  }
-
-  ifStmt() {
-    this.adv(); this.expect('LP');
-    const cond=this.expr(); this.expect('RP');
-    const body=this.block();
-    let eb=null;
-    if (this.check('ELSE')) {
-      this.adv();
-      eb = this.check('HISS') ? [this.ifStmt()] : this.block();
-    }
-    return {T:'If',cond,body,eb};
-  }
-
-  whileStmt() {
-    this.adv(); this.expect('LP');
-    const cond=this.expr(); this.expect('RP');
-    return {T:'While',cond,body:this.block()};
-  }
-
-  forStmt() {
-    this.adv(); this.expect('LP');
-    const vn=this.expect('IDENT').v;
-    this.expect('FROM');
-    const from=this.expr();
-    this.expect('TO');
-    const to=this.expr();
-    this.expect('RP');
-    return {T:'For',vn,from,to,body:this.block()};
-  }
-
-  funcDecl() {
-    this.adv();
-    const name=this.expect('IDENT').v; this.expect('LP');
-    const params=[];
-    while (!this.check('RP')) { params.push(this.expect('IDENT').v); if (!this.check('RP')) this.expect('COMMA'); }
-    this.expect('RP');
-    return {T:'Func',name,params,body:this.block()};
-  }
-
-  block() {
-    this.expect('LB');
-    const stmts=[];
-    while (!this.check('RB')&&!this.check('EOF')) stmts.push(this.stmt());
-    this.expect('RB');
-    return stmts;
-  }
-
-  expr() { return this.or(); }
-
-  or() {
-    let l=this.and();
-    while(this.check('OR')){this.adv();l={T:'Bin',op:'or',l,r:this.and()};}
-    return l;
-  }
-
-  and() {
-    let l=this.eq();
-    while(this.check('AND')){this.adv();l={T:'Bin',op:'and',l,r:this.eq()};}
-    return l;
-  }
-
-  eq() {
-    let l=this.cmp();
-    while(this.check('EQ')||this.check('NEQ')){
-      const op=this.adv().t==='EQ'?'==':'!=';
-      l={T:'Bin',op,l,r:this.cmp()};
-    }
-    return l;
-  }
-
-  cmp() {
-    let l=this.add();
-    const ops={LT:'<',GT:'>',LTE:'<=',GTE:'>='};
-    while(ops[this.peek().t]){const op=ops[this.adv().t];l={T:'Bin',op,l,r:this.add()};}
-    return l;
-  }
-
-  add() {
-    let l=this.mul();
-    while(this.check('PLUS')||this.check('MINUS')){
-      const op=this.adv().t==='PLUS'?'+':'-';
-      l={T:'Bin',op,l,r:this.mul()};
-    }
-    return l;
-  }
-
-  mul() {
-    let l=this.unary();
-    const ops={MUL:'*',DIV:'/',MOD:'%'};
-    while(ops[this.peek().t]){const op=ops[this.adv().t];l={T:'Bin',op,l,r:this.unary()};}
-    return l;
-  }
-
-  unary() {
-    if(this.check('NOT')){this.adv();return {T:'Unary',op:'not',e:this.unary()};}
-    if(this.check('MINUS')){this.adv();return {T:'Unary',op:'-',e:this.unary()};}
-    return this.postfix();
-  }
-
-  postfix() {
-    let e=this.primary();
-    while(this.check('LBK')){
-      this.adv(); const idx=this.expr(); this.expect('RBK');
-      e={T:'Idx',obj:e,idx};
-    }
-    return e;
-  }
-
-  primary() {
-    const t=this.peek();
-    switch(t.t) {
-      case 'NUM': this.adv(); return {T:'Lit',v:t.v};
-      case 'STR': this.adv(); return {T:'Lit',v:t.v};
-      case 'PAWSITIVE': this.adv(); return {T:'Lit',v:true};
-      case 'CLAWFUL': this.adv(); return {T:'Lit',v:false};
-      case 'NAP': this.adv(); return {T:'Lit',v:null};
-      case 'LP': { this.adv(); const e=this.expr(); this.expect('RP'); return e; }
-      case 'LITTER': {
-        this.adv(); this.expect('LBK');
-        const els=[];
-        while(!this.check('RBK')){els.push(this.expr());if(!this.check('RBK'))this.expect('COMMA');}
-        this.expect('RBK');
-        return {T:'Arr',els};
-      }
-      case 'IDENT': {
-        this.adv();
-        if(this.check('LP')){
-          this.adv();
-          const args=[];
-          while(!this.check('RP')){args.push(this.expr());if(!this.check('RP'))this.expect('COMMA');}
-          this.expect('RP');
-          return {T:'Call',name:t.v,args};
+      tokenize() {
+        const tokens = [];
+        while (this.pos < this.src.length) {
+          this.skipWS();
+          if (this.pos >= this.src.length) break;
+          const ch = this.src[this.pos];
+          if (ch === '#') { while (this.pos < this.src.length && this.src[this.pos] !== '\n') this.pos++; continue; }
+          if (ch === '"' || ch === "'") { tokens.push(this.readStr(ch)); continue; }
+          if (/\d/.test(ch)) { tokens.push(this.readNum()); continue; }
+          if (/[a-zA-Z_]/.test(ch)) { tokens.push(this.readIdent()); continue; }
+          const l = this.line, c = this.col;
+          const next = this.src[this.pos + 1];
+          if (ch === '+') { tokens.push({ t: 'PLUS', l, c }); this.pos++; this.col++; }
+          else if (ch === '-') { tokens.push({ t: 'MINUS', l, c }); this.pos++; this.col++; }
+          else if (ch === '*') { tokens.push({ t: 'MUL', l, c }); this.pos++; this.col++; }
+          else if (ch === '/') { tokens.push({ t: 'DIV', l, c }); this.pos++; this.col++; }
+          else if (ch === '%') { tokens.push({ t: 'MOD', l, c }); this.pos++; this.col++; }
+          else if (ch === '(') { tokens.push({ t: 'LP', l, c }); this.pos++; this.col++; }
+          else if (ch === ')') { tokens.push({ t: 'RP', l, c }); this.pos++; this.col++; }
+          else if (ch === '{') { tokens.push({ t: 'LB', l, c }); this.pos++; this.col++; }
+          else if (ch === '}') { tokens.push({ t: 'RB', l, c }); this.pos++; this.col++; }
+          else if (ch === '[') { tokens.push({ t: 'LBK', l, c }); this.pos++; this.col++; }
+          else if (ch === ']') { tokens.push({ t: 'RBK', l, c }); this.pos++; this.col++; }
+          else if (ch === ',') { tokens.push({ t: 'COMMA', l, c }); this.pos++; this.col++; }
+          else if (ch === '=' && next === '=') { tokens.push({ t: 'EQ', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '=' && next !== '=') { tokens.push({ t: 'ASSIGN', l, c }); this.pos++; this.col++; }
+          else if (ch === '!' && next === '=') { tokens.push({ t: 'NEQ', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '<' && next === '=') { tokens.push({ t: 'LTE', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '<') { tokens.push({ t: 'LT', l, c }); this.pos++; this.col++; }
+          else if (ch === '>' && next === '=') { tokens.push({ t: 'GTE', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '>') { tokens.push({ t: 'GT', l, c }); this.pos++; this.col++; }
+          else throw new Error(`Unexpected char '${ch}' at line ${l}`);
         }
-        return {T:'Id',name:t.v};
+        tokens.push({ t: 'EOF', l: this.line, c: this.col });
+        return tokens;
       }
-      default: throw new Error(`Unexpected '${t.v||t.t}' at line ${t.l}`);
+
+      skipWS() {
+        while (this.pos < this.src.length && /\s/.test(this.src[this.pos])) {
+          if (this.src[this.pos] === '\n') { this.line++; this.col = 1; }
+          else this.col++;
+          this.pos++;
+        }
+      }
+
+      readStr(q) {
+        const l = this.line, c = this.col; this.pos++; this.col++;
+        let v = '';
+        while (this.pos < this.src.length && this.src[this.pos] !== q) {
+          if (this.src[this.pos] === '\\') {
+            this.pos++; this.col++;
+            const e = this.src[this.pos];
+            v += (e === 'n' ? '\n' : e === 't' ? '\t' : e);
+          } else v += this.src[this.pos];
+          this.pos++; this.col++;
+        }
+        if (this.pos < this.src.length) { this.pos++; this.col++; }
+        return { t: 'STR', v, l, c };
+      }
+
+      readNum() {
+        const l = this.line, c = this.col;
+        let s = '';
+        while (this.pos < this.src.length && /[\d.]/.test(this.src[this.pos])) { s += this.src[this.pos]; this.pos++; this.col++; }
+        return { t: 'NUM', v: parseFloat(s), l, c };
+      }
+
+      readIdent() {
+        const l = this.line, c = this.col;
+        let s = '';
+        while (this.pos < this.src.length && /[a-zA-Z0-9_]/.test(this.src[this.pos])) { s += this.src[this.pos]; this.pos++; this.col++; }
+        const t = KEYWORDS[s] || 'IDENT';
+        return { t, v: s, l, c };
+      }
     }
-  }
-}
 
-// ============================================================
-// MEOW LANGUAGE — INTERPRETER
-// ============================================================
-class MeowError extends Error { constructor(m) { super(m); this.name='MeowError'; } }
-class ReturnSig { constructor(v){this.v=v;} }
-class BreakSig {}
-class ContinueSig {}
+    // ============================================================
+    // MEOW LANGUAGE — PARSER
+    // ============================================================
+    class Parser {
+      constructor(tokens) { this.tok = tokens; this.pos = 0; }
+      peek() { return this.tok[this.pos]; }
+      adv() { return this.tok[this.pos++]; }
+      check(t) { return this.peek().t === t; }
+      expect(t) {
+        const tk = this.adv();
+        if (tk.t !== t) throw new Error(`Expected ${t} but got '${tk.v || tk.t}' at line ${tk.l}`);
+        return tk;
+      }
 
-const BUILTINS = {
-  fur: a => a[0]?.length ?? 0,
-  whisker: a => meowStr(a[0]),
-  paw_num: a => Number(a[0]),
-  chase: a => { a[0].push(a[1]); return a[0]; },
-  nuzzle: a => a[0].join(a[1]!==undefined?a[1]:', '),
-  sniff: a => typeof a[0],
-  catnap: a => Math.floor(Math.random()*a[0]),
-  kibble: a => Math.floor(a[0]),
-  treat: a => Math.round(a[0]),
-  claw_up: a => Math.ceil(a[0]),
-  pounce_sqrt: a => Math.sqrt(a[0]),
-  meow_upper: a => String(a[0]).toUpperCase(),
-  meow_lower: a => String(a[0]).toLowerCase(),
-  scratch_split: a => String(a[0]).split(a[1]??''),
-  tail_slice: a => a[0].slice(a[1],a[2]),
-};
+      parse() {
+        const stmts = [];
+        while (!this.check('EOF')) stmts.push(this.stmt());
+        return { T: 'Prog', stmts };
+      }
 
-function meowStr(v) {
-  if (v===null) return 'nap';
-  if (v===true) return 'pawsitive';
-  if (v===false) return 'clawful';
-  if (Array.isArray(v)) return '[' + v.map(meowStr).join(', ') + ']';
-  return String(v);
-}
+      stmt() {
+        const t = this.peek();
+        const t2 = this.tok[this.pos + 1];
+        // Assignment: IDENT =
+        if (t.t === 'IDENT' && t2?.t === 'ASSIGN') {
+          const name = this.adv().v; this.adv();
+          return { T: 'Assign', name, val: this.expr() };
+        }
+        switch (t.t) {
+          case 'PURR': { this.adv(); const name = this.expect('IDENT').v; this.expect('ASSIGN'); return { T: 'Decl', name, val: this.expr() }; }
+          case 'MEOW': { this.adv(); return { T: 'Print', e: this.expr() }; }
+          case 'HISS': return this.ifStmt();
+          case 'STALK': return this.whileStmt();
+          case 'POUNCE': return this.forStmt();
+          case 'CLAW': return this.funcDecl();
+          case 'PAW': { this.adv(); return { T: 'Ret', e: this.expr() }; }
+          case 'SCRATCH': { this.adv(); return { T: 'Brk' }; }
+          case 'KNEAD': { this.adv(); return { T: 'Cont' }; }
+          default: return { T: 'ExprS', e: this.expr() };
+        }
+      }
 
-class Interpreter {
-  constructor() { this.output = []; }
+      ifStmt() {
+        this.adv(); this.expect('LP');
+        const cond = this.expr(); this.expect('RP');
+        const body = this.block();
+        let eb = null;
+        if (this.check('ELSE')) {
+          this.adv();
+          eb = this.check('HISS') ? [this.ifStmt()] : this.block();
+        }
+        return { T: 'If', cond, body, eb };
+      }
 
-  run(ast) {
-    this.output = [];
-    const env = Object.create(null);
-    try { this.block(ast.stmts, env); }
-    catch(e) {
-      if (e instanceof ReturnSig) {}
-      else throw e;
+      whileStmt() {
+        this.adv(); this.expect('LP');
+        const cond = this.expr(); this.expect('RP');
+        return { T: 'While', cond, body: this.block() };
+      }
+
+      forStmt() {
+        this.adv(); this.expect('LP');
+        const vn = this.expect('IDENT').v;
+        this.expect('FROM');
+        const from = this.expr();
+        this.expect('TO');
+        const to = this.expr();
+        this.expect('RP');
+        return { T: 'For', vn, from, to, body: this.block() };
+      }
+
+      funcDecl() {
+        this.adv();
+        const name = this.expect('IDENT').v; this.expect('LP');
+        const params = [];
+        while (!this.check('RP')) { params.push(this.expect('IDENT').v); if (!this.check('RP')) this.expect('COMMA'); }
+        this.expect('RP');
+        return { T: 'Func', name, params, body: this.block() };
+      }
+
+      block() {
+        this.expect('LB');
+        const stmts = [];
+        while (!this.check('RB') && !this.check('EOF')) stmts.push(this.stmt());
+        this.expect('RB');
+        return stmts;
+      }
+
+      expr() { return this.or(); }
+
+      or() {
+        let l = this.and();
+        while (this.check('OR')) { this.adv(); l = { T: 'Bin', op: 'or', l, r: this.and() }; }
+        return l;
+      }
+
+      and() {
+        let l = this.eq();
+        while (this.check('AND')) { this.adv(); l = { T: 'Bin', op: 'and', l, r: this.eq() }; }
+        return l;
+      }
+
+      eq() {
+        let l = this.cmp();
+        while (this.check('EQ') || this.check('NEQ')) {
+          const op = this.adv().t === 'EQ' ? '==' : '!=';
+          l = { T: 'Bin', op, l, r: this.cmp() };
+        }
+        return l;
+      }
+
+      cmp() {
+        let l = this.add();
+        const ops = { LT: '<', GT: '>', LTE: '<=', GTE: '>=' };
+        while (ops[this.peek().t]) { const op = ops[this.adv().t]; l = { T: 'Bin', op, l, r: this.add() }; }
+        return l;
+      }
+
+      add() {
+        let l = this.mul();
+        while (this.check('PLUS') || this.check('MINUS')) {
+          const op = this.adv().t === 'PLUS' ? '+' : '-';
+          l = { T: 'Bin', op, l, r: this.mul() };
+        }
+        return l;
+      }
+
+      mul() {
+        let l = this.unary();
+        const ops = { MUL: '*', DIV: '/', MOD: '%' };
+        while (ops[this.peek().t]) { const op = ops[this.adv().t]; l = { T: 'Bin', op, l, r: this.unary() }; }
+        return l;
+      }
+
+      unary() {
+        if (this.check('NOT')) { this.adv(); return { T: 'Unary', op: 'not', e: this.unary() }; }
+        if (this.check('MINUS')) { this.adv(); return { T: 'Unary', op: '-', e: this.unary() }; }
+        return this.postfix();
+      }
+
+      postfix() {
+        let e = this.primary();
+        while (this.check('LBK')) {
+          this.adv(); const idx = this.expr(); this.expect('RBK');
+          e = { T: 'Idx', obj: e, idx };
+        }
+        return e;
+      }
+
+      primary() {
+        const t = this.peek();
+        switch (t.t) {
+          case 'NUM': this.adv(); return { T: 'Lit', v: t.v };
+          case 'STR': this.adv(); return { T: 'Lit', v: t.v };
+          case 'PAWSITIVE': this.adv(); return { T: 'Lit', v: true };
+          case 'CLAWFUL': this.adv(); return { T: 'Lit', v: false };
+          case 'NAP': this.adv(); return { T: 'Lit', v: null };
+          case 'LP': { this.adv(); const e = this.expr(); this.expect('RP'); return e; }
+          case 'LITTER': {
+            this.adv(); this.expect('LBK');
+            const els = [];
+            while (!this.check('RBK')) { els.push(this.expr()); if (!this.check('RBK')) this.expect('COMMA'); }
+            this.expect('RBK');
+            return { T: 'Arr', els };
+          }
+          case 'IDENT': {
+            this.adv();
+            if (this.check('LP')) {
+              this.adv();
+              const args = [];
+              while (!this.check('RP')) { args.push(this.expr()); if (!this.check('RP')) this.expect('COMMA'); }
+              this.expect('RP');
+              return { T: 'Call', name: t.v, args };
+            }
+            return { T: 'Id', name: t.v };
+          }
+          default: throw new Error(`Unexpected '${t.v || t.t}' at line ${t.l}`);
+        }
+      }
     }
-    return this.output;
-  }
 
-  block(stmts, env) {
-    for (const s of stmts) this.exec(s, env);
-  }
+    // ============================================================
+    // MEOW LANGUAGE — INTERPRETER
+    // ============================================================
+    class MeowError extends Error { constructor(m) { super(m); this.name = 'MeowError'; } }
+    class ReturnSig { constructor(v) { this.v = v; } }
+    class BreakSig { }
+    class ContinueSig { }
 
-  exec(s, env) {
-    switch(s.T) {
-      case 'Decl': env[s.name] = this.eval(s.val, env); break;
-      case 'Assign': {
-        const v = this.eval(s.val, env);
-        // walk prototype chain to find where it's defined
+    const BUILTINS = {
+      fur: a => a[0]?.length ?? 0,
+      whisker: a => meowStr(a[0]),
+      paw_num: a => Number(a[0]),
+      chase: a => { a[0].push(a[1]); return a[0]; },
+      nuzzle: a => a[0].join(a[1] !== undefined ? a[1] : ', '),
+      sniff: a => typeof a[0],
+      catnap: a => Math.floor(Math.random() * a[0]),
+      kibble: a => Math.floor(a[0]),
+      treat: a => Math.round(a[0]),
+      claw_up: a => Math.ceil(a[0]),
+      pounce_sqrt: a => Math.sqrt(a[0]),
+      meow_upper: a => String(a[0]).toUpperCase(),
+      meow_lower: a => String(a[0]).toLowerCase(),
+      scratch_split: a => String(a[0]).split(a[1] ?? ''),
+      tail_slice: a => a[0].slice(a[1], a[2]),
+    };
+
+    function meowStr(v) {
+      if (v === null) return 'nap';
+      if (v === true) return 'pawsitive';
+      if (v === false) return 'clawful';
+      if (Array.isArray(v)) return '[' + v.map(meowStr).join(', ') + ']';
+      return String(v);
+    }
+
+    class Interpreter {
+      constructor() { this.output = []; }
+
+      run(ast) {
+        this.output = [];
+        const env = Object.create(null);
+        try { this.block(ast.stmts, env); }
+        catch (e) {
+          if (e instanceof ReturnSig) { }
+          else throw e;
+        }
+        return this.output;
+      }
+
+      block(stmts, env) {
+        for (const s of stmts) this.exec(s, env);
+      }
+
+      exec(s, env) {
+        switch (s.T) {
+          case 'Decl': env[s.name] = this.eval(s.val, env); break;
+          case 'Assign': {
+            const v = this.eval(s.val, env);
+            // walk prototype chain to find where it's defined
+            let e = env;
+            while (e !== null) {
+              if (Object.prototype.hasOwnProperty.call(e, s.name)) { e[s.name] = v; return; }
+              e = Object.getPrototypeOf(e);
+            }
+            env[s.name] = v; // define new
+            break;
+          }
+          case 'Print': this.output.push(meowStr(this.eval(s.e, env))); break;
+          case 'If': {
+            const c = this.eval(s.cond, env);
+            if (this.truthy(c)) { const e2 = Object.create(env); this.block(s.body, e2); }
+            else if (s.eb) { const e2 = Object.create(env); this.block(s.eb, e2); }
+            break;
+          }
+          case 'While': {
+            let itr = 0;
+            while (this.truthy(this.eval(s.cond, env))) {
+              if (++itr > 200000) throw new MeowError('Infinite loop! (>200,000 iterations) 😾');
+              try { this.block(s.body, Object.create(env)); }
+              catch (e) { if (e instanceof BreakSig) break; if (e instanceof ContinueSig) continue; throw e; }
+            }
+            break;
+          }
+          case 'For': {
+            let from = this.eval(s.from, env), to = this.eval(s.to, env);
+            for (let i = from; i <= to; i++) {
+              const e2 = Object.create(env); e2[s.vn] = i;
+              try { this.block(s.body, e2); }
+              catch (e) { if (e instanceof BreakSig) break; if (e instanceof ContinueSig) continue; throw e; }
+            }
+            break;
+          }
+          case 'Func': env[s.name] = { __fn: true, params: s.params, body: s.body, closure: env }; break;
+          case 'Ret': throw new ReturnSig(this.eval(s.e, env));
+          case 'Brk': throw new BreakSig();
+          case 'Cont': throw new ContinueSig();
+          case 'ExprS': this.eval(s.e, env); break;
+        }
+      }
+
+      lookup(name, env) {
         let e = env;
         while (e !== null) {
-          if (Object.prototype.hasOwnProperty.call(e, s.name)) { e[s.name]=v; return; }
+          if (Object.prototype.hasOwnProperty.call(e, name)) return e[name];
           e = Object.getPrototypeOf(e);
         }
-        env[s.name] = v; // define new
-        break;
+        throw new MeowError(`Unknown variable: '${name}' 😿`);
       }
-      case 'Print': this.output.push(meowStr(this.eval(s.e, env))); break;
-      case 'If': {
-        const c = this.eval(s.cond, env);
-        if (this.truthy(c)) { const e2=Object.create(env); this.block(s.body, e2); }
-        else if (s.eb) { const e2=Object.create(env); this.block(s.eb, e2); }
-        break;
-      }
-      case 'While': {
-        let itr=0;
-        while (this.truthy(this.eval(s.cond, env))) {
-          if (++itr > 200000) throw new MeowError('Infinite loop! (>200,000 iterations) 😾');
-          try { this.block(s.body, Object.create(env)); }
-          catch(e) { if(e instanceof BreakSig)break; if(e instanceof ContinueSig)continue; throw e; }
+
+      eval(e, env) {
+        switch (e.T) {
+          case 'Lit': return e.v;
+          case 'Id': return this.lookup(e.name, env);
+          case 'Arr': return e.els.map(x => this.eval(x, env));
+          case 'Idx': {
+            const obj = this.eval(e.obj, env);
+            const idx = this.eval(e.idx, env);
+            if (obj == null) throw new MeowError('Cannot index nap (null)');
+            if (idx < 0 || idx >= obj.length) throw new MeowError(`Index ${idx} out of bounds (length ${obj.length})`);
+            return obj[idx];
+          }
+          case 'Unary': {
+            const v = this.eval(e.e, env);
+            if (e.op === 'not') return !this.truthy(v);
+            if (e.op === '-') return -v;
+            break;
+          }
+          case 'Bin': {
+            if (e.op === 'and') { const l = this.eval(e.l, env); return this.truthy(l) ? this.eval(e.r, env) : l; }
+            if (e.op === 'or') { const l = this.eval(e.l, env); return this.truthy(l) ? l : this.eval(e.r, env); }
+            const l = this.eval(e.l, env), r = this.eval(e.r, env);
+            switch (e.op) {
+              case '+': return (typeof l === 'string' || typeof r === 'string') ? String(l) + String(r) : l + r;
+              case '-': return l - r;
+              case '*': return l * r;
+              case '/': if (r === 0) throw new MeowError('Division by zero! 😾'); return l / r;
+              case '%': return l % r;
+              case '==': return l === r;
+              case '!=': return l !== r;
+              case '<': return l < r;
+              case '>': return l > r;
+              case '<=': return l <= r;
+              case '>=': return l >= r;
+            }
+            break;
+          }
+          case 'Call': {
+            const args = e.args.map(a => this.eval(a, env));
+            if (BUILTINS[e.name]) return BUILTINS[e.name](args);
+            const fn = this.lookup(e.name, env);
+            if (!fn || !fn.__fn) throw new MeowError(`'${e.name}' is not a function 😾`);
+            const ce = Object.create(fn.closure);
+            fn.params.forEach((p, i) => ce[p] = args[i] ?? null);
+            try { this.block(fn.body, ce); }
+            catch (ex) { if (ex instanceof ReturnSig) return ex.v; throw ex; }
+            return null;
+          }
         }
-        break;
       }
-      case 'For': {
-        let from=this.eval(s.from,env), to=this.eval(s.to,env);
-        for (let i=from;i<=to;i++) {
-          const e2=Object.create(env); e2[s.vn]=i;
-          try { this.block(s.body, e2); }
-          catch(e) { if(e instanceof BreakSig)break; if(e instanceof ContinueSig)continue; throw e; }
+
+      truthy(v) { return v !== null && v !== false && v !== 0 && v !== ''; }
+    }
+
+    // ============================================================
+    // IDE — MULTI-TAB MANAGER
+    // ============================================================
+    let tabs = [];
+    let activeTabId = null;
+    let tabCounter = 0;
+
+    function createTab(name, content) {
+      const id = ++tabCounter;
+      tabs.push({ id, name, content, savedContent: content, modified: false });
+      return id;
+    }
+
+    function switchTab(id) {
+      // Save current editor content to current tab
+      if (activeTabId !== null) {
+        const cur = tabs.find(t => t.id === activeTabId);
+        if (cur) {
+          cur.content = editor.value;
+          cur.modified = cur.content !== cur.savedContent;
         }
-        break;
       }
-      case 'Func': env[s.name]={__fn:true,params:s.params,body:s.body,closure:env}; break;
-      case 'Ret': throw new ReturnSig(this.eval(s.e, env));
-      case 'Brk': throw new BreakSig();
-      case 'Cont': throw new ContinueSig();
-      case 'ExprS': this.eval(s.e, env); break;
+      activeTabId = id;
+      const tab = tabs.find(t => t.id === id);
+      if (!tab) return;
+      editor.value = tab.content;
+      updateHighlight();
+      updateStatusBar();
+      renderTabs();
+      editor.focus();
+      updatePlaceholder();
     }
-  }
 
-  lookup(name, env) {
-    let e=env;
-    while(e!==null){
-      if(Object.prototype.hasOwnProperty.call(e,name)) return e[name];
-      e=Object.getPrototypeOf(e);
-    }
-    throw new MeowError(`Unknown variable: '${name}' 😿`);
-  }
-
-  eval(e, env) {
-    switch(e.T) {
-      case 'Lit': return e.v;
-      case 'Id': return this.lookup(e.name, env);
-      case 'Arr': return e.els.map(x=>this.eval(x,env));
-      case 'Idx': {
-        const obj=this.eval(e.obj,env);
-        const idx=this.eval(e.idx,env);
-        if(obj==null) throw new MeowError('Cannot index nap (null)');
-        if(idx<0||idx>=obj.length) throw new MeowError(`Index ${idx} out of bounds (length ${obj.length})`);
-        return obj[idx];
+    function removeTab(id, e) {
+      e?.stopPropagation();
+      if (tabs.length <= 1) { // Don't close last tab, just clear it
+        const tab = tabs.find(t => t.id === id);
+        if (tab) { tab.content = ''; tab.savedContent = ''; tab.modified = false; tab.name = 'scratch.meow'; }
+        editor.value = '';
+        updateHighlight();
+        updateStatusBar();
+        renderTabs();
+        updatePlaceholder();
+        return;
       }
-      case 'Unary': {
-        const v=this.eval(e.e,env);
-        if(e.op==='not') return !this.truthy(v);
-        if(e.op==='-') return -v;
-        break;
-      }
-      case 'Bin': {
-        if(e.op==='and'){const l=this.eval(e.l,env);return this.truthy(l)?this.eval(e.r,env):l;}
-        if(e.op==='or'){const l=this.eval(e.l,env);return this.truthy(l)?l:this.eval(e.r,env);}
-        const l=this.eval(e.l,env), r=this.eval(e.r,env);
-        switch(e.op){
-          case '+': return (typeof l==='string'||typeof r==='string')?String(l)+String(r):l+r;
-          case '-': return l-r;
-          case '*': return l*r;
-          case '/': if(r===0)throw new MeowError('Division by zero! 😾'); return l/r;
-          case '%': return l%r;
-          case '==': return l===r;
-          case '!=': return l!==r;
-          case '<': return l<r;
-          case '>': return l>r;
-          case '<=': return l<=r;
-          case '>=': return l>=r;
-        }
-        break;
-      }
-      case 'Call': {
-        const args=e.args.map(a=>this.eval(a,env));
-        if(BUILTINS[e.name]) return BUILTINS[e.name](args);
-        const fn=this.lookup(e.name,env);
-        if(!fn||!fn.__fn) throw new MeowError(`'${e.name}' is not a function 😾`);
-        const ce=Object.create(fn.closure);
-        fn.params.forEach((p,i)=>ce[p]=args[i]??null);
-        try { this.block(fn.body,ce); }
-        catch(ex) { if(ex instanceof ReturnSig)return ex.v; throw ex; }
-        return null;
-      }
-    }
-  }
-
-  truthy(v) { return v!==null&&v!==false&&v!==0&&v!==''; }
-}
-
-// ============================================================
-// IDE — SYNTAX HIGHLIGHTER
-// ============================================================
-function highlight(code) {
-  const kwOrange = new Set(['purr','meow','hiss','else','stalk','pounce','claw','paw','litter','scratch','knead','from','to']);
-  const kwPurple = new Set(['pawsitive','clawful','nap']);
-  const kwBlue   = new Set(['and','or','not']);
-
-  let out = '';
-  let i = 0;
-  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-
-  while (i < code.length) {
-    // Comment
-    if (code[i] === '#') {
-      let j = i;
-      while (j < code.length && code[j] !== '\n') j++;
-      out += `<span class="hl-comment">${esc(code.slice(i,j))}</span>`;
-      i = j; continue;
-    }
-    // String
-    if (code[i] === '"' || code[i] === "'") {
-      const q = code[i]; let j = i+1;
-      while (j < code.length && code[j] !== q) { if (code[j]==='\\') j++; j++; }
-      j++;
-      out += `<span class="hl-string">${esc(code.slice(i,j))}</span>`;
-      i = j; continue;
-    }
-    // Number
-    if (/\d/.test(code[i])) {
-      let j=i; while(j<code.length&&/[\d.]/.test(code[j]))j++;
-      out += `<span class="hl-number">${esc(code.slice(i,j))}</span>`;
-      i=j; continue;
-    }
-    // Identifier / keyword
-    if (/[a-zA-Z_]/.test(code[i])) {
-      let j=i; while(j<code.length&&/[a-zA-Z0-9_]/.test(code[j]))j++;
-      const w = code.slice(i,j);
-      if (kwOrange.has(w)) out += `<span class="hl-keyword">${w}</span>`;
-      else if (kwPurple.has(w)) out += `<span class="hl-bool">${w}</span>`;
-      else if (kwBlue.has(w)) out += `<span class="hl-op">${w}</span>`;
-      else out += `<span class="hl-ident">${esc(w)}</span>`;
-      i=j; continue;
-    }
-    // Operators
-    if ('+-*/%<>=!'.includes(code[i])) {
-      out += `<span class="hl-op">${esc(code[i])}</span>`;
-      i++; continue;
-    }
-    // Parens/brackets
-    if ('()'.includes(code[i])) { out += `<span class="hl-paren">${code[i]}</span>`; i++; continue; }
-    if ('[]'.includes(code[i])) { out += `<span class="hl-bracket">${code[i]}</span>`; i++; continue; }
-    // Everything else
-    out += esc(code[i]);
-    i++;
-  }
-  return out;
-}
-
-// ============================================================
-// IDE — EDITOR
-// ============================================================
-const editor = document.getElementById('code-editor');
-const hlLayer = document.getElementById('highlight-layer');
-const lineNums = document.getElementById('line-numbers');
-
-function updateHighlight() {
-  const code = editor.value;
-  hlLayer.innerHTML = highlight(code) + '\n';
-  // Line numbers
-  const lines = code.split('\n').length;
-  lineNums.innerHTML = Array.from({length:lines},(_,i)=>i+1).join('\n');
-}
-
-function updateStatusBar() {
-  const text = editor.value;
-  const pos = editor.selectionStart;
-  const before = text.slice(0,pos);
-  const lines = before.split('\n');
-  document.getElementById('sb-line').textContent = lines.length;
-  document.getElementById('sb-col').textContent = lines[lines.length-1].length+1;
-  const wc = text.trim() ? text.trim().split(/\s+/).length : 0;
-  document.getElementById('sb-count').textContent = wc ? `${wc} words` : '';
-}
-
-editor.addEventListener('input', updateHighlight);
-editor.addEventListener('keydown', e => {
-  if (e.key === 'Tab') {
-    e.preventDefault();
-    const s=editor.selectionStart, en=editor.selectionEnd;
-    editor.value = editor.value.slice(0,s)+'  '+editor.value.slice(en);
-    editor.selectionStart = editor.selectionEnd = s+2;
-    updateHighlight();
-  }
-  if ((e.ctrlKey||e.metaKey) && e.key==='Enter') {
-    e.preventDefault(); runCode();
-  }
-});
-editor.addEventListener('keyup', updateStatusBar);
-editor.addEventListener('click', updateStatusBar);
-
-// Sync scroll
-document.querySelector('.editor-inner').addEventListener('scroll', function() {
-  hlLayer.style.transform = `translate(-${this.scrollLeft}px, -${this.scrollTop}px)`;
-  lineNums.scrollTop = this.scrollTop;
-});
-
-// ============================================================
-// IDE — RUN
-// ============================================================
-const interp = new Interpreter();
-
-function runCode() {
-  const code = editor.value.trim();
-  if (!code) return;
-  const dot = document.getElementById('status-dot');
-  const out = document.getElementById('output');
-  
-  dot.className = 'status-dot running';
-  out.innerHTML = '';
-
-  const t0 = performance.now();
-
-  setTimeout(() => {
-    try {
-      const tokens = new Lexer(code).tokenize();
-      const ast = new Parser(tokens).parse();
-      const results = interp.run(ast);
-      const elapsed = (performance.now()-t0).toFixed(1);
-
-      dot.className = 'status-dot success';
-      document.getElementById('exec-time').textContent = `${elapsed}ms`;
-
-      if (results.length === 0) {
-        out.innerHTML = `<div class="output-system">🐾 Program ran successfully — no output</div>`;
+      const idx = tabs.findIndex(t => t.id === id);
+      tabs.splice(idx, 1);
+      if (activeTabId === id) {
+        const newIdx = Math.min(idx, tabs.length - 1);
+        switchTab(tabs[newIdx].id);
       } else {
-        results.forEach((line, i) => {
-          const div = document.createElement('div');
-          div.className = 'output-line';
-          div.innerHTML = `<span class="output-prefix">🐱</span><span class="output-text">${escapeHtml(line)}</span>`;
-          div.style.animationDelay = `${i*0.04}s`;
-          div.style.opacity = '0';
-          div.style.animation = 'fadeIn 0.2s ease forwards';
-          out.appendChild(div);
-        });
-        const timeDiv = document.createElement('div');
-        timeDiv.className = 'output-time';
-        timeDiv.textContent = `✓ ${results.length} line${results.length!==1?'s':''} printed — ${elapsed}ms`;
-        out.appendChild(timeDiv);
+        renderTabs();
       }
-    } catch(err) {
-      dot.className = 'status-dot error';
-      document.getElementById('exec-time').textContent = '';
-      out.innerHTML = `<div class="output-error">😾 <span><strong>Error:</strong> ${escapeHtml(err.message)}</span></div>
-        <div class="output-system" style="margin-top:8px">Check your syntax and try again, hooman.</div>`;
     }
-  }, 40);
-}
 
-function escapeHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
-}
+    function renderTabs() {
+      const container = document.getElementById('editor-tabs');
+      const addBtn = document.getElementById('tab-add-btn');
+      // Remove all tabs
+      container.querySelectorAll('.tab').forEach(el => el.remove());
 
-function clearOutput() {
-  document.getElementById('output').innerHTML = `<div class="output-placeholder">😺 Output cleared. Ready to run more MEOW!</div>`;
-  document.getElementById('status-dot').className = 'status-dot';
-  document.getElementById('exec-time').textContent = '';
-}
+      tabs.forEach(tab => {
+        const el = document.createElement('div');
+        el.className = 'tab' + (tab.id === activeTabId ? ' active' : '');
+        el.dataset.id = tab.id;
 
-// ============================================================
-// EXAMPLES
-// ============================================================
-const examples = {
-  hello: `# 🐱 Hello World in MEOW!
+        // Icon
+        const icon = document.createElement('span');
+        icon.textContent = '🐾';
+        icon.style.fontSize = '10px';
+
+        // Name (dblclick to rename)
+        const name = document.createElement('span');
+        name.textContent = tab.name;
+        el.appendChild(icon);
+        el.appendChild(name);
+
+        // Modified dot
+        if (tab.modified) {
+          const dot = document.createElement('span');
+          dot.className = 'tab-dot-unsaved';
+          el.appendChild(dot);
+        }
+
+        // Close button
+        if (tabs.length > 1 || true) {
+          const close = document.createElement('span');
+          close.className = 'tab-close';
+          close.textContent = '✕';
+          close.onclick = (e) => removeTab(tab.id, e);
+          el.appendChild(close);
+        }
+
+        el.addEventListener('click', () => switchTab(tab.id));
+        el.addEventListener('dblclick', (e) => {
+          if (e.target.classList.contains('tab-close')) return;
+          startRename(tab.id, name, el);
+        });
+
+        container.insertBefore(el, addBtn);
+      });
+    }
+
+    function startRename(id, nameEl, tabEl) {
+      const tab = tabs.find(t => t.id === id);
+      if (!tab) return;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'tab-rename-input';
+      input.value = tab.name;
+      nameEl.replaceWith(input);
+      input.focus();
+      input.select();
+
+      const finish = () => {
+        const v = input.value.trim() || tab.name;
+        tab.name = v.includes('.') ? v : v + '.meow';
+        input.replaceWith(nameEl);
+        nameEl.textContent = tab.name;
+        renderTabs();
+      };
+      input.addEventListener('blur', finish);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); finish(); }
+        if (e.key === 'Escape') { input.replaceWith(nameEl); nameEl.textContent = tab.name; }
+      });
+    }
+
+    function newFile() {
+      const id = createTab('scratch.meow', '# ✨ Write your own MEOW code here!\n# Use the sidebar snippets & keywords to get started.\n\n');
+      switchTab(id);
+      clearOutput();
+      // Position cursor at end
+      setTimeout(() => {
+        editor.focus();
+        editor.selectionStart = editor.selectionEnd = editor.value.length;
+        updatePlaceholder();
+      }, 50);
+      showToast('✨ New file created! Start coding 🐾');
+    }
+
+    // ============================================================
+    // IDE — SNIPPET INSERTION
+    // ============================================================
+    const snippetCode = {
+      var: 'purr myVar = 0',
+      print: 'meow "Hello, World! 🐱"',
+      if: 'hiss (condition) {\n  meow "true!"\n} else {\n  meow "false!"\n}',
+      while: 'purr i = 0\nstalk (i < 10) {\n  meow whisker(i)\n  i = i + 1\n}',
+      for: 'pounce (i from 1 to 10) {\n  meow whisker(i)\n}',
+      func: 'claw myFunc(a, b) {\n  purr result = a + b\n  paw result\n}\n\nmeow whisker(myFunc(3, 4))',
+      array: 'purr cats = litter ["Whiskers", "Luna", "Mittens"]\npounce (i from 0 to 2) {\n  meow cats[i]\n}',
+      forEach: 'purr items = litter [10, 20, 30, 40, 50]\npurr total = 0\npounce (i from 0 to 4) {\n  total = total + items[i]\n}\nmeow "Total: " + whisker(total)',
+    };
+
+    function insertSnippet(name) {
+      const code = snippetCode[name];
+      if (!code) return;
+      insertAtCursor('\n' + code + '\n');
+      showToast(`🧩 Inserted: ${name} snippet`);
+    }
+
+    function insertWord(word) {
+      insertAtCursor(word);
+      showToast(`💡 Inserted: ${word.trim()}`);
+    }
+
+    function insertAtCursor(text) {
+      editor.focus();
+      const start = editor.selectionStart;
+      const end = editor.selectionEnd;
+      const before = editor.value.slice(0, start);
+      const after = editor.value.slice(end);
+      editor.value = before + text + after;
+      const newPos = start + text.length;
+      editor.selectionStart = editor.selectionEnd = newPos;
+      updateHighlight();
+      updateStatusBar();
+      updatePlaceholder();
+      // mark current tab modified
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) {
+          tab.content = editor.value;
+          tab.modified = tab.content !== tab.savedContent;
+          renderTabs();
+        }
+      }
+    }
+
+    // ============================================================
+    // IDE — TOAST
+    // ============================================================
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('insert-toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    // ============================================================
+    // IDE — PLACEHOLDER
+    // ============================================================
+    function updatePlaceholder() {
+      const ph = document.getElementById('editor-placeholder');
+      if (ph) ph.style.display = editor.value ? 'none' : 'block';
+    }
+
+    // ============================================================
+    // IDE — SYNTAX HIGHLIGHTER
+    // ============================================================
+    function highlight(code) {
+      const kwOrange = new Set(['purr', 'meow', 'hiss', 'else', 'stalk', 'pounce', 'claw', 'paw', 'litter', 'scratch', 'knead', 'from', 'to']);
+      const kwPurple = new Set(['pawsitive', 'clawful', 'nap']);
+      const kwBlue = new Set(['and', 'or', 'not']);
+
+      let out = '';
+      let i = 0;
+      const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      while (i < code.length) {
+        if (code[i] === '#') {
+          let j = i;
+          while (j < code.length && code[j] !== '\n') j++;
+          out += `<span class="hl-comment">${esc(code.slice(i, j))}</span>`;
+          i = j; continue;
+        }
+        if (code[i] === '"' || code[i] === "'") {
+          const q = code[i]; let j = i + 1;
+          while (j < code.length && code[j] !== q) { if (code[j] === '\\') j++; j++; }
+          j++;
+          out += `<span class="hl-string">${esc(code.slice(i, j))}</span>`;
+          i = j; continue;
+        }
+        if (/\d/.test(code[i])) {
+          let j = i; while (j < code.length && /[\d.]/.test(code[j])) j++;
+          out += `<span class="hl-number">${esc(code.slice(i, j))}</span>`;
+          i = j; continue;
+        }
+        if (/[a-zA-Z_]/.test(code[i])) {
+          let j = i; while (j < code.length && /[a-zA-Z0-9_]/.test(code[j])) j++;
+          const w = code.slice(i, j);
+          if (kwOrange.has(w)) out += `<span class="hl-keyword">${w}</span>`;
+          else if (kwPurple.has(w)) out += `<span class="hl-bool">${w}</span>`;
+          else if (kwBlue.has(w)) out += `<span class="hl-op">${w}</span>`;
+          else out += `<span class="hl-ident">${esc(w)}</span>`;
+          i = j; continue;
+        }
+        if ('+-*/%<>=!'.includes(code[i])) {
+          out += `<span class="hl-op">${esc(code[i])}</span>`;
+          i++; continue;
+        }
+        if ('()'.includes(code[i])) { out += `<span class="hl-paren">${code[i]}</span>`; i++; continue; }
+        if ('[]'.includes(code[i])) { out += `<span class="hl-bracket">${code[i]}</span>`; i++; continue; }
+        out += esc(code[i]);
+        i++;
+      }
+      return out;
+    }
+
+    // ============================================================
+    // IDE — EDITOR
+    // ============================================================
+    const editor = document.getElementById('code-editor');
+    const hlLayer = document.getElementById('highlight-layer');
+    const lineNums = document.getElementById('line-numbers');
+
+    function updateHighlight() {
+      const code = editor.value;
+      hlLayer.innerHTML = highlight(code) + '\n';
+      const lines = code.split('\n').length;
+      lineNums.innerHTML = Array.from({ length: lines }, (_, i) => i + 1).join('\n');
+      // update current tab content
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) {
+          tab.content = code;
+          const wasModified = tab.modified;
+          tab.modified = tab.content !== tab.savedContent;
+          if (wasModified !== tab.modified) renderTabs();
+        }
+      }
+    }
+
+    function updateStatusBar() {
+      const text = editor.value;
+      const pos = editor.selectionStart;
+      const before = text.slice(0, pos);
+      const lines = before.split('\n');
+      document.getElementById('sb-line').textContent = lines.length;
+      document.getElementById('sb-col').textContent = lines[lines.length - 1].length + 1;
+      const wc = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('sb-count').textContent = wc ? `${wc} words` : '';
+    }
+
+    editor.addEventListener('input', () => { updateHighlight(); updatePlaceholder(); });
+    editor.addEventListener('keydown', e => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const s = editor.selectionStart, en = editor.selectionEnd;
+        editor.value = editor.value.slice(0, s) + '  ' + editor.value.slice(en);
+        editor.selectionStart = editor.selectionEnd = s + 2;
+        updateHighlight();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault(); runCode();
+      }
+      // Ctrl+N = new file
+      if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+        e.preventDefault(); newFile();
+      }
+    });
+    editor.addEventListener('keyup', updateStatusBar);
+    editor.addEventListener('click', updateStatusBar);
+
+    document.querySelector('#editor-inner').addEventListener('scroll', function () {
+      hlLayer.style.transform = `translate(-${this.scrollLeft}px, -${this.scrollTop}px)`;
+      lineNums.scrollTop = this.scrollTop;
+    });
+
+    // ============================================================
+    // IDE — RUN
+    // ============================================================
+    const interp = new Interpreter();
+
+    function runCode() {
+      const code = editor.value.trim();
+      if (!code) {
+        showToast('😿 Nothing to run! Write some code first.');
+        return;
+      }
+      const dot = document.getElementById('status-dot');
+      const out = document.getElementById('output');
+
+      dot.className = 'status-dot running';
+      out.innerHTML = '';
+
+      const t0 = performance.now();
+
+      setTimeout(() => {
+        try {
+          const tokens = new Lexer(code).tokenize();
+          const ast = new Parser(tokens).parse();
+          const results = interp.run(ast);
+          const elapsed = (performance.now() - t0).toFixed(1);
+
+          dot.className = 'status-dot success';
+          document.getElementById('exec-time').textContent = `${elapsed}ms`;
+
+          // Mark tab as saved
+          if (activeTabId !== null) {
+            const tab = tabs.find(t => t.id === activeTabId);
+            if (tab) { tab.savedContent = tab.content; tab.modified = false; renderTabs(); }
+          }
+
+          if (results.length === 0) {
+            out.innerHTML = `<div class="output-system">🐾 Program ran successfully — no output</div>`;
+          } else {
+            results.forEach((line, i) => {
+              const div = document.createElement('div');
+              div.className = 'output-line';
+              div.innerHTML = `<span class="output-prefix">🐱</span><span class="output-text">${escapeHtml(line)}</span>`;
+              div.style.opacity = '0';
+              div.style.animation = `fadeIn 0.2s ease ${i * 0.04}s forwards`;
+              out.appendChild(div);
+            });
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'output-time';
+            timeDiv.textContent = `✓ ${results.length} line${results.length !== 1 ? 's' : ''} printed — ${elapsed}ms`;
+            out.appendChild(timeDiv);
+          }
+        } catch (err) {
+          dot.className = 'status-dot error';
+          document.getElementById('exec-time').textContent = '';
+          out.innerHTML = `<div class="output-error">😾 <span><strong>Error:</strong> ${escapeHtml(err.message)}</span></div>
+        <div class="output-system" style="margin-top:8px">Check your syntax and try again, hooman.</div>`;
+        }
+      }, 40);
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+    }
+
+    function clearOutput() {
+      document.getElementById('output').innerHTML = `<div class="output-placeholder">😺 Output cleared. Ready to run more MEOW!</div>`;
+      document.getElementById('status-dot').className = 'status-dot';
+      document.getElementById('exec-time').textContent = '';
+    }
+
+    // ============================================================
+    // EXAMPLES
+    // ============================================================
+    const examples = {
+      hello: `# 🐱 Hello World in MEOW!
 # The center of MEOW is... meow!
 
 meow "Hello, World! 🐱"
@@ -1308,7 +2167,7 @@ purr version = 1
 meow "Welcome to " + language + " v" + whisker(version)
 meow "The cat programming language 🐾"`,
 
-  fibonacci: `# 🔢 Fibonacci Sequence
+      fibonacci: `# 🔢 Fibonacci Sequence
 # Using recursion in MEOW
 
 claw fib(n) {
@@ -1323,7 +2182,7 @@ pounce (i from 0 to 10) {
   meow "fib(" + whisker(i) + ") = " + whisker(fib(i))
 }`,
 
-  fizzbuzz: `# 🎉 FizzBuzz — Cat Edition!
+      fizzbuzz: `# 🎉 FizzBuzz — Cat Edition!
 
 pounce (i from 1 to 30) {
   hiss (i % 15 == 0) {
@@ -1337,7 +2196,7 @@ pounce (i from 1 to 30) {
   }
 }`,
 
-  functions: `# 🪄 Functions in MEOW
+      functions: `# 🪄 Functions in MEOW
 
 claw greet(name) {
   paw "Hello, " + name + "! 🐱"
@@ -1370,7 +2229,7 @@ hiss (isPurring(8)) {
 
 meow "5! = " + whisker(factorial(5))`,
 
-  arrays: `# 📦 Arrays (Litters) in MEOW
+      arrays: `# 📦 Arrays (Litters) in MEOW
 
 purr cats = litter ["Whiskers", "Luna", "Mittens", "Shadow", "Pixel"]
 purr scores = litter [95, 87, 72, 99, 64]
@@ -1396,7 +2255,7 @@ meow "Best score: " + whisker(best)
 # Join names
 meow "All cats: " + nuzzle(cats, ", ")`,
 
-  factorial: `# ❕ Factorial — Iterative
+      factorial: `# ❕ Factorial — Iterative
 
 claw factIter(n) {
   purr result = 1
@@ -1413,7 +2272,7 @@ pounce (n from 1 to 10) {
   meow whisker(n) + "! = " + whisker(factIter(n))
 }`,
 
-  loop: `# 🔄 Loop Examples in MEOW
+      loop: `# 🔄 Loop Examples in MEOW
 
 # pounce = for range loop
 meow "Counting up:"
@@ -1444,7 +2303,7 @@ pounce (i from 1 to 3) {
   }
 }`,
 
-  strings: `# 🧵 String Operations in MEOW
+      strings: `# 🧵 String Operations in MEOW
 
 purr name = "Whiskers"
 purr greeting = "Hello, " + name + "!"
@@ -1467,7 +2326,7 @@ meow "Type of pawsitive: " + sniff(pawsitive)
 purr words = litter ["The", "cat", "says", "MEOW!"]
 meow nuzzle(words, " ")`,
 
-  catlife: `# 😺 A Day in the Life of a Cat!
+      catlife: `# 😺 A Day in the Life of a Cat!
 # Full MEOW program demo
 
 claw sleep(hours) {
@@ -1529,38 +2388,97 @@ hiss (happiness > 100) {
 
 meow ""
 meow "Tomorrow's plan: same thing. 🐱"`
-};
+    };
 
-function loadExample(name) {
-  editor.value = examples[name] || '';
-  updateHighlight();
-  updateStatusBar();
-  clearOutput();
+    examples.bubbleSort = `# 🫧 Bubble Sort in MEOW
+# Sorting a litter of numbers
+
+claw bubbleSort(arr, n) {
+  pounce (i from 0 to n - 2) {
+    pounce (j from 0 to n - i - 2) {
+      hiss (arr[j] > arr[j + 1]) {
+        purr tmp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = tmp
+      }
+    }
+  }
 }
 
-function showRef() {
-  document.getElementById('ref-modal').classList.add('open');
+purr data = litter [64, 34, 25, 12, 22, 11]
+meow "Original: " + nuzzle(data, ", ")
+
+bubbleSort(data, 6)
+meow "Sorted:   " + nuzzle(data, " -> ")`;
+
+    examples.recursion = `# 🌀 Recursion in MEOW
+# Calculating powers of a number
+
+claw power(base, exp) {
+  hiss (exp == 0) { 
+    paw 1 
+  }
+  paw base * power(base, exp - 1)
 }
 
-function closeRef() {
-  document.getElementById('ref-modal').classList.remove('open');
-}
+meow "3 to the power of 4 is:"
+meow whisker(power(3, 4)) # -> 81
 
-document.getElementById('ref-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeRef();
-});
+meow ""
+meow "3 to the power of 6 is:"
+meow whisker(power(3, 6)) # -> 729`;
 
-// Add fadeIn animation
-const style = document.createElement('style');
-style.textContent = `@keyframes fadeIn { to { opacity:1; } }`;
-document.head.appendChild(style);
+    function loadExample(name) {
+      const code = examples[name];
+      if (!code) return;
+      // Load into current active tab
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) {
+          tab.name = name + '.meow';
+          tab.content = code;
+          tab.savedContent = code;
+          tab.modified = false;
+        }
+      }
+      editor.value = code;
+      updateHighlight();
+      updateStatusBar();
+      renderTabs();
+      clearOutput();
+      updatePlaceholder();
+      showToast(`📂 Loaded: ${name}.meow`);
+    }
 
-// ============================================================
-// INIT
-// ============================================================
-loadExample('catlife');
-updateHighlight();
-updateStatusBar();
-</script>
+    function showRef() {
+      document.getElementById('ref-modal').classList.add('open');
+    }
+
+    function closeRef() {
+      document.getElementById('ref-modal').classList.remove('open');
+    }
+
+    document.getElementById('ref-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeRef();
+    });
+
+    // Add fadeIn animation
+    const style = document.createElement('style');
+    style.textContent = `@keyframes fadeIn { to { opacity:1; } }`;
+    document.head.appendChild(style);
+
+    // ============================================================
+    // INIT — load catlife example as first tab
+    // ============================================================
+    const firstId = createTab('catlife.meow', examples.catlife);
+    tabs[0].savedContent = examples.catlife;
+    activeTabId = firstId;
+    editor.value = examples.catlife;
+    updateHighlight();
+    updateStatusBar();
+    renderTabs();
+    updatePlaceholder();
+  </script>
 </body>
+
 </html>
