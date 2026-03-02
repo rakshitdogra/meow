@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEOW Language — Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --bg2: #f3f1eb;
+      --bg3: #ebe8e0;
+      --surface: #ffffff;
+      --border: #e2ddd4;
+      --border2: #d0cbbf;
+      --text: #1a1814;
+      --text2: #5a5549;
+      --text3: #9a9488;
+      --orange: #e8622a;
+      --orange2: #f0864d;
+      --orange3: #f5a872;
+      --orange-light: #fef3ec;
+      --orange-mid: #fde4d0;
+      --green: #2a7a4a;
+      --green-bg: #edf7f2;
+      --blue: #2563a8;
+      --blue-bg: #eff5fd;
+      --purple: #7c3aed;
+      --purple-bg: #f5f0ff;
+      --red: #c0392b;
+      --red-bg: #fdf3f2;
+      --sidebar-w: 260px;
+      --header-h: 60px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text3);
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 0;
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--orange);
+      letter-spacing: -0.3px;
+      flex-shrink: 0;
+    }
+
+    .site-logo .cat {
+      font-size: 22px;
+    }
+
+    .logo-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text3);
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 2px 7px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: 40px;
+    }
+
+    .header-nav a {
+      padding: 6px 14px;
+      border-radius: 8px;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .header-nav a:hover,
+    .header-nav a.active {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .btn-ide {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 2px 8px rgba(232, 98, 42, 0.3);
+    }
+
+    .btn-ide:hover {
+      background: var(--orange2);
+      box-shadow: 0 4px 16px rgba(232, 98, 42, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-github {
+      background: var(--surface);
+      color: var(--text2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-github:hover {
+      background: var(--bg2);
+      color: var(--text);
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: var(--header-h);
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .sidebar-group {
+      margin-bottom: 4px;
+    }
+
+    .sidebar-group-label {
+      padding: 6px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      margin-top: 12px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      font-size: 13.5px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.1s;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+    }
+
+    .sidebar-link:hover {
+      background: var(--bg2);
+      color: var(--text);
+      border-left-color: var(--border2);
+    }
+
+    .sidebar-link.active {
+      background: var(--orange-light);
+      color: var(--orange);
+      border-left-color: var(--orange);
+      font-weight: 600;
+    }
+
+    .sidebar-link .icon {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .page-section {
+      max-width: 780px;
+      padding: 56px 60px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--orange-light) 0%, var(--bg) 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 60px 64px;
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '🐾';
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 140px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--orange-mid);
+      border: 1px solid var(--orange3);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .accent {
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .pill-orange {
+      background: var(--orange-mid);
+      color: var(--orange);
+    }
+
+    .pill-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .pill-blue {
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    .pill-purple {
+      background: var(--purple-bg);
+      color: var(--purple);
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--text);
+      padding-top: 40px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 28px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--text2);
+      margin-bottom: 14px;
+    }
+
+    p strong {
+      color: var(--text);
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+      color: var(--text2);
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* ── CODE BLOCKS ── */
+    pre {
+      background: #1e1c18;
+      border: 1px solid #333027;
+      border-radius: 10px;
+      padding: 20px 22px;
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    pre .lang-badge {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #5a5549;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    pre code {
+      color: #e8e0d0;
+      display: block;
+    }
+
+    :not(pre)>code {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 1px 6px;
+      border-radius: 5px;
+      font-size: 13px;
+      color: var(--orange);
+    }
+
+    /* Syntax */
+    .kw {
+      color: #ff8c42;
+      font-weight: 500;
+    }
+
+    .str {
+      color: #6bcf7f;
+    }
+
+    .num {
+      color: #ffb347;
+    }
+
+    .cmt {
+      color: #5a5549;
+      font-style: italic;
+    }
+
+    .ident {
+      color: #e8e0d0;
+    }
+
+    .op {
+      color: #5b9cf6;
+    }
+
+    .bool {
+      color: #c084fc;
+    }
+
+    .fn {
+      color: #f472b6;
+    }
+
+    .paren {
+      color: #ffd580;
+    }
+
+    /* ── CALLOUT BOXES ── */
+    .callout {
+      padding: 16px 18px;
+      border-radius: 10px;
+      border-left: 3px solid;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .callout-orange {
+      background: var(--orange-light);
+      border-color: var(--orange);
+    }
+
+    .callout-orange .callout-title {
+      color: var(--orange);
+    }
+
+    .callout-green {
+      background: var(--green-bg);
+      border-color: var(--green);
+    }
+
+    .callout-green .callout-title {
+      color: var(--green);
+    }
+
+    .callout-blue {
+      background: var(--blue-bg);
+      border-color: var(--blue);
+    }
+
+    .callout-blue .callout-title {
+      color: var(--blue);
+    }
+
+    .callout-purple {
+      background: var(--purple-bg);
+      border-color: var(--purple);
+    }
+
+    .callout-purple .callout-title {
+      color: var(--purple);
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--text2);
+    }
+
+    /* ── TABLES ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th {
+      background: var(--bg2);
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--bg3);
+      vertical-align: top;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: var(--bg2);
+    }
+
+    td code {
+      font-size: 12px;
+    }
+
+    td .kw2 {
+      color: var(--orange);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+
+    td .ex {
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    /* ── KEYWORD GRID ── */
+    .kw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .kw-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: all 0.15s;
+      box-shadow: var(--shadow);
+    }
+
+    .kw-card:hover {
+      border-color: var(--orange3);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .kw-card .kw-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .kw-card .kw-desc {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .kw-card .kw-ex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      background: var(--bg2);
+      padding: 3px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── INLINE EXAMPLE RUNNER ── */
+    .run-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .run-example-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .run-example-header span {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .run-btn-small {
+      margin-left: auto;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      transition: all 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .run-btn-small:hover {
+      background: var(--orange2);
+    }
+
+    .run-example pre {
+      border-radius: 0;
+      border: none;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .run-output {
+      background: #141210;
+      padding: 12px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a8a090;
+      border-top: 1px solid #2a2820;
+      min-height: 32px;
+      display: none;
+      line-height: 1.7;
+    }
+
+    .run-output.visible {
+      display: block;
+    }
+
+    .run-output .out-line {
+      color: #c8bfb0;
+    }
+
+    .run-output .out-prefix {
+      color: #ff8c42;
+      opacity: 0.6;
+      margin-right: 6px;
+    }
+
+    .run-output .out-err {
+      color: #ff6b6b;
+    }
+
+    /* ── OPERATOR TABLE ── */
+    .op-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .op-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .op-chip .op-sym {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .op-chip .op-name {
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* ── BUILTIN TABLE ── */
+    .builtin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .builtin-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .builtin-card:hover {
+      border-color: var(--orange3);
+    }
+
+    .builtin-sig {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--orange2);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .builtin-desc {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    /* ── GRAMMAR SECTION ── */
+    .grammar-rule {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text2);
+      line-height: 1.9;
+    }
+
+    .gr-name {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .gr-op {
+      color: var(--blue);
+    }
+
+    .gr-str {
+      color: var(--green);
+    }
+
+    .gr-meta {
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    /* ── TOC RIGHT RAIL ── */
+    .toc-rail {
+      position: fixed;
+      top: calc(var(--header-h) + 24px);
+      right: 24px;
+      width: 180px;
+      font-size: 12px;
+    }
+
+    .toc-rail-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text3);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-link {
+      display: block;
+      padding: 3px 0 3px 8px;
+      color: var(--text3);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all 0.1s;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .toc-link:hover,
+    .toc-link.active {
+      color: var(--orange);
+      border-left-color: var(--orange);
+    }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      margin-left: var(--sidebar-w);
+      border-top: 1px solid var(--border);
+      padding: 32px 60px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .doc-footer .logo {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .doc-footer a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .doc-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── PREV/NEXT ── */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    .page-nav-btn {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text2);
+      background: var(--surface);
+      transition: all 0.15s;
+      box-shadow: var(--shadow);
+    }
+
+    .page-nav-btn:hover {
+      border-color: var(--orange3);
+      color: var(--orange);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .page-nav-btn .dir {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .page-nav-btn .title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .page-nav-btn.next {
+      text-align: right;
+    }
+
+    /* ── ANCHOR LINKS ── */
+    h2[id],
+    h3[id] {
+      scroll-margin-top: 80px;
+    }
+
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* ── STEP ITEMS ── */
+    .steps {
+      counter-reset: step-counter;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .step::before {
+      content: none;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-body {
+      flex: 1;
+    }
+
+    .step-body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-top: 0;
+    }
+
+    .step-body p {
+      margin: 0;
+      font-size: 13.5px;
+    }
+
+    /* ── VERSION TAG ── */
+    .ver-tag {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .ver-new {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .ver-stable {
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero>* {
+      animation: fadeSlide 0.4s ease both;
+    }
+
+    .hero h1 {
+      animation-delay: 0.05s;
+    }
+
+    .hero-sub {
+      animation-delay: 0.1s;
+    }
+
+    .hero-actions {
+      animation-delay: 0.15s;
+    }
+
+    /* ── SEARCH ── */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      background: var(--surface);
+      font-size: 13px;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all 0.15s;
+      width: 180px;
+    }
+
+    .search-bar:hover {
+      border-color: var(--orange3);
+      color: var(--text2);
+    }
+
+    .search-bar kbd {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      background: var(--bg3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+    }
+
+    /* ── SEARCH MODAL ── */
+    .search-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 15vh;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .search-modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .search-modal {
+      width: 560px;
+      max-width: 90vw;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition: transform 0.2s;
+    }
+
+    .search-modal-overlay.open .search-modal {
+      transform: translateY(0);
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .search-input-wrap .icon {
+      font-size: 18px;
+      color: var(--orange2);
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .search-results {
+      max-height: 400px;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+
+    .search-result-item {
+      padding: 12px 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item:hover,
+    .search-result-item.active {
+      background: var(--orange-light);
+    }
+
+    .search-result-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .search-result-path {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .search-empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text3);
+      font-size: 14px;
+    }
+
+    .search-footer {
+      padding: 10px 20px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 16px;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    .search-footer kbd {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="#" class="site-logo">
+      <span class="cat">🐱</span>
+      MEOW
+      <span class="logo-badge">v1.0</span>
+    </a>
+    <nav class="header-nav">
+      <a href="#intro" class="active">Docs</a>
+      <a href="#syntax">Language</a>
+      <a href="#builtins">Builtins</a>
+      <a href="#examples-sec">Examples</a>
+    </nav>
+    <div class="header-right">
+      <div class="search-bar" onclick="openSearch()">
+        <span>🔍</span> Search docs <kbd>⌘K</kbd>
+      </div>
+      <a href="meow-ide.html" class="header-btn btn-ide">▶ Open IDE</a>
+    </div>
+  </header>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Getting Started</div>
+        <a class="sidebar-link active" href="#intro"><span class="icon">🏠</span> Introduction</a>
+        <a class="sidebar-link" href="#philosophy"><span class="icon">🐱</span> Philosophy</a>
+        <a class="sidebar-link" href="#quickstart"><span class="icon">⚡</span> Quick Start</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Language Guide</div>
+        <a class="sidebar-link" href="#syntax"><span class="icon">✏️</span> Syntax Overview</a>
+        <a class="sidebar-link" href="#variables"><span class="icon">📦</span> Variables</a>
+        <a class="sidebar-link" href="#types"><span class="icon">🔤</span> Types</a>
+        <a class="sidebar-link" href="#operators"><span class="icon">➕</span> Operators</a>
+        <a class="sidebar-link" href="#control-flow"><span class="icon">🔀</span> Control Flow</a>
+        <a class="sidebar-link" href="#loops"><span class="icon">🔄</span> Loops</a>
+        <a class="sidebar-link" href="#functions"><span class="icon">⚙️</span> Functions</a>
+        <a class="sidebar-link" href="#arrays"><span class="icon">📋</span> Arrays (Litters)</a>
+        <a class="sidebar-link" href="#strings"><span class="icon">🧵</span> Strings</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Reference</div>
+        <a class="sidebar-link" href="#keywords"><span class="icon">🗝️</span> All Keywords</a>
+        <a class="sidebar-link" href="#builtins"><span class="icon">🔧</span> Built-in Functions</a>
+        <a class="sidebar-link" href="#grammar"><span class="icon">📐</span> Grammar</a>
+        <a class="sidebar-link" href="#errors"><span class="icon">😾</span> Errors</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">Examples</div>
+        <a class="sidebar-link" href="#examples-sec"><span class="icon">🌟</span> Example Programs</a>
+        <a class="sidebar-link" href="#patterns"><span class="icon">🎨</span> Patterns</a>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-eyebrow">🐾 Cat Programming Language — Official Documentation</div>
+        <h1>The <span class="accent">MEOW</span><br>Language</h1>
+        <p class="hero-sub">
+          A complete, expressive programming language where <strong>MEOW</strong> is the center of all output.
+          Variables purr. Logic hisses. Loops stalk. Functions claw. Welcome to the internet's most cat-brained
+          language.
+        </p>
+        <div class="hero-actions">
+          <span class="pill pill-orange">🐱 Cat-Powered</span>
+          <span class="pill pill-green">✅ Interpreted</span>
+          <span class="pill pill-blue">⚡ Fast</span>
+          <span class="pill pill-purple">🔧 Full-Featured</span>
+        </div>
+      </div>
+
+      <!-- ── INTRODUCTION ── -->
+      <div class="page-section" id="intro">
+
+        <h2 id="intro">Introduction</h2>
+
+        <p>
+          <strong>MEOW</strong> is a dynamically-typed, interpreted programming language designed entirely around cat
+          behavior and vocabulary. Every keyword, construct, and concept maps to something a cat would do — because all
+          great languages start with a 🐱.
+        </p>
+        <p>
+          At the core of MEOW is the sacred <code>meow</code> keyword — the primary output command. Everything in the
+          language revolves around it, just as everything in a house revolves around the cat.
+        </p>
+
+        <div class="callout callout-orange">
+          <div class="callout-title">🐾 Core Philosophy</div>
+          <p>If a cat would do it, MEOW can express it. Variables <em>purr</em> into existence. Conditions
+            <em>hiss</em>. Loops <em>stalk</em> their prey. Functions <em>claw</em> through logic. And when something
+            goes wrong? The cat <em>scratches</em>.
+          </p>
+        </div>
+
+        <h3 id="philosophy">Language Features</h3>
+        <ul>
+          <li><strong>Dynamic typing</strong> — No type declarations, just like a cat ignoring rules</li>
+          <li><strong>First-class functions</strong> — Define and call with <code>claw</code></li>
+          <li><strong>Closures</strong> — Functions capture their environment (like a cat in a box)</li>
+          <li><strong>Arrays (Litters)</strong> — Ordered collections of values</li>
+          <li><strong>14+ built-in functions</strong> — Utilities for strings, math, arrays</li>
+          <li><strong>Rich control flow</strong> — Conditionals, two loop types, break/continue</li>
+          <li><strong>Expression-based</strong> — Most constructs return a value</li>
+        </ul>
+
+        <hr>
+
+        <h3 id="quickstart">Quick Start</h3>
+        <p>Write your first MEOW program. Open the IDE and type:</p>
+
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 hello.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="cmt"># My first MEOW program</span>
+<span class="kw">meow</span> <span class="str">"Hello, World! 🐱"</span>
+
+<span class="kw">purr</span> name <span class="op">=</span> <span class="str">"Whiskers"</span>
+<span class="kw">meow</span> <span class="str">"My cat's name is: "</span> <span class="op">+</span> name
+
+<span class="kw">purr</span> lives <span class="op">=</span> <span class="num">9</span>
+<span class="kw">meow</span> name <span class="op">+</span> <span class="str">" has "</span> <span class="op">+</span> whisker(lives) <span class="op">+</span> <span class="str">" lives"</span></code></pre>
+          <div class="run-output"
+            data-output='["Hello, World! 🐱","My cat\u2019s name is: Whiskers","Whiskers has 9 lives"]'></div>
+        </div>
+
+      </div><!-- /page-section intro -->
+
+      <!-- ── SYNTAX ── -->
+      <div class="page-section" id="syntax">
+
+        <h2 id="syntax">Syntax Overview</h2>
+
+        <p>MEOW has a clean, block-based syntax. Blocks are delimited by <code>{ }</code>. There are no semicolons.
+          Comments start with <code>#</code>.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="cmt"># This is a comment</span>
+
+<span class="kw">purr</span> x <span class="op">=</span> <span class="num">42</span>           <span class="cmt"># variable declaration</span>
+<span class="kw">meow</span> x               <span class="cmt"># print output</span>
+
+<span class="kw">hiss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>      <span class="cmt"># if block</span>
+  <span class="kw">meow</span> <span class="str">"big number"</span>
+<span class="paren">}</span></code></pre>
+
+        <h3>File Extension</h3>
+        <p>MEOW source files use the <code>.meow</code> extension. For example: <code>main.meow</code>,
+          <code>utils.meow</code>.
+        </p>
+
+        <h3>Whitespace</h3>
+        <p>Whitespace is insignificant except as a delimiter between tokens. Indentation is purely cosmetic — use it
+          consistently for readability.</p>
+
+        <h3>Comments</h3>
+        <pre><code><span class="cmt"># This is a single-line comment</span>
+<span class="kw">meow</span> <span class="str">"Hello"</span> <span class="cmt"># Comments can follow code</span></code></pre>
+
+      </div>
+
+      <!-- ── VARIABLES ── -->
+      <div class="page-section" id="variables">
+
+        <h2 id="variables">Variables</h2>
+
+        <p>Variables are declared using the <code>purr</code> keyword. Once declared, they can be reassigned without a
+          keyword.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> x <span class="op">=</span> <span class="num">10</span>
+<span class="kw">purr</span> name <span class="op">=</span> <span class="str">"Luna"</span>
+<span class="kw">purr</span> isHungry <span class="op">=</span> <span class="bool">pawsitive</span>
+<span class="kw">purr</span> nothing <span class="op">=</span> <span class="bool">nap</span>
+
+<span class="cmt"># Reassignment (no keyword needed)</span>
+x <span class="op">=</span> <span class="num">20</span>
+name <span class="op">=</span> name <span class="op">+</span> <span class="str">" the cat"</span>
+
+<span class="kw">meow</span> x
+<span class="kw">meow</span> name</code></pre>
+
+        <div class="callout callout-blue">
+          <div class="callout-title">📝 Variable Scoping</div>
+          <p>Variables declared inside blocks (<code>hiss</code>, <code>stalk</code>, <code>claw</code>, etc.) are
+            scoped to that block. Outer variables are accessible from inner scopes. Reassigning an outer variable from
+            an inner scope mutates it.</p>
+        </div>
+
+        <h3>Variable Naming</h3>
+        <p>Variable names must start with a letter or underscore, followed by letters, digits, or underscores. They are
+          case-sensitive.</p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Valid</th>
+              <th>Invalid</th>
+            </tr>
+            <tr>
+              <td><code>myVar</code>, <code>cat_name</code>, <code>_count</code>, <code>x1</code></td>
+              <td><code>1cat</code>, <code>my-var</code>, <code>purr</code> (reserved)</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- ── TYPES ── -->
+      <div class="page-section" id="types">
+
+        <h2 id="types">Types</h2>
+        <p>MEOW is dynamically typed. Values carry their type at runtime. There are five primitive types:</p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Type</th>
+              <th>MEOW Literal</th>
+              <th>Example</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>Number</strong></td>
+              <td><code>42</code> / <code>3.14</code></td>
+              <td class="ex"><code class="kw2">purr</code> n = 42</td>
+              <td>Integer or float</td>
+            </tr>
+            <tr>
+              <td><strong>String</strong></td>
+              <td><code>"hello"</code></td>
+              <td class="ex"><code class="kw2">purr</code> s = "meow"</td>
+              <td>Text in double/single quotes</td>
+            </tr>
+            <tr>
+              <td><strong>Boolean</strong></td>
+              <td><code>pawsitive</code> / <code>clawful</code></td>
+              <td class="ex"><code class="kw2">purr</code> b = pawsitive</td>
+              <td>True / False</td>
+            </tr>
+            <tr>
+              <td><strong>Null</strong></td>
+              <td><code>nap</code></td>
+              <td class="ex"><code class="kw2">purr</code> x = nap</td>
+              <td>Absence of value</td>
+            </tr>
+            <tr>
+              <td><strong>Array</strong></td>
+              <td><code>litter [...]</code></td>
+              <td class="ex"><code class="kw2">purr</code> a = litter [1,2,3]</td>
+              <td>Ordered collection</td>
+            </tr>
+          </table>
+        </div>
+
+        <h3>Truthiness</h3>
+        <p>In MEOW, the following values are <strong>falsy</strong>: <code>clawful</code>, <code>nap</code>,
+          <code>0</code>, <code>""</code>. Everything else is truthy.
+        </p>
+
+        <h3>Type Checking</h3>
+        <pre><code><span class="kw">purr</span> x <span class="op">=</span> <span class="num">42</span>
+<span class="kw">meow</span> sniff(x)        <span class="cmt"># → "number"</span>
+<span class="kw">meow</span> sniff(<span class="str">"hello"</span>)  <span class="cmt"># → "string"</span>
+<span class="kw">meow</span> sniff(<span class="bool">pawsitive</span>) <span class="cmt"># → "boolean"</span></code></pre>
+
+        <h3>Type Conversion</h3>
+        <pre><code><span class="kw">purr</span> n <span class="op">=</span> <span class="num">42</span>
+<span class="kw">meow</span> whisker(n)     <span class="cmt"># → "42"  (to string)</span>
+<span class="kw">meow</span> paw_num(<span class="str">"7"</span>) <span class="cmt"># → 7    (to number)</span></code></pre>
+
+      </div>
+
+      <!-- ── OPERATORS ── -->
+      <div class="page-section" id="operators">
+
+        <h2 id="operators">Operators</h2>
+
+        <h3>Arithmetic</h3>
+        <div class="op-grid">
+          <div class="op-chip">
+            <div class="op-sym">+</div>
+            <div class="op-name">Add / Concat</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">-</div>
+            <div class="op-name">Subtract</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">*</div>
+            <div class="op-name">Multiply</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">/</div>
+            <div class="op-name">Divide</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">%</div>
+            <div class="op-name">Modulo</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">==</div>
+            <div class="op-name">Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">!=</div>
+            <div class="op-name">Not Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&lt;</div>
+            <div class="op-name">Less Than</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&gt;</div>
+            <div class="op-name">Greater Than</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&lt;=</div>
+            <div class="op-name">Less / Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&gt;=</div>
+            <div class="op-name">Greater / Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">-x</div>
+            <div class="op-name">Negate</div>
+          </div>
+        </div>
+
+        <h3>Logical Operators</h3>
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Operator</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td><span class="kw2">and</span></td>
+              <td>Logical AND (short-circuits)</td>
+              <td class="ex">hiss (x > 0 and x < 10)</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">or</span></td>
+              <td>Logical OR (short-circuits)</td>
+              <td class="ex">hiss (a == 1 or b == 2)</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">not</span></td>
+              <td>Logical NOT</td>
+              <td class="ex">hiss (not done)</td>
+            </tr>
+          </table>
+        </div>
+
+        <h3>String Concatenation</h3>
+        <p>The <code>+</code> operator concatenates strings. If either operand is a string, both are coerced to strings.
+        </p>
+        <pre><code><span class="kw">meow</span> <span class="str">"Hello "</span> <span class="op">+</span> <span class="str">"World"</span>       <span class="cmt"># → "Hello World"</span>
+<span class="kw">meow</span> <span class="str">"Count: "</span> <span class="op">+</span> <span class="num">42</span>           <span class="cmt"># → "Count: 42"</span>
+<span class="kw">meow</span> <span class="str">"Pi: "</span> <span class="op">+</span> <span class="num">3.14</span>            <span class="cmt"># → "Pi: 3.14"</span></code></pre>
+
+        <h3>Operator Precedence</h3>
+        <p>From highest to lowest: <code>not</code>, <code>- (unary)</code>, <code>* / %</code>, <code>+ -</code>,
+          <code>&lt; &gt; &lt;= &gt;=</code>, <code>== !=</code>, <code>and</code>, <code>or</code>.
+        </p>
+
+      </div>
+
+      <!-- ── CONTROL FLOW ── -->
+      <div class="page-section" id="control-flow">
+
+        <h2 id="control-flow">Control Flow</h2>
+
+        <h3>hiss — If Statement</h3>
+        <p>The <code>hiss</code> keyword begins a conditional block. Cats hiss when they're suspicious — use it when
+          evaluating conditions.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">hiss</span> <span class="paren">(</span>condition<span class="paren">)</span> <span class="paren">{</span>
+  <span class="cmt"># runs if truthy</span>
+<span class="paren">}</span>
+
+<span class="kw">hiss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"big"</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"small"</span>
+<span class="paren">}</span></code></pre>
+
+        <h3>else if Chaining</h3>
+        <p>Chain conditions by following <code>else</code> with another <code>hiss</code>:</p>
+
+        <pre><code><span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"😻 A grade"</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"😸 B grade"</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"😾 Try again"</span>
+<span class="paren">}</span></code></pre>
+
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 grades.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="kw">purr</span> score <span class="op">=</span> <span class="num">85</span>
+<span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"Grade A — Magnificent cat! 😻"</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"Grade B — Pretty good kitty 😸"</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"Needs more napping... 😾"</span>
+<span class="paren">}</span></code></pre>
+          <div class="run-output" data-output='["Grade B — Pretty good kitty 😸"]'></div>
+        </div>
+
+      </div>
+
+      <!-- ── LOOPS ── -->
+      <div class="page-section" id="loops">
+
+        <h2 id="loops">Loops</h2>
+
+        <h3>stalk — While Loop</h3>
+        <p>The <code>stalk</code> loop runs while a condition is truthy. Like a cat stalking its prey — patient,
+          relentless, waiting.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> i <span class="op">=</span> <span class="num">0</span>
+<span class="kw">stalk</span> <span class="paren">(</span>i <span class="op"><</span> <span class="num">5</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"Stalking... step "</span> <span class="op">+</span> whisker(i)
+  i <span class="op">=</span> i <span class="op">+</span> <span class="num">1</span>
+<span class="paren">}</span></code></pre>
+
+        <h3>pounce — For Range Loop</h3>
+        <p>The <code>pounce</code> loop iterates over an inclusive integer range. Like a cat pouncing from one end to
+          the other.</p>
+
+        <pre><code><span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">5</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">meow</span> <span class="str">"Pounce #"</span> <span class="op">+</span> whisker(i)
+<span class="paren">}</span></code></pre>
+
+        <div class="callout callout-blue">
+          <div class="callout-title">📌 Range is Inclusive</div>
+          <p><code>pounce (i from 1 to 5)</code> iterates with i = 1, 2, 3, 4, 5. Both bounds are included.</p>
+        </div>
+
+        <h3>scratch — Break</h3>
+        <p>Exits the innermost loop immediately.</p>
+
+        <h3>knead — Continue</h3>
+        <p>Skips to the next iteration of the loop. Like a cat kneading — repeating, but skipping.</p>
+
+        <pre><code><span class="cmt"># Print only odd numbers 1–10</span>
+<span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">knead</span> <span class="paren">}</span>
+  <span class="kw">meow</span> whisker(i)
+<span class="paren">}</span></code></pre>
+
+      </div>
+
+      <!-- ── FUNCTIONS ── -->
+      <div class="page-section" id="functions">
+
+        <h2 id="functions">Functions</h2>
+
+        <p>Functions are defined with <code>claw</code> and return values with <code>paw</code>. Like a cat's claw —
+          precise, purposeful, sharp.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">claw</span> <span class="fn">functionName</span><span class="paren">(</span>param1, param2<span class="paren">)</span> <span class="paren">{</span>
+  <span class="cmt"># function body</span>
+  <span class="kw">paw</span> result
+<span class="paren">}</span>
+
+<span class="cmt"># Call it:</span>
+<span class="kw">purr</span> result <span class="op">=</span> <span class="fn">functionName</span><span class="paren">(</span>a, b<span class="paren">)</span></code></pre>
+
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 functions.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="kw">claw</span> <span class="fn">greet</span><span class="paren">(</span>name<span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">paw</span> <span class="str">"Hello, "</span> <span class="op">+</span> name <span class="op">+</span> <span class="str">"! 🐱"</span>
+<span class="paren">}</span>
+
+<span class="kw">claw</span> <span class="fn">power</span><span class="paren">(</span>base, exp<span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">purr</span> result <span class="op">=</span> <span class="num">1</span>
+  <span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> exp<span class="paren">)</span> <span class="paren">{</span>
+    result <span class="op">=</span> result <span class="op">*</span> base
+  <span class="paren">}</span>
+  <span class="kw">paw</span> result
+<span class="paren">}</span>
+
+<span class="kw">meow</span> greet(<span class="str">"Whiskers"</span>)
+<span class="kw">meow</span> <span class="str">"2^10 = "</span> <span class="op">+</span> whisker(power(<span class="num">2</span>, <span class="num">10</span>))</code></pre>
+          <div class="run-output" data-output='["Hello, Whiskers! 🐱","2^10 = 1024"]'></div>
+        </div>
+
+        <h3>Recursion</h3>
+        <p>Functions can call themselves recursively. MEOW supports full recursion:</p>
+
+        <pre><code><span class="kw">claw</span> <span class="fn">fib</span><span class="paren">(</span>n<span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">hiss</span> <span class="paren">(</span>n <span class="op"><=</span> <span class="num">1</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> n <span class="paren">}</span>
+  <span class="kw">paw</span> fib(n <span class="op">-</span> <span class="num">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="num">2</span>)
+<span class="paren">}</span>
+<span class="kw">meow</span> whisker(fib(<span class="num">10</span>)) <span class="cmt"># → 55</span></code></pre>
+
+        <h3>Closures</h3>
+        <p>Functions capture the variables in their enclosing scope:</p>
+
+        <pre><code><span class="kw">purr</span> count <span class="op">=</span> <span class="num">0</span>
+
+<span class="kw">claw</span> <span class="fn">increment</span><span class="paren">()</span> <span class="paren">{</span>
+  count <span class="op">=</span> count <span class="op">+</span> <span class="num">1</span>
+  <span class="kw">paw</span> count
+<span class="paren">}</span>
+
+<span class="kw">meow</span> whisker(increment())  <span class="cmt"># → 1</span>
+<span class="kw">meow</span> whisker(increment())  <span class="cmt"># → 2</span>
+<span class="kw">meow</span> whisker(increment())  <span class="cmt"># → 3</span></code></pre>
+
+      </div>
+
+      <!-- ── ARRAYS ── -->
+      <div class="page-section" id="arrays">
+
+        <h2 id="arrays">Arrays (Litters)</h2>
+
+        <p>Arrays in MEOW are called <strong>litters</strong> — because a litter of kittens is the most natural
+          collection. They're created with the <code>litter [...]</code> syntax.</p>
+
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> cats <span class="op">=</span> <span class="kw">litter</span> [<span class="str">"Whiskers"</span>, <span class="str">"Luna"</span>, <span class="str">"Shadow"</span>]
+<span class="kw">purr</span> nums <span class="op">=</span> <span class="kw">litter</span> [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>]
+<span class="kw">purr</span> mixed <span class="op">=</span> <span class="kw">litter</span> [<span class="num">1</span>, <span class="str">"two"</span>, <span class="bool">pawsitive</span>]</code></pre>
+
+        <h3>Indexing</h3>
+        <p>Access elements with <code>arr[index]</code>. Indices are zero-based.</p>
+
+        <pre><code><span class="kw">meow</span> cats[<span class="num">0</span>]   <span class="cmt"># → "Whiskers"</span>
+<span class="kw">meow</span> cats[<span class="num">2</span>]   <span class="cmt"># → "Shadow"</span></code></pre>
+
+        <h3>Array Operations</h3>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Operation</th>
+              <th>Syntax</th>
+              <th>Returns</th>
+            </tr>
+            <tr>
+              <td>Length</td>
+              <td><span class="kw2">fur(arr)</span></td>
+              <td>Number of elements</td>
+            </tr>
+            <tr>
+              <td>Push (append)</td>
+              <td><span class="kw2">chase(arr, value)</span></td>
+              <td>Modified array</td>
+            </tr>
+            <tr>
+              <td>Join</td>
+              <td><span class="kw2">nuzzle(arr, sep)</span></td>
+              <td>Joined string</td>
+            </tr>
+            <tr>
+              <td>Slice</td>
+              <td><span class="kw2">tail_slice(arr, start, end)</span></td>
+              <td>New sub-array</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 arrays.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="kw">purr</span> cats <span class="op">=</span> <span class="kw">litter</span> [<span class="str">"Pixel"</span>, <span class="str">"Luna"</span>, <span class="str">"Biscuit"</span>]
+
+<span class="kw">meow</span> <span class="str">"Count: "</span> <span class="op">+</span> whisker(fur(cats))
+<span class="kw">meow</span> <span class="str">"First: "</span> <span class="op">+</span> cats[<span class="num">0</span>]
+
+chase(cats, <span class="str">"Mochi"</span>)
+<span class="kw">meow</span> <span class="str">"After adding: "</span> <span class="op">+</span> nuzzle(cats, <span class="str">", "</span>)</code></pre>
+          <div class="run-output" data-output='["Count: 3","First: Pixel","After adding: Pixel, Luna, Biscuit, Mochi"]'>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── STRINGS ── -->
+      <div class="page-section" id="strings">
+
+        <h2 id="strings">Strings</h2>
+
+        <p>Strings are enclosed in double <code>"..."</code> or single <code>'...'</code> quotes. Escape sequences:
+          <code>\n</code> (newline), <code>\t</code> (tab), <code>\\</code> (backslash).
+        </p>
+
+        <pre><code><span class="kw">purr</span> s <span class="op">=</span> <span class="str">"Hello, Whiskers!"</span>
+<span class="kw">meow</span> fur(s)            <span class="cmt"># → 16 (length)</span>
+<span class="kw">meow</span> meow_upper(s)     <span class="cmt"># → "HELLO, WHISKERS!"</span>
+<span class="kw">meow</span> meow_lower(s)     <span class="cmt"># → "hello, whiskers!"</span>
+
+<span class="kw">purr</span> parts <span class="op">=</span> scratch_split(s, <span class="str">", "</span>)
+<span class="kw">meow</span> parts[<span class="num">0</span>]          <span class="cmt"># → "Hello"</span>
+<span class="kw">meow</span> parts[<span class="num">1</span>]          <span class="cmt"># → "Whiskers!"</span></code></pre>
+
+      </div>
+
+      <!-- ── KEYWORDS ── -->
+      <div class="page-section" id="keywords">
+
+        <h2 id="keywords">All Keywords</h2>
+
+        <div class="kw-grid">
+          <div class="kw-card">
+            <div class="kw-name">purr</div>
+            <div class="kw-desc">Declare a variable</div>
+            <div class="kw-ex">purr x = 42</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">meow</div>
+            <div class="kw-desc">Print to output — the sacred center</div>
+            <div class="kw-ex">meow "Hello!"</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">hiss</div>
+            <div class="kw-desc">Conditional if block</div>
+            <div class="kw-ex">hiss (x > 0) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">else</div>
+            <div class="kw-desc">Else / else-if branch</div>
+            <div class="kw-ex">} else { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">stalk</div>
+            <div class="kw-desc">While loop</div>
+            <div class="kw-ex">stalk (alive) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">pounce</div>
+            <div class="kw-desc">For range loop</div>
+            <div class="kw-ex">pounce (i from 1 to 5)</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">from / to</div>
+            <div class="kw-desc">Range bounds in pounce</div>
+            <div class="kw-ex">from 0 to 10</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">claw</div>
+            <div class="kw-desc">Define a function</div>
+            <div class="kw-ex">claw add(a,b) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">paw</div>
+            <div class="kw-desc">Return a value from a function</div>
+            <div class="kw-ex">paw result</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">litter</div>
+            <div class="kw-desc">Create an array</div>
+            <div class="kw-ex">litter [1, 2, 3]</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">pawsitive</div>
+            <div class="kw-desc">Boolean true</div>
+            <div class="kw-ex">purr ok = pawsitive</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">clawful</div>
+            <div class="kw-desc">Boolean false</div>
+            <div class="kw-ex">purr bad = clawful</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">nap</div>
+            <div class="kw-desc">Null / no value</div>
+            <div class="kw-ex">purr x = nap</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">scratch</div>
+            <div class="kw-desc">Break out of a loop</div>
+            <div class="kw-ex">scratch</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">knead</div>
+            <div class="kw-desc">Continue to next iteration</div>
+            <div class="kw-ex">knead</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">and / or / not</div>
+            <div class="kw-desc">Logical operators</div>
+            <div class="kw-ex">hiss (a and b)</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── BUILTINS ── -->
+      <div class="page-section" id="builtins">
+
+        <h2 id="builtins">Built-in Functions</h2>
+
+        <p>MEOW provides 14 built-in functions, all with cat-themed names. You never need to import them — they're
+          always available, like a cat who decides to sit on your keyboard.</p>
+
+        <div class="builtin-grid">
+          <div class="builtin-card">
+            <div class="builtin-sig">fur(x)</div>
+            <div class="builtin-desc">Length of string or array</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">whisker(x)</div>
+            <div class="builtin-desc">Convert any value to string</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">paw_num(x)</div>
+            <div class="builtin-desc">Convert string to number</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">sniff(x)</div>
+            <div class="builtin-desc">Get type name as string</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">chase(arr, val)</div>
+            <div class="builtin-desc">Append value to array</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">nuzzle(arr, sep)</div>
+            <div class="builtin-desc">Join array elements with separator</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">catnap(n)</div>
+            <div class="builtin-desc">Random integer 0 to n-1</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">kibble(x)</div>
+            <div class="builtin-desc">Floor (round down)</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">treat(x)</div>
+            <div class="builtin-desc">Round to nearest integer</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">claw_up(x)</div>
+            <div class="builtin-desc">Ceiling (round up)</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">pounce_sqrt(x)</div>
+            <div class="builtin-desc">Square root</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">meow_upper(x)</div>
+            <div class="builtin-desc">Convert string to uppercase</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">meow_lower(x)</div>
+            <div class="builtin-desc">Convert string to lowercase</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">scratch_split(s, delim)</div>
+            <div class="builtin-desc">Split string by delimiter</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">tail_slice(arr, start, end)</div>
+            <div class="builtin-desc">Slice array from start to end</div>
+          </div>
+        </div>
+
+        <h3>Math Examples</h3>
+        <pre><code><span class="kw">meow</span> whisker(kibble(<span class="num">3.7</span>))      <span class="cmt"># → "3"</span>
+<span class="kw">meow</span> whisker(treat(<span class="num">3.5</span>))       <span class="cmt"># → "4"</span>
+<span class="kw">meow</span> whisker(pounce_sqrt(<span class="num">16</span>))  <span class="cmt"># → "4"</span>
+<span class="kw">meow</span> whisker(catnap(<span class="num">100</span>))      <span class="cmt"># → random 0–99</span></code></pre>
+
+      </div>
+
+      <!-- ── GRAMMAR ── -->
+      <div class="page-section" id="grammar">
+
+        <h2 id="grammar">Grammar (EBNF)</h2>
+        <p>The formal grammar of MEOW, expressed in Extended Backus-Naur Form:</p>
+
+        <div class="grammar-rule">
+          <span class="gr-name">program</span> <span class="gr-op">::=</span> statement*<br><br>
+          <span class="gr-name">statement</span> <span class="gr-op">::=</span> declaration | assignment | meow_stmt |
+          if_stmt | while_stmt | for_stmt | func_decl | return_stmt | break_stmt | continue_stmt | expr_stmt<br><br>
+          <span class="gr-name">declaration</span> <span class="gr-op">::=</span> <span class="gr-str">"purr"</span>
+          IDENT <span class="gr-str">"="</span> expr<br>
+          <span class="gr-name">assignment</span> <span class="gr-op">::=</span> IDENT <span class="gr-str">"="</span>
+          expr<br>
+          <span class="gr-name">meow_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"meow"</span>
+          expr<br><br>
+          <span class="gr-name">if_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"hiss"</span> <span
+            class="gr-str">"("</span> expr <span class="gr-str">")"</span> block (<span class="gr-str">"else"</span>
+          (if_stmt | block))?<br>
+          <span class="gr-name">while_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"stalk"</span>
+          <span class="gr-str">"("</span> expr <span class="gr-str">")"</span> block<br>
+          <span class="gr-name">for_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"pounce"</span>
+          <span class="gr-str">"("</span> IDENT <span class="gr-str">"from"</span> expr <span class="gr-str">"to"</span>
+          expr <span class="gr-str">")"</span> block<br>
+          <span class="gr-name">func_decl</span> <span class="gr-op">::=</span> <span class="gr-str">"claw"</span> IDENT
+          <span class="gr-str">"("</span> params <span class="gr-str">")"</span> block<br>
+          <span class="gr-name">return_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"paw"</span>
+          expr<br><br>
+          <span class="gr-name">block</span> <span class="gr-op">::=</span> <span class="gr-str">"{"</span> statement*
+          <span class="gr-str">"}"</span><br>
+          <span class="gr-name">params</span> <span class="gr-op">::=</span> (IDENT (<span class="gr-str">","</span>
+          IDENT)*)?<br><br>
+          <span class="gr-name">expr</span> <span class="gr-op">::=</span> or_expr<br>
+          <span class="gr-name">or_expr</span> <span class="gr-op">::=</span> and_expr (<span class="gr-str">"or"</span>
+          and_expr)*<br>
+          <span class="gr-name">and_expr</span> <span class="gr-op">::=</span> eq_expr (<span
+            class="gr-str">"and"</span> eq_expr)*<br>
+          <span class="gr-name">eq_expr</span> <span class="gr-op">::=</span> cmp_expr ((<span
+            class="gr-str">"=="</span>|<span class="gr-str">"!="</span>) cmp_expr)*<br>
+          <span class="gr-name">cmp_expr</span> <span class="gr-op">::=</span> add_expr ((<span
+            class="gr-str">"&lt;"</span>|<span class="gr-str">"&gt;"</span>|<span class="gr-str">"&lt;="</span>|<span
+            class="gr-str">"&gt;="</span>) add_expr)*<br>
+          <span class="gr-name">add_expr</span> <span class="gr-op">::=</span> mul_expr ((<span
+            class="gr-str">"+"</span>|<span class="gr-str">"-"</span>) mul_expr)*<br>
+          <span class="gr-name">mul_expr</span> <span class="gr-op">::=</span> unary_expr ((<span
+            class="gr-str">"*"</span>|<span class="gr-str">"/"</span>|<span class="gr-str">"%"</span>) unary_expr)*<br>
+          <span class="gr-name">unary_expr</span> <span class="gr-op">::=</span> (<span
+            class="gr-str">"not"</span>|<span class="gr-str">"-"</span>)? postfix<br>
+          <span class="gr-name">postfix</span> <span class="gr-op">::=</span> primary (<span class="gr-str">"["</span>
+          expr <span class="gr-str">"]"</span>)*<br><br>
+          <span class="gr-name">primary</span> <span class="gr-op">::=</span> NUMBER | STRING | <span
+            class="gr-str">"pawsitive"</span> | <span class="gr-str">"clawful"</span> | <span
+            class="gr-str">"nap"</span> | IDENT | IDENT <span class="gr-str">"("</span> args <span
+            class="gr-str">")"</span> | <span class="gr-str">"("</span> expr <span class="gr-str">")"</span> |
+          array_lit<br>
+          <span class="gr-name">array_lit</span> <span class="gr-op">::=</span> <span class="gr-str">"litter"</span>
+          <span class="gr-str">"["</span> (expr (<span class="gr-str">","</span> expr)*)? <span
+            class="gr-str">"]"</span>
+        </div>
+
+      </div>
+
+      <!-- ── ERRORS ── -->
+      <div class="page-section" id="errors">
+
+        <h2 id="errors">Errors</h2>
+
+        <p>When MEOW is unhappy, it <em>hisses</em> with an error message. There are two kinds of errors:</p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Error Type</th>
+              <th>When it Occurs</th>
+              <th>Example Message</th>
+            </tr>
+            <tr>
+              <td><strong>Syntax Error</strong></td>
+              <td>During parsing — invalid code structure</td>
+              <td><code>Expected ')' but got '+' at line 3</code></td>
+            </tr>
+            <tr>
+              <td><strong>Runtime Error</strong></td>
+              <td>During execution — invalid operations</td>
+              <td><code>Unknown variable: 'x' 😿</code></td>
+            </tr>
+            <tr>
+              <td><strong>Division by Zero</strong></td>
+              <td>Dividing by 0</td>
+              <td><code>Division by zero! 😾</code></td>
+            </tr>
+            <tr>
+              <td><strong>Index Out of Bounds</strong></td>
+              <td>Array index too large</td>
+              <td><code>Index 5 out of bounds (length 3)</code></td>
+            </tr>
+            <tr>
+              <td><strong>Infinite Loop</strong></td>
+              <td>Loop runs more than 200,000 iterations</td>
+              <td><code>Infinite loop! 😾</code></td>
+            </tr>
+            <tr>
+              <td><strong>Not a Function</strong></td>
+              <td>Calling a non-function value</td>
+              <td><code>'x' is not a function 😾</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="callout callout-orange">
+          <div class="callout-title">🐾 Error Philosophy</div>
+          <p>Cats don't do helpful error messages. MEOW tries to be nicer than a real cat — it tells you the line number
+            and what went wrong. But when things go really wrong, expect a 😾.</p>
+        </div>
+
+      </div>
+
+      <!-- ── EXAMPLES ── -->
+      <div class="page-section" id="examples-sec">
+
+        <h2 id="examples-sec">Example Programs</h2>
+
+        <h3>FizzBuzz</h3>
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 fizzbuzz.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">20</span><span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">15</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"PurrBuzz 🐱"</span>
+  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">3</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Purr 🐾"</span>
+  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">5</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Buzz 🐟"</span>
+  <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span> <span class="kw">meow</span> whisker(i) <span class="paren">}</span>
+<span class="paren">}</span></code></pre>
+          <div class="run-output"
+            data-output='["1","2","Purr 🐾","4","Buzz 🐟","Purr 🐾","7","8","Purr 🐾","Buzz 🐟","11","Purr 🐾","13","14","PurrBuzz 🐱","16","17","Purr 🐾","19","Buzz 🐟"]'>
+          </div>
+        </div>
+
+        <h3>Bubble Sort</h3>
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">claw</span> <span class="fn">bubbleSort</span><span class="paren">(</span>arr, n<span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">0</span> <span class="kw">to</span> n <span class="op">-</span> <span class="num">2</span><span class="paren">)</span> <span class="paren">{</span>
+    <span class="kw">pounce</span> <span class="paren">(</span>j <span class="kw">from</span> <span class="num">0</span> <span class="kw">to</span> n <span class="op">-</span> i <span class="op">-</span> <span class="num">2</span><span class="paren">)</span> <span class="paren">{</span>
+      <span class="kw">hiss</span> <span class="paren">(</span>arr[j] <span class="op">></span> arr[j <span class="op">+</span> <span class="num">1</span>]<span class="paren">)</span> <span class="paren">{</span>
+        <span class="kw">purr</span> tmp <span class="op">=</span> arr[j]
+        arr[j] <span class="op">=</span> arr[j <span class="op">+</span> <span class="num">1</span>]
+        arr[j <span class="op">+</span> <span class="num">1</span>] <span class="op">=</span> tmp
+      <span class="paren">}</span>
+    <span class="paren">}</span>
+  <span class="paren">}</span>
+<span class="paren">}</span>
+
+<span class="kw">purr</span> data <span class="op">=</span> <span class="kw">litter</span> [<span class="num">64</span>, <span class="num">34</span>, <span class="num">25</span>, <span class="num">12</span>, <span class="num">22</span>, <span class="num">11</span>]
+bubbleSort(data, <span class="num">6</span>)
+<span class="kw">meow</span> nuzzle(data, <span class="str">" → "</span>)</code></pre>
+
+        <h3 id="patterns">Common Patterns</h3>
+
+        <div class="callout callout-green">
+          <div class="callout-title">✅ Pattern: Accumulator</div>
+          <p>Accumulate a result in a variable inside a loop:</p>
+        </div>
+        <pre><code><span class="kw">purr</span> sum <span class="op">=</span> <span class="num">0</span>
+<span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">100</span><span class="paren">)</span> <span class="paren">{</span>
+  sum <span class="op">=</span> sum <span class="op">+</span> i
+<span class="paren">}</span>
+<span class="kw">meow</span> <span class="str">"Sum 1–100 = "</span> <span class="op">+</span> whisker(sum) <span class="cmt"># → 5050</span></code></pre>
+
+        <div class="callout callout-purple">
+          <div class="callout-title">🔮 Pattern: Recursive Descent</div>
+          <p>Use recursion for tree-like or mathematical problems:</p>
+        </div>
+        <pre><code><span class="kw">claw</span> <span class="fn">power</span><span class="paren">(</span>base, exp<span class="paren">)</span> <span class="paren">{</span>
+  <span class="kw">hiss</span> <span class="paren">(</span>exp <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> <span class="num">1</span> <span class="paren">}</span>
+  <span class="kw">paw</span> base <span class="op">*</span> power(base, exp <span class="op">-</span> <span class="num">1</span>)
+<span class="paren">}</span>
+<span class="kw">meow</span> whisker(power(<span class="num">3</span>, <span class="num">6</span>)) <span class="cmt"># → 729</span></code></pre>
+
+      </div>
+
+      <!-- PAGE NAV -->
+      <div class="page-section" style="padding-top:0">
+        <div class="page-nav">
+          <a href="#intro" class="page-nav-btn">
+            <div class="dir">← Previous</div>
+            <div class="title">Introduction</div>
+          </a>
+          <a href="meow-ide.html" class="page-nav-btn next">
+            <div class="dir">Try it →</div>
+            <div class="title">Open MEOW IDE</div>
+          </a>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /layout -->
+
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <div><span class="logo">🐱 MEOW</span> — The Cat Programming Language v1.0</div>
+    <div>Built with 🐾 and caffeine · <a href="meow-ide.html">Open IDE</a></div>
+  </footer>
+
+  <script>
+    // ── INLINE RUN EXAMPLES ──
+    const BUILTINS = {
+      fur: a => a[0]?.length ?? 0,
+      whisker: a => { const v = a[0]; if (v === null) return 'nap'; if (v === true) return 'pawsitive'; if (v === false) return 'clawful'; if (Array.isArray(v)) return '[' + v.map(x => BUILTINS.whisker([x])).join(', ') + ']'; return String(v) },
+      paw_num: a => Number(a[0]),
+      chase: a => { a[0].push(a[1]); return a[0] },
+      nuzzle: a => a[0].join(a[1] !== undefined ? a[1] : ', '),
+      sniff: a => typeof a[0],
+      catnap: a => Math.floor(Math.random() * a[0]),
+      kibble: a => Math.floor(a[0]),
+      treat: a => Math.round(a[0]),
+      claw_up: a => Math.ceil(a[0]),
+      pounce_sqrt: a => Math.sqrt(a[0]),
+      meow_upper: a => String(a[0]).toUpperCase(),
+      meow_lower: a => String(a[0]).toLowerCase(),
+      scratch_split: a => String(a[0]).split(a[1] ?? ''),
+      tail_slice: a => a[0].slice(a[1], a[2]),
+    };
+
+    function meowStr(v) { if (v === null) return 'nap'; if (v === true) return 'pawsitive'; if (v === false) return 'clawful'; if (Array.isArray(v)) return '[' + v.map(meowStr).join(', ') + ']'; return String(v); }
+
+    function runInline(btn) {
+      const wrapper = btn.closest('.run-example');
+      const outDiv = wrapper.querySelector('.run-output');
+
+      // Get raw code from pre/code text content
+      const codeEl = wrapper.querySelector('pre code');
+      const code = codeEl.textContent;
+
+      outDiv.classList.add('visible');
+
+      try {
+        const KWDS = { purr: 'PURR', meow: 'MEOW', hiss: 'HISS', else: 'ELSE', stalk: 'STALK', pounce: 'POUNCE', claw: 'CLAW', paw: 'PAW', from: 'FROM', to: 'TO', litter: 'LITTER', pawsitive: 'PAWSITIVE', clawful: 'CLAWFUL', nap: 'NAP', and: 'AND', or: 'OR', not: 'NOT', scratch: 'SCRATCH', knead: 'KNEAD' };
+
+        class Lx {
+          constructor(s) { this.s = s; this.i = 0; this.ln = 1; }
+          tok() { const ts = []; while (this.i < this.s.length) { this.ws(); if (this.i >= this.s.length) break; const c = this.s[this.i]; if (c === '#') { while (this.i < this.s.length && this.s[this.i] !== '\n') this.i++; continue; } if (c === '"' || c === "'") { ts.push(this.str(c)); continue; } if (/\d/.test(c)) { ts.push(this.num()); continue; } if (/[a-zA-Z_]/.test(c)) { ts.push(this.id()); continue; } const n = this.s[this.i + 1], l = this.ln; if (c === '+' || c === '-' || c === '*' || c === '/' || c === '%' || c === '(' || c === ')' || c === '{' || c === '}' || c === '[' || c === ']' || c === ',') { const tp = { '+': 'PLUS', '-': 'MINUS', '*': 'MUL', '/': 'DIV', '%': 'MOD', '(': 'LP', ')': 'RP', '{': 'LB', '}': 'RB', '[': 'LBK', ']': 'RBK', ',': 'COMMA' }[c]; ts.push({ t: tp, l }); this.i++; continue; } if (c === '=' && n === '=') { ts.push({ t: 'EQ', l }); this.i += 2; continue; } if (c === '=' && n !== '=') { ts.push({ t: 'ASSIGN', l }); this.i++; continue; } if (c === '!' && n === '=') { ts.push({ t: 'NEQ', l }); this.i += 2; continue; } if (c === '<' && n === '=') { ts.push({ t: 'LTE', l }); this.i += 2; continue; } if (c === '<') { ts.push({ t: 'LT', l }); this.i++; continue; } if (c === '>' && n === '=') { ts.push({ t: 'GTE', l }); this.i += 2; continue; } if (c === '>') { ts.push({ t: 'GT', l }); this.i++; continue; } throw new Error(`Char '${c}' at line ${l}`); } ts.push({ t: 'EOF', l: this.ln }); return ts; }
+          ws() { while (this.i < this.s.length && /\s/.test(this.s[this.i])) { if (this.s[this.i] === '\n') this.ln++; this.i++; } }
+          str(q) { const l = this.ln; this.i++; let v = ''; while (this.i < this.s.length && this.s[this.i] !== q) { if (this.s[this.i] === '\\') { this.i++; v += (this.s[this.i] === 'n' ? '\n' : this.s[this.i] === 't' ? '\t' : this.s[this.i]); } else v += this.s[this.i]; this.i++; } this.i++; return { t: 'STR', v, l }; }
+          num() { const l = this.ln; let s = ''; while (this.i < this.s.length && /[\d.]/.test(this.s[this.i])) { s += this.s[this.i]; this.i++; } return { t: 'NUM', v: parseFloat(s), l }; }
+          id() { const l = this.ln; let s = ''; while (this.i < this.s.length && /[a-zA-Z0-9_]/.test(this.s[this.i])) { s += this.s[this.i]; this.i++; } return { t: KWDS[s] || 'IDENT', v: s, l }; }
+        }
+
+        class Rt {
+          constructor(t) { this.t = t; this.p = 0; }
+          pk() { return this.t[this.p]; } adv() { return this.t[this.p++]; } ck(t) { return this.pk().t === t; }
+          ex(t) { const k = this.adv(); if (k.t !== t) throw new Error(`Expected ${t} at line ${k.l}`); return k; }
+          parse() { const s = []; while (!this.ck('EOF')) s.push(this.st()); return { T: 'Prog', s }; }
+          st() {
+            const t = this.pk(), t2 = this.t[this.p + 1];
+            if (t.t === 'IDENT' && t2?.t === 'ASSIGN') { const n = this.adv().v; this.adv(); return { T: 'Asgn', n, v: this.expr() }; }
+            switch (t.t) {
+              case 'PURR': { this.adv(); const n = this.ex('IDENT').v; this.ex('ASSIGN'); return { T: 'Decl', n, v: this.expr() }; }
+              case 'MEOW': { this.adv(); return { T: 'Prnt', e: this.expr() }; }
+              case 'HISS': return this.ifS();
+              case 'STALK': { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); return { T: 'Whl', c, b: this.blk() }; }
+              case 'POUNCE': { this.adv(); this.ex('LP'); const vn = this.ex('IDENT').v; this.ex('FROM'); const f = this.expr(); this.ex('TO'); const to = this.expr(); this.ex('RP'); return { T: 'For', vn, f, to, b: this.blk() }; }
+              case 'CLAW': { this.adv(); const n = this.ex('IDENT').v; this.ex('LP'); const ps = []; while (!this.ck('RP')) { ps.push(this.ex('IDENT').v); if (!this.ck('RP')) this.ex('COMMA'); } this.ex('RP'); return { T: 'Fn', n, ps, b: this.blk() }; }
+              case 'PAW': { this.adv(); return { T: 'Ret', e: this.expr() }; }
+              case 'SCRATCH': { this.adv(); return { T: 'Brk' }; }
+              case 'KNEAD': { this.adv(); return { T: 'Cont' }; }
+              default: return { T: 'ExS', e: this.expr() };
+            }
+          }
+          ifS() { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); const b = this.blk(); let eb = null; if (this.ck('ELSE')) { this.adv(); eb = this.ck('HISS') ? [this.ifS()] : this.blk(); } return { T: 'If', c, b, eb }; }
+          blk() { this.ex('LB'); const s = []; while (!this.ck('RB') && !this.ck('EOF')) s.push(this.st()); this.ex('RB'); return s; }
+          expr() { return this.or(); }
+          or() { let l = this.and(); while (this.ck('OR')) { this.adv(); l = { T: 'Bin', op: 'or', l, r: this.and() }; } return l; }
+          and() { let l = this.eq(); while (this.ck('AND')) { this.adv(); l = { T: 'Bin', op: 'and', l, r: this.eq() }; } return l; }
+          eq() { let l = this.cmp(); while (this.ck('EQ') || this.ck('NEQ')) { const op = this.adv().t === 'EQ' ? '==' : '!='; l = { T: 'Bin', op, l, r: this.cmp() }; } return l; }
+          cmp() { let l = this.add(); const m = { LT: '<', GT: '>', LTE: '<=', GTE: '>=' }; while (m[this.pk().t]) { const op = m[this.adv().t]; l = { T: 'Bin', op, l, r: this.add() }; } return l; }
+          add() { let l = this.mul(); while (this.ck('PLUS') || this.ck('MINUS')) { const op = this.adv().t === 'PLUS' ? '+' : '-'; l = { T: 'Bin', op, l, r: this.mul() }; } return l; }
+          mul() { let l = this.un(); const m = { MUL: '*', DIV: '/', MOD: '%' }; while (m[this.pk().t]) { const op = m[this.adv().t]; l = { T: 'Bin', op, l, r: this.un() }; } return l; }
+          un() { if (this.ck('NOT')) { this.adv(); return { T: 'Un', op: 'not', e: this.un() }; } if (this.ck('MINUS')) { this.adv(); return { T: 'Un', op: '-', e: this.un() }; } return this.post(); }
+          post() { let e = this.prim(); while (this.ck('LBK')) { this.adv(); const i = this.expr(); this.ex('RBK'); e = { T: 'Idx', o: e, i }; } return e; }
+          prim() { const t = this.pk(); switch (t.t) { case 'NUM': this.adv(); return { T: 'Lit', v: t.v }; case 'STR': this.adv(); return { T: 'Lit', v: t.v }; case 'PAWSITIVE': this.adv(); return { T: 'Lit', v: true }; case 'CLAWFUL': this.adv(); return { T: 'Lit', v: false }; case 'NAP': this.adv(); return { T: 'Lit', v: null }; case 'LP': { this.adv(); const e = this.expr(); this.ex('RP'); return e; } case 'LITTER': { this.adv(); this.ex('LBK'); const els = []; while (!this.ck('RBK')) { els.push(this.expr()); if (!this.ck('RBK')) this.ex('COMMA'); } this.ex('RBK'); return { T: 'Arr', els }; } case 'IDENT': { this.adv(); if (this.ck('LP')) { this.adv(); const args = []; while (!this.ck('RP')) { args.push(this.expr()); if (!this.ck('RP')) this.ex('COMMA'); } this.ex('RP'); return { T: 'Call', n: t.v, args }; } return { T: 'Id', n: t.v }; } default: throw new Error(`Unexpected '${t.v || t.t}' at line ${t.l}`); } }
+        }
+
+        class RetSig { constructor(v) { this.v = v; } } class BrkSig { } class CntSig { }
+        class Interp {
+          constructor() { this.out = []; }
+          run(ast) { this.out = []; const env = Object.create(null); try { this.blk(ast.s, env); } catch (e) { if (!(e instanceof RetSig)) throw e; } return this.out; }
+          blk(ss, env) { for (const s of ss) this.exec(s, env); }
+          lk(n, env) { let e = env; while (e !== null) { if (Object.prototype.hasOwnProperty.call(e, n)) return e[n]; e = Object.getPrototypeOf(e); } throw new Error(`Unknown variable: '${n}' 😿`); }
+          tr(v) { return v !== null && v !== false && v !== 0 && v !== ''; }
+          exec(s, env) {
+            switch (s.T) {
+              case 'Decl': env[s.n] = this.ev(s.v, env); break;
+              case 'Asgn': { const v = this.ev(s.v, env); let e = env; while (e !== null) { if (Object.prototype.hasOwnProperty.call(e, s.n)) { e[s.n] = v; return; } e = Object.getPrototypeOf(e); } env[s.n] = v; break; }
+              case 'Prnt': this.out.push(meowStr(this.ev(s.e, env))); break;
+              case 'If': { if (this.tr(this.ev(s.c, env))) { this.blk(s.b, Object.create(env)); } else if (s.eb) { this.blk(s.eb, Object.create(env)); } break; }
+              case 'Whl': { let it = 0; while (this.tr(this.ev(s.c, env))) { if (++it > 50000) throw new Error('Infinite loop 😾'); try { this.blk(s.b, Object.create(env)); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
+              case 'For': { let f = this.ev(s.f, env), to = this.ev(s.to, env); for (let i = f; i <= to; i++) { const e2 = Object.create(env); e2[s.vn] = i; try { this.blk(s.b, e2); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
+              case 'Fn': env[s.n] = { __fn: pawsitive, ps: s.ps, b: s.b, cl: env }; break;
+              case 'Ret': throw new RetSig(this.ev(s.e, env));
+              case 'Brk': throw new BrkSig();
+              case 'Cont': throw new CntSig();
+              case 'ExS': this.ev(s.e, env); break;
+            }
+          }
+          ev(e, env) {
+            switch (e.T) {
+              case 'Lit': return e.v;
+              case 'Id': return this.lk(e.n, env);
+              case 'Arr': return e.els.map(x => this.ev(x, env));
+              case 'Idx': { const o = this.ev(e.o, env), i = this.ev(e.i, env); return o[i]; }
+              case 'Un': { const v = this.ev(e.e, env); if (e.op === 'not') return !this.tr(v); if (e.op === '-') return -v; break; }
+              case 'Bin': { if (e.op === 'and') { const l = this.ev(e.l, env); return this.tr(l) ? this.ev(e.r, env) : l; } if (e.op === 'or') { const l = this.ev(e.l, env); return this.tr(l) ? l : this.ev(e.r, env); } const l = this.ev(e.l, env), r = this.ev(e.r, env); switch (e.op) { case '+': return (typeof l === 'string' || typeof r === 'string') ? String(l) + String(r) : l + r; case '-': return l - r; case '*': return l * r; case '/': if (r === 0) throw new Error('Division by zero! 😾'); return l / r; case '%': return l % r; case '==': return l === r; case '!=': return l !== r; case '<': return l < r; case '>': return l > r; case '<=': return l <= r; case '>=': return l >= r; }break; }
+              case 'Call': { const args = e.args.map(a => this.ev(a, env)); if (BUILTINS[e.n]) return BUILTINS[e.n](args); const fn = this.lk(e.n, env); if (!fn || !fn.__fn) throw new Error(`'${e.n}' is not a function`); const ce = Object.create(fn.cl); fn.ps.forEach((p, i) => ce[p] = args[i] ?? null); try { this.blk(fn.b, ce); } catch (ex) { if (ex instanceof RetSig) return ex.v; throw ex; } return null; }
+            }
+          }
+        }
+
+        const tokens = new Lx(code).tok();
+        const ast = new Rt(tokens).parse();
+        const output = new Interp().run(ast);
+
+        outDiv.innerHTML = output.map(line =>
+          `<div class="out-line"><span class="out-prefix">🐱</span>${escH(line)}</div>`
+        ).join('');
+        btn.textContent = '✓ Done';
+        btn.style.background = '#2a7a4a';
+        setTimeout(() => { btn.textContent = '▶ Run'; btn.style.background = ''; }, 2000);
+      } catch (err) {
+        outDiv.innerHTML = `<div class="out-err">😾 ${escH(err.message)}</div>`;
+        btn.textContent = '✗ Error';
+        btn.style.background = '#c0392b';
+        setTimeout(() => { btn.textContent = '▶ Run'; btn.style.background = ''; }, 2000);
+      }
+    }
+
+    function escH(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    // ── ACTIVE SIDEBAR ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+          const match = document.querySelector(`.sidebar-link[href="#${id}"]`);
+          if (match) match.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-60px 0px -60% 0px' });
+
+
+    document.querySelectorAll('h2[id], h3[id]').forEach(h => observer.observe(h));
+
+    // ── SEARCH ENGINE ──
+    const searchModal = document.getElementById('search-modal');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    let searchIndex = [];
+    let selectedIndex = -1;
+
+    function indexDocs() {
+      searchIndex = [];
+      document.querySelectorAll('h2[id], h3[id]').forEach(h => {
+        const group = h.closest('.page-section')?.querySelector('h2')?.textContent || 'General';
+        searchIndex.push({
+          id: h.id,
+          title: h.textContent.replace(/^🐾\s*|^\d+\s*|^\W+\s*/, '').trim(),
+          path: group,
+          el: h
+        });
+      });
+    }
+
+    function openSearch() {
+      if (!searchIndex.length) indexDocs();
+      searchModal.classList.add('open');
+      setTimeout(() => searchInput.focus(), 50);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSearch() {
+      searchModal.classList.remove('open');
+      document.body.style.overflow = '';
+      searchInput.value = '';
+      renderResults([]);
+    }
+
+    function renderResults(results) {
+      if (results.length === 0) {
+        if (searchInput.value.trim()) {
+          searchResults.innerHTML = `<div class="search-empty">No results found for "${escH(searchInput.value)}" 😿</div>`;
+        } else {
+          searchResults.innerHTML = '';
+        }
+        selectedIndex = -1;
+        return;
+      }
+
+      searchResults.innerHTML = results.map((r, i) => `
+        <div class="search-result-item ${i === 0 ? 'active' : ''}" data-id="${r.id}" onclick="goToResult('${r.id}')">
+          <div class="search-result-path">${r.path}</div>
+          <div class="search-result-title">${r.title}</div>
+        </div>
+      `).join('');
+      selectedIndex = 0;
+    }
+
+    function goToResult(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        closeSearch();
+        el.scrollIntoView();
+        window.location.hash = id;
+      }
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) return renderResults([]);
+      const matches = searchIndex.filter(item =>
+        item.title.toLowerCase().includes(q) || item.path.toLowerCase().includes(q)
+      ).slice(0, 8);
+      renderResults(matches);
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+      if (e.key === 'Escape' && searchModal.classList.contains('open')) {
+        closeSearch();
+      }
+
+      if (searchModal.classList.contains('open')) {
+        const items = searchResults.querySelectorAll('.search-result-item');
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % items.length;
+          updateActiveResult(items);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+          updateActiveResult(items);
+        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+          e.preventDefault();
+          items[selectedIndex].click();
+        }
+      }
+    });
+
+    function updateActiveResult(items) {
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === selectedIndex);
+        if (i === selectedIndex) item.scrollIntoView({ block: 'nearest' });
+      });
+    }
+
+    searchModal.addEventListener('click', (e) => {
+      if (e.target === searchModal) closeSearch();
+    });
+  </script>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal-overlay" id="search-modal">
+    <div class="search-modal">
+      <div class="search-input-wrap">
+        <span class="icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Search documentation..."
+          autocomplete="off">
+      </div>
+      <div class="search-results" id="search-results">
+        <!-- Results will appear here -->
+      </div>
+      <div class="search-footer">
+        <span><kbd>↵</kbd> select</span>
+        <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+        <span><kbd>esc</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
