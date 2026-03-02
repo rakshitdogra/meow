@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐱</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎵</text></svg>">
   <title>MEOW Language — Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -1109,19 +1110,21 @@
     }
 
     /* ── SEARCH MODAL ── */
+    /* ── SEARCH MODAL ── */
     .search-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 1000;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding-top: 15vh;
+      padding-top: 12vh;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .search-modal-overlay.open {
@@ -1130,32 +1133,37 @@
     }
 
     .search-modal {
-      width: 560px;
+      width: 640px;
       max-width: 90vw;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 14px;
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.05),
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 10px 10px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      transform: translateY(-10px);
-      transition: transform 0.2s;
+      transform: scale(0.95) translateY(-20px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .search-modal-overlay.open .search-modal {
-      transform: translateY(0);
+      transform: scale(1) translateY(0);
     }
 
     .search-input-wrap {
       display: flex;
       align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      gap: 14px;
     }
 
     .search-input-wrap .icon {
-      font-size: 18px;
-      color: var(--orange2);
+      font-size: 20px;
+      opacity: 0.6;
     }
 
     .search-input {
@@ -1163,34 +1171,44 @@
       border: none;
       background: none;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 18px;
       color: var(--text);
       outline: none;
+      font-weight: 400;
     }
 
     .search-results {
-      max-height: 400px;
+      max-height: 440px;
       overflow-y: auto;
-      background: var(--bg);
+      padding: 8px;
     }
 
     .search-result-item {
-      padding: 12px 20px;
+      padding: 10px 14px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       gap: 2px;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.1s;
+      border-radius: 8px;
+      transition: all 0.1s;
+      margin-bottom: 2px;
+      border-bottom: none;
     }
 
     .search-result-item:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
 
     .search-result-item:hover,
     .search-result-item.active {
-      background: var(--orange-light);
+      background: var(--orange);
+    }
+
+    .search-result-item:hover .search-result-title,
+    .search-result-item.active .search-result-title,
+    .search-result-item:hover .search-result-path,
+    .search-result-item.active .search-result-path {
+      color: white;
     }
 
     .search-result-title {
@@ -1201,35 +1219,148 @@
 
     .search-result-path {
       font-size: 11px;
+      font-weight: 500;
       color: var(--text3);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .search-empty {
-      padding: 40px 20px;
+      padding: 40px;
       text-align: center;
       color: var(--text3);
       font-size: 14px;
     }
 
     .search-footer {
-      padding: 10px 20px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.03);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
       display: flex;
       gap: 16px;
-      font-size: 10px;
+      font-size: 11px;
       color: var(--text3);
     }
 
     .search-footer kbd {
-      background: var(--surface);
+      background: white;
       border: 1px solid var(--border2);
-      border-radius: 3px;
       padding: 1px 4px;
-      font-family: 'JetBrains Mono', monospace;
+      border-radius: 3px;
       margin-right: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── RESPONSIVENESS ── */
+    @media (max-width: 1024px) {
+      :root {
+        --sidebar-w: 0px;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 200;
+        width: 280px;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 190;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .sidebar-overlay.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .header-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--text2);
+        margin-right: 8px;
+        border-radius: 8px;
+      }
+
+      .menu-toggle:hover {
+        background: var(--bg3);
+      }
+
+
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 48px 24px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .page-section {
+        padding: 40px 24px;
+      }
+
+      .hero::before {
+        font-size: 80px;
+        right: 20px;
+      }
+
+      .btn-ide {
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-right {
+        gap: 5px;
+      }
+
+      .btn-ide span {
+        display: none;
+      }
+
+      .search-modal {
+        width: 100%;
+        height: 100%;
+        max-width: 100vw;
+        border-radius: 0;
+        transform: translateY(20px);
+      }
+
+      .search-modal-overlay {
+        padding-top: 0;
+      }
+
+      .search-results {
+        max-height: calc(100vh - 120px);
+      }
     }
   </style>
 </head>
@@ -1238,10 +1369,11 @@
 
   <!-- HEADER -->
   <header class="site-header">
+    <div class="menu-toggle" style="display: none;" onclick="toggleSidebar()">☰</div>
     <a href="#" class="site-logo">
       <span class="cat">🐱</span>
       MEOW
-      <span class="logo-badge">v1.0</span>
+      <span class="logo-badge">v1.2</span>
     </a>
     <nav class="header-nav">
       <a href="#intro" class="active">Docs</a>
@@ -1250,15 +1382,19 @@
       <a href="#examples-sec">Examples</a>
     </nav>
     <div class="header-right">
-      <a href="meow-ide.html" class="header-btn btn-ide">▶ Open IDE</a>
+
+      <a href="meow-ide.html" class="header-btn btn-ide">▶ <span>Open IDE</span></a>
     </div>
   </header>
+
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
   <!-- LAYOUT -->
   <div class="layout">
 
     <!-- SIDEBAR -->
-    <nav class="sidebar">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-group-label">Getting Started</div>
         <a class="sidebar-link active" href="#intro"><span class="icon">🏠</span> Introduction</a>
@@ -2219,8 +2355,28 @@ bubbleSort(data, <span class="num">6</span>)
   <!-- FOOTER -->
   <footer class="doc-footer">
     <div><span class="logo">🐱 MEOW</span> — The Cat Programming Language v1.0</div>
-    <div>Built with 🐾 and caffeine · <a href="meow-ide.html">Open IDE</a> · A fun project by <a href="https://www.linkedin.com/in/rakshitdogra/">rakshitdogra</a></div>
+    <div>Built with 🐾 and caffeine · <a href="meow-ide.html">Open IDE</a> · A fun project by <a
+        href="https://www.linkedin.com/in/rakshitdogra/">rakshitdogra</a></div>
   </footer>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal-overlay" id="search-modal">
+    <div class="search-modal">
+      <div class="search-input-wrap">
+        <span class="icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Search documentation..."
+          autocomplete="off">
+      </div>
+      <div class="search-results" id="search-results">
+        <!-- Results will appear here -->
+      </div>
+      <div class="search-footer">
+        <span><kbd>↵</kbd> Select</span>
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>esc</kbd> Close</span>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ── INLINE RUN EXAMPLES ──
@@ -2316,7 +2472,7 @@ bubbleSort(data, <span class="num">6</span>)
               case 'If': { if (this.tr(this.ev(s.c, env))) { this.blk(s.b, Object.create(env)); } else if (s.eb) { this.blk(s.eb, Object.create(env)); } break; }
               case 'Whl': { let it = 0; while (this.tr(this.ev(s.c, env))) { if (++it > 50000) throw new Error('Infinite loop 😾'); try { this.blk(s.b, Object.create(env)); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
               case 'For': { let f = this.ev(s.f, env), to = this.ev(s.to, env); for (let i = f; i <= to; i++) { const e2 = Object.create(env); e2[s.vn] = i; try { this.blk(s.b, e2); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
-              case 'Fn': env[s.n] = { __fn: pawsitive, ps: s.ps, b: s.b, cl: env }; break;
+              case 'Fn': env[s.n] = { __fn: true, ps: s.ps, b: s.b, cl: env }; break;
               case 'Ret': throw new RetSig(this.ev(s.e, env));
               case 'Brk': throw new BrkSig();
               case 'Cont': throw new CntSig();
@@ -2393,21 +2549,26 @@ bubbleSort(data, <span class="num">6</span>)
 
     function openSearch() {
       if (!searchIndex.length) indexDocs();
-      searchModal.classList.add('open');
-      setTimeout(() => searchInput.focus(), 50);
-      document.body.style.overflow = 'hidden';
+      if (searchModal) {
+        searchModal.classList.add('open');
+        setTimeout(() => searchInput && searchInput.focus(), 50);
+        document.body.style.overflow = 'hidden';
+      }
     }
 
     function closeSearch() {
-      searchModal.classList.remove('open');
-      document.body.style.overflow = '';
-      searchInput.value = '';
-      renderResults([]);
+      if (searchModal) {
+        searchModal.classList.remove('open');
+        document.body.style.overflow = '';
+        if (searchInput) searchInput.value = '';
+        renderResults([]);
+      }
     }
 
     function renderResults(results) {
+      if (!searchResults) return;
       if (results.length === 0) {
-        if (searchInput.value.trim()) {
+        if (searchInput && searchInput.value.trim()) {
           searchResults.innerHTML = `<div class="search-empty">No results found for "${escH(searchInput.value)}" 😿</div>`;
         } else {
           searchResults.innerHTML = '';
@@ -2434,25 +2595,27 @@ bubbleSort(data, <span class="num">6</span>)
       }
     }
 
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      if (!q) return renderResults([]);
-      const matches = searchIndex.filter(item =>
-        item.title.toLowerCase().includes(q) || item.path.toLowerCase().includes(q)
-      ).slice(0, 8);
-      renderResults(matches);
-    });
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        if (!q) return renderResults([]);
+        const matches = searchIndex.filter(item =>
+          item.title.toLowerCase().includes(q) || item.path.toLowerCase().includes(q)
+        ).slice(0, 8);
+        renderResults(matches);
+      });
+    }
 
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         openSearch();
       }
-      if (e.key === 'Escape' && searchModal.classList.contains('open')) {
+      if (e.key === 'Escape' && searchModal && searchModal.classList.contains('open')) {
         closeSearch();
       }
 
-      if (searchModal.classList.contains('open')) {
+      if (searchModal && searchModal.classList.contains('open')) {
         const items = searchResults.querySelectorAll('.search-result-item');
         if (e.key === 'ArrowDown') {
           e.preventDefault();
@@ -2476,30 +2639,270 @@ bubbleSort(data, <span class="num">6</span>)
       });
     }
 
-    searchModal.addEventListener('click', (e) => {
-      if (e.target === searchModal) closeSearch();
+    if (searchModal) {
+      searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) closeSearch();
+      });
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+    };
+
+    function escH_SEARCH_MODULE(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); } // Renamed to avoid conflict
+
+    async function runExample(id) {
+      const code = document.getElementById(id).textContent;
+      const outDiv = document.getElementById(id + '-out');
+      const btn = document.getElementById(id + '-btn');
+      outDiv.classList.add('visible');
+      outDiv.innerHTML = '<div class="out-line"><span class="out-prefix">🐱</span>Running...</div>';
+      btn.textContent = '...';
+
+      try {
+        await new Promise(r => setTimeout(r, 600));
+
+        // Simplified runtime just for the documentation logic
+        class Lx_SEARCH_MODULE { // Renamed to avoid conflict
+          constructor(c) { this.c = c; this.p = 0; }
+          tok() {
+            const ts = [];
+            while (this.p < this.c.length) {
+              const ch = this.c[this.p];
+              if (/\s/.test(ch)) { this.p++; continue; }
+              if (ch === '/' && this.c[this.p + 1] === '/') { while (this.p < this.c.length && this.c[this.p] !== '\n') this.p++; continue; }
+              if (/[0-9]/.test(ch)) { let s = ''; while (this.p < this.c.length && /[0-9]/.test(this.c[this.p])) s += this.c[this.p++]; ts.push({ t: 'Num', v: Number(s) }); continue; }
+              if (/[a-zA-Z_]/.test(ch)) { let s = ''; while (this.p < this.c.length && /[a-zA-Z0-9_]/.test(this.c[this.p])) s += this.c[this.p++]; ts.push({ t: 'Id', v: s }); continue; }
+              if (ch === '"' || ch === "'") { const q = ch; this.p++; let s = ''; while (this.p < this.c.length && this.c[this.p] !== q) s += this.c[this.p++]; this.p++; ts.push({ t: 'Str', v: s }); continue; }
+              const ops = ['==', '!=', '<=', '>=', '&&', '||', '+', '-', '*', '/', '%', '=', '<', '>', '(', ')', '{', '}', '[', ']', ',', ';'];
+              let matched = false;
+              for (const op of ops) { if (this.c.startsWith(op, this.p)) { ts.push({ t: 'Op', v: op }); this.p += op.length; matched = true; break; } }
+              if (!matched) this.p++;
+            }
+            return ts;
+          }
+        }
+
+        class Rt_SEARCH_MODULE { // Renamed to avoid conflict
+          constructor(ts) { this.ts = ts; this.p = 0; }
+          parse() { const p = []; while (this.p < this.ts.length) p.push(this.st()); return p; }
+          st() {
+            const t = this.ts[this.p];
+            if (t.t === 'Id' && t.v === 'var') { this.p++; const n = this.ts[this.p++].v; this.p++; return { t: 'Var', n, v: this.ex() }; }
+            if (t.t === 'Id' && t.v === 'func') { this.p++; const n = this.ts[this.p++].v; this.p++; const ps = []; while (this.p < this.ts.length && this.ts[this.p].v !== ')') { if (this.ts[this.p].t === 'Id') ps.push(this.ts[this.p].v); this.p++; } this.p++; this.p++; return { t: 'Func', n, ps, b: this.blk() }; }
+            if (t.t === 'Id' && t.v === 'if') { this.p++; this.p++; const c = this.ex(); this.p++; const b = this.blk(); let eb = null; if (this.p < this.ts.length && this.ts[this.p].v === 'else') { this.p++; eb = this.blk(); } return { t: 'If', c, b, eb }; }
+            if (t.t === 'Id' && t.v === 'while') { this.p++; this.p++; const c = this.ex(); this.p++; const b = this.blk(); return { t: 'While', c, b }; }
+            if (t.t === 'Id' && t.v === 'return') { this.p++; return { t: 'Ret', v: this.ex() }; }
+            return { t: 'Expr', e: this.ex() };
+          }
+          blk() { this.p++; const b = []; while (this.p < this.ts.length && this.ts[this.p].v !== '}') b.push(this.st()); this.p++; return b; }
+          ex() { return this.bin(0); }
+          bin(prec) {
+            let l = this.prim();
+            const ops = { '||': 1, '&&': 2, '==': 3, '!=': 3, '<': 4, '>': 4, '<=': 4, '>=': 4, '+': 5, '-': 5, '*': 6, '/': 6, '%': 6 };
+            while (this.p < this.ts.length) {
+              const op = this.ts[this.p].v;
+              if (!ops[op] || ops[op] <= prec) break;
+              this.p++;
+              l = { t: 'Bin', op, l, r: this.bin(ops[op]) };
+            }
+            return l;
+          }
+          prim() {
+            const t = this.ts[this.p++];
+            if (t.t === 'Num' || t.t === 'Str') return { t: 'Lit', v: t.v };
+            if (t.t === 'Id') {
+              if (this.p < this.ts.length && this.ts[this.p].v === '(') {
+                this.p++; const args = []; while (this.p < this.ts.length && this.ts[this.p].v !== ')') { args.push(this.ex()); if (this.p < this.ts.length && this.ts[this.p].v === ',') this.p++; } this.p++; return { t: 'Call', n: t.v, args };
+              }
+              return { t: 'Ref', n: t.v };
+            }
+            if (t.v === '(') { const e = this.ex(); this.p++; return e; }
+            return null;
+          }
+        }
+
+        class RetSig_SEARCH_MODULE { constructor(v) { this.v = v; } } // Renamed to avoid conflict
+
+        class Interp_SEARCH_MODULE { // Renamed to avoid conflict
+          run(ast) {
+            const env = Object.create(null); const out = [];
+            const BUILTINS = { 'meow': (args) => { out.push(args.map(a => String(a)).join(' ')); return args[0]; } };
+            try { ast.forEach(node => this.ev(node, env)); } catch (e) { if (!(e instanceof RetSig_SEARCH_MODULE)) throw e; } // Using renamed RetSig
+            return out;
+          }
+          lk(n, env) { if (n in env) return env[n]; if (Object.getPrototypeOf(env)) return this.lk(n, Object.getPrototypeOf(env)); return null; }
+          tr(v) { return v !== false && v !== null && v !== 0 && v !== ''; }
+          ev(e, env) {
+            if (!e) return null;
+            switch (e.t) {
+              case 'Lit': return e.v;
+              case 'Ref': return this.lk(e.n, env);
+              case 'Var': return env[e.n] = this.ev(e.v, env);
+              case 'Expr': return this.ev(e.e, env);
+              case 'While': { let r = null; while (this.tr(this.ev(e.c, env))) r = this.blk(e.b, env); return r; }
+              case 'If': { if (this.tr(this.ev(e.c, env))) return this.blk(e.b, env); else if (e.eb) return this.blk(e.eb, env); return null; }
+              case 'Ret': { throw new RetSig_SEARCH_MODULE(this.ev(e.v, env)); } // Using renamed RetSig
+              case 'Func': { return env[e.n] = { __fn: true, ps: e.ps, b: e.b, cl: env }; }
+              case 'Bin': { if (e.op === 'and') { const l = this.ev(e.l, env); return this.tr(l) ? this.ev(e.r, env) : l; } if (e.op === 'or') { const l = this.ev(e.l, env); return this.tr(l) ? l : this.ev(e.r, env); } const l = this.ev(e.l, env), r = this.ev(e.r, env); switch (e.op) { case '+': return (typeof l === 'string' || typeof r === 'string') ? String(l) + String(r) : l + r; case '-': return l - r; case '*': return l * r; case '/': if (r === 0) throw new Error('Division by zero! 😾'); return l / r; case '%': return l % r; case '==': return l === r; case '!=': return l !== r; case '<': return l < r; case '>': return l < r; case '<=': return l <= r; case '>=': return l >= r; } break; }
+              case 'Call': { const args = e.args.map(a => this.ev(a, env)); if (BUILTINS_SEARCH_MODULE[e.n]) return BUILTINS_SEARCH_MODULE[e.n](args); const fn = this.lk(e.n, env); if (!fn || !fn.__fn) throw new Error(`'${e.n}' is not a function`); const ce = Object.create(fn.cl); fn.ps.forEach((p, i) => ce[p] = args[i] ?? null); try { this.blk(fn.b, ce); } catch (ex) { if (ex instanceof RetSig_SEARCH_MODULE) return ex.v; throw ex; } return null; } // Using renamed BUILTINS and RetSig
+            }
+          }
+          blk(b, env) { let r = null; b.forEach(s => r = this.ev(s, env)); return r; }
+        }
+
+        const tokens = new Lx_SEARCH_MODULE(code).tok(); // Using renamed Lx
+        const ast = new Rt_SEARCH_MODULE(tokens).parse(); // Using renamed Rt
+        const output = new Interp_SEARCH_MODULE().run(ast); // Using renamed Interp
+
+        outDiv.innerHTML = output.map(line =>
+          `<div class="out-line"><span class="out-prefix">🐱</span>${escH_SEARCH_MODULE(line)}</div>` // Using renamed escH
+        ).join('');
+        btn.textContent = '✓ Done';
+        btn.style.background = '#2a7a4a';
+        setTimeout(() => { btn.textContent = '▶ Run'; btn.style.background = ''; }, 2000);
+      } catch (err) {
+        outDiv.innerHTML = `<div class="out-err">😾 ${escH_SEARCH_MODULE(err.message)}</div>`; // Using renamed escH
+        btn.textContent = '✗ Error';
+        btn.style.background = '#c0392b';
+        setTimeout(() => { btn.textContent = '▶ Run'; btn.style.background = ''; }, 2000);
+      }
+    }
+
+    // ── ACTIVE SIDEBAR ──
+    const observer_SEARCH_MODULE = new IntersectionObserver((entries) => { // Renamed to avoid conflict
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.getAttribute('id');
+          document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+          const match = document.querySelector(`.sidebar-link[href="#${id}"]`);
+          if (match) match.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-60px 0px -60% 0px' });
+
+    document.querySelectorAll('h2[id], h3[id]').forEach(h => observer_SEARCH_MODULE.observe(h)); // Using renamed observer
+
+    // ── SEARCH ENGINE ──
+    const searchModal_SEARCH_MODULE = document.getElementById('search-modal'); // Renamed to avoid conflict
+    const searchInput_SEARCH_MODULE = document.getElementById('search-input'); // Renamed to avoid conflict
+    const searchResults_SEARCH_MODULE = document.getElementById('search-results'); // Renamed to avoid conflict
+    let searchIndex_SEARCH_MODULE = []; // Renamed to avoid conflict
+    let selectedIndex_SEARCH_MODULE = -1; // Renamed to avoid conflict
+
+    function indexDocs_SEARCH_MODULE() { // Renamed to avoid conflict
+      searchIndex_SEARCH_MODULE = [];
+      document.querySelectorAll('h2[id], h3[id]').forEach(h => {
+        const group = h.closest('.page-section')?.querySelector('h2')?.textContent || 'General';
+        searchIndex_SEARCH_MODULE.push({
+          id: h.id,
+          title: h.textContent.replace(/^🐾\s*|^\d+\s*|^\W+\s*/, '').trim(),
+          path: group,
+          el: h
+        });
+      });
+    }
+
+    function openSearch_SEARCH_MODULE() { // Renamed to avoid conflict
+      if (!searchIndex_SEARCH_MODULE.length) indexDocs_SEARCH_MODULE();
+      searchModal_SEARCH_MODULE.classList.add('open');
+      setTimeout(() => searchInput_SEARCH_MODULE.focus(), 50);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSearch_SEARCH_MODULE() { // Renamed to avoid conflict
+      searchModal_SEARCH_MODULE.classList.remove('open');
+      document.body.style.overflow = '';
+      searchInput_SEARCH_MODULE.value = '';
+      renderResults_SEARCH_MODULE([]);
+    }
+
+    function renderResults_SEARCH_MODULE(results) { // Renamed to avoid conflict
+      if (results.length === 0) {
+        if (searchInput_SEARCH_MODULE.value.trim()) {
+          searchResults_SEARCH_MODULE.innerHTML = `<div class="search-empty">No results found for "${escH_SEARCH_MODULE(searchInput_SEARCH_MODULE.value)}" 😿</div>`;
+        } else {
+          searchResults_SEARCH_MODULE.innerHTML = '';
+        }
+        selectedIndex_SEARCH_MODULE = -1;
+        return;
+      }
+
+      searchResults_SEARCH_MODULE.innerHTML = results.map((r, i) => `
+        <div class="search-result-item ${i === 0 ? 'active' : ''}" data-id="${r.id}" onclick="goToResult_SEARCH_MODULE('${r.id}')">
+          <div class="search-result-path">${r.path}</div>
+          <div class="search-result-title">${r.title}</div>
+        </div>
+      `).join('');
+      selectedIndex_SEARCH_MODULE = 0;
+    }
+
+    function goToResult_SEARCH_MODULE(id) { // Renamed to avoid conflict
+      const el = document.getElementById(id);
+      if (el) {
+        closeSearch_SEARCH_MODULE();
+        el.scrollIntoView();
+        window.location.hash = id;
+      }
+    }
+
+    searchInput_SEARCH_MODULE.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) return renderResults_SEARCH_MODULE([]);
+      const matches = searchIndex_SEARCH_MODULE.filter(item =>
+        item.title.toLowerCase().includes(q) || item.path.toLowerCase().includes(q)
+      ).slice(0, 8);
+      renderResults_SEARCH_MODULE(matches);
     });
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch_SEARCH_MODULE();
+      }
+      if (e.key === 'Escape' && searchModal_SEARCH_MODULE && searchModal_SEARCH_MODULE.classList.contains('open')) {
+        closeSearch_SEARCH_MODULE();
+      }
+
+      if (searchModal_SEARCH_MODULE && searchModal_SEARCH_MODULE.classList.contains('open')) {
+        const items = searchResults_SEARCH_MODULE.querySelectorAll('.search-result-item');
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedIndex_SEARCH_MODULE = (selectedIndex_SEARCH_MODULE + 1) % items.length;
+          updateActiveResult_SEARCH_MODULE(items);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedIndex_SEARCH_MODULE = (selectedIndex_SEARCH_MODULE - 1 + items.length) % items.length;
+          updateActiveResult_SEARCH_MODULE(items);
+        } else if (e.key === 'Enter' && selectedIndex_SEARCH_MODULE >= 0) {
+          e.preventDefault();
+          items[selectedIndex_SEARCH_MODULE].click();
+        }
+      }
+    });
+
+    function updateActiveResult_SEARCH_MODULE(items) { // Renamed to avoid conflict
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === selectedIndex_SEARCH_MODULE);
+        if (i === selectedIndex_SEARCH_MODULE) item.scrollIntoView({ block: 'nearest' });
+      });
+    }
+
+    if (searchModal_SEARCH_MODULE) {
+      searchModal_SEARCH_MODULE.addEventListener('click', (e) => {
+        if (e.target === searchModal_SEARCH_MODULE) closeSearch_SEARCH_MODULE();
+      });
+    }
+
+    function toggleSidebar_SEARCH_MODULE() { // Renamed to avoid conflict
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('visible');
+      document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+    }
   </script>
-
-  <!-- SEARCH MODAL -->
-  <div class="search-modal-overlay" id="search-modal">
-    <div class="search-modal">
-      <div class="search-input-wrap">
-        <span class="icon">🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Search documentation..."
-          autocomplete="off">
-      </div>
-      <div class="search-results" id="search-results">
-        <!-- Results will appear here -->
-      </div>
-      <div class="search-footer">
-        <span><kbd>↵</kbd> select</span>
-        <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
-        <span><kbd>esc</kbd> close</span>
-      </div>
-    </div>
-  </div>
-
 </body>
 
 </html>
