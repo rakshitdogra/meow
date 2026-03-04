@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎵</text></svg>">
-  <title>MEOW Language — Documentation</title>
+  <title>MEOW Language - Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
@@ -1373,7 +1373,7 @@
     <a href="#" class="site-logo">
       <span class="cat">🐱</span>
       MEOW
-      <span class="logo-badge">v1.2</span>
+      <span class="logo-badge">v2.1</span>
     </a>
     <nav class="header-nav">
       <a href="#intro" class="active">Docs</a>
@@ -1465,7 +1465,7 @@
         <div class="callout callout-orange">
           <div class="callout-title">🐾 Core Philosophy</div>
           <p>If a cat would do it, MEOW can express it. Variables <em>purr</em> into existence. Conditions
-            <em>hiss</em>. Loops <em>stalk</em> their prey. Functions <em>claw</em> through logic. And when something
+            <em>psspss</em>. Loops <em>stalk</em> their prey. Functions <em>claw</em> through logic. And when something
             goes wrong? The cat <em>scratches</em>.
           </p>
         </div>
@@ -1518,7 +1518,7 @@
 <span class="kw">purr</span> x <span class="op">=</span> <span class="num">42</span>           <span class="cmt"># variable declaration</span>
 <span class="kw">meow</span> x               <span class="cmt"># print output</span>
 
-<span class="kw">hiss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>      <span class="cmt"># if block</span>
+<span class="kw">psspss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>      <span class="cmt"># if block</span>
   <span class="kw">meow</span> <span class="str">"big number"</span>
 <span class="paren">}</span></code></pre>
 
@@ -1559,7 +1559,7 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <div class="callout callout-blue">
           <div class="callout-title">📝 Variable Scoping</div>
-          <p>Variables declared inside blocks (<code>hiss</code>, <code>stalk</code>, <code>claw</code>, etc.) are
+          <p>Variables declared inside blocks (<code>psspss</code>, <code>stalk</code>, <code>claw</code>, etc.) are
             scoped to that block. Outer variables are accessible from inner scopes. Reassigning an outer variable from
             an inner scope mutates it.</p>
         </div>
@@ -1716,17 +1716,17 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
             <tr>
               <td><span class="kw2">and</span></td>
               <td>Logical AND (short-circuits)</td>
-              <td class="ex">hiss (x > 0 and x < 10)</td>
+              <td class="ex">psspss (x > 0 and x < 10)</td>
             </tr>
             <tr>
               <td><span class="kw2">or</span></td>
               <td>Logical OR (short-circuits)</td>
-              <td class="ex">hiss (a == 1 or b == 2)</td>
+              <td class="ex">psspss (a == 1 or b == 2)</td>
             </tr>
             <tr>
               <td><span class="kw2">not</span></td>
               <td>Logical NOT</td>
-              <td class="ex">hiss (not done)</td>
+              <td class="ex">psspss (not done)</td>
             </tr>
           </table>
         </div>
@@ -1750,26 +1750,26 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <h2 id="control-flow">Control Flow</h2>
 
-        <h3>hiss — If Statement</h3>
-        <p>The <code>hiss</code> keyword begins a conditional block. Cats hiss when they're suspicious — use it when
+        <h3>psspss — If Statement</h3>
+        <p>The <code>psspss</code> keyword begins a conditional block. Cats psspss when they're suspicious — use it when
           evaluating conditions.</p>
 
-        <pre><code><span class="lang-badge">.meow</span><span class="kw">hiss</span> <span class="paren">(</span>condition<span class="paren">)</span> <span class="paren">{</span>
+        <pre><code><span class="lang-badge">.meow</span><span class="kw">psspss</span> <span class="paren">(</span>condition<span class="paren">)</span> <span class="paren">{</span>
   <span class="cmt"># runs if truthy</span>
 <span class="paren">}</span>
 
-<span class="kw">hiss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>
+<span class="kw">psspss</span> <span class="paren">(</span>x <span class="op">></span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"big"</span>
 <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"small"</span>
 <span class="paren">}</span></code></pre>
 
         <h3>else if Chaining</h3>
-        <p>Chain conditions by following <code>else</code> with another <code>hiss</code>:</p>
+        <p>Chain conditions by following <code>else</code> with another <code>psspss</code>:</p>
 
-        <pre><code><span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
+        <pre><code><span class="kw">psspss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"😻 A grade"</span>
-<span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="kw">psspss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"😸 B grade"</span>
 <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"😾 Try again"</span>
@@ -1781,9 +1781,9 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
             <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
           </div>
           <pre><code><span class="kw">purr</span> score <span class="op">=</span> <span class="num">85</span>
-<span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
+<span class="kw">psspss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">90</span><span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"Grade A — Magnificent cat! 😻"</span>
-<span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
+<span class="paren">}</span> <span class="kw">else</span> <span class="kw">psspss</span> <span class="paren">(</span>score <span class="op">>=</span> <span class="num">70</span><span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"Grade B — Pretty good kitty 😸"</span>
 <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span>
   <span class="kw">meow</span> <span class="str">"Needs more napping... 😾"</span>
@@ -1829,7 +1829,7 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <pre><code><span class="cmt"># Print only odd numbers 1–10</span>
 <span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">10</span><span class="paren">)</span> <span class="paren">{</span>
-  <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">knead</span> <span class="paren">}</span>
+  <span class="kw">psspss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">knead</span> <span class="paren">}</span>
   <span class="kw">meow</span> whisker(i)
 <span class="paren">}</span></code></pre>
 
@@ -1877,7 +1877,7 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
         <p>Functions can call themselves recursively. MEOW supports full recursion:</p>
 
         <pre><code><span class="kw">claw</span> <span class="fn">fib</span><span class="paren">(</span>n<span class="paren">)</span> <span class="paren">{</span>
-  <span class="kw">hiss</span> <span class="paren">(</span>n <span class="op"><=</span> <span class="num">1</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> n <span class="paren">}</span>
+  <span class="kw">psspss</span> <span class="paren">(</span>n <span class="op"><=</span> <span class="num">1</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> n <span class="paren">}</span>
   <span class="kw">paw</span> fib(n <span class="op">-</span> <span class="num">1</span>) <span class="op">+</span> fib(n <span class="op">-</span> <span class="num">2</span>)
 <span class="paren">}</span>
 <span class="kw">meow</span> whisker(fib(<span class="num">10</span>)) <span class="cmt"># → 55</span></code></pre>
@@ -2003,9 +2003,9 @@ chase(cats, <span class="str">"Mochi"</span>)
             <div class="kw-ex">meow "Hello!"</div>
           </div>
           <div class="kw-card">
-            <div class="kw-name">hiss</div>
+            <div class="kw-name">psspss</div>
             <div class="kw-desc">Conditional if block</div>
-            <div class="kw-ex">hiss (x > 0) { }</div>
+            <div class="kw-ex">psspss (x > 0) { }</div>
           </div>
           <div class="kw-card">
             <div class="kw-name">else</div>
@@ -2070,7 +2070,7 @@ chase(cats, <span class="str">"Mochi"</span>)
           <div class="kw-card">
             <div class="kw-name">and / or / not</div>
             <div class="kw-desc">Logical operators</div>
-            <div class="kw-ex">hiss (a and b)</div>
+            <div class="kw-ex">psspss (a and b)</div>
           </div>
         </div>
 
@@ -2171,7 +2171,7 @@ chase(cats, <span class="str">"Mochi"</span>)
           expr<br>
           <span class="gr-name">meow_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"meow"</span>
           expr<br><br>
-          <span class="gr-name">if_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"hiss"</span> <span
+          <span class="gr-name">if_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"psspss"</span> <span
             class="gr-str">"("</span> expr <span class="gr-str">")"</span> block (<span class="gr-str">"else"</span>
           (if_stmt | block))?<br>
           <span class="gr-name">while_stmt</span> <span class="gr-op">::=</span> <span class="gr-str">"stalk"</span>
@@ -2284,9 +2284,9 @@ chase(cats, <span class="str">"Mochi"</span>)
             <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
           </div>
           <pre><code><span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">1</span> <span class="kw">to</span> <span class="num">20</span><span class="paren">)</span> <span class="paren">{</span>
-  <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">15</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"PurrBuzz 🐱"</span>
-  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">3</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Purr 🐾"</span>
-  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">hiss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">5</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Buzz 🐟"</span>
+  <span class="kw">psspss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">15</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"PurrBuzz 🐱"</span>
+  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">psspss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">3</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Purr 🐾"</span>
+  <span class="paren">}</span> <span class="kw">else</span> <span class="kw">psspss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">5</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Buzz 🐟"</span>
   <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span> <span class="kw">meow</span> whisker(i) <span class="paren">}</span>
 <span class="paren">}</span></code></pre>
           <div class="run-output"
@@ -2298,7 +2298,7 @@ chase(cats, <span class="str">"Mochi"</span>)
         <pre><code><span class="lang-badge">.meow</span><span class="kw">claw</span> <span class="fn">bubbleSort</span><span class="paren">(</span>arr, n<span class="paren">)</span> <span class="paren">{</span>
   <span class="kw">pounce</span> <span class="paren">(</span>i <span class="kw">from</span> <span class="num">0</span> <span class="kw">to</span> n <span class="op">-</span> <span class="num">2</span><span class="paren">)</span> <span class="paren">{</span>
     <span class="kw">pounce</span> <span class="paren">(</span>j <span class="kw">from</span> <span class="num">0</span> <span class="kw">to</span> n <span class="op">-</span> i <span class="op">-</span> <span class="num">2</span><span class="paren">)</span> <span class="paren">{</span>
-      <span class="kw">hiss</span> <span class="paren">(</span>arr[j] <span class="op">></span> arr[j <span class="op">+</span> <span class="num">1</span>]<span class="paren">)</span> <span class="paren">{</span>
+      <span class="kw">psspss</span> <span class="paren">(</span>arr[j] <span class="op">></span> arr[j <span class="op">+</span> <span class="num">1</span>]<span class="paren">)</span> <span class="paren">{</span>
         <span class="kw">purr</span> tmp <span class="op">=</span> arr[j]
         arr[j] <span class="op">=</span> arr[j <span class="op">+</span> <span class="num">1</span>]
         arr[j <span class="op">+</span> <span class="num">1</span>] <span class="op">=</span> tmp
@@ -2328,7 +2328,7 @@ bubbleSort(data, <span class="num">6</span>)
           <p>Use recursion for tree-like or mathematical problems:</p>
         </div>
         <pre><code><span class="kw">claw</span> <span class="fn">power</span><span class="paren">(</span>base, exp<span class="paren">)</span> <span class="paren">{</span>
-  <span class="kw">hiss</span> <span class="paren">(</span>exp <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> <span class="num">1</span> <span class="paren">}</span>
+  <span class="kw">psspss</span> <span class="paren">(</span>exp <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> <span class="num">1</span> <span class="paren">}</span>
   <span class="kw">paw</span> base <span class="op">*</span> power(base, exp <span class="op">-</span> <span class="num">1</span>)
 <span class="paren">}</span>
 <span class="kw">meow</span> whisker(power(<span class="num">3</span>, <span class="num">6</span>)) <span class="cmt"># → 729</span></code></pre>
@@ -2411,7 +2411,7 @@ bubbleSort(data, <span class="num">6</span>)
       outDiv.classList.add('visible');
 
       try {
-        const KWDS = { purr: 'PURR', meow: 'MEOW', hiss: 'HISS', else: 'ELSE', stalk: 'STALK', pounce: 'POUNCE', claw: 'CLAW', paw: 'PAW', from: 'FROM', to: 'TO', litter: 'LITTER', pawsitive: 'PAWSITIVE', clawful: 'CLAWFUL', nap: 'NAP', and: 'AND', or: 'OR', not: 'NOT', scratch: 'SCRATCH', knead: 'KNEAD' };
+        const KWDS = { purr: 'PURR', meow: 'MEOW', psspss: 'psspss', else: 'ELSE', stalk: 'STALK', pounce: 'POUNCE', claw: 'CLAW', paw: 'PAW', from: 'FROM', to: 'TO', litter: 'LITTER', pawsitive: 'PAWSITIVE', clawful: 'CLAWFUL', nap: 'NAP', and: 'AND', or: 'OR', not: 'NOT', scratch: 'SCRATCH', knead: 'KNEAD' };
 
         class Lx {
           constructor(s) { this.s = s; this.i = 0; this.ln = 1; }
@@ -2433,7 +2433,7 @@ bubbleSort(data, <span class="num">6</span>)
             switch (t.t) {
               case 'PURR': { this.adv(); const n = this.ex('IDENT').v; this.ex('ASSIGN'); return { T: 'Decl', n, v: this.expr() }; }
               case 'MEOW': { this.adv(); return { T: 'Prnt', e: this.expr() }; }
-              case 'HISS': return this.ifS();
+              case 'psspss': return this.ifS();
               case 'STALK': { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); return { T: 'Whl', c, b: this.blk() }; }
               case 'POUNCE': { this.adv(); this.ex('LP'); const vn = this.ex('IDENT').v; this.ex('FROM'); const f = this.expr(); this.ex('TO'); const to = this.expr(); this.ex('RP'); return { T: 'For', vn, f, to, b: this.blk() }; }
               case 'CLAW': { this.adv(); const n = this.ex('IDENT').v; this.ex('LP'); const ps = []; while (!this.ck('RP')) { ps.push(this.ex('IDENT').v); if (!this.ck('RP')) this.ex('COMMA'); } this.ex('RP'); return { T: 'Fn', n, ps, b: this.blk() }; }
@@ -2443,7 +2443,7 @@ bubbleSort(data, <span class="num">6</span>)
               default: return { T: 'ExS', e: this.expr() };
             }
           }
-          ifS() { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); const b = this.blk(); let eb = null; if (this.ck('ELSE')) { this.adv(); eb = this.ck('HISS') ? [this.ifS()] : this.blk(); } return { T: 'If', c, b, eb }; }
+          ifS() { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); const b = this.blk(); let eb = null; if (this.ck('ELSE')) { this.adv(); eb = this.ck('psspss') ? [this.ifS()] : this.blk(); } return { T: 'If', c, b, eb }; }
           blk() { this.ex('LB'); const s = []; while (!this.ck('RB') && !this.ck('EOF')) s.push(this.st()); this.ex('RB'); return s; }
           expr() { return this.or(); }
           or() { let l = this.and(); while (this.ck('OR')) { this.adv(); l = { T: 'Bin', op: 'or', l, r: this.and() }; } return l; }
