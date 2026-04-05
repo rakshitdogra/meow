@@ -1,40 +1,4639 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
-<title>MEOW IDE v2</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
-<style>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+  <title>MEOW IDE v2.1.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Josefin+Sans:wght@700&display=swap"
+    rel="stylesheet">
+  <style>
     /* ── THEME VARIABLES ── */
-    :root,[data-theme="dark"]{
-      --bg:#0d0d14;--bg2:#12121c;--bg3:#1a1a28;--bg4:#222236;
-      --border:#2e2e4a;--orange:#ff8c42;--orange2:#ffb347;--orange3:#ffd580;
-      --purple:#9b59b6;--blue:#5b9cf6;--green:#6bcf7f;--red:#ff6b6b;--pink:#ff79c6;
-      --text:#e8e8f0;--text2:#9a9ab8;--text3:#5a5a7a;
-      --glow:rgba(255,140,66,.15);--glow2:rgba(255,140,66,.35);
-      --hl-found:rgba(255,213,128,.35);--hl-current:rgba(255,140,66,.5);
+    :root,
+    [data-theme="dark"] {
+      --bg: #0d0d14;
+      --bg2: #12121c;
+      --bg3: #1a1a28;
+      --bg4: #222236;
+      --border: #2e2e4a;
+      --orange: #ff8c42;
+      --orange2: #ffb347;
+      --orange3: #ffd580;
+      --purple: #9b59b6;
+      --blue: #5b9cf6;
+      --green: #6bcf7f;
+      --red: #ff6b6b;
+      --pink: #ff79c6;
+      --text: #e8e8f0;
+      --text2: #9a9ab8;
+      --text3: #5a5a7a;
+      --glow: rgba(255, 140, 66, .15);
+      --glow2: rgba(255, 140, 66, .35);
+      --hl-found: rgba(255, 213, 128, .35);
+      --hl-current: rgba(255, 140, 66, .5);
     }
-    [data-theme="light"]{
-      --bg:#f4f3ef;--bg2:#e8e7e3;--bg3:#dddcd8;--bg4:#d0cfc9;
-      --border:#b8b7b0;--orange:#c85e1a;--orange2:#d97316;--orange3:#b45309;
-      --purple:#7c3aed;--blue:#1d4ed8;--green:#15803d;--red:#dc2626;--pink:#be185d;
-      --text:#1c1b26;--text2:#4a4960;--text3:#888799;
-      --glow:rgba(200,94,26,.12);--glow2:rgba(200,94,26,.3);
-      --hl-found:rgba(217,119,6,.25);--hl-current:rgba(200,94,26,.4);
+
+    [data-theme="light"] {
+      --bg: #f4f3ef;
+      --bg2: #e8e7e3;
+      --bg3: #dddcd8;
+      --bg4: #d0cfc9;
+      --border: #b8b7b0;
+      --orange: #c85e1a;
+      --orange2: #d97316;
+      --orange3: #b45309;
+      --purple: #7c3aed;
+      --blue: #1d4ed8;
+      --green: #15803d;
+      --red: #dc2626;
+      --pink: #be185d;
+      --text: #1c1b26;
+      --text2: #4a4960;
+      --text3: #888799;
+      --glow: rgba(200, 94, 26, .12);
+      --glow2: rgba(200, 94, 26, .3);
+      --hl-found: rgba(217, 119, 6, .25);
+      --hl-current: rgba(200, 94, 26, .4);
     }
-    [data-theme="dracula"]{
-      --bg:#282a36;--bg2:#1e1f2b;--bg3:#313344;--bg4:#44475a;
-      --border:#6272a4;--orange:#ffb86c;--orange2:#ff79c6;--orange3:#f1fa8c;
-      --purple:#bd93f9;--blue:#8be9fd;--green:#50fa7b;--red:#ff5555;--pink:#ff79c6;
-      --text:#f8f8f2;--text2:#cdd3ea;--text3:#6272a4;
-      --glow:rgba(255,184,108,.15);--glow2:rgba(255,184,108,.35);
-      --hl-found:rgba(241,250,140,.25);--hl-current:rgba(255,184,108,.45);
+
+    [data-theme="dracula"] {
+      --bg: #282a36;
+      --bg2: #1e1f2b;
+      --bg3: #313344;
+      --bg4: #44475a;
+      --border: #6272a4;
+      --orange: #ffb86c;
+      --orange2: #ff79c6;
+      --orange3: #f1fa8c;
+      --purple: #bd93f9;
+      --blue: #8be9fd;
+      --green: #50fa7b;
+      --red: #ff5555;
+      --pink: #ff79c6;
+      --text: #f8f8f2;
+      --text2: #cdd3ea;
+      --text3: #6272a4;
+      --glow: rgba(255, 184, 108, .15);
+      --glow2: rgba(255, 184, 108, .35);
+      --hl-found: rgba(241, 250, 140, .25);
+      --hl-current: rgba(255, 184, 108, .45);
     }
-    [data-theme="nord"]{
+
+    [data-theme="nord"] {
+      --bg: #2e3440;
+      --bg2: #242933;
+      --bg3: #3b4252;
+      --bg4: #434c5e;
+      --border: #4c566a;
+      --orange: #d08770;
+      --orange2: #ebcb8b;
+      --orange3: #a3be8c;
+      --purple: #b48ead;
+      --blue: #88c0d0;
+      --green: #a3be8c;
+      --red: #bf616a;
+      --pink: #b48ead;
+      --text: #eceff4;
+      --text2: #e5e9f0;
+      --text3: #7b8caa;
+      --glow: rgba(208, 135, 112, .15);
+      --glow2: rgba(208, 135, 112, .3);
+      --hl-found: rgba(163, 190, 140, .25);
+      --hl-current: rgba(208, 135, 112, .4);
+    }
+
+    [data-theme="hc"] {
+      --bg: #000;
+      --bg2: #0a0a0a;
+      --bg3: #111;
+      --bg4: #1a1a1a;
+      --border: #fff;
+      --orange: #ff0;
+      --orange2: #ff0;
+      --orange3: #fff;
+      --purple: #f0f;
+      --blue: #0ff;
+      --green: #0f0;
+      --red: #f00;
+      --pink: #f0f;
+      --text: #fff;
+      --text2: #ddd;
+      --text3: #888;
+      --glow: rgba(255, 255, 0, .2);
+      --glow2: rgba(255, 255, 0, .5);
+      --hl-found: rgba(255, 255, 0, .3);
+      --hl-current: rgba(255, 0, 0, .5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 14px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), var(--orange2), var(--orange3), var(--orange), transparent);
+      animation: scanline 3s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% {
+        transform: translateX(-100%)
+      }
+
+      100% {
+        transform: translateX(100%)
+      }
+    }
+
+    .logo {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px var(--glow2);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      user-select: none;
+    }
+
+    .logo .cat-icon {
+      animation: catblink 4s infinite;
+    }
+
+    @keyframes catblink {
+
+      0%,
+      90%,
+      100% {
+        opacity: 1
+      }
+
+      92%,
+      98% {
+        opacity: 0
+      }
+    }
+
+    .logo .ver {
+      font-size: 9px;
+      color: var(--text3);
+      background: var(--bg4);
+      padding: 2px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      letter-spacing: 1px;
+    }
+
+    .hdr-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+    }
+
+    .hdr-sub {
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    .hdr-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all .15s;
+      letter-spacing: .4px;
+      white-space: nowrap;
+    }
+
+    .btn-run {
+      background: var(--orange);
+      color: #111;
+      font-weight: 700;
+      box-shadow: 0 0 14px rgba(255, 140, 66, .4);
+    }
+
+    .btn-run:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 22px rgba(255, 140, 66, .6);
+      transform: translateY(-1px);
+    }
+
+    .btn-debug {
+      background: var(--purple);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-debug:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: var(--bg4);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg3);
+      color: var(--text);
+      border-color: var(--orange);
+    }
+
+    .btn-orange3 {
+      background: var(--bg4);
+      color: var(--orange3);
+      border: 1px solid var(--border);
+    }
+
+    .btn-orange3:hover {
+      background: var(--bg3);
+      border-color: var(--orange3);
+    }
+
+    .btn-icon {
+      padding: 6px 8px;
+      font-size: 13px;
+    }
+
+    /* theme picker */
+    .theme-picker {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 6px;
+    }
+
+    .theme-picker label {
+      font-size: 9px;
+      color: var(--text3);
+      margin-right: 2px;
+    }
+
+    .theme-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all .15s;
+      border: 2px solid transparent;
+    }
+
+    .theme-dot:hover,
+    .theme-dot.active {
+      transform: scale(1.3);
+      border-color: var(--text);
+    }
+
+    /* ── FIND/REPLACE BAR ── */
+    .find-bar {
+      display: none;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 5px 14px;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .find-bar.open {
+      display: flex;
+    }
+
+    .find-input {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      padding: 4px 9px;
+      outline: none;
+      width: 200px;
+    }
+
+    .find-input:focus {
+      border-color: var(--orange);
+    }
+
+    .find-count {
+      font-size: 10px;
+      color: var(--text3);
+      min-width: 60px;
+    }
+
+    .find-toggle {
+      font-size: 10px;
+      color: var(--text3);
+      cursor: pointer;
+      user-select: none;
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .find-toggle.on {
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .find-sep {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 220px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sidebar-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .sidebar-tab {
+      flex: 1;
+      padding: 7px 0;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .15s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .sidebar-tab.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    .sidebar-body {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-body::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .sidebar-body::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .sidebar-section {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-title {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text3);
+      margin-bottom: 7px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* file tree */
+    .file-item {
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--text2);
+      transition: all .1s;
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .file-item:hover {
+      background: var(--bg3);
+      color: var(--orange);
+      border-color: var(--border);
+    }
+
+    .file-item.active {
+      background: var(--bg3);
+      color: var(--orange);
+      border-color: var(--border);
+    }
+
+    .file-item .fi-icon {
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    .file-item .fi-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-item .fi-actions {
+      display: none;
+      gap: 3px;
+    }
+
+    .file-item:hover .fi-actions {
+      display: flex;
+    }
+
+    .fi-btn {
+      font-size: 10px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      border: none;
+      background: var(--bg4);
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .1s;
+    }
+
+    .fi-btn:hover {
+      color: var(--orange);
+    }
+
+    .file-upload-area {
+      margin-top: 6px;
+      padding: 8px;
+      border: 1px dashed var(--border);
+      border-radius: 5px;
+      text-align: center;
+      font-size: 10px;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    #file-upload-input {
+      display: none;
+    }
+
+    /* snippets/keywords */
+    .example-item {
+      padding: 6px 9px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--text2);
+      transition: all .1s;
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .example-item:hover {
+      background: var(--bg3);
+      color: var(--orange);
+      border-color: var(--border);
+    }
+
+    .snippet-item {
+      padding: 5px 9px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10.5px;
+      color: var(--text3);
+      transition: all .1s;
+      margin-bottom: 1px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      line-height: 1.3;
+    }
+
+    .snippet-item:hover {
+      background: var(--bg3);
+      color: var(--orange3);
+      border-color: var(--border);
+    }
+
+    .snippet-item .sn-name {
+      color: var(--text2);
+      font-size: 11px;
+    }
+
+    .snippet-item .sn-desc {
+      font-size: 9px;
+      color: var(--text3);
+    }
+
+    .keyword-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      margin: 2px;
+      border-radius: 4px;
+      font-size: 10px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .keyword-chip:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-1px);
+    }
+
+    .builtin-item {
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 10px;
+      color: var(--text3);
+      transition: all .1s;
+      margin-bottom: 1px;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .builtin-item:hover {
+      background: var(--bg3);
+      border-color: var(--border);
+      color: var(--orange3);
+    }
+
+    .builtin-item .bi-name {
+      color: var(--orange2);
+      font-size: 10px;
+    }
+
+    /* ── EDITOR AREA ── */
+    .editor-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .editor-tabs {
+      display: flex;
+      align-items: center;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 4px;
+      height: 35px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-shrink: 0;
+      gap: 0;
+    }
+
+    .editor-tabs::-webkit-scrollbar {
+      height: 2px;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      height: 27px;
+      border-radius: 5px 5px 0 0;
+      font-size: 11px;
+      color: var(--text2);
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      margin-bottom: -1px;
+      transition: all .1s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+      max-width: 160px;
+    }
+
+    .tab .tab-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .tab.active {
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--orange);
+      border-bottom-color: var(--bg);
+    }
+
+    .tab:not(.active):hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .tab-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      font-size: 10px;
+      color: var(--text3);
+      cursor: pointer;
+      margin-left: 2px;
+      transition: all .1s;
+      flex-shrink: 0;
+    }
+
+    .tab-close:hover {
+      background: rgba(255, 107, 107, .2);
+      color: var(--red);
+    }
+
+    .tab-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--orange2);
+      flex-shrink: 0;
+    }
+
+    .tab-add {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      margin-left: 4px;
+      font-size: 15px;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .1s;
+      flex-shrink: 0;
+      border: 1px dashed transparent;
+    }
+
+    .tab-add:hover {
+      color: var(--orange);
+      background: var(--bg3);
+      border-color: var(--border);
+    }
+
+    @media(max-width:1024px) and (min-width:769px) {
+      .tab {
+        padding: 0 8px;
+        font-size: 10.5px;
+        max-width: 120px;
+      }
+
+      .tab .tab-icon {
+        display: none;
+      }
+    }
+
+    @media(max-width:768px) {
+      .tab {
+        padding: 0 7px;
+        font-size: 10px;
+        max-width: 100px;
+      }
+
+      .tab .tab-icon {
+        display: none;
+      }
+
+      .tab-add {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* editor + minimap wrapper */
+    .editor-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .editor-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* line numbers */
+    .line-numbers {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 52px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      padding-top: 14px;
+      font-size: 12px;
+      line-height: 22px;
+      text-align: right;
+      padding-right: 6px;
+      color: var(--text3);
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      font-family: 'Fira Code', monospace;
+      white-space: pre;
+    }
+
+    /* fold gutter */
+    .fold-gutter {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 14px;
+      overflow: hidden;
+      padding-top: 14px;
+      font-size: 10px;
+      line-height: 22px;
+      color: var(--text3);
+      user-select: none;
+      z-index: 2;
+      font-family: monospace;
+    }
+
+    .fold-btn {
+      cursor: pointer;
+      display: block;
+      width: 14px;
+      text-align: center;
+      transition: color .1s;
+    }
+
+    .fold-btn:hover {
+      color: var(--orange);
+    }
+
+    .editor-inner {
+      position: absolute;
+      left: 52px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+
+    .highlight-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 14px 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 22px;
+      white-space: pre;
+      pointer-events: none;
+      z-index: 1;
+      min-width: max-content;
+      min-height: 100%;
+    }
+
+    #code-editor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 14px 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 22px;
+      background: transparent;
+      color: transparent;
+      caret-color: var(--orange2);
+      border: none;
+      outline: none;
+      resize: none;
+      white-space: pre;
+      overflow: auto;
+      overflow-wrap: normal;
+      tab-size: 2;
+      z-index: 2;
+    }
+
+    #code-editor::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    #code-editor::-webkit-scrollbar-track {
+      background: var(--bg2);
+    }
+
+    #code-editor::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .editor-placeholder {
+      position: absolute;
+      top: 14px;
+      left: 68px;
+      color: var(--text3);
+      font-size: 13px;
+      line-height: 22px;
+      pointer-events: none;
+      z-index: 0;
+      font-family: 'Fira Code', monospace;
+      white-space: pre;
+      opacity: .4;
+    }
+
+    /* error line */
+    .hl-error-line {
+      background: rgba(255, 107, 107, .12);
+      display: block;
+      width: max-content;
+      min-width: 100%;
+      text-decoration: underline wavy var(--red);
+    }
+
+    .ln-error {
+      color: var(--red) !important;
+    }
+
+    .ln-break {
+      color: var(--orange) !important;
+    }
+
+    .hl-match {
+      background: var(--hl-found);
+      border-radius: 2px;
+    }
+
+    .hl-match-current {
+      background: var(--hl-current);
+      border-radius: 2px;
+    }
+
+    .debug-line {
+      background: rgba(91, 156, 246, .15);
+      display: block;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    /* ── MINIMAP ── */
+    .minimap-panel {
+      width: 100px;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    #minimap-canvas {
+      display: block;
+      width: 100px;
+    }
+
+    .minimap-viewport {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background: rgba(255, 140, 66, .15);
+      border: 1px solid rgba(255, 140, 66, .3);
+      pointer-events: none;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .right-panel {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+    }
+
+    .panel-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .panel-tab {
+      flex: 1;
+      padding: 8px 4px;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .15s;
+      border-bottom: 2px solid transparent;
+      position: relative;
+    }
+
+    .panel-tab.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    .panel-tab .badge {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      background: var(--orange);
+      color: #111;
+      font-size: 8px;
+      border-radius: 8px;
+      padding: 0 4px;
+      font-weight: 700;
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-view {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .panel-view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-view::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .panel-view::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    /* output */
+    .output-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      padding: 1px 0;
+    }
+
+    .output-prefix {
+      color: var(--orange);
+      opacity: .7;
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .output-text {
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .output-error {
+      color: var(--red);
+      padding: 8px 10px;
+      background: rgba(255, 107, 107, .08);
+      border-radius: 5px;
+      border-left: 2px solid var(--red);
+      margin: 4px 0;
+      font-size: 11px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .output-system {
+      color: var(--text3);
+      font-style: italic;
+      font-size: 11px;
+      padding: 3px 0;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .output-time {
+      font-size: 10px;
+      color: var(--text3);
+      padding: 5px 0 2px;
+      border-top: 1px solid var(--border);
+      margin-top: 5px;
+      text-align: right;
+    }
+
+    .output-placeholder {
+      color: var(--text3);
+      font-size: 12px;
+      padding: 20px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* panel header row */
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    /* variables */
+    .var-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .var-table th {
+      text-align: left;
+      padding: 4px 8px;
+      background: var(--bg3);
+      color: var(--text3);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .var-table td {
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(46, 46, 74, .4);
+      vertical-align: top;
+      font-size: 11px;
+      word-break: break-all;
+    }
+
+    .var-table tr:hover td {
+      background: var(--bg3);
+    }
+
+    .var-name {
+      color: var(--orange2);
+    }
+
+    .var-type {
+      color: var(--text3);
+      font-size: 9px;
+      padding: 1px 4px;
+      background: var(--bg3);
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .var-val-str {
+      color: var(--green);
+    }
+
+    .var-val-num {
+      color: var(--orange2);
+    }
+
+    .var-val-bool {
+      color: var(--purple);
+    }
+
+    .var-val-null {
+      color: var(--text3);
+    }
+
+    .var-val-arr {
+      color: var(--blue);
+    }
+
+    .var-val-dict {
+      color: var(--pink);
+    }
+
+    /* history */
+    .hist-item {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: all .1s;
+    }
+
+    .hist-item:hover {
+      border-color: var(--orange);
+      background: var(--bg3);
+    }
+
+    .hist-time {
+      font-size: 9px;
+      color: var(--text3);
+      margin-bottom: 3px;
+    }
+
+    .hist-code {
+      font-size: 10px;
+      color: var(--text2);
+      white-space: pre;
+      overflow: hidden;
+      max-height: 40px;
+      text-overflow: ellipsis;
+    }
+
+    .hist-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid;
+      margin-top: 4px;
+    }
+
+    .hist-badge.ok {
+      color: var(--green);
+      border-color: var(--green);
+    }
+
+    .hist-badge.err {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    /* debug */
+    .debug-controls {
+      display: flex;
+      gap: 6px;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      align-items: center;
+    }
+
+    .debug-step {
+      background: var(--bg4);
+      color: var(--blue);
+      border: 1px solid var(--border);
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all .1s;
+    }
+
+    .debug-step:hover:not(:disabled) {
+      border-color: var(--blue);
+      background: var(--bg3);
+    }
+
+    .debug-step:disabled {
+      opacity: .4;
+      cursor: default;
+    }
+
+    .debug-slider {
+      flex: 1;
+      accent-color: var(--orange);
+    }
+
+    .debug-pos {
+      font-size: 10px;
+      color: var(--text3);
+      white-space: nowrap;
+    }
+
+    .debug-trace {
+      font-size: 11px;
+      line-height: 1.7;
+      padding: 8px;
+    }
+
+    .debug-trace-item {
+      padding: 3px 6px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      border-left: 2px solid transparent;
+    }
+
+    .debug-trace-item.current {
+      border-left-color: var(--orange);
+      background: var(--bg3);
+    }
+
+    .debug-event {
+      color: var(--text3);
+      font-size: 9px;
+    }
+
+    /* ── STATUS BAR ── */
+    .statusbar {
+      height: 22px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 14px;
+      font-size: 10px;
+      color: var(--text3);
+      flex-shrink: 0;
+    }
+
+    /* ── IMAGE CAT WALKER ── */
+    .cat-strip {
+      position: fixed;
+      bottom: 22px;
+      left: 0;
+      width: 100%;
+      height: 44px;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: visible;
+    }
+
+    #cat-walker {
+      position: absolute;
+      bottom: 0;
+      right: -80px;
+      pointer-events: all;
+      cursor: pointer;
+    }
+
+    #cat-walker img {
+      width: 44px;
+      image-rendering: pixelated;
+      display: block;
+    }
+
+    /* speech bubble */
+    #cat-bubble {
+      position: fixed;
+      bottom: 72px;
+      transform: translateX(-50%) scale(0);
+      transform-origin: bottom center;
+      background: var(--bg2, #12121c);
+      border: 2px solid var(--orange, #ff8c42);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--orange, #ff8c42);
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 0 16px rgba(255, 140, 66, .5);
+      transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), opacity .15s;
+      opacity: 0;
+      z-index: 99999;
+    }
+
+    #cat-bubble.show {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    #cat-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 8px solid var(--orange, #ff8c42);
+    }
+
+    #cat-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--bg2, #12121c);
+      z-index: 1;
+    }
+
+    .statusbar span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .accent {
+      color: var(--orange);
+    }
+
+    .sb-shortcuts {
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text3);
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+
+    .status-dot.running {
+      background: var(--orange);
+      box-shadow: 0 0 7px var(--orange);
+      animation: pulse .8s infinite;
+    }
+
+    .status-dot.success {
+      background: var(--green);
+      box-shadow: 0 0 7px var(--green);
+    }
+
+    .status-dot.error {
+      background: var(--red);
+      box-shadow: 0 0 7px var(--red);
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    /* ── MODALS ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 680px;
+      max-width: 92vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 22px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .6), 0 0 40px var(--glow);
+      transform: translateY(10px);
+      transition: transform .2s;
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+
+    .modal h2 {
+      font-family: 'Josefin Sans', sans-serif;
+      color: var(--orange);
+      margin-bottom: 14px;
+      font-size: 17px;
+      letter-spacing: 2px;
+    }
+
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .modal-close:hover {
+      color: var(--orange);
+    }
+
+    /* ref modal grid */
+    .kw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 7px;
+    }
+
+    .kw-card {
+      background: var(--bg3);
+      padding: 7px 11px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .kw-card .kn {
+      font-family: 'Fira Code', monospace;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .kw-card .kd {
+      color: var(--text3);
+      font-size: 9px;
+      margin-top: 2px;
+    }
+
+    /* input modal */
+    .input-modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      width: 400px;
+      max-width: 92vw;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+    }
+
+    .input-modal h3 {
+      color: var(--orange);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .input-modal input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      padding: 8px 12px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .input-modal input:focus {
+      border-color: var(--orange);
+    }
+
+    .input-modal .btn-row {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    /* ── TOAST ── */
+    .insert-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      color: var(--orange3);
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: all .25s;
+      pointer-events: none;
+      z-index: 50;
+      white-space: nowrap;
+    }
+
+    .insert-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* rename input */
+    .tab-rename-input {
+      background: var(--bg4);
+      border: 1px solid var(--orange);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      padding: 1px 5px;
+      width: 90px;
+      outline: none;
+    }
+
+    /* ── MOBILE NAV MENU ── */
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--text2);
+      border-radius: 7px;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+
+    .menu-toggle:hover {
+      background: var(--bg3);
+      color: var(--orange);
+    }
+
+    /* Mobile action dropdown */
+    .mob-menu {
+      position: fixed;
+      top: 50px;
+      right: 0;
+      left: 0;
+      background: var(--bg2);
+      border-bottom: 2px solid var(--orange);
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .5);
+    }
+
+    .mob-menu.open {
+      display: flex;
+    }
+
+    .mob-row {
+      display: flex;
+      gap: 6px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .mob-row:last-child {
+      border-bottom: none;
+    }
+
+    .mob-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .mob-menu .btn {
+      font-size: 11px;
+      padding: 7px 12px;
+    }
+
+    .mob-theme-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mob-theme-row label {
+      font-size: 9px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .sidebar-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* hide desktop-only header items on mobile */
+    @media(max-width:768px) {
+      .hdr-desktop {
+        display: none !important;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header {
+        padding: 0 10px;
+      }
+    }
+
+    @media(min-width:769px) {
+      .mob-menu {
+        display: none !important;
+      }
+
+      .menu-toggle {
+        display: none !important;
+      }
+    }
+
+    @media(max-width:1024px) and (min-width:769px) {
+      .sidebar {
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        z-index: 110;
+        transform: translateX(-100%);
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, .3);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .minimap-panel {
+        display: none;
+      }
+
+      .hdr-sub {
+        display: none;
+      }
+
+      .hdr-sep {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+      }
+
+      /* keep hdr-desktop but hide low-priority items */
+      .hdr-desktop {
+        display: flex !important;
+      }
+
+      .theme-picker {
+        display: none;
+      }
+
+      /* right panel narrows on tablet */
+      .right-panel {
+        width: 260px;
+      }
+
+      /* hide status shortcuts on tablet */
+      .sb-shortcuts {
+        display: none !important;
+      }
+
+      /* tighter panel tabs */
+      .panel-tab {
+        font-size: 8px;
+        padding: 8px 2px;
+        letter-spacing: .5px;
+      }
+    }
+
+    @media(max-width:768px) {
+      .main {
+        flex-direction: column;
+      }
+
+      .right-panel {
+        width: 100%;
+        height: 42vh;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      .modal {
+        width: 96vw;
+        padding: 12px;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        z-index: 110;
+        transform: translateX(-100%);
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, .3);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .minimap-panel {
+        display: none;
+      }
+
+      .sb-shortcuts {
+        display: none !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    /* syntax */
+    .hl-keyword {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .hl-string {
+      color: var(--green);
+    }
+
+    .hl-number {
+      color: var(--orange2);
+    }
+
+    .hl-comment {
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    .hl-bool {
+      color: var(--purple);
+    }
+
+    .hl-ident {
+      color: var(--text);
+    }
+
+    .hl-op {
+      color: var(--blue);
+    }
+
+    .hl-paren {
+      color: var(--orange3);
+    }
+
+    .hl-bracket {
+      color: var(--orange3);
+    }
+
+    .hl-interp {
+      color: var(--pink);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1
+      }
+    }
+
+    /* ── GUI PANEL ── */
+    #panel-gui {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    #panel-gui.active {
+      display: flex;
+    }
+
+    .gui-canvas {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .gui-btn {
+      background: var(--orange);
+      color: #111;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(255, 140, 66, 0.2);
+    }
+
+    .gui-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 140, 66, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .gui-btn:active {
+      transform: translateY(0);
+    }
+
+    .gui-label {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .gui-input {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .gui-input:focus {
+      border-color: var(--orange);
+    }
+
+    .gui-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .gui-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .gui-modal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      max-width: 80%;
+    }
+
+    /* Advanced GUI Layouts */
+    .gui-row {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .gui-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .gui-spacer {
+      flex: 1;
+      min-height: 12px;
+      min-width: 12px;
+    }
+
+    .gui-img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      object-fit: contain;
+    }
+
+    .gui-slider-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .gui-slider {
+      width: 100%;
+      accent-color: var(--orange);
+      cursor: pointer;
+    }
+
+    /* Floating GUI Container */
+    #gui-floating-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 440px;
+      max-width: 90vw;
+      height: 580px;
+      max-height: 85vh;
+      background: var(--bg2);
+      border: 2px solid var(--orange);
+      border-radius: 16px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 140, 66, 0.1);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s, opacity 0.2s;
+      opacity: 0;
+    }
+
+    #gui-floating-container.show {
+      display: flex;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .gui-floating-header {
+      padding: 10px 16px;
+      background: var(--bg3);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: move;
+    }
+
+    .gui-floating-close {
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0 4px;
+    }
+
+    .gui-floating-close:hover {
+      color: var(--orange);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="menu-toggle" onclick="toggleMobMenu()" id="mob-toggle">☰</div>
+    <div class="logo"><span class="cat-icon">🐱</span>MEOW<span class="ver">v2.1.1</span></div>
+    <div class="hdr-sep hdr-desktop"></div>
+    <span class="hdr-sub hdr-desktop">Purrrfect Language to Exist! lol</span>
+    <!-- Desktop actions -->
+    <div class="hdr-actions hdr-desktop">
+      <div class="theme-picker">
+        <label>THEME</label>
+        <div class="theme-dot" style="background:#ff8c42" data-theme="dark" title="Dark" onclick="setTheme('dark')">
+        </div>
+        <div class="theme-dot" style="background:#c85e1a" data-theme="light" title="Light" onclick="setTheme('light')">
+        </div>
+        <div class="theme-dot" style="background:#ffb86c" data-theme="dracula" title="Dracula"
+          onclick="setTheme('dracula')"></div>
+        <div class="theme-dot" style="background:#d08770" data-theme="nord" title="Nord" onclick="setTheme('nord')">
+        </div>
+        <div class="theme-dot" style="background:#ff0" data-theme="hc" title="High Contrast" onclick="setTheme('hc')">
+        </div>
+      </div>
+      <a class="btn btn-ghost btn-icon" style="text-decoration: none;" href="index.html" title="Documentation">Docs</a>
+      <button class="btn btn-ghost btn-icon" onclick="toggleFind()" title="Find (Ctrl+F)">🔍</button>
+      <button class="btn btn-ghost btn-icon" onclick="newFile()" title="New File">✨</button>
+      <button class="btn btn-ghost btn-icon" onclick="showRef()" title="Language Reference">🗒️</button>
+      <button class="btn btn-ghost btn-icon" onclick="clearOutput()" title="Clear Output">🗑</button>
+      <button class="btn btn-debug" onclick="runDebug()">⚙ Debug</button>
+      <button class="btn btn-run" onclick="runCode()">▶ Run</button>
+    </div>
+    <!-- Mobile: Run + Find always visible -->
+    <div style="display:flex;gap:6px;margin-left:auto" class="mob-hdr-btns">
+      <button class="btn btn-ghost btn-icon" onclick="toggleFind()" title="Find" style="display:none"
+        id="mob-find-btn">🔍</button>
+      <button class="btn btn-debug" onclick="runDebug();closeMobMenu()" id="mob-debug-btn"
+        style="display:none">⚙</button>
+      <button class="btn btn-run" onclick="runCode()" id="mob-run-btn" style="display:none">▶</button>
+    </div>
+  </div>
+
+  <!-- MOBILE DROPDOWN MENU -->
+  <div class="mob-menu" id="mob-menu">
+    <div class="mob-theme-row">
+      <label>Theme:</label>
+      <div class="theme-dot" style="background:#ff8c42" data-theme="dark" onclick="setTheme('dark');closeMobMenu()">
+      </div>
+      <div class="theme-dot" style="background:#c85e1a" data-theme="light" onclick="setTheme('light');closeMobMenu()">
+      </div>
+      <div class="theme-dot" style="background:#ffb86c" data-theme="dracula"
+        onclick="setTheme('dracula');closeMobMenu()"></div>
+      <div class="theme-dot" style="background:#d08770" data-theme="nord" onclick="setTheme('nord');closeMobMenu()">
+      </div>
+      <div class="theme-dot" style="background:#ff0" data-theme="hc" onclick="setTheme('hc');closeMobMenu()"></div>
+    </div>
+    <div class="mob-row">
+      <button class="btn btn-ghost" onclick="toggleSidebar();closeMobMenu()">📁 Menu</button>
+      <button class="btn btn-ghost" onclick="newFile();closeMobMenu()">✨ New</button>
+      <button class="btn btn-ghost" onclick="clearOutput();closeMobMenu()">🗑 Clear</button>
+      <button class="btn btn-orange3" onclick="showRef();closeMobMenu()">🗒️ Ref</button>
+    </div>
+  </div>
+  <div id="mob-overlay" onclick="closeMobMenu()" style="display:none;position:fixed;inset:0;z-index:199;"></div>
+
+  <!-- FIND/REPLACE BAR -->
+  <div class="find-bar" id="find-bar">
+    <input class="find-input" id="find-input" placeholder="Find…" oninput="doFind()" onkeydown="findKey(event)">
+    <button class="btn btn-ghost btn-icon" onclick="findPrev()">↑</button>
+    <button class="btn btn-ghost btn-icon" onclick="findNext()">↓</button>
+    <span class="find-count" id="find-count"></span>
+    <span class="find-toggle" id="find-case" onclick="toggleCase()" title="Case sensitive">Aa</span>
+    <div class="find-sep"></div>
+    <input class="find-input" id="replace-input" placeholder="Replace…" style="display:none">
+    <button class="btn btn-ghost" id="replace-btn" style="display:none;font-size:10px"
+      onclick="doReplace()">Replace</button>
+    <button class="btn btn-ghost" id="replace-all-btn" style="display:none;font-size:10px"
+      onclick="doReplaceAll()">All</button>
+    <span style="margin-left:auto;font-size:11px;color:var(--text3);cursor:pointer" onclick="closeFind()">✕</span>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar();closeMobMenu()"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-tabs">
+        <div class="sidebar-tab active" id="stab-files" onclick="switchSideTab('files')">📁 Files</div>
+        <div class="sidebar-tab" id="stab-snip" onclick="switchSideTab('snip')">🧩 Snippets</div>
+      </div>
+
+      <!-- FILES TAB -->
+      <div class="sidebar-body" id="sbody-files">
+        <div class="sidebar-section">
+          <div class="sidebar-title">
+            <span>📂 Open Files</span>
+            <button class="fi-btn" onclick="newFile()" title="New">＋</button>
+          </div>
+          <div id="file-tree"></div>
+          <div class="file-upload-area" onclick="document.getElementById('file-upload-input').click()">
+            📤 Upload .meow file
+            <input id="file-upload-input" type="file" accept=".meow,.txt" multiple onchange="uploadFiles(event)">
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">🐾 Examples</div>
+          <div class="example-item" onclick="loadExample('hello')">🐱 Hello World</div>
+          <div class="example-item" onclick="loadExample('fibonacci')">🔢 Fibonacci</div>
+          <div class="example-item" onclick="loadExample('fizzbuzz')">🎉 FizzBuzz</div>
+          <div class="example-item" onclick="loadExample('functions')">🪄 Functions</div>
+          <div class="example-item" onclick="loadExample('arrays')">📦 Arrays</div>
+          <div class="example-item" onclick="loadExample('dicts')">🗂 Dicts (den)</div>
+          <div class="example-item" onclick="loadExample('interp')">✨ Interpolation</div>
+          <div class="example-item" onclick="loadExample('catlife')">😺 Cat Life</div>
+          <div class="example-item" onclick="loadExample('bubbleSort')">🫧 Bubble Sort</div>
+          <div class="example-item" onclick="loadExample('fileops')">📄 File Ops</div>
+          <div class="example-item" onclick="loadExample('gui_counter')">🎨 GUI Counter</div>
+          <div class="example-item" onclick="loadExample('gui_profile')">👤 Cat Profile</div>
+        </div>
+      </div>
+
+      <!-- SNIPPETS TAB -->
+      <div class="sidebar-body" id="sbody-snip" style="display:none">
+        <div class="sidebar-section">
+          <div class="sidebar-title">🧩 Snippets <span style="font-size:8px;color:var(--text3)">(click to insert)</span>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('var')"><span>🟠</span>
+            <div>
+              <div class="sn-name">Variable</div>
+              <div class="sn-desc">purr x = val</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('print')"><span>🟢</span>
+            <div>
+              <div class="sn-name">Print</div>
+              <div class="sn-desc">meow "..."</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('if')"><span>🔵</span>
+            <div>
+              <div class="sn-name">If / Else</div>
+              <div class="sn-desc">psspss (...) { } else { }</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('elif')"><span>🔷</span>
+            <div>
+              <div class="sn-name">If / Elif / Else</div>
+              <div class="sn-desc">psspss / else psspss / else</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('while')"><span>🟣</span>
+            <div>
+              <div class="sn-name">While Loop</div>
+              <div class="sn-desc">stalk (cond) { }</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('for')"><span>🟡</span>
+            <div>
+              <div class="sn-name">For Loop</div>
+              <div class="sn-desc">pounce (i from 1 to 10)</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('func')"><span>🩷</span>
+            <div>
+              <div class="sn-name">Function</div>
+              <div class="sn-desc">claw name(args) { paw }</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('array')"><span>📦</span>
+            <div>
+              <div class="sn-name">Array</div>
+              <div class="sn-desc">purr arr = litter [...]</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('dict')"><span>🗂</span>
+            <div>
+              <div class="sn-name">Dictionary</div>
+              <div class="sn-desc">purr d = den {"k":v}</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('interp')"><span>✨</span>
+            <div>
+              <div class="sn-name">Interpolation</div>
+              <div class="sn-desc">meow "Hello ${name}!"</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('import')"><span>📥</span>
+            <div>
+              <div class="sn-name">Import</div>
+              <div class="sn-desc">import "filename"</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('gui_lbl')"><span>🖼️</span>
+            <div>
+              <div class="sn-name">GUI Label</div>
+              <div class="sn-desc">gui_label("...")</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('gui_btn')"><span>🖱️</span>
+            <div>
+              <div class="sn-name">GUI Button</div>
+              <div class="sn-desc">gui_button("txt", "fn")</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('gui_input')"><span>⌨️</span>
+            <div>
+              <div class="sn-name">GUI Input</div>
+              <div class="sn-desc">gui_input("hint", "var")</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('gui_layout')"><span>🔲</span>
+            <div>
+              <div class="sn-name">GUI Layout</div>
+              <div class="sn-desc">row/column/end</div>
+            </div>
+          </div>
+          <div class="snippet-item" onclick="insertSnippet('gui_slider')"><span>🎚️</span>
+            <div>
+              <div class="sn-name">GUI Slider</div>
+              <div class="sn-desc">gui_slider(min, max, var)</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">💡 Keywords</div>
+          <div>
+            <span class="keyword-chip" onclick="insertWord('purr ')">purr</span>
+            <span class="keyword-chip" onclick="insertWord('meow ')">meow</span>
+            <span class="keyword-chip" onclick="insertWord('psspss ')">psspss</span>
+            <span class="keyword-chip" onclick="insertWord('stalk ')">stalk</span>
+            <span class="keyword-chip" onclick="insertWord('pounce ')">pounce</span>
+            <span class="keyword-chip" onclick="insertWord('claw ')">claw</span>
+            <span class="keyword-chip" onclick="insertWord('paw ')">paw</span>
+            <span class="keyword-chip" style="color:var(--purple)" onclick="insertWord('pawsitive')">pawsitive</span>
+            <span class="keyword-chip" style="color:var(--purple)" onclick="insertWord('clawful')">clawful</span>
+            <span class="keyword-chip" style="color:var(--text3)" onclick="insertWord('nap')">nap</span>
+            <span class="keyword-chip" style="color:var(--orange3)" onclick="insertWord('litter []')">litter[]</span>
+            <span class="keyword-chip" style="color:var(--pink)" onclick="insertWord('den {}')">den{}</span>
+            <span class="keyword-chip" style="color:var(--blue)" onclick="insertWord('else ')">else</span>
+            <span class="keyword-chip" style="color:var(--blue)" onclick="insertWord(' and ')">and</span>
+            <span class="keyword-chip" style="color:var(--blue)" onclick="insertWord(' or ')">or</span>
+            <span class="keyword-chip" style="color:var(--blue)" onclick="insertWord('not ')">not</span>
+            <span class="keyword-chip" style="color:var(--red)" onclick="insertWord('scratch')">scratch</span>
+            <span class="keyword-chip" style="color:var(--green)" onclick="insertWord('knead')">knead</span>
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">🔧 Builtins</div>
+          <div class="builtin-item" onclick="insertWord('fur()')"><span class="bi-name">fur(x)</span>— length</div>
+          <div class="builtin-item" onclick="insertWord('whisker()')"><span class="bi-name">whisker(x)</span>— to string
+          </div>
+          <div class="builtin-item" onclick="insertWord('paw_num()')"><span class="bi-name">paw_num(x)</span>— to number
+          </div>
+          <div class="builtin-item" onclick="insertWord('chase(, )')"><span class="bi-name">chase(arr,v)</span>— push
+          </div>
+          <div class="builtin-item" onclick="insertWord('nuzzle(, )')"><span class="bi-name">nuzzle(arr,s)</span>— join
+          </div>
+          <div class="builtin-item" onclick="insertWord('ask()')"><span class="bi-name">ask(prompt)</span>— input</div>
+          <div class="builtin-item" onclick="insertWord('keys()')"><span class="bi-name">keys(dict)</span>— dict keys
+          </div>
+          <div class="builtin-item" onclick="insertWord('values()')"><span class="bi-name">values(dict)</span>— dict
+            vals</div>
+          <div class="builtin-item" onclick="insertWord('has(, )')"><span class="bi-name">has(dict,k)</span>— has key
+          </div>
+          <div class="builtin-item" onclick="insertWord('del_key(, )')"><span class="bi-name">del_key(d,k)</span>—
+            remove key</div>
+          <div class="builtin-item" onclick="insertWord('read_file()')"><span class="bi-name">read_file(n)</span>— read
+            tab</div>
+          <div class="builtin-item" onclick="insertWord('write_file(, )')"><span class="bi-name">write_file(n,s)</span>—
+            write tab</div>
+          <div class="builtin-item" onclick="insertWord('catnap()')"><span class="bi-name">catnap(n)</span>— random
+          </div>
+          <div class="builtin-item" onclick="insertWord('kibble()')"><span class="bi-name">kibble(x)</span>— floor</div>
+          <div class="builtin-item" onclick="insertWord('treat()')"><span class="bi-name">treat(x)</span>— round</div>
+          <div class="builtin-item" onclick="insertWord('pounce_sqrt()')"><span class="bi-name">pounce_sqrt(x)</span>—
+            sqrt</div>
+          <div class="builtin-item" onclick="insertWord('sniff()')"><span class="bi-name">sniff(x)</span>— typeof</div>
+          <div class="builtin-item" onclick="insertWord('gui_label()')"><span class="bi-name">gui_label(t)</span>— add
+            text</div>
+          <div class="builtin-item" onclick="insertWord('gui_button(, )')"><span class="bi-name">gui_button(t,f)</span>—
+            add button</div>
+          <div class="builtin-item" onclick="insertWord('gui_input(, )')"><span class="bi-name">gui_input(p,v)</span>—
+            add input</div>
+          <div class="builtin-item" onclick="insertWord('gui_show_modal()')"><span class="bi-name">gui_modal(t)</span>—
+            show overlay</div>
+          <div class="builtin-item" onclick="insertWord('gui_row()')"><span class="bi-name">gui_row()</span>— start row
+          </div>
+          <div class="builtin-item" onclick="insertWord('gui_column()')"><span class="bi-name">gui_column()</span>—
+            start column</div>
+          <div class="builtin-item" onclick="insertWord('gui_end()')"><span class="bi-name">gui_end()</span>— end layout
+          </div>
+          <div class="builtin-item" onclick="insertWord('gui_image(, , )')"><span
+              class="bi-name">gui_image(u,w,h)</span>— img</div>
+          <div class="builtin-item" onclick="insertWord('gui_slider(, , )')"><span
+              class="bi-name">gui_slider(m,M,v)</span>— slider</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR AREA -->
+    <div class="editor-area">
+      <div class="editor-tabs" id="editor-tabs">
+        <div class="tab-add" id="tab-add-btn" onclick="newFile()">＋</div>
+      </div>
+      <div class="editor-body">
+        <div class="editor-wrapper">
+          <div class="line-numbers" id="line-numbers">1</div>
+          <div class="editor-inner" id="editor-inner">
+            <div class="editor-placeholder" id="editor-placeholder"># Start typing MEOW code…
+              # Click a snippet or keyword to insert it!</div>
+            <div class="highlight-layer" id="highlight-layer"></div>
+            <textarea id="code-editor" spellcheck="false" autocomplete="off" autocorrect="off"
+              autocapitalize="off"></textarea>
+          </div>
+        </div>
+        <div class="minimap-panel" id="minimap-panel">
+          <canvas id="minimap-canvas" width="100"></canvas>
+          <div class="minimap-viewport" id="minimap-viewport"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="panel-tabs">
+        <div class="panel-tab active" data-panel="output" onclick="switchPanel('output')">Output</div>
+        <div class="panel-tab" data-panel="vars" onclick="switchPanel('vars')">Variables</div>
+        <div class="panel-tab" data-panel="history" onclick="switchPanel('history')">History<span class="badge"
+            id="hist-badge" style="display:none"></span></div>
+        <div class="panel-tab" data-panel="debug" onclick="switchPanel('debug')">Debug</div>
+      </div>
+      <div class="panel-body">
+        <!-- OUTPUT -->
+        <div class="panel-view active" id="panel-output">
+          <div class="panel-header">
+            <span>
+              <div class="status-dot" id="status-dot"></div> Output
+            </span>
+            <span id="exec-time" style="font-size:10px;color:var(--text3)"></span>
+          </div>
+          <div id="output" style="flex:1;overflow-y:auto;padding:12px">
+            <div class="output-placeholder">🐱 Press <span style="color:var(--orange)">▶ Run</span> to execute.</div>
+          </div>
+        </div>
+        <!-- VARIABLES -->
+        <div class="panel-view" id="panel-vars">
+          <div class="panel-header"><span>🔬 Variable Inspector</span><span id="var-count"
+              style="font-size:10px"></span></div>
+          <div id="vars-content" style="flex:1;overflow-y:auto;padding:8px">
+            <div class="output-placeholder" style="font-size:11px">Run code to inspect variables.</div>
+          </div>
+        </div>
+        <!-- HISTORY -->
+        <div class="panel-view" id="panel-history">
+          <div class="panel-header"><span>📜 Run History</span><button class="fi-btn"
+              onclick="clearHistory()">Clear</button></div>
+          <div id="history-content" style="flex:1;overflow-y:auto;padding:8px">
+            <div class="output-placeholder" style="font-size:11px">No runs yet.</div>
+          </div>
+        </div>
+        <!-- DEBUG -->
+        <div class="panel-view" id="panel-debug">
+          <div class="debug-controls">
+            <button class="debug-step" id="dbg-prev" onclick="debugStep(-1)" disabled>⏮ Prev</button>
+            <button class="debug-step" id="dbg-next" onclick="debugStep(1)" disabled>Next ⏭</button>
+            <input type="range" class="debug-slider" id="dbg-slider" min="0" value="0" oninput="debugJump(+this.value)"
+              disabled>
+            <span class="debug-pos" id="dbg-pos">—</span>
+          </div>
+          <div id="debug-content" style="flex:1;overflow-y:auto;padding:8px">
+            <div class="output-placeholder" style="font-size:11px">Click <b style="color:var(--purple)">⚙ Debug</b> to
+              trace execution.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAT WALKER STRIP -->
+  <div class="cat-strip" id="cat-strip">
+    <div id="cat-walker">
+      <img id="catSprite" src="cat/cat1.png" alt="">
+    </div>
+    <div id="cat-bubble">meowww</div>
+  </div>
+
+  <!-- FLOATING GUI OVERLAY -->
+  <div id="gui-floating-container">
+    <div class="gui-floating-header" id="gui-drag-handle">
+      <span style="font-size:11px; font-weight:700; color:var(--orange);">🎨 LIVE GUI PREVIEW</span>
+      <button class="gui-floating-close" onclick="closeGuiOverlay()">✕</button>
+    </div>
+    <div id="gui-canvas" class="gui-canvas"></div>
+    <div id="gui-overlay" class="gui-overlay">
+      <div id="gui-modal" class="gui-modal"></div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <span>🐱 MEOW <span class="accent">v2.1.1</span> by <span class="accent"><a style="color: var(--orange);"
+          href="https://linkedin.com/in/rakshitdogra">rakshitdogra</a></span></span>
+    <span>
+      <div class="status-dot" id="sb-dot"></div>
+    </span>
+    <span>Ln <span class="accent" id="sb-line">1</span> Col <span class="accent" id="sb-col">1</span></span>
+    <span id="sb-count"></span>
+    <span class="sb-shortcuts">Ctrl+Enter:Run | Ctrl+F:Find | Ctrl+S:Save</span>
+  </div>
+
+  <!-- REF MODAL -->
+  <div class="modal-overlay" id="ref-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeRef()">✕</button>
+      <h2>🐱 MEOW v2.1.1 Language Reference</h2>
+      <div class="kw-grid" style="margin-bottom:18px">
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">purr</div>
+          <div class="kd">Declare variable</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">meow</div>
+          <div class="kd">Print output</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">psspss</div>
+          <div class="kd">If statement</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">else psspss</div>
+          <div class="kd">Elif (else-if)</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">else</div>
+          <div class="kd">Else branch</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">stalk</div>
+          <div class="kd">While loop</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">pounce</div>
+          <div class="kd">For range loop</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">claw</div>
+          <div class="kd">Define function</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">paw</div>
+          <div class="kd">Return value</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">litter</div>
+          <div class="kd">Create array</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--pink)">den</div>
+          <div class="kd">Create dictionary</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--orange)">import</div>
+          <div class="kd">Import another file</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--purple)">pawsitive</div>
+          <div class="kd">Boolean true</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--purple)">clawful</div>
+          <div class="kd">Boolean false</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--text3)">nap</div>
+          <div class="kd">Null value</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--red)">scratch</div>
+          <div class="kd">Break loop</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--green)">knead</div>
+          <div class="kd">Continue loop</div>
+        </div>
+        <div class="kw-card">
+          <div class="kn" style="color:var(--blue)">and / or / not</div>
+          <div class="kd">Logic operators</div>
+        </div>
+      </div>
+      <div
+        style="background:var(--bg3);border-radius:6px;padding:12px;font-size:11px;line-height:1.9;border:1px solid var(--border);margin-bottom:14px">
+        <div><span style="color:var(--orange2)">String interpolation:</span> <span style="color:var(--green)">meow
+            "Hello ${name}!"</span></div>
+        <div><span style="color:var(--orange2)">Dictionary:</span> <span style="color:var(--pink)">purr d = den { "key":
+            value }</span></div>
+        <div><span style="color:var(--orange2)">Dict access:</span> <span style="color:var(--text2)">d["key"]</span>
+          &nbsp; <span style="color:var(--orange2)">Dict assign:</span> <span style="color:var(--text2)">d["key"] =
+            val</span></div>
+        <div><span style="color:var(--orange2)">Console input:</span> <span style="color:var(--text2)">purr name =
+            ask("Enter name: ")</span></div>
+        <div><span style="color:var(--orange2)">Import file:</span> <span style="color:var(--text2)">import
+            "utils"</span></div>
+        <div><span style="color:var(--orange2)">File ops:</span> <span
+            style="color:var(--text2)">read_file("data.txt")</span> &nbsp; <span
+            style="color:var(--text2)">write_file("out.txt", content)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT MODAL -->
+  <div class="modal-overlay" id="input-modal">
+    <div class="input-modal">
+      <h3 id="input-prompt">Enter value:</h3>
+      <input id="input-field" type="text" placeholder="Type here…" onkeydown="if(event.key==='Enter')submitInput()">
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="submitInput('')">Cancel</button>
+        <button class="btn btn-run" onclick="submitInput()">OK 🐾</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="insert-toast" id="insert-toast"></div>
+
+  <script>
+
+    // ============================================================
+    // MEOW v2 — LEXER
+    // ============================================================
+    const KEYWORDS = {
+      'purr': 'PURR', 'meow': 'MEOW', 'psspss': 'psspss', 'else': 'ELSE',
+      'stalk': 'STALK', 'pounce': 'POUNCE', 'claw': 'CLAW', 'paw': 'PAW',
+      'from': 'FROM', 'to': 'TO', 'litter': 'LITTER', 'den': 'DEN',
+      'import': 'IMPORT',
+      'pawsitive': 'PAWSITIVE', 'clawful': 'CLAWFUL', 'nap': 'NAP',
+      'and': 'AND', 'or': 'OR', 'not': 'NOT', 'scratch': 'SCRATCH', 'knead': 'KNEAD'
+    };
+
+    class Lexer {
+      constructor(src) { this.src = src; this.pos = 0; this.line = 1; this.col = 1; }
+      tokenize() {
+        const tokens = [];
+        while (this.pos < this.src.length) {
+          this.skipWS();
+          if (this.pos >= this.src.length) break;
+          const ch = this.src[this.pos];
+          if (ch === '#') { while (this.pos < this.src.length && this.src[this.pos] !== '\n') this.pos++; continue; }
+          if (ch === '"' || ch === "'") { tokens.push(this.readStr(ch)); continue; }
+          if (/\d/.test(ch)) { tokens.push(this.readNum()); continue; }
+          if (/[a-zA-Z_]/.test(ch)) { tokens.push(this.readIdent()); continue; }
+          const l = this.line, c = this.col, n = this.src[this.pos + 1];
+          if (ch === '+' && n === '+') { tokens.push({ t: 'PLUSPLUS', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '-' && n === '-') { tokens.push({ t: 'MINUSMINUS', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '+') { tokens.push({ t: 'PLUS', l, c }); this.pos++; this.col++; }
+          else if (ch === '-') { tokens.push({ t: 'MINUS', l, c }); this.pos++; this.col++; }
+          else if (ch === '*') { tokens.push({ t: 'MUL', l, c }); this.pos++; this.col++; }
+          else if (ch === '/') { tokens.push({ t: 'DIV', l, c }); this.pos++; this.col++; }
+          else if (ch === '%') { tokens.push({ t: 'MOD', l, c }); this.pos++; this.col++; }
+          else if (ch === '(') { tokens.push({ t: 'LP', l, c }); this.pos++; this.col++; }
+          else if (ch === ')') { tokens.push({ t: 'RP', l, c }); this.pos++; this.col++; }
+          else if (ch === '{') { tokens.push({ t: 'LB', l, c }); this.pos++; this.col++; }
+          else if (ch === '}') { tokens.push({ t: 'RB', l, c }); this.pos++; this.col++; }
+          else if (ch === '[') { tokens.push({ t: 'LBK', l, c }); this.pos++; this.col++; }
+          else if (ch === ']') { tokens.push({ t: 'RBK', l, c }); this.pos++; this.col++; }
+          else if (ch === ',') { tokens.push({ t: 'COMMA', l, c }); this.pos++; this.col++; }
+          else if (ch === ':' && n !== '=') { tokens.push({ t: 'COLON', l, c }); this.pos++; this.col++; }
+          else if (ch === '=' && n === '=') { tokens.push({ t: 'EQ', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '=' && n !== '=') { tokens.push({ t: 'ASSIGN', l, c }); this.pos++; this.col++; }
+          else if (ch === '!' && n === '=') { tokens.push({ t: 'NEQ', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '<' && n === '=') { tokens.push({ t: 'LTE', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '<') { tokens.push({ t: 'LT', l, c }); this.pos++; this.col++; }
+          else if (ch === '>' && n === '=') { tokens.push({ t: 'GTE', l, c }); this.pos += 2; this.col += 2; }
+          else if (ch === '>') { tokens.push({ t: 'GT', l, c }); this.pos++; this.col++; }
+          else if (ch === '+' && n === '=') { tokens.push({ t: 'PLUSASSIGN', l, c }); this.pos += 2; this.col += 2; }
+          else throw new Error(`Unexpected char '${ch}' at line ${l}`);
+        }
+        tokens.push({ t: 'EOF', l: this.line, c: this.col });
+        return tokens;
+      }
+      skipWS() {
+        while (this.pos < this.src.length && /\s/.test(this.src[this.pos])) {
+          if (this.src[this.pos] === '\n') { this.line++; this.col = 1; } else this.col++;
+          this.pos++;
+        }
+      }
+      readStr(q) {
+        const l = this.line, c = this.col; this.pos++; this.col++;
+        let v = '';
+        while (this.pos < this.src.length && this.src[this.pos] !== q) {
+          if (this.src[this.pos] === '\\') {
+            this.pos++; this.col++;
+            const e = this.src[this.pos];
+            v += (e === 'n' ? '\n' : e === 't' ? '\t' : e === 'r' ? '\r' : e);
+          } else v += this.src[this.pos];
+          this.pos++; this.col++;
+        }
+        if (this.pos < this.src.length) { this.pos++; this.col++; }
+        return { t: 'STR', v, l, c };
+      }
+      readNum() {
+        const l = this.line, c = this.col; let s = '';
+        while (this.pos < this.src.length && /[\d.]/.test(this.src[this.pos])) { s += this.src[this.pos]; this.pos++; this.col++; }
+        return { t: 'NUM', v: parseFloat(s), l, c };
+      }
+      readIdent() {
+        const l = this.line, c = this.col; let s = '';
+        while (this.pos < this.src.length && /[a-zA-Z0-9_]/.test(this.src[this.pos])) { s += this.src[this.pos]; this.pos++; this.col++; }
+        const t = KEYWORDS[s] || 'IDENT';
+        return { t, v: s, l, c };
+      }
+    }
+
+    // ============================================================
+    // MEOW v2 — PARSER
+    // ============================================================
+    class Parser {
+      constructor(tokens) { this.tok = tokens; this.pos = 0; }
+      peek() { return this.tok[this.pos]; }
+      adv() { return this.tok[this.pos++]; }
+      check(t) { return this.peek().t === t; }
+      expect(t) {
+        const tk = this.adv();
+        if (tk.t !== t) throw new Error(`Expected ${t} got '${tk.v || tk.t}' at line ${tk.l}`);
+        return tk;
+      }
+      parse() {
+        const stmts = [];
+        while (!this.check('EOF')) stmts.push(this.stmt());
+        return { T: 'Prog', stmts };
+      }
+
+      stmt() {
+        const t = this.peek();
+        const t2 = this.tok[this.pos + 1];
+
+        // import "file"
+        if (t.t === 'IMPORT') { this.adv(); const f = this.expect('STR').v; return { T: 'Import', file: f, line: t.l }; }
+
+        // IDENT = expr  or  IDENT[idx] = expr
+        if (t.t === 'IDENT' && t2?.t === 'ASSIGN') {
+          const name = this.adv().v; this.adv();
+          return { T: 'Assign', name, val: this.expr(), line: t.l };
+        }
+        if (t.t === 'IDENT' && t2?.t === 'LBK') {
+          // check if it's IDENT[idx] = (index assign)
+          if (this.isIdxAssign()) {
+            const name = this.adv().v; this.adv();
+            const idx = this.expr(); this.expect('RBK'); this.expect('ASSIGN');
+            return { T: 'IdxAssign', name, idx, val: this.expr(), line: t.l };
+          }
+        }
+        // += shorthand
+        if (t.t === 'IDENT' && t2?.t === 'PLUSASSIGN') {
+          const name = this.adv().v; this.adv();
+          return { T: 'Assign', name, val: { T: 'Bin', op: '+', l: { T: 'Id', name }, r: this.expr() }, line: t.l };
+        }
+
+        switch (t.t) {
+          case 'PURR': { this.adv(); const name = this.expect('IDENT').v; this.expect('ASSIGN'); return { T: 'Decl', name, val: this.expr(), line: t.l }; }
+          case 'MEOW': { this.adv(); return { T: 'Print', e: this.expr(), line: t.l }; }
+          case 'psspss': return this.ifStmt();
+          case 'STALK': return this.whileStmt();
+          case 'POUNCE': return this.forStmt();
+          case 'CLAW': return this.funcDecl();
+          case 'PAW': { this.adv(); return { T: 'Ret', e: this.expr(), line: t.l }; }
+          case 'SCRATCH': { this.adv(); return { T: 'Brk', line: t.l }; }
+          case 'KNEAD': { this.adv(); return { T: 'Cont', line: t.l }; }
+          default: return { T: 'ExprS', e: this.expr(), line: t.l };
+        }
+      }
+
+      isIdxAssign() {
+        let depth = 0, i = this.pos + 1;
+        while (i < this.tok.length) {
+          if (this.tok[i].t === 'LBK') depth++;
+          else if (this.tok[i].t === 'RBK') { depth--; if (depth === 0) break; }
+          i++;
+        }
+        return this.tok[i + 1]?.t === 'ASSIGN';
+      }
+
+      ifStmt() {
+        const l = this.peek().l; this.adv(); this.expect('LP');
+        const cond = this.expr(); this.expect('RP');
+        const body = this.block();
+        let eb = null;
+        if (this.check('ELSE')) {
+          this.adv();
+          eb = this.check('psspss') ? [this.ifStmt()] : this.block();
+        }
+        return { T: 'If', cond, body, eb, line: l };
+      }
+      whileStmt() {
+        const l = this.peek().l; this.adv(); this.expect('LP');
+        const cond = this.expr(); this.expect('RP');
+        return { T: 'While', cond, body: this.block(), line: l };
+      }
+      forStmt() {
+        const l = this.peek().l; this.adv(); this.expect('LP');
+        const vn = this.expect('IDENT').v; this.expect('FROM');
+        const from = this.expr(); this.expect('TO');
+        const to = this.expr(); this.expect('RP');
+        return { T: 'For', vn, from, to, body: this.block(), line: l };
+      }
+      funcDecl() {
+        const l = this.peek().l; this.adv();
+        const name = this.expect('IDENT').v; this.expect('LP');
+        const params = [];
+        while (!this.check('RP')) { params.push(this.expect('IDENT').v); if (!this.check('RP')) this.expect('COMMA'); }
+        this.expect('RP');
+        return { T: 'Func', name, params, body: this.block(), line: l };
+      }
+      block() {
+        this.expect('LB'); const stmts = [];
+        while (!this.check('RB') && !this.check('EOF')) stmts.push(this.stmt());
+        this.expect('RB'); return stmts;
+      }
+      expr() { return this.or(); }
+      or() { let l = this.and(); while (this.check('OR')) { this.adv(); l = { T: 'Bin', op: 'or', l, r: this.and() }; } return l; }
+      and() { let l = this.eq(); while (this.check('AND')) { this.adv(); l = { T: 'Bin', op: 'and', l, r: this.eq() }; } return l; }
+      eq() {
+        let l = this.cmp();
+        while (this.check('EQ') || this.check('NEQ')) {
+          const op = this.adv().t === 'EQ' ? '==' : '!='; l = { T: 'Bin', op, l, r: this.cmp() };
+        } return l;
+      }
+      cmp() {
+        let l = this.add(); const ops = { LT: '<', GT: '>', LTE: '<=', GTE: '>=' };
+        while (ops[this.peek().t]) { const op = ops[this.adv().t]; l = { T: 'Bin', op, l, r: this.add() }; } return l;
+      }
+      add() {
+        let l = this.mul();
+        while (this.check('PLUS') || this.check('MINUS')) {
+          const op = this.adv().t === 'PLUS' ? '+' : '-'; l = { T: 'Bin', op, l, r: this.mul() };
+        } return l;
+      }
+      mul() {
+        let l = this.unary(); const ops = { MUL: '*', DIV: '/', MOD: '%' };
+        while (ops[this.peek().t]) { const op = ops[this.adv().t]; l = { T: 'Bin', op, l, r: this.unary() }; } return l;
+      }
+      unary() {
+        if (this.check('NOT')) { this.adv(); return { T: 'Unary', op: 'not', e: this.unary() }; }
+        if (this.check('MINUS')) { this.adv(); return { T: 'Unary', op: '-', e: this.unary() }; }
+        return this.postfix();
+      }
+      postfix() {
+        let e = this.primary();
+        while (this.check('LBK')) {
+          this.adv(); const idx = this.expr(); this.expect('RBK');
+          e = { T: 'Idx', obj: e, idx };
+        }
+        return e;
+      }
+      primary() {
+        const t = this.peek();
+        switch (t.t) {
+          case 'NUM': this.adv(); return { T: 'Lit', v: t.v };
+          case 'STR': this.adv(); return { T: 'Lit', v: t.v };
+          case 'PAWSITIVE': this.adv(); return { T: 'Lit', v: true };
+          case 'CLAWFUL': this.adv(); return { T: 'Lit', v: false };
+          case 'NAP': this.adv(); return { T: 'Lit', v: null };
+          case 'LP': { this.adv(); const e = this.expr(); this.expect('RP'); return e; }
+          case 'LITTER': {
+            this.adv(); this.expect('LBK');
+            const els = [];
+            while (!this.check('RBK')) { els.push(this.expr()); if (!this.check('RBK')) this.expect('COMMA'); }
+            this.expect('RBK'); return { T: 'Arr', els };
+          }
+          case 'DEN': {
+            this.adv(); this.expect('LB');
+            const pairs = [];
+            while (!this.check('RB')) {
+              const k = this.expr(); this.expect('COLON'); const v = this.expr();
+              pairs.push({ k, v });
+              if (!this.check('RB')) this.expect('COMMA');
+            }
+            this.expect('RB'); return { T: 'Dict', pairs };
+          }
+          case 'IDENT': {
+            this.adv();
+            if (this.check('LP')) {
+              this.adv(); const args = [];
+              while (!this.check('RP')) { args.push(this.expr()); if (!this.check('RP')) this.expect('COMMA'); }
+              this.expect('RP'); return { T: 'Call', name: t.v, args };
+            }
+            return { T: 'Id', name: t.v };
+          }
+          default: throw new Error(`Unexpected '${t.v || t.t}' at line ${t.l}`);
+        }
+      }
+    }
+
+    // ============================================================
+    // MEOW v2 — INTERPRETER
+    // ============================================================
+    class MeowError extends Error { constructor(m) { super(m); this.name = 'MeowError'; } }
+    class ReturnSig { constructor(v) { this.v = v; } }
+    class BreakSig { }
+    class ContinueSig { }
+
+    function meowStr(v) {
+      if (v === null) return 'nap';
+      if (v === true) return 'pawsitive';
+      if (v === false) return 'clawful';
+      if (Array.isArray(v)) return '[' + v.map(meowStr).join(', ') + ']';
+      if (v && v.__dict) return '{' + Object.keys(v).filter(k => k !== '__dict').map(k => `"${k}": ${meowStr(v[k])}`).join(', ') + '}';
+      return String(v);
+    }
+
+    function meowType(v) {
+      if (v === null) return 'null';
+      if (v === true || v === false) return 'bool';
+      if (typeof v === 'number') return 'number';
+      if (typeof v === 'string') return 'string';
+      if (Array.isArray(v)) return 'array';
+      if (v && v.__dict) return 'dict';
+      if (v && v.__fn) return 'function';
+      return typeof v;
+    }
+
+    class Interpreter {
+      constructor(opts = {}) {
+        this.output = [];
+        this.callStack = [];
+        this.trace = [];
+        this.traceMode = false;
+        this.finalEnv = null;
+        this.getTabs = opts.getTabs || (() => []);
+        this.writeTabs = opts.writeTabs || (() => { });
+      }
+
+      run(ast) {
+        this.output = []; this.callStack = []; this.trace = []; this.finalEnv = null;
+        const env = Object.create(null);
+        try { this.block(ast.stmts, env); }
+        catch (e) { if (e instanceof ReturnSig) { } else throw e; }
+        this.finalEnv = env;
+        return this.output;
+      }
+
+      recordTrace(s, env) {
+        if (!this.traceMode) return;
+        const vars = this.snapVars(env);
+        this.trace.push({
+          line: s.line || 0,
+          event: s.T,
+          vars,
+          output: [...this.output],
+          stack: [...this.callStack.map(f => f.name)]
+        });
+      }
+
+      snapVars(env) {
+        const out = {}; let e = env;
+        while (e !== null) {
+          for (const k of Object.getOwnPropertyNames(e)) {
+            if (!(k in out) && !k.startsWith('__')) out[k] = e[k];
+          }
+          e = Object.getPrototypeOf(e);
+        }
+        return out;
+      }
+
+      block(stmts, env) { for (const s of stmts) this.exec(s, env); }
+
+      exec(s, env) {
+        this.recordTrace(s, env);
+        switch (s.T) {
+          case 'Decl': env[s.name] = this.eval(s.val, env); break;
+          case 'Assign': {
+            const v = this.eval(s.val, env);
+            let e = env;
+            while (e !== null) {
+              if (Object.prototype.hasOwnProperty.call(e, s.name)) { e[s.name] = v; return; }
+              e = Object.getPrototypeOf(e);
+            }
+            env[s.name] = v; break;
+          }
+          case 'IdxAssign': {
+            const obj = this.lookup(s.name, env);
+            const idx = this.eval(s.idx, env);
+            if (obj == null) throw new MeowError(`Cannot index nap`);
+            obj[idx] = this.eval(s.val, env);
+            break;
+          }
+          case 'Print': this.output.push(meowStr(this.eval(s.e, env))); break;
+          case 'If': {
+            if (this.truthy(this.eval(s.cond, env))) { this.block(s.body, Object.create(env)); }
+            else if (s.eb) { this.block(s.eb, Object.create(env)); }
+            break;
+          }
+          case 'While': {
+            let itr = 0;
+            while (this.truthy(this.eval(s.cond, env))) {
+              if (++itr > 200000) throw new MeowError('Infinite loop detected (>200k iterations)');
+              try { this.block(s.body, Object.create(env)); }
+              catch (e) { if (e instanceof BreakSig) break; if (e instanceof ContinueSig) continue; throw e; }
+            } break;
+          }
+          case 'For': {
+            const from = this.eval(s.from, env), to = this.eval(s.to, env);
+            for (let i = from; i <= to; i++) {
+              const e2 = Object.create(env); e2[s.vn] = i;
+              try { this.block(s.body, e2); }
+              catch (e) { if (e instanceof BreakSig) break; if (e instanceof ContinueSig) continue; throw e; }
+            } break;
+          }
+          case 'Func': env[s.name] = { __fn: true, params: s.params, body: s.body, closure: env, name: s.name }; break;
+          case 'Ret': throw new ReturnSig(this.eval(s.e, env));
+          case 'Brk': throw new BreakSig();
+          case 'Cont': throw new ContinueSig();
+          case 'Import': {
+            const tabName = s.file.endsWith('.meow') ? s.file : s.file + '.meow';
+            const allTabs = this.getTabs();
+            const tab = allTabs.find(t => t.name === tabName) || allTabs.find(t => t.name === s.file);
+            if (!tab) throw new MeowError(`Cannot import '${s.file}': file not found. Is the tab open?`);
+            const tokens = new Lexer(tab.content).tokenize();
+            const ast = new Parser(tokens).parse();
+            this.block(ast.stmts, env);
+            break;
+          }
+          case 'ExprS': this.eval(s.e, env); break;
+        }
+      }
+
+      lookup(name, env) {
+        let e = env;
+        while (e !== null) {
+          if (Object.prototype.hasOwnProperty.call(e, name)) return e[name];
+          e = Object.getPrototypeOf(e);
+        }
+        throw new MeowError(`Unknown variable: '${name}' 😿`);
+      }
+
+      interpolate(s, env) {
+        return s.replace(/\$\{([^}]+)\}/g, (_, expr) => {
+          try {
+            const toks = new Lexer(expr).tokenize();
+            const p = new Parser(toks);
+            const node = p.expr();
+            return meowStr(this.eval(node, env));
+          } catch { return `\${${expr}}`; }
+        });
+      }
+
+      eval(e, env) {
+        switch (e.T) {
+          case 'Lit': {
+            if (typeof e.v === 'string' && e.v.includes('${')) { return this.interpolate(e.v, env); }
+            return e.v;
+          }
+          case 'Id': return this.lookup(e.name, env);
+          case 'Arr': return e.els.map(x => this.eval(x, env));
+          case 'Dict': {
+            const d = { __dict: true };
+            for (const p of e.pairs) d[meowStr(this.eval(p.k, env)).replace(/^"|"$/g, '')] = this.eval(p.v, env);
+            return d;
+          }
+          case 'Idx': {
+            const obj = this.eval(e.obj, env);
+            const idx = this.eval(e.idx, env);
+            if (obj == null) throw new MeowError('Cannot index nap (null)');
+            if (obj.__dict) return obj[idx] ?? null;
+            if (typeof idx === 'number' && (idx < 0 || idx >= obj.length))
+              throw new MeowError(`Index ${idx} out of bounds (length ${obj.length})`);
+            return obj[idx] ?? null;
+          }
+          case 'Unary': {
+            const v = this.eval(e.e, env);
+            if (e.op === 'not') return !this.truthy(v);
+            if (e.op === '-') return -v;
+            break;
+          }
+          case 'Bin': {
+            if (e.op === 'and') { const l = this.eval(e.l, env); return this.truthy(l) ? this.eval(e.r, env) : l; }
+            if (e.op === 'or') { const l = this.eval(e.l, env); return this.truthy(l) ? l : this.eval(e.r, env); }
+            const l = this.eval(e.l, env), r = this.eval(e.r, env);
+            switch (e.op) {
+              case '+': return (typeof l === 'string' || typeof r === 'string') ? String(l) + String(r) : l + r;
+              case '-': return l - r; case '*': return l * r;
+              case '/': if (r === 0) throw new MeowError('Division by zero!'); return l / r;
+              case '%': return l % r;
+              case '==': return l === r; case '!=': return l !== r;
+              case '<': return l < r; case '>': return l > r; case '<=': return l <= r; case '>=': return l >= r;
+            }break;
+          }
+          case 'Call': {
+            const args = e.args.map(a => this.eval(a, env));
+            // builtins
+            const bi = this.builtin(e.name, args, env);
+            if (bi !== undefined) return bi;
+            const fn = this.lookup(e.name, env);
+            if (!fn || !fn.__fn) throw new MeowError(`'${e.name}' is not a function`);
+            this.callStack.push({ name: e.name, line: e.line || 0 });
+            const ce = Object.create(fn.closure);
+            fn.params.forEach((p, i) => ce[p] = args[i] ?? null);
+            let result = null;
+            try { this.block(fn.body, ce); }
+            catch (ex) { if (ex instanceof ReturnSig) { result = ex.v; } else { this.callStack.pop(); throw ex; } }
+            this.callStack.pop();
+            return result;
+          }
+        }
+        return null;
+      }
+
+      builtin(name, args, env) {
+        const getTabs = this.getTabs; const writeTabs = this.writeTabs;
+        switch (name) {
+          case 'fur': return args[0]?.length ?? 0;
+          case 'whisker': return meowStr(args[0]);
+          case 'paw_num': return Number(args[0]);
+          case 'chase': args[0].push(args[1]); return args[0];
+          case 'nuzzle': return args[0].join(args[1] !== undefined ? args[1] : ', ');
+          case 'sniff': return meowType(args[0]);
+          case 'catnap': return Math.floor(Math.random() * args[0]);
+          case 'kibble': return Math.floor(args[0]);
+          case 'treat': return Math.round(args[0]);
+          case 'claw_up': return Math.ceil(args[0]);
+          case 'pounce_sqrt': return Math.sqrt(args[0]);
+          case 'meow_upper': return String(args[0]).toUpperCase();
+          case 'meow_lower': return String(args[0]).toLowerCase();
+          case 'scratch_split': return String(args[0]).split(args[1] ?? '');
+          case 'tail_slice': return args[0].slice(args[1], args[2]);
+          case 'ask': {
+            const prompt = meowStr(args[0] ?? 'Enter value:');
+            const result = window.prompt(prompt) ?? '';
+            return result;
+          }
+          case 'keys': {
+            const d = args[0]; if (!d || !d.__dict) throw new MeowError('keys() requires a dict');
+            return Object.keys(d).filter(k => k !== '__dict');
+          }
+          case 'values': {
+            const d = args[0]; if (!d || !d.__dict) throw new MeowError('values() requires a dict');
+            return Object.keys(d).filter(k => k !== '__dict').map(k => d[k]);
+          }
+          case 'has': {
+            const d = args[0]; if (!d || !d.__dict) throw new MeowError('has() requires a dict');
+            return Object.prototype.hasOwnProperty.call(d, args[1]) && args[1] !== '__dict';
+          }
+          case 'del_key': {
+            const d = args[0]; if (!d || !d.__dict) throw new MeowError('del_key() requires a dict');
+            delete d[args[1]]; return d;
+          }
+          case 'read_file': {
+            const fname = String(args[0]);
+            const allTabs = getTabs();
+            const tab = allTabs.find(t => t.name === fname) || allTabs.find(t => t.name === fname + '.meow');
+            if (!tab) throw new MeowError(`read_file: file '${fname}' not found`);
+            return tab.content;
+          }
+          case 'write_file': {
+            const fname = String(args[0]), content = String(args[1] ?? '');
+            writeTabs(fname, content);
+            return true;
+          }
+          case 'pop': { if (!Array.isArray(args[0])) throw new MeowError('pop() needs array'); return args[0].pop() ?? null; }
+          case 'sort': { if (!Array.isArray(args[0])) throw new MeowError('sort() needs array'); return [...args[0]].sort((a, b) => a - b); }
+          case 'reverse': { if (!Array.isArray(args[0])) throw new MeowError('reverse() needs array'); return [...args[0]].reverse(); }
+          case 'max': { if (!args[0]) return null; if (Array.isArray(args[0])) return Math.max(...args[0]); return Math.max(...args); }
+          case 'min': { if (!args[0]) return null; if (Array.isArray(args[0])) return Math.min(...args[0]); return Math.min(...args); }
+          case 'abs': return Math.abs(args[0]);
+          case 'pow': return Math.pow(args[0], args[1]);
+          // GUI builtins
+          case 'gui_clear': clearGui(); return true;
+          case 'gui_label': addGuiLabel(args[0]); return true;
+          case 'gui_button': addGuiButton(args[0], args[1]); return true;
+          case 'gui_input': addGuiInput(args[0], args[1]); return true;
+          case 'gui_show_modal': showGuiModal(args[0]); return true;
+          case 'gui_hide_modal': hideGuiModal(); return true;
+          case 'gui_row': guiRow(); return true;
+          case 'gui_column': guiColumn(); return true;
+          case 'gui_end': guiEnd(); return true;
+          case 'gui_image': guiImage(args[0], args[1], args[2]); return true;
+          case 'gui_slider': guiSlider(args[0], args[1], args[2]); return true;
+          case 'gui_spacer': guiSpacer(args[0]); return true;
+          case 'gui_set_color': guiSetColor(args[0]); return true;
+          case 'gui_set_padding': guiSetPadding(args[0]); return true;
+          case 'gui_set_id': guiSetId(args[0]); return true;
+          default: return undefined;
+        }
+      }
+
+      truthy(v) { return v !== null && v !== false && v !== 0 && v !== ''; }
+    }
+
+    // ============================================================
+    // IDE — THEME
+    // ============================================================
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.querySelectorAll('.theme-dot').forEach(d => d.classList.toggle('active', d.dataset.theme === t));
+      localStorage.setItem('meow_theme', t);
+    }
+
+    // ============================================================
+    // IDE — PANELS
+    // ============================================================
+    function switchPanel(name) {
+      document.querySelectorAll('.panel-tab').forEach(t => t.classList.toggle('active', t.dataset.panel === name));
+      document.querySelectorAll('.panel-view').forEach(v => v.classList.toggle('active', v.id === 'panel-' + name));
+    }
+    function switchSideTab(name) {
+      document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.toggle('active', t.id === 'stab-' + name));
+      document.getElementById('sbody-files').style.display = name === 'files' ? 'flex' : 'none';
+      document.getElementById('sbody-snip').style.display = name === 'snip' ? 'flex' : 'none';
+    }
+
+    // ============================================================
+    // IDE — TAB MANAGER
+    // ============================================================
+    let tabs = [], activeTabId = null, tabCounter = 0;
+
+    function createTab(name, content) {
+      const id = ++tabCounter;
+      tabs.push({ id, name, content, savedContent: content, modified: false });
+      return id;
+    }
+
+    function switchTab(id) {
+      if (activeTabId !== null) {
+        const cur = tabs.find(t => t.id === activeTabId);
+        if (cur) { cur.content = editor.value; cur.modified = cur.content !== cur.savedContent; }
+      }
+      activeTabId = id;
+      const tab = tabs.find(t => t.id === id);
+      if (!tab) return;
+      editor.value = tab.content;
+      updateHighlight(); updateStatusBar(); renderTabs(); renderFileTree();
+      editor.focus(); updatePlaceholder();
+    }
+
+    function removeTab(id, e) {
+      e?.stopPropagation();
+      if (tabs.length <= 1) {
+        const tab = tabs.find(t => t.id === id);
+        if (tab) { tab.content = ''; tab.savedContent = ''; tab.modified = false; tab.name = 'scratch.meow'; }
+        editor.value = ''; updateHighlight(); updateStatusBar(); renderTabs(); renderFileTree(); updatePlaceholder();
+        return;
+      }
+      const idx = tabs.findIndex(t => t.id === id);
+      tabs.splice(idx, 1);
+      if (activeTabId === id) { switchTab(tabs[Math.min(idx, tabs.length - 1)].id); }
+      else { renderTabs(); renderFileTree(); }
+    }
+
+    function renderTabs() {
+      const container = document.getElementById('editor-tabs');
+      const addBtn = document.getElementById('tab-add-btn');
+      container.querySelectorAll('.tab').forEach(el => el.remove());
+      tabs.forEach(tab => {
+        const el = document.createElement('div');
+        el.className = 'tab' + (tab.id === activeTabId ? ' active' : '');
+        const icon = document.createElement('span'); icon.textContent = '🐾'; icon.style.fontSize = '9px'; icon.className = 'tab-icon';
+        const name = document.createElement('span'); name.textContent = tab.name; name.className = 'tab-name';
+        el.appendChild(icon); el.appendChild(name);
+        if (tab.modified) { const dot = document.createElement('span'); dot.className = 'tab-dot'; el.appendChild(dot); }
+        const close = document.createElement('span'); close.className = 'tab-close'; close.textContent = '✕';
+        close.onclick = ev => removeTab(tab.id, ev); el.appendChild(close);
+        el.addEventListener('click', () => switchTab(tab.id));
+        el.addEventListener('dblclick', ev => { if (ev.target.classList.contains('tab-close')) return; startRename(tab.id, name, el); });
+        container.insertBefore(el, addBtn);
+      });
+    }
+
+    function renderFileTree() {
+      const tree = document.getElementById('file-tree');
+      tree.innerHTML = '';
+      tabs.forEach(tab => {
+        const item = document.createElement('div');
+        item.className = 'file-item' + (tab.id === activeTabId ? ' active' : '');
+        item.innerHTML = `<span class="fi-icon">🐾</span>
+      <span class="fi-name" title="${tab.name}">${tab.name}</span>
+      <div class="fi-actions">
+        <button class="fi-btn" onclick="renameTabPrompt(${tab.id})" title="Rename">✏️</button>
+        <button class="fi-btn" onclick="downloadTab(${tab.id})" title="Download">⬇️</button>
+        <button class="fi-btn" onclick="duplicateTab(${tab.id})" title="Duplicate">⧉</button>
+      </div>`;
+        item.addEventListener('click', () => switchTab(tab.id));
+        tree.appendChild(item);
+      });
+    }
+
+    function renameTabPrompt(id) {
+      const tab = tabs.find(t => t.id === id); if (!tab) return;
+      const newName = window.prompt('Rename file:', tab.name);
+      if (newName && newName.trim()) {
+        tab.name = newName.trim().includes('.') ? newName.trim() : newName.trim() + '.meow';
+        renderTabs(); renderFileTree();
+      }
+    }
+
+    function duplicateTab(id) {
+      const tab = tabs.find(t => t.id === id); if (!tab) return;
+      const base = tab.name.replace(/\.[^.]+$/, '');
+      const ext = tab.name.includes('.') ? tab.name.slice(tab.name.lastIndexOf('.')) : '';
+      const newId = createTab(base + '_copy' + ext, tab.content);
+      switchTab(newId); showToast('⧉ Duplicated: ' + tab.name);
+    }
+
+    function startRename(id, nameEl, tabEl) {
+      const tab = tabs.find(t => t.id === id); if (!tab) return;
+      const input = document.createElement('input'); input.type = 'text';
+      input.className = 'tab-rename-input'; input.value = tab.name;
+      nameEl.replaceWith(input); input.focus(); input.select();
+      const finish = () => {
+        const v = input.value.trim() || tab.name;
+        tab.name = v.includes('.') ? v : v + '.meow';
+        input.replaceWith(nameEl); nameEl.textContent = tab.name;
+        renderTabs(); renderFileTree();
+      };
+      input.addEventListener('blur', finish);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); finish(); }
+        if (e.key === 'Escape') { input.replaceWith(nameEl); nameEl.textContent = tab.name; }
+      });
+    }
+
+    // ============================================================
+    // IDE — FILE OPERATIONS
+    // ============================================================
+    function newFile() {
+      const id = createTab('scratch.meow', '# ✨ New file\n\n');
+      switchTab(id); clearOutput();
+      setTimeout(() => { editor.focus(); editor.selectionStart = editor.selectionEnd = editor.value.length; }, 50);
+      showToast('✨ New file created'); saveToLocalStorage();
+    }
+
+    function downloadTab(id) {
+      const tab = tabs.find(t => t.id === id) || (activeTabId && tabs.find(t => t.id === activeTabId));
+      if (!tab) return;
+      const blob = new Blob([tab.content], { type: 'text/plain' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = tab.name; a.click(); URL.revokeObjectURL(a.href);
+      showToast('⬇️ Downloaded: ' + tab.name);
+    }
+
+    function uploadFiles(event) {
+      const files = [...event.target.files];
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const id = createTab(file.name, e.target.result);
+          switchTab(id); showToast('📤 Uploaded: ' + file.name); saveToLocalStorage();
+        };
+        reader.readAsText(file);
+      });
+      event.target.value = '';
+    }
+
+    // write_file from interpreter
+    function writeTabFromCode(name, content) {
+      const tab = tabs.find(t => t.name === name) || tabs.find(t => t.name === name + '.meow');
+      if (tab) { tab.content = content; tab.savedContent = content; tab.modified = false; }
+      else { createTab(name.includes('.') ? name : name + '.meow', content); }
+      renderTabs(); renderFileTree(); saveToLocalStorage();
+    }
+
+    // ============================================================
+    // IDE — LOCAL STORAGE
+    // ============================================================
+    function saveToLocalStorage() {
+      try {
+        const data = {
+          tabs: tabs.map(t => ({ id: t.id, name: t.name, content: t.content })),
+          activeTabId, tabCounter
+        };
+        localStorage.setItem('meow_ide_v2', JSON.stringify(data));
+      } catch (e) { }
+    }
+
+    function loadFromLocalStorage() {
+      try {
+        const raw = localStorage.getItem('meow_ide_v2');
+        if (!raw) return false;
+        const data = JSON.parse(raw);
+        if (!data.tabs || !data.tabs.length) return false;
+        tabs = data.tabs.map(t => ({ ...t, savedContent: t.content, modified: false }));
+        tabCounter = data.tabCounter || tabs.length;
+        activeTabId = data.activeTabId || tabs[0].id;
+        const active = tabs.find(t => t.id === activeTabId) || tabs[0];
+        editor.value = active.content;
+        updateHighlight(); updateStatusBar(); renderTabs(); renderFileTree(); updatePlaceholder();
+        return true;
+      } catch (e) { return false; }
+    }
+
+    // auto-save on editor change
+    let saveTimer = null;
+    function scheduleSave() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveToLocalStorage, 1500);
+    }
+
+    // ============================================================
+    // IDE — SNIPPETS
+    // ============================================================
+    const snippetCode = {
+      var: 'purr myVar = 0',
+      print: 'meow "Hello, World! 🐱"',
+      if: 'psspss (condition) {\n  meow "true!"\n} else {\n  meow "false!"\n}',
+      elif: 'psspss (x > 10) {\n  meow "big"\n} else psspss (x > 5) {\n  meow "medium"\n} else {\n  meow "small"\n}',
+      while: 'purr i = 0\nstalk (i < 10) {\n  meow whisker(i)\n  i = i + 1\n}',
+      for: 'pounce (i from 1 to 10) {\n  meow whisker(i)\n}',
+      func: 'claw myFunc(a, b) {\n  purr result = a + b\n  paw result\n}\nmeow whisker(myFunc(3, 4))',
+      array: 'purr cats = litter ["Whiskers", "Luna", "Mittens"]\npounce (i from 0 to 2) {\n  meow cats[i]\n}',
+      dict: 'purr cat = den { "name": "Luna", "age": 3, "color": "silver" }\nmeow cat["name"]\ncat["age"] = 4\nmeow "Keys: " + nuzzle(keys(cat), ", ")',
+      interp: 'purr name = "Whiskers"\npurr age = 3\nmeow "My cat ${name} is ${age} years old! 🐱"',
+      import: 'import "utils"\n# Runs utils.meow in the current scope',
+      gui_btn: 'gui_button("Click Me!", "myFunction")\n\nclaw myFunction() {\n  meow "Button clicked! 🐾"\n}',
+      gui_lbl: 'gui_label("Hello from MEOW GUI!")',
+      gui_input: 'purr myText = ""\ngui_input("Type something...", "myText")\n\nclaw check() {\n  meow "You typed: " + myText\n}\ngui_button("Show Input", "check")',
+      gui_layout: 'gui_row()\n  gui_label("Left")\n  gui_spacer()\n  gui_label("Right")\ngui_end()',
+      gui_slider: 'purr val = 50\ngui_label("Value: ${val}")\ngui_slider(0, 100, "val")\ngui_button("Check", "check")\n\nclaw check() { meow "Current: " + whisker(val) }',
+    };
+
+    function insertSnippet(name) {
+      const code = snippetCode[name]; if (!code) return;
+      insertAtCursor('\n' + code + '\n'); showToast(`🧩 Inserted: ${name}`);
+    }
+    function insertWord(word) { insertAtCursor(word); showToast(`💡 ${word.trim()}`); }
+
+    function insertAtCursor(text) {
+      editor.focus();
+      const s = editor.selectionStart, end = editor.selectionEnd;
+      editor.value = editor.value.slice(0, s) + text + editor.value.slice(end);
+      editor.selectionStart = editor.selectionEnd = s + text.length;
+      updateHighlight(); updateStatusBar(); updatePlaceholder();
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) { tab.content = editor.value; tab.modified = tab.content !== tab.savedContent; renderTabs(); }
+      }
+    }
+
+    // ============================================================
+    // IDE — FIND / REPLACE
+    // ============================================================
+    let findMatches = [], findIdx = 0, findCase = false, findOpen = false, replaceOpen = false;
+
+    function toggleFind(withReplace = false) {
+      const bar = document.getElementById('find-bar');
+      if (!findOpen || (!replaceOpen && withReplace)) {
+        bar.classList.add('open'); findOpen = true;
+        document.getElementById('replace-input').style.display = withReplace ? '' : 'none';
+        document.getElementById('replace-btn').style.display = withReplace ? '' : 'none';
+        document.getElementById('replace-all-btn').style.display = withReplace ? '' : 'none';
+        replaceOpen = withReplace;
+        document.getElementById('find-input').focus(); document.getElementById('find-input').select();
+      } else { closeFind(); }
+    }
+    function closeFind() {
+      const bar = document.getElementById('find-bar');
+      bar.classList.remove('open'); findOpen = false; replaceOpen = false;
+      findMatches = []; findIdx = 0; updateHighlight();
+    }
+    function toggleCase() {
+      findCase = !findCase;
+      document.getElementById('find-case').classList.toggle('on', findCase); doFind();
+    }
+    function doFind() {
+      const needle = document.getElementById('find-input').value;
+      if (!needle) { findMatches = []; document.getElementById('find-count').textContent = ''; updateHighlight(); return; }
+      const code = editor.value;
+      const flags = findCase ? 'g' : 'gi';
+      const re = new RegExp(needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags);
+      findMatches = []; let m;
+      while ((m = re.exec(code)) !== null) { findMatches.push({ start: m.index, end: m.index + m[0].length }); }
+      if (findIdx >= findMatches.length) findIdx = 0;
+      document.getElementById('find-count').textContent = findMatches.length ? `${findIdx + 1}/${findMatches.length}` : '0 results';
+      updateHighlight();
+      if (findMatches.length) scrollToMatch(findIdx);
+    }
+    function findNext() { findIdx = (findIdx + 1) % Math.max(1, findMatches.length); doFind(); }
+    function findPrev() { findIdx = (findIdx - 1 + Math.max(1, findMatches.length)) % Math.max(1, findMatches.length); doFind(); }
+    function findKey(e) {
+      if (e.key === 'Enter') e.shiftKey ? findPrev() : findNext();
+      if (e.key === 'Escape') closeFind();
+    }
+    function scrollToMatch(idx) {
+      if (!findMatches[idx]) return;
+      editor.selectionStart = findMatches[idx].start;
+      editor.selectionEnd = findMatches[idx].end;
+      editor.focus();
+    }
+    function doReplace() {
+      const needle = document.getElementById('find-input').value;
+      const replacement = document.getElementById('replace-input').value;
+      if (!needle || !findMatches[findIdx]) return;
+      const m = findMatches[findIdx];
+      editor.value = editor.value.slice(0, m.start) + replacement + editor.value.slice(m.end);
+      updateHighlight(); doFind();
+    }
+    function doReplaceAll() {
+      const needle = document.getElementById('find-input').value;
+      const replacement = document.getElementById('replace-input').value;
+      if (!needle) return;
+      const flags = findCase ? 'g' : 'gi';
+      const re = new RegExp(needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags);
+      const count = (editor.value.match(re) || []).length;
+      editor.value = editor.value.replace(re, replacement);
+      updateHighlight(); doFind(); showToast(`🔄 Replaced ${count} occurrence(s)`);
+    }
+
+    // ============================================================
+    // IDE — SYNTAX HIGHLIGHT
+    // ============================================================
+    let errorLine = null, debugLine = null;
+
+    function highlight(code) {
+      const kwOrange = new Set(['purr', 'meow', 'psspss', 'else', 'stalk', 'pounce', 'claw', 'paw', 'litter', 'scratch', 'knead', 'from', 'to', 'den', 'import']);
+      const kwPurple = new Set(['pawsitive', 'clawful', 'nap']);
+      const kwBlue = new Set(['and', 'or', 'not']);
+      const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      const lines = code.split('\n');
+      const resultLines = lines.map((line, lineIdx) => {
+        const lineNum = lineIdx + 1;
+        let out = '', i = 0;
+        while (i < line.length) {
+          if (line[i] === '#') { out += `<span class="hl-comment">${esc(line.slice(i))}</span>`; i = line.length; continue; }
+          if (line[i] === '"' || line[i] === "'") {
+            const q = line[i]; let j = i + 1;
+            while (j < line.length && line[j] !== q) { if (line[j] === '\\') j++; j++; } j++;
+            const raw = line.slice(i, j);
+            // highlight interpolation inside string
+            if (raw.includes('${')) {
+              let s = esc(raw.slice(0, 1));
+              const inner = raw.slice(1, raw.length - 1);
+              s += inner.replace(/\$\{([^}]*)\}/g, (_, expr) => `<span class="hl-interp">\${${esc(expr)}}</span>`
+                .replace(/[^<>{}$]+/g, m => esc(m))).replace(/(?<!\$\{[^}]*)[^<>]*/g, m => esc(m));
+              // simpler approach:
+              s = `<span class="hl-string">${esc(raw)}</span>`;
+              // override with pink for ${} parts
+              s = `<span class="hl-string">${esc(raw).replace(/\$\{([^}]*)\}/g, '<span class="hl-interp">$${esc("{")}$1${esc("}")}</span>')}</span>`;
+              out += `<span class="hl-string">${esc(raw)}</span>`;
+            } else { out += `<span class="hl-string">${esc(raw)}</span>`; }
+            i = j; continue;
+          }
+          if (/\d/.test(line[i])) {
+            let j = i; while (j < line.length && /[\d.]/.test(line[j])) j++;
+            out += `<span class="hl-number">${esc(line.slice(i, j))}</span>`; i = j; continue;
+          }
+          if (/[a-zA-Z_]/.test(line[i])) {
+            let j = i; while (j < line.length && /[a-zA-Z0-9_]/.test(line[j])) j++;
+            const w = line.slice(i, j);
+            if (kwOrange.has(w)) out += `<span class="hl-keyword">${w}</span>`;
+            else if (kwPurple.has(w)) out += `<span class="hl-bool">${w}</span>`;
+            else if (kwBlue.has(w)) out += `<span class="hl-op">${w}</span>`;
+            else out += `<span class="hl-ident">${esc(w)}</span>`;
+            i = j; continue;
+          }
+          if ('+-*/%<>=!'.includes(line[i])) { out += `<span class="hl-op">${esc(line[i])}</span>`; i++; continue; }
+          if ('()'.includes(line[i])) { out += `<span class="hl-paren">${line[i]}</span>`; i++; continue; }
+          if ('[]'.includes(line[i])) { out += `<span class="hl-bracket">${line[i]}</span>`; i++; continue; }
+          out += esc(line[i]); i++;
+        }
+
+        // apply find highlights
+        let lineOut = out;
+        // apply error/debug line class
+        if (lineNum === errorLine) return `<span class="hl-error-line">${lineOut}</span>`;
+        if (lineNum === debugLine) return `<span class="debug-line">${lineOut}</span>`;
+        return lineOut;
+      });
+
+      // Apply find match highlights to full code output
+      // (simplified: just return line-joined)
+      return resultLines.join('\n');
+    }
+
+    // ============================================================
+    // IDE — EDITOR CORE
+    // ============================================================
+    const editor = document.getElementById('code-editor');
+    const hlLayer = document.getElementById('highlight-layer');
+    const lineNums = document.getElementById('line-numbers');
+
+    function updateHighlight() {
+      const code = editor.value;
+      hlLayer.innerHTML = highlight(code) + '\n';
+
+      // Line numbers with error/breakpoint indicators
+      const lineCount = code.split('\n').length;
+      const ln = Array.from({ length: lineCount }, (_, i) => {
+        const n = i + 1;
+        const isErr = n === errorLine;
+        const isDbg = n === debugLine;
+        if (isErr) return `<span class="ln-error" data-l="${n}">${n}</span>`;
+        if (isDbg) return `<span style="color:var(--blue)" data-l="${n}">${n}</span>`;
+        return `<span data-l="${n}">${n}</span>`;
+      }).join('\n');
+      lineNums.innerHTML = ln;
+
+      // Sync tab
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) {
+          tab.content = code;
+          const was = tab.modified;
+          tab.modified = tab.content !== tab.savedContent;
+          if (was !== tab.modified) renderTabs();
+        }
+      }
+      renderMinimap();
+    }
+
+    function updateStatusBar() {
+      const text = editor.value, pos = editor.selectionStart;
+      const lines = text.slice(0, pos).split('\n');
+      document.getElementById('sb-line').textContent = lines.length;
+      document.getElementById('sb-col').textContent = lines[lines.length - 1].length + 1;
+      const wc = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById('sb-count').textContent = wc ? `${wc} words` : '';
+    }
+
+    function updatePlaceholder() {
+      const ph = document.getElementById('editor-placeholder');
+      if (ph) ph.style.display = editor.value ? 'none' : 'block';
+    }
+
+    // Auto-close brackets
+    const AUTO_CLOSE = { '(': ')', '{': '}', '[': ']', '"': '"', "'": "'" };
+
+    editor.addEventListener('keydown', e => {
+      const start = editor.selectionStart, end = editor.selectionEnd;
+
+      // Ctrl shortcuts
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runCode(); return; }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'n') { e.preventDefault(); newFile(); return; }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveToLocalStorage(); showToast('💾 Saved'); return; }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); toggleFind(false); return; }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'h') { e.preventDefault(); toggleFind(true); return; }
+
+      // Tab → 2 spaces
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const s = editor.selectionStart, en = editor.selectionEnd;
+        editor.value = editor.value.slice(0, s) + '  ' + editor.value.slice(en);
+        editor.selectionStart = editor.selectionEnd = s + 2;
+        updateHighlight(); return;
+      }
+
+      // Auto-indent on Enter
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const before = editor.value.slice(0, start);
+        const after = editor.value.slice(end);
+        const line = before.split('\n').pop();
+        const indent = line.match(/^(\s*)/)[1];
+        const last = line.trimEnd().slice(-1);
+        if (last === '{') {
+          const nextNonWS = after.trimStart()[0];
+          const extra = nextNonWS === '}' ? '\n' + indent : '';
+          editor.value = before + '\n' + indent + '  ' + extra + after;
+          editor.selectionStart = editor.selectionEnd = start + indent.length + 3;
+        } else {
+          editor.value = before + '\n' + indent + after;
+          editor.selectionStart = editor.selectionEnd = start + indent.length + 1;
+        }
+        updateHighlight(); return;
+      }
+
+      // Auto-close
+      if (AUTO_CLOSE[e.key] && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        const close = AUTO_CLOSE[e.key];
+        const selected = editor.value.slice(start, end);
+        if (selected) {
+          editor.value = editor.value.slice(0, start) + e.key + selected + close + editor.value.slice(end);
+          editor.selectionStart = start + 1; editor.selectionEnd = start + 1 + selected.length;
+        } else {
+          const nextChar = editor.value[start];
+          if (nextChar === close && e.key === close) { editor.selectionStart = editor.selectionEnd = start + 1; return; }
+          editor.value = editor.value.slice(0, start) + e.key + close + editor.value.slice(end);
+          editor.selectionStart = editor.selectionEnd = start + 1;
+        }
+        updateHighlight(); return;
+      }
+
+      // Backspace: remove auto-closed pair
+      if (e.key === 'Backspace' && start === end && start > 0) {
+        const prev = editor.value[start - 1], next = editor.value[start];
+        if (AUTO_CLOSE[prev] && AUTO_CLOSE[prev] === next) {
+          e.preventDefault();
+          editor.value = editor.value.slice(0, start - 1) + editor.value.slice(start + 1);
+          editor.selectionStart = editor.selectionEnd = start - 1;
+          updateHighlight(); return;
+        }
+      }
+    });
+
+    editor.addEventListener('input', () => { updateHighlight(); updatePlaceholder(); scheduleSave(); });
+    editor.addEventListener('keyup', updateStatusBar);
+    editor.addEventListener('click', updateStatusBar);
+    editor.addEventListener('scroll', function () {
+      hlLayer.style.transform = `translate(-${this.scrollLeft}px, -${this.scrollTop}px)`;
+      lineNums.scrollTop = this.scrollTop;
+      updateMinimapViewport();
+    });
+
+    // ============================================================
+    // IDE — MINIMAP
+    // ============================================================
+    const minimapCanvas = document.getElementById('minimap-canvas');
+    const minimapCtx = minimapCanvas.getContext('2d');
+
+    function getThemeColor(varName) {
+      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+
+    function renderMinimap() {
+      const code = editor.value;
+      const lines = code.split('\n');
+      const W = 100, LH = 3, CW = 1.2;
+      minimapCanvas.width = W;
+      minimapCanvas.height = Math.max(lines.length * LH, editor.offsetHeight);
+      minimapCanvas.style.height = minimapCanvas.height + 'px';
+
+      const bgColor = getThemeColor('--bg') || '#0d0d14';
+      const commentColor = getThemeColor('--text3') || '#5a5a7a';
+      const kwColor = getThemeColor('--orange') || '#ff8c42';
+      const strColor = getThemeColor('--green') || '#6bcf7f';
+      const textColor = getThemeColor('--text2') || '#9a9ab8';
+
+      minimapCtx.fillStyle = bgColor;
+      minimapCtx.fillRect(0, 0, W, minimapCanvas.height);
+
+      const kwPat = /\b(purr|meow|psspss|else|stalk|pounce|claw|paw|litter|den|import|scratch|knead|from|to)\b/;
+      const strPat = /"[^"]*"|'[^']*'/;
+      const cmtPat = /#.*/;
+
+      lines.forEach((line, i) => {
+        const y = i * LH;
+        const trim = line.trimStart();
+        let color = textColor;
+        if (cmtPat.test(trim)) color = commentColor;
+        else if (strPat.test(trim)) color = strColor;
+        else if (kwPat.test(trim)) color = kwColor;
+
+        const len = Math.min(line.length * CW, W - 4);
+        if (len > 0) {
+          minimapCtx.fillStyle = color + '88';
+          minimapCtx.fillRect(2, y, len, LH - 0.5);
+        }
+        if (i === errorLine - 1) {
+          minimapCtx.fillStyle = 'rgba(255,107,107,0.3)';
+          minimapCtx.fillRect(0, y, W, LH);
+        }
+        if (i === debugLine - 1) {
+          minimapCtx.fillStyle = 'rgba(91,156,246,0.3)';
+          minimapCtx.fillRect(0, y, W, LH);
+        }
+      });
+      updateMinimapViewport();
+    }
+
+    function updateMinimapViewport() {
+      const vp = document.getElementById('minimap-viewport');
+      const totalLines = editor.value.split('\n').length;
+      const LH = 3;
+      const totalH = Math.max(totalLines * LH, editor.offsetHeight);
+      const ratio = editor.offsetHeight / Math.max(editor.scrollHeight, 1);
+      const scrollRatio = editor.scrollTop / Math.max(editor.scrollHeight - editor.offsetHeight, 1);
+      const vpH = Math.max(editor.offsetHeight * LH * totalLines / Math.max(editor.scrollHeight, 1), 20);
+      const vpTop = scrollRatio * (totalH - vpH);
+      vp.style.top = vpTop + 'px';
+      vp.style.height = vpH + 'px';
+    }
+
+    minimapCanvas.addEventListener('click', function (e) {
+      const rect = this.getBoundingClientRect();
+      const y = e.clientY - rect.top;
+      const totalLines = editor.value.split('\n').length;
+      const LH = 3;
+      const totalH = totalLines * LH;
+      const ratio = y / this.offsetHeight;
+      editor.scrollTop = ratio * editor.scrollHeight;
+    });
+
+    // ============================================================
+    // IDE — RUN / DEBUG
+    // ============================================================
+    let runHistory = [];
+    const interp = new Interpreter({
+      getTabs: () => tabs,
+      writeTabs: writeTabFromCode
+    });
+    const debugInterp = new Interpreter({
+      getTabs: () => tabs,
+      writeTabs: writeTabFromCode
+    });
+
+    function escHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+    }
+
+    function runCode() {
+      const code = editor.value.trim();
+      if (!code) { showToast('😿 Nothing to run!'); return; }
+      errorLine = null; debugLine = null; clearGui();
+      const dot = document.getElementById('status-dot');
+      const out = document.getElementById('output');
+      const sbDot = document.getElementById('sb-dot');
+      dot.className = 'status-dot running'; sbDot.className = 'status-dot running';
+      out.innerHTML = '';
+      switchPanel('output');
+      const t0 = performance.now();
+      setTimeout(() => {
+        try {
+          const tokens = new Lexer(code).tokenize();
+          const ast = new Parser(tokens).parse();
+          const results = interp.run(ast);
+          const elapsed = (performance.now() - t0).toFixed(1);
+          dot.className = 'status-dot success'; sbDot.className = 'status-dot success';
+          document.getElementById('exec-time').textContent = elapsed + 'ms';
+
+          // mark saved
+          if (activeTabId) {
+            const tab = tabs.find(t => t.id === activeTabId);
+            if (tab) { tab.savedContent = tab.content; tab.modified = false; renderTabs(); }
+          }
+
+          if (results.length === 0) {
+            out.innerHTML = `<div class="output-system">🐾 No output — ran successfully</div>`;
+          } else {
+            results.forEach((line, i) => {
+              const div = document.createElement('div'); div.className = 'output-line';
+              div.innerHTML = `<span class="output-prefix">🐱</span><span class="output-text">${escHtml(line)}</span>`;
+              div.style.opacity = '0'; div.style.animation = `fadeIn .18s ease ${i * .04}s forwards`;
+              out.appendChild(div);
+            });
+            const td = document.createElement('div'); td.className = 'output-time';
+            td.textContent = `✓ ${results.length} line${results.length !== 1 ? 's' : ''} — ${elapsed}ms`;
+            out.appendChild(td);
+          }
+
+          // update variable inspector
+          updateVarInspector(interp.finalEnv);
+          // add to history
+          addHistory(code, results, elapsed, null);
+          updateHighlight();
+        } catch (err) {
+          dot.className = 'status-dot error'; sbDot.className = 'status-dot error';
+          document.getElementById('exec-time').textContent = '';
+
+          // extract line number from error message
+          const lineMatch = err.message.match(/line (\d+)/i);
+          if (lineMatch) { errorLine = parseInt(lineMatch[1]); }
+          else {
+            // try to find it from call stack context
+            errorLine = null;
+          }
+          updateHighlight();
+
+          // format stack trace
+          let stackHtml = '';
+          if (interp.callStack && interp.callStack.length) {
+            stackHtml = '\n<span style="color:var(--text3)">Stack trace:\n' +
+              interp.callStack.map(f => `  at ${f.name}() line ${f.line}`).join('\n') + '</span>';
+          }
+          out.innerHTML = `<div class="output-error">😾 <b>Error:</b> ${escHtml(err.message)}${stackHtml}</div>
+        <div class="output-system" style="margin-top:6px">Check your syntax and try again, hooman.</div>`;
+          addHistory(code, [], 0, err.message);
+        }
+      }, 40);
+    }
+
+    function runDebug() {
+      const code = editor.value.trim();
+      if (!code) { showToast('😿 Nothing to debug!'); return; }
+      errorLine = null; debugLine = null;
+      debugInterp.traceMode = true;
+      try {
+        const tokens = new Lexer(code).tokenize();
+        const ast = new Parser(tokens).parse();
+        debugInterp.run(ast);
+      } catch (e) { }
+      debugInterp.traceMode = false;
+
+      const trace = debugInterp.trace;
+      if (!trace.length) { showToast('🔍 No trace data'); return; }
+
+      switchPanel('debug');
+      showDebugTrace(trace, 0);
+      showToast(`⚙ Traced ${trace.length} steps`);
+    }
+
+    let currentTrace = [], currentTraceIdx = 0;
+
+    function showDebugTrace(trace, idx) {
+      currentTrace = trace; currentTraceIdx = idx;
+      const content = document.getElementById('debug-content');
+      const slider = document.getElementById('dbg-slider');
+      const pos = document.getElementById('dbg-pos');
+      slider.max = trace.length - 1; slider.value = idx; slider.disabled = false;
+      document.getElementById('dbg-prev').disabled = false;
+      document.getElementById('dbg-next').disabled = false;
+      pos.textContent = `${idx + 1}/${trace.length}`;
+
+      const step = trace[idx];
+      debugLine = step.line || null; updateHighlight();
+
+      // show vars at this step
+      const vars = step.vars || {};
+      const rows = Object.entries(vars).filter(([k]) => !k.startsWith('__')).map(([k, v]) => {
+        const type = meowType(v);
+        const valStr = meowStr(v).slice(0, 80);
+        const cls = `var-val-${type}`;
+        return `<tr><td class="var-name">${k}</td><td><span class="${cls}">${escHtml(valStr)}</span></td><td><span class="var-type">${type}</span></td></tr>`;
+      }).join('');
+
+      content.innerHTML = `<div style="margin-bottom:8px;font-size:10px;color:var(--text3)">
+    Step ${idx + 1}/${trace.length} — Line ${step.line} — Event: <span style="color:var(--orange)">${step.event}</span>
+    ${step.stack && step.stack.length ? '<br>Stack: ' + step.stack.join(' → ') : ''}
+  </div>
+  <div style="margin-bottom:8px;font-size:10px;color:var(--text3)">Output so far:</div>
+  <div style="font-size:11px;color:var(--text2);background:var(--bg3);padding:6px;border-radius:5px;max-height:80px;overflow-y:auto;margin-bottom:8px">
+    ${step.output.length ? step.output.map(l => escHtml(l)).join('<br>') : '<em style="color:var(--text3)">none</em>'}
+  </div>
+  <div style="font-size:10px;color:var(--text3);margin-bottom:4px">Variables:</div>
+  <table class="var-table"><thead><tr><th>Name</th><th>Value</th><th>Type</th></tr></thead><tbody>${rows || '<tr><td colspan="3" style="color:var(--text3);font-size:10px">No variables yet</td></tr>'}</tbody></table>`;
+    }
+
+    function debugStep(dir) {
+      const newIdx = Math.max(0, Math.min(currentTrace.length - 1, currentTraceIdx + dir));
+      showDebugTrace(currentTrace, newIdx);
+    }
+    function debugJump(idx) { showDebugTrace(currentTrace, idx); }
+
+    // ============================================================
+    // IDE — VARIABLE INSPECTOR
+    // ============================================================
+    function updateVarInspector(env) {
+      if (!env) { document.getElementById('vars-content').innerHTML = '<div class="output-placeholder" style="font-size:11px">Run code to inspect variables.</div>'; return; }
+      const vars = {}; let e = env;
+      while (e !== null) {
+        for (const k of Object.getOwnPropertyNames(e)) {
+          if (!(k in vars) && !k.startsWith('__')) vars[k] = e[k];
+        }
+        e = Object.getPrototypeOf(e);
+      }
+      const entries = Object.entries(vars).filter(([k, v]) => typeof v !== 'undefined');
+      document.getElementById('var-count').textContent = entries.length + ' vars';
+      if (!entries.length) {
+        document.getElementById('vars-content').innerHTML = '<div class="output-placeholder" style="font-size:11px">No variables found.</div>'; return;
+      }
+      const rows = entries.map(([k, v]) => {
+        const type = meowType(v);
+        const valStr = meowStr(v).slice(0, 120);
+        const cls = `var-val-${type}`;
+        return `<tr><td class="var-name">${escHtml(k)}</td><td><span class="${cls}">${escHtml(valStr)}</span></td><td><span class="var-type">${type}</span></td></tr>`;
+      }).join('');
+      document.getElementById('vars-content').innerHTML =
+        `<table class="var-table"><thead><tr><th>Name</th><th>Value</th><th>Type</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    // ============================================================
+    // IDE — RUN HISTORY
+    // ============================================================
+    function addHistory(code, output, elapsed, error) {
+      runHistory.unshift({
+        time: new Date().toLocaleTimeString(),
+        code: code.slice(0, 300), output, elapsed, error
+      });
+      if (runHistory.length > 20) runHistory.pop();
+      const badge = document.getElementById('hist-badge');
+      badge.style.display = ''; badge.textContent = runHistory.length;
+      renderHistory();
+    }
+
+    function clearHistory() { runHistory = []; document.getElementById('hist-badge').style.display = 'none'; renderHistory(); }
+
+    function renderHistory() {
+      const el = document.getElementById('history-content');
+      if (!runHistory.length) { el.innerHTML = '<div class="output-placeholder" style="font-size:11px">No runs yet.</div>'; return; }
+      el.innerHTML = runHistory.map((h, i) => {
+        const badge = h.error
+          ? `<span class="hist-badge err">✕ Error</span>`
+          : `<span class="hist-badge ok">✓ ${h.output.length} lines · ${h.elapsed}ms</span>`;
+        return `<div class="hist-item" onclick="loadFromHistory(${i})" title="Click to restore code">
+      <div class="hist-time">${h.time}</div>
+      <div class="hist-code">${escHtml(h.code.slice(0, 150))}</div>
+      ${badge}
+    </div>`;
+      }).join('');
+    }
+
+    function loadFromHistory(i) {
+      const h = runHistory[i]; if (!h) return;
+      const tab = tabs.find(t => t.id === activeTabId);
+      if (tab) { tab.content = h.code; tab.modified = true; }
+      editor.value = h.code; updateHighlight(); updateStatusBar(); updatePlaceholder(); renderTabs();
+      showToast('📜 Restored from history');
+    }
+
+    // ============================================================
+    // IDE — GUI ENGINE
+    // ============================================================
+    let guiStack = [], guiNextId = null, guiNextColor = null, guiNextPadding = null;
+
+    function clearGui() {
+      const canvas = document.getElementById('gui-canvas');
+      if (!canvas) return;
+      canvas.innerHTML = '';
+      guiStack = [canvas];
+      guiNextId = null; guiNextColor = null; guiNextPadding = null;
+      hideGuiModal();
+    }
+
+    function openGuiOverlay() {
+      document.getElementById('gui-floating-container').classList.add('show');
+    }
+    function closeGuiOverlay() {
+      document.getElementById('gui-floating-container').classList.remove('show');
+    }
+
+    function guiCtx(el) {
+      if (guiNextId) { el.id = guiNextId; guiNextId = null; }
+      if (guiNextColor) { el.style.color = guiNextColor; guiNextColor = null; }
+      if (guiNextPadding) { el.style.padding = guiNextPadding; guiNextPadding = null; }
+      return el;
+    }
+
+    function guiAdd(el) {
+      const parent = guiStack[guiStack.length - 1] || document.getElementById('gui-canvas');
+      parent.appendChild(el);
+      return el;
+    }
+
+    function addGuiLabel(text) {
+      openGuiOverlay();
+      const el = guiCtx(document.createElement('div'));
+      el.className = 'gui-label';
+      el.textContent = meowStr(text);
+      guiAdd(el);
+    }
+
+    function addGuiButton(text, callbackName) {
+      openGuiOverlay();
+      const btn = guiCtx(document.createElement('button'));
+      btn.className = 'gui-btn';
+      btn.textContent = meowStr(text);
+      btn.onclick = () => { if (callbackName) triggerMeowFunction(callbackName); };
+      guiAdd(btn);
+    }
+
+    function addGuiInput(placeholder, varName) {
+      openGuiOverlay();
+      const input = guiCtx(document.createElement('input'));
+      input.className = 'gui-input';
+      input.placeholder = meowStr(placeholder);
+      input.oninput = () => { if (interp.finalEnv) interp.finalEnv[varName] = input.value; };
+      guiAdd(input);
+    }
+
+    function guiRow() {
+      openGuiOverlay();
+      const el = guiCtx(document.createElement('div'));
+      el.className = 'gui-row';
+      guiAdd(el);
+      guiStack.push(el);
+    }
+
+    function guiColumn() {
+      openGuiOverlay();
+      const el = guiCtx(document.createElement('div'));
+      el.className = 'gui-column';
+      guiAdd(el);
+      guiStack.push(el);
+    }
+
+    function guiEnd() {
+      if (guiStack.length > 1) guiStack.pop();
+    }
+
+    function guiImage(url, w, h) {
+      openGuiOverlay();
+      const img = guiCtx(document.createElement('img'));
+      img.className = 'gui-img';
+      img.src = meowStr(url);
+      if (w) img.style.width = typeof w === 'number' ? w + 'px' : w;
+      if (h) img.style.height = typeof h === 'number' ? h + 'px' : h;
+      guiAdd(img);
+    }
+
+    function guiSlider(min, max, varName) {
+      openGuiOverlay();
+      const container = document.createElement('div');
+      container.className = 'gui-slider-container';
+      const slider = guiCtx(document.createElement('input'));
+      slider.type = 'range'; slider.className = 'gui-slider';
+      slider.min = min; slider.max = max;
+      slider.oninput = () => { if (interp.finalEnv) interp.finalEnv[varName] = Number(slider.value); };
+      container.appendChild(slider);
+      guiAdd(container);
+    }
+
+    function guiSpacer(px) {
+      const el = document.createElement('div');
+      el.className = 'gui-spacer';
+      if (px) el.style.flex = `0 0 ${typeof px === 'number' ? px + 'px' : px}`;
+      guiAdd(el);
+    }
+
+    function guiSetColor(c) { guiNextColor = meowStr(c); }
+    function guiSetPadding(p) { guiNextPadding = typeof p === 'number' ? p + 'px' : p; }
+    function guiSetId(id) { guiNextId = meowStr(id); }
+
+    function showGuiModal(content) {
+      openGuiOverlay();
+      const overlay = document.getElementById('gui-overlay');
+      const modal = document.getElementById('gui-modal');
+      modal.innerHTML = `<div class="gui-label" style="margin-bottom:15px">${escHtml(meowStr(content))}</div>
+    <button class="gui-btn" onclick="hideGuiModal()">Close 🐾</button>`;
+      overlay.classList.add('show');
+    }
+
+    function hideGuiModal() {
+      const overlay = document.getElementById('gui-overlay');
+      if (overlay) overlay.classList.remove('show');
+    }
+
+    function triggerMeowFunction(name) {
+      if (!interp.finalEnv) {
+        showToast('😾 Run the code first!');
+        return;
+      }
+      const fn = interp.lookup(name, interp.finalEnv);
+      if (!fn || !fn.__fn) {
+        showToast(`😾 Function '${name}' not found!`);
+        return;
+      }
+
+      const sbDot = document.getElementById('sb-dot');
+      sbDot.className = 'status-dot running';
+
+      // Create a sub-execution for the callback
+      setTimeout(() => {
+        try {
+          interp.callStack.push({ name: `callback:${name}`, line: 0 });
+          const ce = Object.create(fn.closure);
+          // for callbacks, we often want them to see the LATEST global state
+          // so we use the finalEnv as the parent of the closure
+          Object.setPrototypeOf(ce, interp.finalEnv);
+          interp.block(fn.body, ce);
+          interp.callStack.pop();
+          sbDot.className = 'status-dot success';
+          updateVarInspector(interp.finalEnv);
+        } catch (err) {
+          sbDot.className = 'status-dot error';
+          console.error(err);
+          showToast('😾 GUI Error: ' + err.message);
+        }
+      }, 10);
+    }
+
+    // Dragging logic for GUI overlay
+    (function () {
+      const container = document.getElementById('gui-floating-container');
+      const handle = document.getElementById('gui-drag-handle');
+      if (!container || !handle) return;
+
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      handle.onmousedown = function (e) {
+        isDragging = true;
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+        container.style.transition = 'none'; // Disable transition while dragging
+        document.onmousemove = onMouseMove;
+        document.onmouseup = onMouseUp;
+      };
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+        container.style.left = (e.clientX - offsetX) + 'px';
+        container.style.top = (e.clientY - offsetY) + 'px';
+        container.style.transform = 'none'; // Remove centering transform once moved
+      }
+
+      function onMouseUp() {
+        isDragging = false;
+        document.onmousemove = null;
+        document.onmouseup = null;
+      }
+    })();
+
+    // ============================================================
+    // IDE — UTILITIES
+    // ============================================================
+    let toastTimer = null;
+    function showToast(msg) {
+      const t = document.getElementById('insert-toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearOutput() {
+      document.getElementById('output').innerHTML = `<div class="output-placeholder">😺 Output cleared.</div>`;
+      document.getElementById('status-dot').className = 'status-dot';
+      document.getElementById('sb-dot').className = 'status-dot';
+      document.getElementById('exec-time').textContent = '';
+      errorLine = null; debugLine = null; updateHighlight();
+    }
+
+    function showRef() { document.getElementById('ref-modal').classList.add('open'); }
+    function closeRef() { document.getElementById('ref-modal').classList.remove('open'); }
+    document.getElementById('ref-modal').addEventListener('click', function (e) { if (e.target === this) closeRef(); });
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebar-overlay').classList.toggle('visible');
+    }
+
+    function toggleMobMenu() {
+      const menu = document.getElementById('mob-menu');
+      const isOpen = menu.classList.toggle('open');
+      document.getElementById('mob-toggle').textContent = isOpen ? '✕' : '☰';
+      const ov = document.getElementById('mob-overlay');
+      if (ov) ov.style.display = isOpen ? 'block' : 'none';
+    }
+    function closeMobMenu() {
+      document.getElementById('mob-menu').classList.remove('open');
+      document.getElementById('mob-toggle').textContent = '☰';
+      const ov = document.getElementById('mob-overlay');
+      if (ov) ov.style.display = 'none';
+    }
+    // Close mob menu when clicking outside
+    document.addEventListener('click', function (e) {
+      const menu = document.getElementById('mob-menu');
+      const toggle = document.getElementById('mob-toggle');
+      if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+        closeMobMenu();
+      }
+    });
+
+    // Show/hide mobile-only header buttons based on screen size
+    function updateMobButtons() {
+      const isMob = window.innerWidth <= 768;
+      ['mob-find-btn', 'mob-debug-btn', 'mob-run-btn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = isMob ? '' : 'none';
+      });
+    }
+    window.addEventListener('resize', updateMobButtons);
+    updateMobButtons();
+
+    // ============================================================
+    // IDE — EXAMPLES
+    // ============================================================
+    const examples = {
+      hello: `# 🐱 Hello World in MEOW v2.1.1!
+meow "Hello, World! 🐱"
+purr name = "Whiskers"
+purr version = 2
+meow "Welcome to MEOW v\${version} — now with more features!"
+meow "Running as: \${name}"`,
+
+      fibonacci: `# 🔢 Fibonacci with string interpolation
+claw fib(n) {
+  psspss (n <= 1) { paw n }
+  paw fib(n - 1) + fib(n - 2)
+}
+pounce (i from 0 to 12) {
+  meow "fib(\${i}) = \${fib(i)}"
+}`,
+
+      fizzbuzz: `# 🎉 FizzBuzz — Cat Edition!
+pounce (i from 1 to 30) {
+  psspss (i % 15 == 0) {
+    meow "PurrBuzz 🐱💫"
+  } else psspss (i % 3 == 0) {
+    meow "Purr 🐾"
+  } else psspss (i % 5 == 0) {
+    meow "Buzz 🐟"
+  } else {
+    meow whisker(i)
+  }
+}`,
+
+      functions: `# 🪄 Functions & closures
+claw greet(name, title) {
+  paw "Hello, \${title} \${name}! 🐱"
+}
+claw factorial(n) {
+  psspss (n <= 1) { paw 1 }
+  paw n * factorial(n - 1)
+}
+meow greet("Luna", "Dr.")
+meow greet("Mittens", "Prof.")
+pounce (n from 1 to 8) {
+  meow "\${n}! = \${factorial(n)}"
+}`,
+
+      arrays: `# 📦 Arrays & operations
+purr cats = litter ["Whiskers", "Luna", "Mittens", "Shadow"]
+purr scores = litter [95, 87, 72, 99]
+meow "Cat roster:"
+pounce (i from 0 to 3) {
+  meow "  \${cats[i]} — score: \${scores[i]}"
+}
+chase(cats, "Biscuit")
+meow "After adding Biscuit: \${fur(cats)} cats"
+meow "All: \${nuzzle(cats, ", ")}"
+meow "Sorted scores: \${nuzzle(sort(scores), " < ")}"`,
+
+      dicts: `# 🗂 Dictionaries (den)
+purr cat = den {
+  "name": "Luna",
+  "age": 3,
+  "color": "silver",
+  "purring": pawsitive
+}
+meow "Name: \${cat["name"]}"
+meow "Age: \${cat["age"]}"
+cat["age"] = 4
+meow "Updated age: \${cat["age"]}"
+meow "Keys: \${nuzzle(keys(cat), ", ")}"
+psspss (has(cat, "purring")) {
+  meow "Cat is purring: \${cat["purring"]}"
+}
+
+# Dict of dicts
+purr zoo = den {
+  "cat": den { "sound": "meow", "legs": 4 },
+  "dog": den { "sound": "woof", "legs": 4 },
+  "bird": den { "sound": "tweet", "legs": 2 }
+}
+purr animals = keys(zoo)
+pounce (i from 0 to 2) {
+  purr animal = animals[i]
+  purr info = zoo[animal]
+  meow "\${animal} says \${info["sound"]} and has \${info["legs"]} legs"
+}`,
+
+      interp: `# ✨ String Interpolation
+purr name = "Luna"
+purr age = 3
+purr score = 9.5
+meow "My cat \${name} is \${age} years old!"
+meow "Score: \${score * 10}/100"
+purr items = litter ["fish", "milk", "yarn"]
+pounce (i from 0 to 2) {
+  meow "Item \${i + 1}: \${items[i]}"
+}
+claw describe(animal, sound) {
+  paw "The \${animal} goes \${sound}!"
+}
+meow describe("cat", "meow")
+meow describe("dog", "woof")`,
+
+      catlife: `# 😺 A Day in the Life of a Cat!
+claw eat(food) {
+  psspss (food == "tuna") {
+    meow "  🐟 TUNA! Pure bliss! +50"
+    paw 50
+  } else psspss (food == "kibble") {
+    meow "  🥣 Kibble. Fine. +10"
+    paw 10
+  } else {
+    meow "  😾 What is THIS? -5"
+    paw -5
+  }
+}
+claw sleep(hrs) {
+  meow "  😴 Sleeping \${hrs} hours..."
+  paw hrs * 10
+}
+claw knock(item) {
+  meow "  🐾 *pushes \${item} off table*"
+  paw 20
+}
+purr hp = 0
+meow "=== Cat's Day ==="
+meow ""
+meow "🌅 Morning:"
+hp = hp + eat("tuna")
+hp = hp + knock("coffee mug")
+hp = hp + knock("phone")
+meow ""
+meow "☀️ Afternoon:"
+hp = hp + sleep(4)
+hp = hp + eat("kibble")
+meow "  😒 Ignoring humans..."
+meow ""
+meow "🌙 Evening:"
+hp = hp + knock("book")
+hp = hp + sleep(8)
+meow ""
+meow "=== Summary ==="
+meow "Total happiness: \${hp} points"
+psspss (hp > 100) {
+  meow "Status: 😻 MAXIMUM PURRING"
+} else psspss (hp > 60) {
+  meow "Status: 😸 Content"
+} else {
+  meow "Status: 😐 Tolerating existence"
+}`,
+
+      bubbleSort: `# 🫧 Bubble Sort
+claw bubbleSort(arr, n) {
+  pounce (i from 0 to n - 2) {
+    pounce (j from 0 to n - i - 2) {
+      psspss (arr[j] > arr[j + 1]) {
+        purr tmp = arr[j]
+        arr[j] = arr[j + 1]
+        arr[j + 1] = tmp
+      }
+    }
+  }
+}
+purr data = litter [64, 34, 25, 12, 22, 11, 90]
+meow "Original: \${nuzzle(data, ", ")}"
+bubbleSort(data, 7)
+meow "Sorted:   \${nuzzle(data, " → ")}"`,
+
+      fileops: `# 📄 File Operations
+# write_file creates a new tab with the content
+write_file("data.txt", "Hello from MEOW!\nLine 2\nLine 3")
+meow "Wrote data.txt"
+
+# read it back
+purr content = read_file("data.txt")
+meow "Read back: \${content}"
+
+# Use as a data store
+purr log = ""
+pounce (i from 1 to 5) {
+  log = log + "Entry \${i}: item_\${i}\n"
+}
+write_file("log.txt", log)
+meow "Log written! Open log.txt tab to see it."`,
+
+      gui_counter: `# 🎨 GUI Counter Example
+# Click 'Run' then open the 'GUI' tab!
+
+purr count = 0
+
+claw increment() {
+  count = count + 1
+  gui_clear()
+  gui_label("--- MEOW COUNTER ---")
+  gui_label("Current count: \${count}")
+  gui_button("Click to add! 🐾", "increment")
+  gui_button("Reset", "resetCount")
+  
+  psspss (count >= 10) {
+    gui_show_modal("😻 WOW! You reached \${count} clicks!")
+  }
+}
+
+claw resetCount() {
+  count = 0
+  gui_clear()
+  gui_label("Counter Reset!")
+  gui_button("Start Again", "increment")
+}
+
+# Initial UI
+gui_label("Welcome to MEOW GUI!")
+gui_button("Start Counter 🐾", "increment")`,
+
+      gui_profile: `# 👤 Advanced GUI: Cat Profile
+# Demonstrates Rows, Columns, Images, and Sliders!
+
+purr catName = "Whiskers"
+purr catAge = 2
+purr catHealth = 80
+
+claw updateUI() {
+  gui_clear()
+  
+  # Header Row
+  gui_row()
+    gui_set_color("#FF8C42")
+    gui_label("🐾 CAT PROFILE")
+    gui_spacer()
+    gui_button("Refresh", "updateUI")
+  gui_end()
+  
+  gui_spacer(20)
+  
+  # Content Column
+  gui_column()
+    # Image from a placeholder service
+    gui_image("https://placekitten.com/400/200", 400, 200)
+    
+    gui_row()
+      gui_label("Name: ")
+      gui_input("Enter name...", "catName")
+    gui_end()
+    
+    gui_row()
+      gui_label("Age: \${catAge} years")
+      gui_slider(0, 20, "catAge")
+    gui_end()
+    
+    gui_row()
+      gui_label("Health: \${catHealth}%")
+      gui_slider(0, 100, "catHealth")
+    gui_end()
+    
+    gui_spacer(10)
+    gui_button("Save Profile", "save")
+  gui_end()
+}
+
+claw save() {
+  gui_show_modal("Saved \${catName}'s profile! 😺")
+}
+
+# Initial trigger
+updateUI()`,
+    };
+
+    function loadExample(name) {
+      const code = examples[name]; if (!code) return;
+      if (activeTabId !== null) {
+        const tab = tabs.find(t => t.id === activeTabId);
+        if (tab) { tab.name = name + '.meow'; tab.content = code; tab.savedContent = code; tab.modified = false; }
+      }
+      editor.value = code;
+      updateHighlight(); updateStatusBar(); renderTabs(); renderFileTree(); clearOutput(); updatePlaceholder();
+      showToast(`📂 Loaded: ${name}.meow`);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    // add fadeIn animation
+    const styleEl = document.createElement('style');
+    styleEl.textContent = '@keyframes fadeIn{to{opacity:1}}';
+    document.head.appendChild(styleEl);
+
+    // restore theme
+    const savedTheme = localStorage.getItem('meow_theme') || 'dark';
+    setTheme(savedTheme);
+
+    // load from localStorage or load default
+    const loaded = loadFromLocalStorage();
+    if (!loaded) {
+      const firstId = createTab('catlife.meow', examples.catlife);
+      tabs[0].savedContent = examples.catlife;
+      activeTabId = firstId;
+      editor.value = examples.catlife;
+      updateHighlight(); updateStatusBar(); renderTabs(); renderFileTree(); updatePlaceholder();
+    }
+
+    // render minimap after fonts load
+    setTimeout(() => { renderMinimap(); }, 300);
+
+    // ============================================================
+    // IMAGE CAT WALKER — sprite sheet via img src swap
+    // ============================================================
+    (function () {
+      const frames = [
+        "cat/cat1.png", "cat/cat2.png", "cat/cat3.png",
+        "cat/cat4.png", "cat/cat5.png", "cat/cat6.png",
+        "cat/cat7.png", "cat/cat8.png", "cat/cat9.png"
+      ];
+      let frame = 0;
+      const sprite = document.getElementById('catSprite');
+      const cat = document.getElementById('cat-walker');
+      const strip = document.getElementById('cat-strip');
+      if (!sprite || !cat || !strip) return;
+
+      // Animate sprite frames
+      setInterval(() => {
+        frame = (frame + 1) % frames.length;
+        sprite.src = frames[frame];
+      }, 150);
+
+      // Movement
+      let pos = window.innerWidth;
+      let dir = -1;
+
+      const bubble = document.getElementById('cat-bubble');
+
+      function move() {
+        pos += dir * 0.6;
+        const maxPos = strip.offsetWidth - 80;
+        if (pos <= 0) {
+          dir = 1;
+          cat.style.transform = 'scaleX(-1)';
+        }
+        if (pos >= maxPos) {
+          dir = -1;
+          cat.style.transform = 'scaleX(1)';
+        }
+        cat.style.left = pos + 'px';
+        cat.style.right = 'auto';
+
+        // Always track bubble over cat centre — every single frame
+        if (bubble) {
+          // cat is 44px wide, centre it; strip bottom is 22px above viewport bottom
+          const catCentreX = pos + 22;
+          bubble.style.left = catCentreX + 'px';
+          // reset transform so it never inherits cat flip
+          bubble.style.transform = 'translateX(-50%) scale(' + (bubble.classList.contains('show') ? '1' : '0') + ')';
+        }
+
+        requestAnimationFrame(move);
+      }
+      move();
+
+      // Show / hide
+      if (cat && bubble) {
+        cat.addEventListener('mouseenter', () => bubble.classList.add('show'));
+        cat.addEventListener('mouseleave', () => bubble.classList.remove('show'));
+      }
+    })();
+
+
+
+  </script>
+</body>
+
+</html>    [data-theme="nord"]{
       --bg:#2e3440;--bg2:#242933;--bg3:#3b4252;--bg4:#434c5e;
       --border:#4c566a;--orange:#d08770;--orange2:#ebcb8b;--orange3:#a3be8c;
       --purple:#b48ead;--blue:#88c0d0;--green:#a3be8c;--red:#bf616a;--pink:#b48ead;
