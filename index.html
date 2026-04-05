@@ -39,223 +39,1085 @@
       --pink-bg: #fdf2f8;
       --sidebar-w: 260px;
       --header-h: 60px;
-      --shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.04);
-      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 4px 12px rgba(0, 0, 0, .04);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .04);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-    body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; font-size: 15px; line-height: 1.7; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text3);
+    }
 
     /* HEADER */
     .site-header {
-      position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
-      background: rgba(250,249,246,.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border); z-index: 100;
-      display: flex; align-items: center; padding: 0 24px; gap: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: rgba(250, 249, 246, .92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 0;
     }
-    .menu-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 20px; cursor: pointer; color: var(--text2); margin-right: 8px; border-radius: 8px; }
-    .menu-toggle:hover { background: var(--bg3); }
-    .site-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 18px; color: var(--orange); letter-spacing: -.3px; flex-shrink: 0; }
-    .site-logo .cat { font-size: 22px; }
-    .logo-badge { font-size: 10px; font-weight: 600; color: var(--text3); background: var(--bg3); border: 1px solid var(--border2); padding: 2px 7px; border-radius: 20px; letter-spacing: .5px; }
-    .header-nav { display: flex; align-items: center; gap: 2px; margin-left: 40px; }
-    .header-nav a { padding: 6px 14px; border-radius: 8px; color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; transition: all .15s; }
-    .header-nav a:hover, .header-nav a.active { background: var(--bg3); color: var(--text); }
-    .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-    .header-btn { display: flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: 8px; font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: all .15s; }
-    .btn-ide { background: var(--orange); color: white; box-shadow: 0 2px 8px rgba(232,98,42,.3); }
-    .btn-ide:hover { background: var(--orange2); box-shadow: 0 4px 16px rgba(232,98,42,.4); transform: translateY(-1px); }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text2);
+      margin-right: 8px;
+      border-radius: 8px;
+    }
+
+    .menu-toggle:hover {
+      background: var(--bg3);
+    }
+
+    .site-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--orange);
+      letter-spacing: -.3px;
+      flex-shrink: 0;
+    }
+
+    .site-logo .cat {
+      font-size: 22px;
+    }
+
+    .logo-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text3);
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 2px 7px;
+      border-radius: 20px;
+      letter-spacing: .5px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: 40px;
+    }
+
+    .header-nav a {
+      padding: 6px 14px;
+      border-radius: 8px;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all .15s;
+    }
+
+    .header-nav a:hover,
+    .header-nav a.active {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all .15s;
+    }
+
+    .btn-ide {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 2px 8px rgba(232, 98, 42, .3);
+    }
+
+    .btn-ide:hover {
+      background: var(--orange2);
+      box-shadow: 0 4px 16px rgba(232, 98, 42, .4);
+      transform: translateY(-1px);
+    }
 
     /* LAYOUT */
-    .layout { display: flex; padding-top: var(--header-h); min-height: 100vh; }
+    .layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
 
     /* SIDEBAR */
-    .sidebar { width: var(--sidebar-w); position: fixed; top: var(--header-h); bottom: 0; left: 0; overflow-y: auto; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 0; }
-    .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.3); backdrop-filter: blur(4px); z-index: 190; opacity: 0; pointer-events: none; transition: opacity .3s; }
-    .sidebar-overlay.visible { opacity: 1; pointer-events: all; }
-    .sidebar-group { margin-bottom: 4px; }
-    .sidebar-group-label { padding: 6px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text3); margin-top: 12px; }
-    .sidebar-link { display: flex; align-items: center; gap: 8px; padding: 7px 20px; font-size: 13.5px; color: var(--text2); text-decoration: none; transition: all .1s; border-left: 2px solid transparent; font-weight: 400; }
-    .sidebar-link:hover { background: var(--bg2); color: var(--text); border-left-color: var(--border2); }
-    .sidebar-link.active { background: var(--orange-light); color: var(--orange); border-left-color: var(--orange); font-weight: 600; }
-    .sidebar-link .icon { font-size: 14px; opacity: .8; }
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: var(--header-h);
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .3);
+      backdrop-filter: blur(4px);
+      z-index: 190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .sidebar-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .sidebar-group {
+      margin-bottom: 4px;
+    }
+
+    .sidebar-group-label {
+      padding: 6px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      margin-top: 12px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      font-size: 13.5px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all .1s;
+      border-left: 2px solid transparent;
+      font-weight: 400;
+    }
+
+    .sidebar-link:hover {
+      background: var(--bg2);
+      color: var(--text);
+      border-left-color: var(--border2);
+    }
+
+    .sidebar-link.active {
+      background: var(--orange-light);
+      color: var(--orange);
+      border-left-color: var(--orange);
+      font-weight: 600;
+    }
+
+    .sidebar-link .icon {
+      font-size: 14px;
+      opacity: .8;
+    }
 
     /* CONTENT */
-    .content { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
-    .page-section { max-width: 780px; padding: 56px 60px; margin: 0 auto; }
+    .content {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .page-section {
+      max-width: 780px;
+      padding: 56px 60px;
+      margin: 0 auto;
+    }
 
     /* HERO */
-    .hero { background: linear-gradient(135deg, var(--orange-light) 0%, var(--bg) 60%); border-bottom: 1px solid var(--border); padding: 72px 60px 64px; max-width: 100%; position: relative; overflow: hidden; }
-    .hero::before { content: '🐾'; position: absolute; right: 80px; top: 50%; transform: translateY(-50%); font-size: 140px; opacity: .06; pointer-events: none; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: var(--orange-mid); border: 1px solid var(--orange3); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--orange); letter-spacing: .5px; margin-bottom: 20px; }
-    .hero h1 { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; color: var(--text); margin-bottom: 16px; }
-    .hero h1 .accent { color: var(--orange); }
-    .hero-sub { font-size: 17px; color: var(--text2); max-width: 520px; line-height: 1.65; margin-bottom: 32px; font-weight: 400; }
-    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .hero {
+      background: linear-gradient(135deg, var(--orange-light) 0%, var(--bg) 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 60px 64px;
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-    .pill-orange { background: var(--orange-mid); color: var(--orange); }
-    .pill-green  { background: var(--green-bg);   color: var(--green);  }
-    .pill-blue   { background: var(--blue-bg);    color: var(--blue);   }
-    .pill-purple { background: var(--purple-bg);  color: var(--purple); }
-    .pill-pink   { background: var(--pink-bg);    color: var(--pink);   }
+    .hero::before {
+      content: '🐾';
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 140px;
+      opacity: .06;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--orange-mid);
+      border: 1px solid var(--orange3);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: .5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .accent {
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .pill-orange {
+      background: var(--orange-mid);
+      color: var(--orange);
+    }
+
+    .pill-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .pill-blue {
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    .pill-purple {
+      background: var(--purple-bg);
+      color: var(--purple);
+    }
+
+    .pill-pink {
+      background: var(--pink-bg);
+      color: var(--pink);
+    }
 
     /* HEADINGS */
-    h2 { font-size: 24px; font-weight: 700; letter-spacing: -.4px; color: var(--text); padding-top: 40px; padding-bottom: 12px; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
-    h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-top: 28px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-    h4 { font-size: 14px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 20px; margin-bottom: 8px; }
-    p { color: var(--text2); margin-bottom: 14px; }
-    p strong { color: var(--text); }
-    ul, ol { padding-left: 20px; color: var(--text2); margin-bottom: 14px; }
-    li { margin-bottom: 4px; }
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: var(--text);
+      padding-top: 40px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 28px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--text2);
+      margin-bottom: 14px;
+    }
+
+    p strong {
+      color: var(--text);
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+      color: var(--text2);
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
 
     /* CODE */
-    pre { background: #1e1c18; border: 1px solid #333027; border-radius: 10px; padding: 20px 22px; overflow-x: auto; margin: 16px 0 20px; position: relative; box-shadow: var(--shadow); }
-    pre .lang-badge { position: absolute; top: 10px; right: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #5a5549; letter-spacing: 1px; text-transform: uppercase; }
-    code { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.75; }
-    pre code { color: #e8e0d0; display: block; }
-    :not(pre)>code { background: var(--bg3); border: 1px solid var(--border2); padding: 1px 6px; border-radius: 5px; font-size: 13px; color: var(--orange); }
+    pre {
+      background: #1e1c18;
+      border: 1px solid #333027;
+      border-radius: 10px;
+      padding: 20px 22px;
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
 
-    .kw  { color: #ff8c42; font-weight: 500; }
-    .str { color: #6bcf7f; }
-    .num { color: #ffb347; }
-    .cmt { color: #5a5549; font-style: italic; }
-    .ident { color: #e8e0d0; }
-    .op  { color: #5b9cf6; }
-    .bool { color: #c084fc; }
-    .fn  { color: #f472b6; }
-    .paren { color: #ffd580; }
-    .interp { color: #ff79c6; }
-    .dict-kw { color: #f472b6; font-weight: 500; }
+    pre .lang-badge {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #5a5549;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    pre code {
+      color: #e8e0d0;
+      display: block;
+    }
+
+    :not(pre)>code {
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      padding: 1px 6px;
+      border-radius: 5px;
+      font-size: 13px;
+      color: var(--orange);
+    }
+
+    .kw {
+      color: #ff8c42;
+      font-weight: 500;
+    }
+
+    .str {
+      color: #6bcf7f;
+    }
+
+    .num {
+      color: #ffb347;
+    }
+
+    .cmt {
+      color: #5a5549;
+      font-style: italic;
+    }
+
+    .ident {
+      color: #e8e0d0;
+    }
+
+    .op {
+      color: #5b9cf6;
+    }
+
+    .bool {
+      color: #c084fc;
+    }
+
+    .fn {
+      color: #f472b6;
+    }
+
+    .paren {
+      color: #ffd580;
+    }
+
+    .interp {
+      color: #ff79c6;
+    }
+
+    .dict-kw {
+      color: #f472b6;
+      font-weight: 500;
+    }
 
     /* CALLOUTS */
-    .callout { padding: 16px 18px; border-radius: 10px; border-left: 3px solid; margin: 18px 0; font-size: 14px; line-height: 1.6; }
-    .callout-title { font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; font-size: 13px; }
-    .callout-orange { background: var(--orange-light); border-color: var(--orange); }
-    .callout-orange .callout-title { color: var(--orange); }
-    .callout-green { background: var(--green-bg); border-color: var(--green); }
-    .callout-green .callout-title { color: var(--green); }
-    .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
-    .callout-blue .callout-title { color: var(--blue); }
-    .callout-purple { background: var(--purple-bg); border-color: var(--purple); }
-    .callout-purple .callout-title { color: var(--purple); }
-    .callout-pink { background: var(--pink-bg); border-color: var(--pink); }
-    .callout-pink .callout-title { color: var(--pink); }
-    .callout p { margin: 0; color: var(--text2); }
+    .callout {
+      padding: 16px 18px;
+      border-radius: 10px;
+      border-left: 3px solid;
+      margin: 18px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .callout-orange {
+      background: var(--orange-light);
+      border-color: var(--orange);
+    }
+
+    .callout-orange .callout-title {
+      color: var(--orange);
+    }
+
+    .callout-green {
+      background: var(--green-bg);
+      border-color: var(--green);
+    }
+
+    .callout-green .callout-title {
+      color: var(--green);
+    }
+
+    .callout-blue {
+      background: var(--blue-bg);
+      border-color: var(--blue);
+    }
+
+    .callout-blue .callout-title {
+      color: var(--blue);
+    }
+
+    .callout-purple {
+      background: var(--purple-bg);
+      border-color: var(--purple);
+    }
+
+    .callout-purple .callout-title {
+      color: var(--purple);
+    }
+
+    .callout-pink {
+      background: var(--pink-bg);
+      border-color: var(--pink);
+    }
+
+    .callout-pink .callout-title {
+      color: var(--pink);
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--text2);
+    }
 
     /* TABLES */
-    .table-wrap { overflow-x: auto; margin: 16px 0 20px; border-radius: 10px; box-shadow: var(--shadow); }
-    table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-    th { background: var(--bg2); padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); border-bottom: 1px solid var(--border); }
-    td { padding: 10px 16px; border-bottom: 1px solid var(--bg3); vertical-align: top; color: var(--text2); line-height: 1.6; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--bg2); }
-    td code { font-size: 12px; }
-    td .kw2 { color: var(--orange); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 12.5px; }
-    td .ex  { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-    td .dict2 { color: var(--pink); font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 12.5px; }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th {
+      background: var(--bg2);
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text3);
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--bg3);
+      vertical-align: top;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: var(--bg2);
+    }
+
+    td code {
+      font-size: 12px;
+    }
+
+    td .kw2 {
+      color: var(--orange);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+
+    td .ex {
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    td .dict2 {
+      color: var(--pink);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 12.5px;
+    }
 
     /* KEYWORD GRID */
-    .kw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
-    .kw-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; transition: all .15s; box-shadow: var(--shadow); }
-    .kw-card:hover { border-color: var(--orange3); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-    .kw-card .kw-name { font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
-    .kw-card .kw-name.dict { color: var(--pink); }
-    .kw-card .kw-desc { font-size: 12px; color: var(--text3); font-weight: 400; margin-bottom: 6px; }
-    .kw-card .kw-ex  { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); background: var(--bg2); padding: 3px 7px; border-radius: 4px; display: inline-block; }
+    .kw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .kw-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: all .15s;
+      box-shadow: var(--shadow);
+    }
+
+    .kw-card:hover {
+      border-color: var(--orange3);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .kw-card .kw-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .kw-card .kw-name.dict {
+      color: var(--pink);
+    }
+
+    .kw-card .kw-desc {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .kw-card .kw-ex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      background: var(--bg2);
+      padding: 3px 7px;
+      border-radius: 4px;
+      display: inline-block;
+    }
 
     /* RUN EXAMPLE */
-    .run-example { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow); }
-    .run-example-header { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .run-example-header span { font-size: 12px; color: var(--text3); font-weight: 500; font-family: 'JetBrains Mono', monospace; }
-    .run-btn-small { margin-left: auto; padding: 4px 12px; border-radius: 6px; background: var(--orange); color: white; border: none; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Sora', sans-serif; transition: all .15s; letter-spacing: .3px; }
-    .run-btn-small:hover { background: var(--orange2); }
-    .run-example pre { border-radius: 0; border: none; margin: 0; box-shadow: none; }
-    .run-output { background: #141210; padding: 12px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a8a090; border-top: 1px solid #2a2820; min-height: 32px; display: none; line-height: 1.7; }
-    .run-output.visible { display: block; }
-    .run-output .out-line { color: #c8bfb0; }
-    .run-output .out-prefix { color: #ff8c42; opacity: .6; margin-right: 6px; }
-    .run-output .out-err { color: #ff6b6b; }
+    .run-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .run-example-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .run-example-header span {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .run-btn-small {
+      margin-left: auto;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      transition: all .15s;
+      letter-spacing: .3px;
+    }
+
+    .run-btn-small:hover {
+      background: var(--orange2);
+    }
+
+    .run-example pre {
+      border-radius: 0;
+      border: none;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .run-output {
+      background: #141210;
+      padding: 12px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a8a090;
+      border-top: 1px solid #2a2820;
+      min-height: 32px;
+      display: none;
+      line-height: 1.7;
+    }
+
+    .run-output.visible {
+      display: block;
+    }
+
+    .run-output .out-line {
+      color: #c8bfb0;
+    }
+
+    .run-output .out-prefix {
+      color: #ff8c42;
+      opacity: .6;
+      margin-right: 6px;
+    }
+
+    .run-output .out-err {
+      color: #ff6b6b;
+    }
 
     /* OP GRID */
-    .op-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
-    .op-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; text-align: center; box-shadow: var(--shadow); }
-    .op-chip .op-sym  { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 700; color: var(--blue); }
-    .op-chip .op-name { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
+    .op-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .op-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .op-chip .op-sym {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .op-chip .op-name {
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 2px;
+    }
 
     /* BUILTIN GRID */
-    .builtin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
-    .builtin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow); }
-    .builtin-card:hover { border-color: var(--orange3); }
-    .builtin-card.dict-card:hover { border-color: var(--pink); }
-    .builtin-sig  { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--orange2); font-weight: 600; margin-bottom: 4px; }
-    .builtin-sig.dict-sig { color: var(--pink); }
-    .builtin-desc { font-size: 12px; color: var(--text3); }
+    .builtin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .builtin-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .builtin-card:hover {
+      border-color: var(--orange3);
+    }
+
+    .builtin-card.dict-card:hover {
+      border-color: var(--pink);
+    }
+
+    .builtin-sig {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--orange2);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .builtin-sig.dict-sig {
+      color: var(--pink);
+    }
+
+    .builtin-desc {
+      font-size: 12px;
+      color: var(--text3);
+    }
 
     /* GRAMMAR */
-    .grammar-rule { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 8px 0; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text2); line-height: 1.9; }
-    .gr-name { color: var(--orange); font-weight: 600; }
-    .gr-op   { color: var(--blue); }
-    .gr-str  { color: var(--green); }
-    .gr-meta { color: var(--text3); font-style: italic; }
+    .grammar-rule {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text2);
+      line-height: 1.9;
+    }
+
+    .gr-name {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .gr-op {
+      color: var(--blue);
+    }
+
+    .gr-str {
+      color: var(--green);
+    }
+
+    .gr-meta {
+      color: var(--text3);
+      font-style: italic;
+    }
 
     /* PAGE NAV */
-    .page-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); gap: 16px; }
-    .page-nav-btn { flex: 1; padding: 16px 20px; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text2); background: var(--surface); transition: all .15s; box-shadow: var(--shadow); }
-    .page-nav-btn:hover { border-color: var(--orange3); color: var(--orange); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-    .page-nav-btn .dir   { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
-    .page-nav-btn .title { font-size: 14px; font-weight: 600; }
-    .page-nav-btn.next   { text-align: right; }
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    .page-nav-btn {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text2);
+      background: var(--surface);
+      transition: all .15s;
+      box-shadow: var(--shadow);
+    }
+
+    .page-nav-btn:hover {
+      border-color: var(--orange3);
+      color: var(--orange);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .page-nav-btn .dir {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .page-nav-btn .title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .page-nav-btn.next {
+      text-align: right;
+    }
 
     /* ANCHOR */
-    h2[id], h3[id] { scroll-margin-top: 80px; }
-    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    h2[id],
+    h3[id] {
+      scroll-margin-top: 80px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
 
     /* VERSION TAG */
-    .ver-tag { display: inline-block; padding: 1px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; margin-left: 6px; vertical-align: middle; }
-    .ver-new { background: var(--green-bg); color: var(--green); }
+    .ver-tag {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .ver-new {
+      background: var(--green-bg);
+      color: var(--green);
+    }
 
     /* NEW FEATURE BADGE */
-    .new-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; background: var(--orange-mid); color: var(--orange); border: 1px solid var(--orange3); margin-left: 8px; vertical-align: middle; }
+    .new-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--orange-mid);
+      color: var(--orange);
+      border: 1px solid var(--orange3);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
 
     /* FOOTER */
-    .doc-footer { margin-left: var(--sidebar-w); border-top: 1px solid var(--border); padding: 32px 60px; background: var(--surface); display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text3); }
-    .doc-footer .logo { color: var(--orange); font-weight: 700; }
-    .doc-footer a { color: var(--orange); text-decoration: none; }
-    .doc-footer a:hover { text-decoration: underline; }
+    .doc-footer {
+      margin-left: var(--sidebar-w);
+      border-top: 1px solid var(--border);
+      padding: 32px 60px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .doc-footer .logo {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .doc-footer a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .doc-footer a:hover {
+      text-decoration: underline;
+    }
 
     /* ANIMATIONS */
-    @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    .hero > * { animation: fadeSlide .4s ease both; }
-    .hero h1 { animation-delay: .05s; }
-    .hero-sub { animation-delay: .1s; }
-    .hero-actions { animation-delay: .15s; }
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero>* {
+      animation: fadeSlide .4s ease both;
+    }
+
+    .hero h1 {
+      animation-delay: .05s;
+    }
+
+    .hero-sub {
+      animation-delay: .1s;
+    }
+
+    .hero-actions {
+      animation-delay: .15s;
+    }
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      :root { --sidebar-w: 0px; }
-      .sidebar { transform: translateX(-100%); transition: transform .3s cubic-bezier(.4,0,.2,1); z-index: 200; width: 280px; box-shadow: 20px 0 50px rgba(0,0,0,.1); }
-      .sidebar.open { transform: translateX(0); }
-      .content { margin-left: 0; }
-      .header-nav { display: none; }
-      .menu-toggle { display: flex !important; }
+      :root {
+        --sidebar-w: 0px;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        z-index: 200;
+        width: 280px;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, .1);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .header-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+      }
     }
+
     @media (max-width: 768px) {
-      .hero { padding: 48px 24px; }
-      .hero h1 { font-size: 32px; }
-      .page-section { padding: 40px 24px; }
-      .builtin-grid { grid-template-columns: 1fr; }
-      .op-grid { grid-template-columns: repeat(3,1fr); }
+      .hero {
+        padding: 48px 24px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .page-section {
+        padding: 40px 24px;
+      }
+
+      .builtin-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .op-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
+
     @media (max-width: 480px) {
-      .hero::before { display: none; }
-      .op-grid { grid-template-columns: repeat(2,1fr); }
+      .hero::before {
+        display: none;
+      }
+
+      .op-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
@@ -268,11 +1130,12 @@
     <a href="#" class="site-logo">
       <span class="cat">🐱</span>
       MEOW
-      <span class="logo-badge">v2.1</span>
+      <span class="logo-badge">v2.1.2</span>
     </a>
     <nav class="header-nav">
       <a href="#intro" class="active">Docs</a>
       <a href="#syntax">Language</a>
+      <a href="#gui-intro">GUI</a>
       <a href="#builtins">Builtins</a>
       <a href="#examples-sec">Examples</a>
     </nav>
@@ -310,6 +1173,12 @@
         <a class="sidebar-link" href="#fileops"><span class="icon">📄</span> File Operations</a>
       </div>
       <div class="sidebar-group">
+        <div class="sidebar-group-label">GUI Engine</div>
+        <a class="sidebar-link" href="#gui-intro"><span class="icon">🎨</span> GUI Overview</a>
+        <a class="sidebar-link" href="#gui-layouts"><span class="icon">🏗️</span> Layout &amp; Nesting</a>
+        <a class="sidebar-link" href="#gui-components"><span class="icon">🖱️</span> Components</a>
+      </div>
+      <div class="sidebar-group">
         <div class="sidebar-group-label">Reference</div>
         <a class="sidebar-link" href="#keywords"><span class="icon">🗝️</span> All Keywords</a>
         <a class="sidebar-link" href="#builtins"><span class="icon">🔧</span> Built-in Functions</a>
@@ -339,7 +1208,9 @@
           <span class="pill pill-green">✅ Interpreted</span>
           <span class="pill pill-blue">⚡ Fast</span>
           <span class="pill pill-purple">🔧 Full-Featured</span>
-          <span class="pill pill-pink">✨ v2 Updated</span>
+          <span class="pill pill-pink">✨ v2.1.2 Updated {April, 26}</span>
+          <span class="pill pill-blue">🧑‍💻 GUI Support Added</span>
+
         </div>
       </div>
 
@@ -348,12 +1219,18 @@
 
         <h2 id="intro">Introduction</h2>
 
-        <p><strong>MEOW</strong> is a dynamically-typed, interpreted programming language designed entirely around cat behavior and vocabulary. Every keyword, construct, and concept maps to something a cat would do — because all great languages start with a 🐱.</p>
-        <p>Version 2 adds dictionaries (<code>den</code>), string interpolation (<code>${...}</code>), user input (<code>ask()</code>), file operations, <code>import</code>, and many new built-in functions.</p>
+        <p><strong>MEOW</strong> is a dynamically-typed, interpreted programming language designed entirely around cat
+          behavior and vocabulary. Every keyword, construct, and concept maps to something a cat would do — because all
+          great languages start with a 🐱.</p>
+        <p>Version 2 adds dictionaries (<code>den</code>), string interpolation (<code>${...}</code>), user input
+          (<code>ask()</code>), file operations, <code>import</code>, and many new built-in functions.</p>
 
         <div class="callout callout-orange">
           <div class="callout-title">🐾 Core Philosophy</div>
-          <p>If a cat would do it, MEOW can express it. Variables <em>purr</em> into existence. Conditions <em>psspss</em>. Loops <em>stalk</em> their prey. Dicts <em>den</em> their secrets. And when something goes wrong? The cat <em>scratches</em>.</p>
+          <p>If a cat would do it, MEOW can express it. Variables <em>purr</em> into existence. Conditions
+            <em>psspss</em>. Loops <em>stalk</em> their prey. Dicts <em>den</em> their secrets. And when something goes
+            wrong? The cat <em>scratches</em>.
+          </p>
         </div>
 
         <h3 id="philosophy">Language Features</h3>
@@ -363,10 +1240,14 @@
           <li><strong>Closures</strong> — Functions capture their environment (like a cat in a box)</li>
           <li><strong>Arrays (Litters)</strong> — Ordered collections</li>
           <li><strong>Dictionaries (Dens)</strong> — Key-value stores <span class="new-badge">v2</span></li>
-          <li><strong>String interpolation</strong> — Embed expressions with <code>${...}</code> <span class="new-badge">v2</span></li>
-          <li><strong>User input</strong> — Read from console with <code>ask()</code> <span class="new-badge">v2</span></li>
-          <li><strong>Import system</strong> — Share code across tabs with <code>import</code> <span class="new-badge">v2</span></li>
-          <li><strong>File operations</strong> — <code>read_file()</code> / <code>write_file()</code> <span class="new-badge">v2</span></li>
+          <li><strong>String interpolation</strong> — Embed expressions with <code>${...}</code> <span
+              class="new-badge">v2</span></li>
+          <li><strong>User input</strong> — Read from console with <code>ask()</code> <span class="new-badge">v2</span>
+          </li>
+          <li><strong>Import system</strong> — Share code across tabs with <code>import</code> <span
+              class="new-badge">v2</span></li>
+          <li><strong>File operations</strong> — <code>read_file()</code> / <code>write_file()</code> <span
+              class="new-badge">v2</span></li>
           <li><strong>25+ built-in functions</strong> — Math, strings, arrays, dicts</li>
           <li><strong>Rich control flow</strong> — Conditionals, two loop types, break/continue</li>
         </ul>
@@ -389,7 +1270,8 @@
 
 <span class="kw">purr</span> lives <span class="op">=</span> <span class="num">9</span>
 <span class="kw">meow</span> <span class="str">"</span><span class="interp">${name}</span><span class="str"> has </span><span class="interp">${lives}</span><span class="str"> lives"</span></code></pre>
-          <div class="run-output" data-output='["Hello, World! 🐱","My cat\u2019s name is: Whiskers","Whiskers has 9 lives"]'></div>
+          <div class="run-output"
+            data-output='["Hello, World! 🐱","My cat\u2019s name is: Whiskers","Whiskers has 9 lives"]'></div>
         </div>
 
       </div>
@@ -398,7 +1280,8 @@
       <div class="page-section" id="syntax">
 
         <h2 id="syntax">Syntax Overview</h2>
-        <p>MEOW has a clean, block-based syntax. Blocks are delimited by <code>{ }</code>. There are no semicolons. Comments start with <code>#</code>.</p>
+        <p>MEOW has a clean, block-based syntax. Blocks are delimited by <code>{ }</code>. There are no semicolons.
+          Comments start with <code>#</code>.</p>
 
         <pre><code><span class="lang-badge">.meow</span><span class="cmt"># This is a comment</span>
 
@@ -410,7 +1293,9 @@
 <span class="paren">}</span></code></pre>
 
         <h3>File Extension</h3>
-        <p>MEOW source files use the <code>.meow</code> extension. The IDE supports multiple open files and <code>import</code> between them.</p>
+        <p>MEOW source files use the <code>.meow</code> extension. The IDE supports multiple open files and
+          <code>import</code> between them.
+        </p>
 
         <h3>Comments</h3>
         <pre><code><span class="cmt"># This is a single-line comment</span>
@@ -422,7 +1307,9 @@
       <div class="page-section" id="variables">
 
         <h2 id="variables">Variables</h2>
-        <p>Variables are declared using the <code>purr</code> keyword. Once declared, they can be reassigned without a keyword. MEOW also supports <code>+=</code> and <code>++</code> / <code>--</code> shorthand. <span class="new-badge">v2</span></p>
+        <p>Variables are declared using the <code>purr</code> keyword. Once declared, they can be reassigned without a
+          keyword. MEOW also supports <code>+=</code> and <code>++</code> / <code>--</code> shorthand. <span
+            class="new-badge">v2</span></p>
 
         <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> x <span class="op">=</span> <span class="num">10</span>
 <span class="kw">purr</span> name <span class="op">=</span> <span class="str">"Luna"</span>
@@ -441,7 +1328,8 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <div class="callout callout-blue">
           <div class="callout-title">📝 Variable Scoping</div>
-          <p>Variables declared inside blocks are scoped to that block. Outer variables are accessible from inner scopes. Reassigning an outer variable from an inner scope mutates it.</p>
+          <p>Variables declared inside blocks are scoped to that block. Outer variables are accessible from inner
+            scopes. Reassigning an outer variable from an inner scope mutates it.</p>
         </div>
 
       </div>
@@ -454,18 +1342,54 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <div class="table-wrap">
           <table>
-            <tr><th>Type</th><th>MEOW Literal</th><th>Example</th><th>Description</th></tr>
-            <tr><td><strong>Number</strong></td><td><code>42</code> / <code>3.14</code></td><td class="ex"><code class="kw2">purr</code> n = 42</td><td>Integer or float</td></tr>
-            <tr><td><strong>String</strong></td><td><code>"hello"</code></td><td class="ex"><code class="kw2">purr</code> s = "meow"</td><td>Text in double/single quotes</td></tr>
-            <tr><td><strong>Boolean</strong></td><td><code>pawsitive</code> / <code>clawful</code></td><td class="ex"><code class="kw2">purr</code> b = pawsitive</td><td>True / False</td></tr>
-            <tr><td><strong>Null</strong></td><td><code>nap</code></td><td class="ex"><code class="kw2">purr</code> x = nap</td><td>Absence of value</td></tr>
-            <tr><td><strong>Array</strong></td><td><code>litter [...]</code></td><td class="ex"><code class="kw2">purr</code> a = litter [1,2,3]</td><td>Ordered collection</td></tr>
-            <tr><td><strong>Dict</strong></td><td><code>den {...}</code></td><td class="ex"><code class="dict2">purr</code> d = den {"k":v}</td><td>Key-value store <span class="new-badge">v2</span></td></tr>
+            <tr>
+              <th>Type</th>
+              <th>MEOW Literal</th>
+              <th>Example</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>Number</strong></td>
+              <td><code>42</code> / <code>3.14</code></td>
+              <td class="ex"><code class="kw2">purr</code> n = 42</td>
+              <td>Integer or float</td>
+            </tr>
+            <tr>
+              <td><strong>String</strong></td>
+              <td><code>"hello"</code></td>
+              <td class="ex"><code class="kw2">purr</code> s = "meow"</td>
+              <td>Text in double/single quotes</td>
+            </tr>
+            <tr>
+              <td><strong>Boolean</strong></td>
+              <td><code>pawsitive</code> / <code>clawful</code></td>
+              <td class="ex"><code class="kw2">purr</code> b = pawsitive</td>
+              <td>True / False</td>
+            </tr>
+            <tr>
+              <td><strong>Null</strong></td>
+              <td><code>nap</code></td>
+              <td class="ex"><code class="kw2">purr</code> x = nap</td>
+              <td>Absence of value</td>
+            </tr>
+            <tr>
+              <td><strong>Array</strong></td>
+              <td><code>litter [...]</code></td>
+              <td class="ex"><code class="kw2">purr</code> a = litter [1,2,3]</td>
+              <td>Ordered collection</td>
+            </tr>
+            <tr>
+              <td><strong>Dict</strong></td>
+              <td><code>den {...}</code></td>
+              <td class="ex"><code class="dict2">purr</code> d = den {"k":v}</td>
+              <td>Key-value store <span class="new-badge">v2</span></td>
+            </tr>
           </table>
         </div>
 
         <h3>Truthiness</h3>
-        <p>Falsy values: <code>clawful</code>, <code>nap</code>, <code>0</code>, <code>""</code>. Everything else is truthy.</p>
+        <p>Falsy values: <code>clawful</code>, <code>nap</code>, <code>0</code>, <code>""</code>. Everything else is
+          truthy.</p>
 
         <h3>Type Checking</h3>
         <pre><code><span class="kw">meow</span> sniff(<span class="num">42</span>)          <span class="cmt"># → "number"</span>
@@ -483,37 +1407,92 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <h3>Arithmetic</h3>
         <div class="op-grid">
-          <div class="op-chip"><div class="op-sym">+</div><div class="op-name">Add / Concat</div></div>
-          <div class="op-chip"><div class="op-sym">-</div><div class="op-name">Subtract</div></div>
-          <div class="op-chip"><div class="op-sym">*</div><div class="op-name">Multiply</div></div>
-          <div class="op-chip"><div class="op-sym">/</div><div class="op-name">Divide</div></div>
-          <div class="op-chip"><div class="op-sym">%</div><div class="op-name">Modulo</div></div>
-          <div class="op-chip"><div class="op-sym">==</div><div class="op-name">Equal</div></div>
-          <div class="op-chip"><div class="op-sym">!=</div><div class="op-name">Not Equal</div></div>
-          <div class="op-chip"><div class="op-sym">&lt;</div><div class="op-name">Less Than</div></div>
-          <div class="op-chip"><div class="op-sym">&gt;</div><div class="op-name">Greater Than</div></div>
-          <div class="op-chip"><div class="op-sym">&lt;=</div><div class="op-name">Less / Eq</div></div>
-          <div class="op-chip"><div class="op-sym">&gt;=</div><div class="op-name">Greater / Eq</div></div>
-          <div class="op-chip"><div class="op-sym">+=</div><div class="op-name">Add-Assign <span style="font-size:8px">v2</span></div></div>
+          <div class="op-chip">
+            <div class="op-sym">+</div>
+            <div class="op-name">Add / Concat</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">-</div>
+            <div class="op-name">Subtract</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">*</div>
+            <div class="op-name">Multiply</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">/</div>
+            <div class="op-name">Divide</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">%</div>
+            <div class="op-name">Modulo</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">==</div>
+            <div class="op-name">Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">!=</div>
+            <div class="op-name">Not Equal</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&lt;</div>
+            <div class="op-name">Less Than</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&gt;</div>
+            <div class="op-name">Greater Than</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&lt;=</div>
+            <div class="op-name">Less / Eq</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">&gt;=</div>
+            <div class="op-name">Greater / Eq</div>
+          </div>
+          <div class="op-chip">
+            <div class="op-sym">+=</div>
+            <div class="op-name">Add-Assign <span style="font-size:8px">v2</span></div>
+          </div>
         </div>
 
         <h3>Logical Operators</h3>
         <div class="table-wrap">
           <table>
-            <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
-            <tr><td><span class="kw2">and</span></td><td>Logical AND (short-circuits)</td><td class="ex">psspss (x > 0 and x &lt; 10)</td></tr>
-            <tr><td><span class="kw2">or</span></td><td>Logical OR (short-circuits)</td><td class="ex">psspss (a == 1 or b == 2)</td></tr>
-            <tr><td><span class="kw2">not</span></td><td>Logical NOT</td><td class="ex">psspss (not done)</td></tr>
+            <tr>
+              <th>Operator</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td><span class="kw2">and</span></td>
+              <td>Logical AND (short-circuits)</td>
+              <td class="ex">psspss (x > 0 and x &lt; 10)</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">or</span></td>
+              <td>Logical OR (short-circuits)</td>
+              <td class="ex">psspss (a == 1 or b == 2)</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">not</span></td>
+              <td>Logical NOT</td>
+              <td class="ex">psspss (not done)</td>
+            </tr>
           </table>
         </div>
 
         <h3>String Concatenation</h3>
-        <p>The <code>+</code> operator concatenates strings. Prefer <strong>string interpolation</strong> for embedded values — see the Strings section.</p>
+        <p>The <code>+</code> operator concatenates strings. Prefer <strong>string interpolation</strong> for embedded
+          values — see the Strings section.</p>
         <pre><code><span class="kw">meow</span> <span class="str">"Hello "</span> <span class="op">+</span> <span class="str">"World"</span>       <span class="cmt"># → "Hello World"</span>
 <span class="kw">meow</span> <span class="str">"Count: "</span> <span class="op">+</span> <span class="num">42</span>           <span class="cmt"># → "Count: 42"</span></code></pre>
 
         <h3>Operator Precedence</h3>
-        <p>Highest to lowest: <code>not</code>, <code>- (unary)</code>, <code>* / %</code>, <code>+ -</code>, <code>&lt; &gt; &lt;= &gt;=</code>, <code>== !=</code>, <code>and</code>, <code>or</code>.</p>
+        <p>Highest to lowest: <code>not</code>, <code>- (unary)</code>, <code>* / %</code>, <code>+ -</code>,
+          <code>&lt; &gt; &lt;= &gt;=</code>, <code>== !=</code>, <code>and</code>, <code>or</code>.
+        </p>
 
       </div>
 
@@ -522,10 +1501,13 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 
         <h2 id="strings">Strings &amp; Interpolation <span class="new-badge">v2</span></h2>
 
-        <p>Strings are enclosed in double <code>"..."</code> or single <code>'...'</code> quotes. Escape sequences: <code>\n</code> (newline), <code>\t</code> (tab), <code>\\</code> (backslash).</p>
+        <p>Strings are enclosed in double <code>"..."</code> or single <code>'...'</code> quotes. Escape sequences:
+          <code>\n</code> (newline), <code>\t</code> (tab), <code>\\</code> (backslash).
+        </p>
 
         <h3>String Interpolation</h3>
-        <p>Embed any expression directly inside a string using <code>${expr}</code>. This is the recommended way to compose strings with variable values.</p>
+        <p>Embed any expression directly inside a string using <code>${expr}</code>. This is the recommended way to
+          compose strings with variable values.</p>
 
         <div class="run-example">
           <div class="run-example-header">
@@ -539,12 +1521,15 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
 <span class="kw">meow</span> <span class="str">"My cat <span class="interp">${name}</span> is <span class="interp">${age}</span> years old!"</span>
 <span class="kw">meow</span> <span class="str">"Score: <span class="interp">${score * 10}</span>/100"</span>
 <span class="kw">meow</span> <span class="str">"Next year she'll be <span class="interp">${age + 1}</span>"</span></code></pre>
-          <div class="run-output" data-output='["My cat Luna is 3 years old!","Score: 95/100","Next year she\u2019ll be 4"]'></div>
+          <div class="run-output"
+            data-output='["My cat Luna is 3 years old!","Score: 95/100","Next year she\u2019ll be 4"]'></div>
         </div>
 
         <div class="callout callout-blue">
           <div class="callout-title">💡 Interpolation vs. Concatenation</div>
-          <p>Prefer <code>"Hello ${name}!"</code> over <code>"Hello " + name + "!"</code>. Interpolation works inside any double- or single-quoted string and supports full expressions — function calls, arithmetic, comparisons.</p>
+          <p>Prefer <code>"Hello ${name}!"</code> over <code>"Hello " + name + "!"</code>. Interpolation works inside
+            any double- or single-quoted string and supports full expressions — function calls, arithmetic, comparisons.
+          </p>
         </div>
 
         <h3>String Built-ins</h3>
@@ -680,15 +1665,51 @@ name <span class="op">=</span> name <span class="op">+</span> <span class="str">
         <h3>Array Operations</h3>
         <div class="table-wrap">
           <table>
-            <tr><th>Operation</th><th>Syntax</th><th>Returns</th></tr>
-            <tr><td>Length</td><td><span class="kw2">fur(arr)</span></td><td>Number of elements</td></tr>
-            <tr><td>Push (append)</td><td><span class="kw2">chase(arr, value)</span></td><td>Modified array</td></tr>
-            <tr><td>Pop (remove last)</td><td><span class="kw2">pop(arr)</span></td><td>Removed element <span class="new-badge">v2</span></td></tr>
-            <tr><td>Join</td><td><span class="kw2">nuzzle(arr, sep)</span></td><td>Joined string</td></tr>
-            <tr><td>Slice</td><td><span class="kw2">tail_slice(arr, start, end)</span></td><td>New sub-array</td></tr>
-            <tr><td>Sort (numbers)</td><td><span class="kw2">sort(arr)</span></td><td>Sorted copy <span class="new-badge">v2</span></td></tr>
-            <tr><td>Reverse</td><td><span class="kw2">reverse(arr)</span></td><td>Reversed copy <span class="new-badge">v2</span></td></tr>
-            <tr><td>Max / Min</td><td><span class="kw2">max(arr)</span> / <span class="kw2">min(arr)</span></td><td>Largest / smallest <span class="new-badge">v2</span></td></tr>
+            <tr>
+              <th>Operation</th>
+              <th>Syntax</th>
+              <th>Returns</th>
+            </tr>
+            <tr>
+              <td>Length</td>
+              <td><span class="kw2">fur(arr)</span></td>
+              <td>Number of elements</td>
+            </tr>
+            <tr>
+              <td>Push (append)</td>
+              <td><span class="kw2">chase(arr, value)</span></td>
+              <td>Modified array</td>
+            </tr>
+            <tr>
+              <td>Pop (remove last)</td>
+              <td><span class="kw2">pop(arr)</span></td>
+              <td>Removed element <span class="new-badge">v2</span></td>
+            </tr>
+            <tr>
+              <td>Join</td>
+              <td><span class="kw2">nuzzle(arr, sep)</span></td>
+              <td>Joined string</td>
+            </tr>
+            <tr>
+              <td>Slice</td>
+              <td><span class="kw2">tail_slice(arr, start, end)</span></td>
+              <td>New sub-array</td>
+            </tr>
+            <tr>
+              <td>Sort (numbers)</td>
+              <td><span class="kw2">sort(arr)</span></td>
+              <td>Sorted copy <span class="new-badge">v2</span></td>
+            </tr>
+            <tr>
+              <td>Reverse</td>
+              <td><span class="kw2">reverse(arr)</span></td>
+              <td>Reversed copy <span class="new-badge">v2</span></td>
+            </tr>
+            <tr>
+              <td>Max / Min</td>
+              <td><span class="kw2">max(arr)</span> / <span class="kw2">min(arr)</span></td>
+              <td>Largest / smallest <span class="new-badge">v2</span></td>
+            </tr>
           </table>
         </div>
 
@@ -705,7 +1726,9 @@ chase(cats, <span class="str">"Mochi"</span>)
 <span class="kw">purr</span> scores <span class="op">=</span> <span class="kw">litter</span> [<span class="num">99</span>, <span class="num">41</span>, <span class="num">72</span>, <span class="num">55</span>]
 <span class="kw">meow</span> <span class="str">"Sorted: <span class="interp">${nuzzle(sort(scores), " < ")}</span>"</span>
 <span class="kw">meow</span> <span class="str">"Max: <span class="interp">${max(scores)}</span>  Min: <span class="interp">${min(scores)}</span>"</span></code></pre>
-          <div class="run-output" data-output='["Count: 3","All: Pixel, Luna, Biscuit, Mochi","Sorted: 41 < 55 < 72 < 99","Max: 99  Min: 41"]'></div>
+          <div class="run-output"
+            data-output='["Count: 3","All: Pixel, Luna, Biscuit, Mochi","Sorted: 41 < 55 < 72 < 99","Max: 99  Min: 41"]'>
+          </div>
         </div>
 
       </div>
@@ -715,7 +1738,8 @@ chase(cats, <span class="str">"Mochi"</span>)
 
         <h2 id="dicts">Dictionaries (Dens) <span class="new-badge">v2</span></h2>
 
-        <p>Dictionaries are key-value stores created with the <code>den { ... }</code> syntax. Keys are strings; values can be any type, including nested dicts or arrays.</p>
+        <p>Dictionaries are key-value stores created with the <code>den { ... }</code> syntax. Keys are strings; values
+          can be any type, including nested dicts or arrays.</p>
 
         <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> cat <span class="op">=</span> <span class="dict-kw">den</span> <span class="paren">{</span>
   <span class="str">"name"</span><span class="op">:</span> <span class="str">"Luna"</span><span class="op">,</span>
@@ -733,11 +1757,31 @@ cat[<span class="str">"age"</span>] <span class="op">=</span> <span class="num">
         <h3>Dict Operations</h3>
         <div class="table-wrap">
           <table>
-            <tr><th>Operation</th><th>Syntax</th><th>Returns</th></tr>
-            <tr><td>Get all keys</td><td><span class="dict2">keys(d)</span></td><td>Array of key strings</td></tr>
-            <tr><td>Get all values</td><td><span class="dict2">values(d)</span></td><td>Array of values</td></tr>
-            <tr><td>Check key exists</td><td><span class="dict2">has(d, key)</span></td><td>pawsitive / clawful</td></tr>
-            <tr><td>Delete a key</td><td><span class="dict2">del_key(d, key)</span></td><td>Modified dict</td></tr>
+            <tr>
+              <th>Operation</th>
+              <th>Syntax</th>
+              <th>Returns</th>
+            </tr>
+            <tr>
+              <td>Get all keys</td>
+              <td><span class="dict2">keys(d)</span></td>
+              <td>Array of key strings</td>
+            </tr>
+            <tr>
+              <td>Get all values</td>
+              <td><span class="dict2">values(d)</span></td>
+              <td>Array of values</td>
+            </tr>
+            <tr>
+              <td>Check key exists</td>
+              <td><span class="dict2">has(d, key)</span></td>
+              <td>pawsitive / clawful</td>
+            </tr>
+            <tr>
+              <td>Delete a key</td>
+              <td><span class="dict2">del_key(d, key)</span></td>
+              <td>Modified dict</td>
+            </tr>
           </table>
         </div>
 
@@ -754,7 +1798,9 @@ cat[<span class="str">"age"</span>] <span class="op">=</span> <span class="num">
 <span class="kw">meow</span> <span class="str">"Keys: <span class="interp">${nuzzle(keys(cat), ", ")}</span>"</span>
 del_key(cat, <span class="str">"color"</span>)
 <span class="kw">meow</span> <span class="str">"After delete: <span class="interp">${nuzzle(keys(cat), ", ")}</span>"</span></code></pre>
-          <div class="run-output" data-output='["Name: Luna","Updated age: 4","Has color? pawsitive","Keys: name, age, color","After delete: name, age"]'></div>
+          <div class="run-output"
+            data-output='["Name: Luna","Updated age: 4","Has color? pawsitive","Keys: name, age, color","After delete: name, age"]'>
+          </div>
         </div>
 
         <h3>Nested Dicts</h3>
@@ -772,7 +1818,9 @@ del_key(cat, <span class="str">"color"</span>)
 
         <h2 id="input">User Input <span class="new-badge">v2</span></h2>
 
-        <p>The <code>ask(prompt)</code> built-in displays a prompt and returns the user's input as a string. Use <code>paw_num()</code> to convert to a number if needed.</p>
+        <p>The <code>ask(prompt)</code> built-in displays a prompt and returns the user's input as a string. Use
+          <code>paw_num()</code> to convert to a number if needed.
+        </p>
 
         <pre><code><span class="lang-badge">.meow</span><span class="kw">purr</span> name <span class="op">=</span> ask(<span class="str">"What is your cat's name? "</span>)
 <span class="kw">meow</span> <span class="str">"Hello, <span class="interp">${name}</span>! 🐱"</span>
@@ -783,7 +1831,8 @@ del_key(cat, <span class="str">"color"</span>)
 
         <div class="callout callout-orange">
           <div class="callout-title">🐾 IDE Behavior</div>
-          <p><code>ask()</code> opens a browser prompt dialog in the MEOW IDE. The value is always returned as a string — convert with <code>paw_num()</code> when you need a number.</p>
+          <p><code>ask()</code> opens a browser prompt dialog in the MEOW IDE. The value is always returned as a string
+            — convert with <code>paw_num()</code> when you need a number.</p>
         </div>
 
       </div>
@@ -793,7 +1842,8 @@ del_key(cat, <span class="str">"color"</span>)
 
         <h2 id="import">Import <span class="new-badge">v2</span></h2>
 
-        <p>The <code>import "filename"</code> statement runs another open tab's code in the current scope, making its functions and variables available. The <code>.meow</code> extension is optional.</p>
+        <p>The <code>import "filename"</code> statement runs another open tab's code in the current scope, making its
+          functions and variables available. The <code>.meow</code> extension is optional.</p>
 
         <pre><code><span class="lang-badge">.meow</span><span class="cmt"># In utils.meow:</span>
 <span class="kw">claw</span> <span class="fn">square</span><span class="paren">(</span>n<span class="paren">)</span> <span class="paren">{</span> <span class="kw">paw</span> n <span class="op">*</span> n <span class="paren">}</span>
@@ -804,7 +1854,8 @@ del_key(cat, <span class="str">"color"</span>)
 
         <div class="callout callout-blue">
           <div class="callout-title">📌 Tab Must Be Open</div>
-          <p>The imported file must exist as an open tab in the IDE. If the tab is not found, MEOW throws a runtime error: <em>Cannot import 'name': file not found.</em></p>
+          <p>The imported file must exist as an open tab in the IDE. If the tab is not found, MEOW throws a runtime
+            error: <em>Cannot import 'name': file not found.</em></p>
         </div>
 
       </div>
@@ -818,9 +1869,18 @@ del_key(cat, <span class="str">"color"</span>)
 
         <div class="table-wrap">
           <table>
-            <tr><th>Function</th><th>Description</th></tr>
-            <tr><td><span class="dict2">read_file(name)</span></td><td>Returns the full text content of the named tab as a string</td></tr>
-            <tr><td><span class="dict2">write_file(name, content)</span></td><td>Creates or overwrites a tab with the given content</td></tr>
+            <tr>
+              <th>Function</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><span class="dict2">read_file(name)</span></td>
+              <td>Returns the full text content of the named tab as a string</td>
+            </tr>
+            <tr>
+              <td><span class="dict2">write_file(name, content)</span></td>
+              <td>Creates or overwrites a tab with the given content</td>
+            </tr>
           </table>
         </div>
 
@@ -838,9 +1898,132 @@ write_file(<span class="str">"log.txt"</span>, log)
 
         <div class="callout callout-green">
           <div class="callout-title">✅ Use Case</div>
-          <p>File operations are great for passing data between tabs, storing intermediate results, or simulating persistent storage within an IDE session.</p>
+          <p>File operations are great for passing data between tabs, storing intermediate results, or simulating
+            persistent storage within an IDE session.</p>
         </div>
 
+      </div>
+
+      <!-- GUI ENGINE -->
+      <div class="page-section" id="gui-intro">
+        <h2 id="gui-intro">GUI Programming <span class="new-badge">v2.1.2</span></h2>
+        <p>MEOW v2.1.2 introduces a built-in <strong>GUI Engine</strong> that allows you to create interactive visual
+          programs. In the MEOW IDE, these programs appear in a floating, draggable overlay.</p>
+
+        <div class="callout callout-purple">
+          <div class="callout-title">🛰️ The Floating Overlay</div>
+          <p>Unlike the text-based console, the GUI Engine provides a <strong>Live Preview</strong> window. This overlay
+            appears automatically as soon as your script executes any <code>gui_</code> command.</p>
+        </div>
+
+        <h3 id="gui-layouts">Layout & Nesting</h3>
+        <p>MEOW uses a "Container Stack" for layouts. By default, elements are added vertically. Use
+          <code>gui_row()</code> and <code>gui_column()</code> to create complex grids.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Function</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><span class="kw2">gui_row()</span></td>
+              <td>Starts a horizontal layout container. All next elements go side-by-side.</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">gui_column()</span></td>
+              <td>Starts a vertical layout container (default).</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">gui_end()</span></td>
+              <td>Ends the current layout container and returns to the parent.</td>
+            </tr>
+            <tr>
+              <td><span class="kw2">gui_spacer(px)</span></td>
+              <td>Adds a gap or flexible space between elements.</td>
+            </tr>
+          </table>
+        </div>
+
+        <pre><code><span class="cmt"># A horizontal toolbar with a spacer pushing buttons apart</span>
+<span class="kw">gui_row</span><span class="paren">()</span>
+  <span class="kw">gui_button</span><span class="paren">(</span><span class="str">"Save"</span><span class="op">,</span> <span class="str">"saveFn"</span><span class="paren">)</span>
+  <span class="kw">gui_spacer</span><span class="paren">()</span>
+  <span class="kw">gui_button</span><span class="paren">(</span><span class="str">"Exit"</span><span class="op">,</span> <span class="str">"exitFn"</span><span class="paren">)</span>
+<span class="kw">gui_end</span><span class="paren">()</span></code></pre>
+
+        <h3 id="gui-components">Visual Components</h3>
+        <p>Use these built-ins to add interactivity and media to your programs.</p>
+
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Component</th>
+              <th>Function Signature</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><strong>Label</strong></td>
+              <td><span class="kw2">gui_label(text)</span></td>
+              <td>Adds a simple text label.</td>
+            </tr>
+            <tr>
+              <td><strong>Button</strong></td>
+              <td><span class="kw2">gui_button(text, fnName)</span></td>
+              <td>Adds a button that triggers a MEOW function.</td>
+            </tr>
+            <tr>
+              <td><strong>Input</strong></td>
+              <td><span class="kw2">gui_input(hint, varName)</span></td>
+              <td>Adds a text field that updates a MEOW variable.</td>
+            </tr>
+            <tr>
+              <td><strong>Slider</strong></td>
+              <td><span class="kw2">gui_slider(min, max, varName)</span></td>
+              <td>Adds a range slider for numeric variables.</td>
+            </tr>
+            <tr>
+              <td><strong>Image</strong></td>
+              <td><span class="kw2">gui_image(url, w, h)</span></td>
+              <td>Renders an image (optional width/height).</td>
+            </tr>
+            <tr>
+              <td><strong>Modal</strong></td>
+              <td><span class="kw2">gui_show_modal(msg)</span></td>
+              <td>Shows a blurred glassmorphic overlay.</td>
+            </tr>
+          </table>
+        </div>
+
+        <h3>Interactive State</h3>
+        <p>Callbacks in MEOW are powerful. When a user clicks a <code>gui_button</code>, the IDE executes the named
+          <code>claw</code> function using the environment from the last successful "Run".
+        </p>
+
+        <div class="run-example">
+          <div class="run-example-header">
+            <span>🐾 gui_basics.meow</span>
+            <button class="run-btn-small" onclick="runInline(this)">▶ Run</button>
+          </div>
+          <pre><code><span class="kw">purr</span> count <span class="op">=</span> <span class="num">0</span>
+<span class="kw">claw</span> <span class="fn">clk</span><span class="paren">()</span> <span class="paren">{</span>
+  count <span class="op">=</span> count <span class="op">+</span> <span class="num">1</span>
+  <span class="kw">gui_clear</span><span class="paren">()</span>
+  <span class="kw">gui_label</span><span class="paren">(</span><span class="str">"Clicks: <span class="interp">${count}</span>"</span><span class="paren">)</span>
+  <span class="kw">gui_button</span><span class="paren">(</span><span class="str">"Click Me!"</span><span class="op">,</span> <span class="str">"clk"</span><span class="paren">)</span>
+<span class="paren">}</span>
+<span class="kw">gui_button</span><span class="paren">(</span><span class="str">"Start Counter"</span><span class="op">,</span> <span class="str">"clk"</span><span class="paren">)</span></code></pre>
+          <div class="run-output" data-output='["[GUI Output Sample Displayed in IDE]"]'></div>
+        </div>
+
+        <h3>Styling Elements</h3>
+        <p>Customize the look of your GUI elements on the fly.</p>
+        <ul>
+          <li><span class="dict2">gui_set_color(hex)</span> — Sets text color for next elements.</li>
+          <li><span class="dict2">gui_set_padding(px)</span> — Sets padding for the active layout container.</li>
+          <li><span class="dict2">gui_set_id(id)</span> — Assigns a CSS ID to the very next element created.</li>
+        </ul>
       </div>
 
       <!-- KEYWORDS -->
@@ -849,24 +2032,111 @@ write_file(<span class="str">"log.txt"</span>, log)
         <h2 id="keywords">All Keywords</h2>
 
         <div class="kw-grid">
-          <div class="kw-card"><div class="kw-name">purr</div><div class="kw-desc">Declare a variable</div><div class="kw-ex">purr x = 42</div></div>
-          <div class="kw-card"><div class="kw-name">meow</div><div class="kw-desc">Print to output</div><div class="kw-ex">meow "Hello!"</div></div>
-          <div class="kw-card"><div class="kw-name">psspss</div><div class="kw-desc">Conditional if block</div><div class="kw-ex">psspss (x > 0) { }</div></div>
-          <div class="kw-card"><div class="kw-name">else</div><div class="kw-desc">Else / else-if branch</div><div class="kw-ex">} else { }</div></div>
-          <div class="kw-card"><div class="kw-name">stalk</div><div class="kw-desc">While loop</div><div class="kw-ex">stalk (alive) { }</div></div>
-          <div class="kw-card"><div class="kw-name">pounce</div><div class="kw-desc">For range loop</div><div class="kw-ex">pounce (i from 1 to 5)</div></div>
-          <div class="kw-card"><div class="kw-name">from / to</div><div class="kw-desc">Range bounds in pounce</div><div class="kw-ex">from 0 to 10</div></div>
-          <div class="kw-card"><div class="kw-name">claw</div><div class="kw-desc">Define a function</div><div class="kw-ex">claw add(a,b) { }</div></div>
-          <div class="kw-card"><div class="kw-name">paw</div><div class="kw-desc">Return value from function</div><div class="kw-ex">paw result</div></div>
-          <div class="kw-card"><div class="kw-name">litter</div><div class="kw-desc">Create an array</div><div class="kw-ex">litter [1, 2, 3]</div></div>
-          <div class="kw-card"><div class="kw-name dict">den</div><div class="kw-desc">Create a dictionary</div><div class="kw-ex">den {"key": val}</div></div>
-          <div class="kw-card"><div class="kw-name">import</div><div class="kw-desc">Import another tab's code</div><div class="kw-ex">import "utils"</div></div>
-          <div class="kw-card"><div class="kw-name">pawsitive</div><div class="kw-desc">Boolean true</div><div class="kw-ex">purr ok = pawsitive</div></div>
-          <div class="kw-card"><div class="kw-name">clawful</div><div class="kw-desc">Boolean false</div><div class="kw-ex">purr bad = clawful</div></div>
-          <div class="kw-card"><div class="kw-name">nap</div><div class="kw-desc">Null / no value</div><div class="kw-ex">purr x = nap</div></div>
-          <div class="kw-card"><div class="kw-name">scratch</div><div class="kw-desc">Break out of a loop</div><div class="kw-ex">scratch</div></div>
-          <div class="kw-card"><div class="kw-name">knead</div><div class="kw-desc">Continue to next iteration</div><div class="kw-ex">knead</div></div>
-          <div class="kw-card"><div class="kw-name">and / or / not</div><div class="kw-desc">Logical operators</div><div class="kw-ex">psspss (a and b)</div></div>
+          <div class="kw-card">
+            <div class="kw-name">purr</div>
+            <div class="kw-desc">Declare a variable</div>
+            <div class="kw-ex">purr x = 42</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">meow</div>
+            <div class="kw-desc">Print to output</div>
+            <div class="kw-ex">meow "Hello!"</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">psspss</div>
+            <div class="kw-desc">Conditional if block</div>
+            <div class="kw-ex">psspss (x > 0) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">else</div>
+            <div class="kw-desc">Else / else-if branch</div>
+            <div class="kw-ex">} else { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">stalk</div>
+            <div class="kw-desc">While loop</div>
+            <div class="kw-ex">stalk (alive) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">pounce</div>
+            <div class="kw-desc">For range loop</div>
+            <div class="kw-ex">pounce (i from 1 to 5)</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">from / to</div>
+            <div class="kw-desc">Range bounds in pounce</div>
+            <div class="kw-ex">from 0 to 10</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">claw</div>
+            <div class="kw-desc">Define a function</div>
+            <div class="kw-ex">claw add(a,b) { }</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">paw</div>
+            <div class="kw-desc">Return value from function</div>
+            <div class="kw-ex">paw result</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">litter</div>
+            <div class="kw-desc">Create an array</div>
+            <div class="kw-ex">litter [1, 2, 3]</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name dict">den</div>
+            <div class="kw-desc">Create a dictionary</div>
+            <div class="kw-ex">den {"key": val}</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">import</div>
+            <div class="kw-desc">Import another tab's code</div>
+            <div class="kw-ex">import "utils"</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">pawsitive</div>
+            <div class="kw-desc">Boolean true</div>
+            <div class="kw-ex">purr ok = pawsitive</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">clawful</div>
+            <div class="kw-desc">Boolean false</div>
+            <div class="kw-ex">purr bad = clawful</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">nap</div>
+            <div class="kw-desc">Null / no value</div>
+            <div class="kw-ex">purr x = nap</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">scratch</div>
+            <div class="kw-desc">Break out of a loop</div>
+            <div class="kw-ex">scratch</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">knead</div>
+            <div class="kw-desc">Continue to next iteration</div>
+            <div class="kw-ex">knead</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">and / or / not</div>
+            <div class="kw-desc">Logical operators</div>
+            <div class="kw-ex">psspss (a and b)</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">gui_row</div>
+            <div class="kw-desc">Start horizontal layout</div>
+            <div class="kw-ex">gui_row()</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">gui_label</div>
+            <div class="kw-desc">Add GUI text</div>
+            <div class="kw-ex">gui_label("txt")</div>
+          </div>
+          <div class="kw-card">
+            <div class="kw-name">gui_button</div>
+            <div class="kw-desc">Add GUI button</div>
+            <div class="kw-ex">gui_button("t", "fn")</div>
+          </div>
         </div>
 
       </div>
@@ -879,55 +2149,178 @@ write_file(<span class="str">"log.txt"</span>, log)
 
         <h3>Core</h3>
         <div class="builtin-grid">
-          <div class="builtin-card"><div class="builtin-sig">fur(x)</div><div class="builtin-desc">Length of string or array</div></div>
-          <div class="builtin-card"><div class="builtin-sig">whisker(x)</div><div class="builtin-desc">Convert any value to string</div></div>
-          <div class="builtin-card"><div class="builtin-sig">paw_num(x)</div><div class="builtin-desc">Convert string to number</div></div>
-          <div class="builtin-card"><div class="builtin-sig">sniff(x)</div><div class="builtin-desc">Get type name as string</div></div>
-          <div class="builtin-card"><div class="builtin-sig">ask(prompt)</div><div class="builtin-desc">Read a line of user input <span class="new-badge">v2</span></div></div>
+          <div class="builtin-card">
+            <div class="builtin-sig">fur(x)</div>
+            <div class="builtin-desc">Length of string or array</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">whisker(x)</div>
+            <div class="builtin-desc">Convert any value to string</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">paw_num(x)</div>
+            <div class="builtin-desc">Convert string to number</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">sniff(x)</div>
+            <div class="builtin-desc">Get type name as string</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">ask(prompt)</div>
+            <div class="builtin-desc">Read a line of user input <span class="new-badge">v2</span></div>
+          </div>
         </div>
 
         <h3>Arrays</h3>
         <div class="builtin-grid">
-          <div class="builtin-card"><div class="builtin-sig">chase(arr, val)</div><div class="builtin-desc">Append value to array</div></div>
-          <div class="builtin-card"><div class="builtin-sig">pop(arr)</div><div class="builtin-desc">Remove &amp; return last element <span class="new-badge">v2</span></div></div>
-          <div class="builtin-card"><div class="builtin-sig">nuzzle(arr, sep)</div><div class="builtin-desc">Join array with separator</div></div>
-          <div class="builtin-card"><div class="builtin-sig">tail_slice(arr, start, end)</div><div class="builtin-desc">Slice sub-array</div></div>
-          <div class="builtin-card"><div class="builtin-sig">sort(arr)</div><div class="builtin-desc">Return numerically sorted copy <span class="new-badge">v2</span></div></div>
-          <div class="builtin-card"><div class="builtin-sig">reverse(arr)</div><div class="builtin-desc">Return reversed copy <span class="new-badge">v2</span></div></div>
-          <div class="builtin-card"><div class="builtin-sig">max(arr)</div><div class="builtin-desc">Largest value in array <span class="new-badge">v2</span></div></div>
-          <div class="builtin-card"><div class="builtin-sig">min(arr)</div><div class="builtin-desc">Smallest value in array <span class="new-badge">v2</span></div></div>
+          <div class="builtin-card">
+            <div class="builtin-sig">chase(arr, val)</div>
+            <div class="builtin-desc">Append value to array</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">pop(arr)</div>
+            <div class="builtin-desc">Remove &amp; return last element <span class="new-badge">v2</span></div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">nuzzle(arr, sep)</div>
+            <div class="builtin-desc">Join array with separator</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">tail_slice(arr, start, end)</div>
+            <div class="builtin-desc">Slice sub-array</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">sort(arr)</div>
+            <div class="builtin-desc">Return numerically sorted copy <span class="new-badge">v2</span></div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">reverse(arr)</div>
+            <div class="builtin-desc">Return reversed copy <span class="new-badge">v2</span></div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">max(arr)</div>
+            <div class="builtin-desc">Largest value in array <span class="new-badge">v2</span></div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">min(arr)</div>
+            <div class="builtin-desc">Smallest value in array <span class="new-badge">v2</span></div>
+          </div>
         </div>
 
         <h3>Dictionaries <span class="new-badge">v2</span></h3>
         <div class="builtin-grid">
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">keys(d)</div><div class="builtin-desc">Array of all keys in dict</div></div>
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">values(d)</div><div class="builtin-desc">Array of all values in dict</div></div>
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">has(d, key)</div><div class="builtin-desc">Check if key exists → boolean</div></div>
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">del_key(d, key)</div><div class="builtin-desc">Remove a key from dict</div></div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">keys(d)</div>
+            <div class="builtin-desc">Array of all keys in dict</div>
+          </div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">values(d)</div>
+            <div class="builtin-desc">Array of all values in dict</div>
+          </div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">has(d, key)</div>
+            <div class="builtin-desc">Check if key exists → boolean</div>
+          </div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">del_key(d, key)</div>
+            <div class="builtin-desc">Remove a key from dict</div>
+          </div>
         </div>
 
         <h3>Math</h3>
         <div class="builtin-grid">
-          <div class="builtin-card"><div class="builtin-sig">catnap(n)</div><div class="builtin-desc">Random integer 0 to n−1</div></div>
-          <div class="builtin-card"><div class="builtin-sig">kibble(x)</div><div class="builtin-desc">Floor (round down)</div></div>
-          <div class="builtin-card"><div class="builtin-sig">treat(x)</div><div class="builtin-desc">Round to nearest integer</div></div>
-          <div class="builtin-card"><div class="builtin-sig">claw_up(x)</div><div class="builtin-desc">Ceiling (round up)</div></div>
-          <div class="builtin-card"><div class="builtin-sig">pounce_sqrt(x)</div><div class="builtin-desc">Square root</div></div>
-          <div class="builtin-card"><div class="builtin-sig">abs(x)</div><div class="builtin-desc">Absolute value <span class="new-badge">v2</span></div></div>
-          <div class="builtin-card"><div class="builtin-sig">pow(base, exp)</div><div class="builtin-desc">Exponentiation <span class="new-badge">v2</span></div></div>
+          <div class="builtin-card">
+            <div class="builtin-sig">catnap(n)</div>
+            <div class="builtin-desc">Random integer 0 to n−1</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">kibble(x)</div>
+            <div class="builtin-desc">Floor (round down)</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">treat(x)</div>
+            <div class="builtin-desc">Round to nearest integer</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">claw_up(x)</div>
+            <div class="builtin-desc">Ceiling (round up)</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">pounce_sqrt(x)</div>
+            <div class="builtin-desc">Square root</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">abs(x)</div>
+            <div class="builtin-desc">Absolute value <span class="new-badge">v2</span></div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">pow(base, exp)</div>
+            <div class="builtin-desc">Exponentiation <span class="new-badge">v2</span></div>
+          </div>
         </div>
 
         <h3>Strings</h3>
         <div class="builtin-grid">
-          <div class="builtin-card"><div class="builtin-sig">meow_upper(x)</div><div class="builtin-desc">Convert to uppercase</div></div>
-          <div class="builtin-card"><div class="builtin-sig">meow_lower(x)</div><div class="builtin-desc">Convert to lowercase</div></div>
-          <div class="builtin-card"><div class="builtin-sig">scratch_split(s, delim)</div><div class="builtin-desc">Split string by delimiter</div></div>
+          <div class="builtin-card">
+            <div class="builtin-sig">meow_upper(x)</div>
+            <div class="builtin-desc">Convert to uppercase</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">meow_lower(x)</div>
+            <div class="builtin-desc">Convert to lowercase</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">scratch_split(s, delim)</div>
+            <div class="builtin-desc">Split string by delimiter</div>
+          </div>
         </div>
 
         <h3>File Operations <span class="new-badge">v2</span></h3>
         <div class="builtin-grid">
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">read_file(name)</div><div class="builtin-desc">Read content of named tab</div></div>
-          <div class="builtin-card dict-card"><div class="builtin-sig dict-sig">write_file(name, content)</div><div class="builtin-desc">Write content to named tab</div></div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">read_file(name)</div>
+            <div class="builtin-desc">Read content of named tab</div>
+          </div>
+          <div class="builtin-card dict-card">
+            <div class="builtin-sig dict-sig">write_file(name, content)</div>
+            <div class="builtin-desc">Write content to named tab</div>
+          </div>
+        </div>
+
+        <h3 id="builtins-gui">GUI Engine <span class="new-badge">v2.1.2</span></h3>
+        <div class="builtin-grid">
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_label(text)</div>
+            <div class="builtin-desc">Adds a text label to UI</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_button(txt, fn)</div>
+            <div class="builtin-desc">Adds button calling MEOW fn</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_input(hint, var)</div>
+            <div class="builtin-desc">Adds input field for var</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_slider(m, M, v)</div>
+            <div class="builtin-desc">Adds numeric slider for var</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_image(url, w, h)</div>
+            <div class="builtin-desc">Renders an image from URL</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_row() / gui_column()</div>
+            <div class="builtin-desc">Start a layout container</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_end()</div>
+            <div class="builtin-desc">End current layout container</div>
+          </div>
+          <div class="builtin-card">
+            <div class="builtin-sig">gui_show_modal(msg)</div>
+            <div class="builtin-desc">Show popup message</div>
+          </div>
         </div>
 
         <h3>Math Examples</h3>
@@ -949,42 +2342,50 @@ write_file(<span class="str">"log.txt"</span>, log)
         <div class="grammar-rule">
           <span class="gr-name">program</span> <span class="gr-op">::=</span> statement*<br><br>
           <span class="gr-name">statement</span> <span class="gr-op">::=</span>
-            declaration | assignment | idx_assignment | meow_stmt | if_stmt | while_stmt |
-            for_stmt | func_decl | return_stmt | break_stmt | continue_stmt | import_stmt | expr_stmt<br><br>
+          declaration | assignment | idx_assignment | meow_stmt | if_stmt | while_stmt |
+          for_stmt | func_decl | return_stmt | break_stmt | continue_stmt | import_stmt | expr_stmt<br><br>
           <span class="gr-name">declaration</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"purr"</span> IDENT <span class="gr-str">"="</span> expr<br>
+          <span class="gr-str">"purr"</span> IDENT <span class="gr-str">"="</span> expr<br>
           <span class="gr-name">assignment</span> <span class="gr-op">::=</span>
-            IDENT (<span class="gr-str">"="</span> | <span class="gr-str">"+="</span>) expr<br>
+          IDENT (<span class="gr-str">"="</span> | <span class="gr-str">"+="</span>) expr<br>
           <span class="gr-name">idx_assignment</span> <span class="gr-op">::=</span>
-            IDENT <span class="gr-str">"["</span> expr <span class="gr-str">"]"</span> <span class="gr-str">"="</span> expr<br>
+          IDENT <span class="gr-str">"["</span> expr <span class="gr-str">"]"</span> <span class="gr-str">"="</span>
+          expr<br>
           <span class="gr-name">meow_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"meow"</span> expr<br>
+          <span class="gr-str">"meow"</span> expr<br>
           <span class="gr-name">import_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"import"</span> STRING<br><br>
+          <span class="gr-str">"import"</span> STRING<br><br>
           <span class="gr-name">if_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"psspss"</span> <span class="gr-str">"("</span> expr <span class="gr-str">")"</span> block
-            (<span class="gr-str">"else"</span> (if_stmt | block))?<br>
+          <span class="gr-str">"psspss"</span> <span class="gr-str">"("</span> expr <span class="gr-str">")"</span>
+          block
+          (<span class="gr-str">"else"</span> (if_stmt | block))?<br>
           <span class="gr-name">while_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"stalk"</span> <span class="gr-str">"("</span> expr <span class="gr-str">")"</span> block<br>
+          <span class="gr-str">"stalk"</span> <span class="gr-str">"("</span> expr <span class="gr-str">")"</span>
+          block<br>
           <span class="gr-name">for_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"pounce"</span> <span class="gr-str">"("</span> IDENT <span class="gr-str">"from"</span> expr
-            <span class="gr-str">"to"</span> expr <span class="gr-str">")"</span> block<br>
+          <span class="gr-str">"pounce"</span> <span class="gr-str">"("</span> IDENT <span class="gr-str">"from"</span>
+          expr
+          <span class="gr-str">"to"</span> expr <span class="gr-str">")"</span> block<br>
           <span class="gr-name">func_decl</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"claw"</span> IDENT <span class="gr-str">"("</span> params <span class="gr-str">")"</span> block<br>
+          <span class="gr-str">"claw"</span> IDENT <span class="gr-str">"("</span> params <span
+            class="gr-str">")"</span> block<br>
           <span class="gr-name">return_stmt</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"paw"</span> expr<br><br>
+          <span class="gr-str">"paw"</span> expr<br><br>
           <span class="gr-name">block</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"{"</span> statement* <span class="gr-str">"}"</span><br>
+          <span class="gr-str">"{"</span> statement* <span class="gr-str">"}"</span><br>
           <span class="gr-name">params</span> <span class="gr-op">::=</span>
-            (IDENT (<span class="gr-str">","</span> IDENT)*)?<br><br>
+          (IDENT (<span class="gr-str">","</span> IDENT)*)?<br><br>
           <span class="gr-name">primary</span> <span class="gr-op">::=</span>
-            NUMBER | STRING | <span class="gr-str">"pawsitive"</span> | <span class="gr-str">"clawful"</span> |
-            <span class="gr-str">"nap"</span> | IDENT | call_expr | <span class="gr-str">"("</span> expr <span class="gr-str">")"</span> |
-            array_lit | dict_lit<br>
+          NUMBER | STRING | <span class="gr-str">"pawsitive"</span> | <span class="gr-str">"clawful"</span> |
+          <span class="gr-str">"nap"</span> | IDENT | call_expr | <span class="gr-str">"("</span> expr <span
+            class="gr-str">")"</span> |
+          array_lit | dict_lit<br>
           <span class="gr-name">array_lit</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"litter"</span> <span class="gr-str">"["</span> (expr (<span class="gr-str">","</span> expr)*)? <span class="gr-str">"]"</span><br>
+          <span class="gr-str">"litter"</span> <span class="gr-str">"["</span> (expr (<span class="gr-str">","</span>
+          expr)*)? <span class="gr-str">"]"</span><br>
           <span class="gr-name">dict_lit</span> <span class="gr-op">::=</span>
-            <span class="gr-str">"den"</span> <span class="gr-str">"{"</span> (expr <span class="gr-str">":"</span> expr (<span class="gr-str">","</span> expr <span class="gr-str">":"</span> expr)*)? <span class="gr-str">"}"</span>
+          <span class="gr-str">"den"</span> <span class="gr-str">"{"</span> (expr <span class="gr-str">":"</span> expr
+          (<span class="gr-str">","</span> expr <span class="gr-str">":"</span> expr)*)? <span class="gr-str">"}"</span>
         </div>
 
       </div>
@@ -996,22 +2397,63 @@ write_file(<span class="str">"log.txt"</span>, log)
 
         <div class="table-wrap">
           <table>
-            <tr><th>Error Type</th><th>When it Occurs</th><th>Example Message</th></tr>
-            <tr><td><strong>Syntax Error</strong></td><td>Invalid code structure</td><td><code>Expected ')' but got '+' at line 3</code></td></tr>
-            <tr><td><strong>Runtime Error</strong></td><td>Unknown variable or bad operation</td><td><code>Unknown variable: 'x' 😿</code></td></tr>
-            <tr><td><strong>Division by Zero</strong></td><td>Dividing by 0</td><td><code>Division by zero!</code></td></tr>
-            <tr><td><strong>Index Out of Bounds</strong></td><td>Array index too large</td><td><code>Index 5 out of bounds (length 3)</code></td></tr>
-            <tr><td><strong>Infinite Loop</strong></td><td>Loop exceeds 200,000 iterations</td><td><code>Infinite loop detected 😾</code></td></tr>
-            <tr><td><strong>Not a Function</strong></td><td>Calling a non-function</td><td><code>'x' is not a function</code></td></tr>
-            <tr><td><strong>Import Not Found</strong></td><td>Imported tab doesn't exist</td><td><code>Cannot import 'name': file not found</code></td></tr>
-            <tr><td><strong>Dict Type Error</strong></td><td>Calling dict builtin on non-dict</td><td><code>keys() requires a dict</code></td></tr>
-            <tr><td><strong>Null Index</strong></td><td>Indexing into <code>nap</code></td><td><code>Cannot index nap (null)</code></td></tr>
+            <tr>
+              <th>Error Type</th>
+              <th>When it Occurs</th>
+              <th>Example Message</th>
+            </tr>
+            <tr>
+              <td><strong>Syntax Error</strong></td>
+              <td>Invalid code structure</td>
+              <td><code>Expected ')' but got '+' at line 3</code></td>
+            </tr>
+            <tr>
+              <td><strong>Runtime Error</strong></td>
+              <td>Unknown variable or bad operation</td>
+              <td><code>Unknown variable: 'x' 😿</code></td>
+            </tr>
+            <tr>
+              <td><strong>Division by Zero</strong></td>
+              <td>Dividing by 0</td>
+              <td><code>Division by zero!</code></td>
+            </tr>
+            <tr>
+              <td><strong>Index Out of Bounds</strong></td>
+              <td>Array index too large</td>
+              <td><code>Index 5 out of bounds (length 3)</code></td>
+            </tr>
+            <tr>
+              <td><strong>Infinite Loop</strong></td>
+              <td>Loop exceeds 200,000 iterations</td>
+              <td><code>Infinite loop detected 😾</code></td>
+            </tr>
+            <tr>
+              <td><strong>Not a Function</strong></td>
+              <td>Calling a non-function</td>
+              <td><code>'x' is not a function</code></td>
+            </tr>
+            <tr>
+              <td><strong>Import Not Found</strong></td>
+              <td>Imported tab doesn't exist</td>
+              <td><code>Cannot import 'name': file not found</code></td>
+            </tr>
+            <tr>
+              <td><strong>Dict Type Error</strong></td>
+              <td>Calling dict builtin on non-dict</td>
+              <td><code>keys() requires a dict</code></td>
+            </tr>
+            <tr>
+              <td><strong>Null Index</strong></td>
+              <td>Indexing into <code>nap</code></td>
+              <td><code>Cannot index nap (null)</code></td>
+            </tr>
           </table>
         </div>
 
         <div class="callout callout-orange">
           <div class="callout-title">🐾 IDE Debug Mode</div>
-          <p>Use the <strong>⚙ Debug</strong> button in the IDE to step through execution trace-by-trace, inspect variable state at each step, and identify exactly where things go wrong.</p>
+          <p>Use the <strong>⚙ Debug</strong> button in the IDE to step through execution trace-by-trace, inspect
+            variable state at each step, and identify exactly where things go wrong.</p>
         </div>
 
       </div>
@@ -1033,7 +2475,9 @@ write_file(<span class="str">"log.txt"</span>, log)
   <span class="paren">}</span> <span class="kw">else</span> <span class="kw">psspss</span> <span class="paren">(</span>i <span class="op">%</span> <span class="num">5</span> <span class="op">==</span> <span class="num">0</span><span class="paren">)</span> <span class="paren">{</span> <span class="kw">meow</span> <span class="str">"Buzz 🐟"</span>
   <span class="paren">}</span> <span class="kw">else</span> <span class="paren">{</span> <span class="kw">meow</span> whisker(i) <span class="paren">}</span>
 <span class="paren">}</span></code></pre>
-          <div class="run-output" data-output='["1","2","Purr 🐾","4","Buzz 🐟","Purr 🐾","7","8","Purr 🐾","Buzz 🐟","11","Purr 🐾","13","14","PurrBuzz 🐱","16","17","Purr 🐾","19","Buzz 🐟"]'></div>
+          <div class="run-output"
+            data-output='["1","2","Purr 🐾","4","Buzz 🐟","Purr 🐾","7","8","Purr 🐾","Buzz 🐟","11","Purr 🐾","13","14","PurrBuzz 🐱","16","17","Purr 🐾","19","Buzz 🐟"]'>
+          </div>
         </div>
 
         <h3>Cat Profile — using Dicts &amp; Interpolation</h3>
@@ -1057,7 +2501,9 @@ write_file(<span class="str">"log.txt"</span>, log)
 <span class="paren">}</span>
 cat[<span class="str">"age"</span>] <span class="op">=</span> cat[<span class="str">"age"</span>] <span class="op">+</span> <span class="num">1</span>
 <span class="kw">meow</span> <span class="str">"Happy birthday <span class="interp">${cat["name"]}</span>! Now <span class="interp">${cat["age"]}</span> years old 🎂"</span></code></pre>
-          <div class="run-output" data-output='["=== Cat Profile ===","  name: Luna","  age: 3","  color: silver","  score: 9.8","Happy birthday Luna! Now 4 years old 🎂"]'></div>
+          <div class="run-output"
+            data-output='["=== Cat Profile ===","  name: Luna","  age: 3","  color: silver","  score: 9.8","Happy birthday Luna! Now 4 years old 🎂"]'>
+          </div>
         </div>
 
         <h3>Bubble Sort</h3>
@@ -1116,6 +2562,30 @@ bubbleSort(data, <span class="num">6</span>)
 <span class="kw">meow</span> whisker(clamp(<span class="num">150</span>, <span class="num">0</span>, <span class="num">100</span>))  <span class="cmt"># → 100</span>
 <span class="kw">meow</span> whisker(clamp(<span class="op">-</span><span class="num">5</span>, <span class="num">0</span>, <span class="num">100</span>))   <span class="cmt"># → 0</span></code></pre>
 
+        <div class="callout callout-blue">
+          <div class="callout-title">👤 Advanced GUI: Cat Profile</div>
+          <p>This layout uses <code>gui_row</code> and <code>gui_slider</code> to build a full character sheet. Try it
+            in the IDE!</p>
+        </div>
+        <pre><code><span class="kw">purr</span> catName <span class="op">=</span> <span class="str">"Whiskers"</span>
+<span class="kw">purr</span> health <span class="op">=</span> <span class="num">85</span>
+
+<span class="kw">claw</span> draw() <span class="paren">{</span>
+  <span class="kw">gui_clear</span><span class="paren">()</span>
+  <span class="kw">gui_row</span><span class="paren">()</span>
+    <span class="kw">gui_set_color</span><span class="paren">(</span><span class="str">"#FF8C42"</span><span class="paren">)</span>
+    <span class="kw">gui_label</span><span class="paren">(</span><span class="str">"🐾 CAT PROFILE"</span><span class="paren">)</span>
+  <span class="kw">gui_end</span><span class="paren">()</span>
+  <span class="kw">gui_image</span><span class="paren">(</span><span class="str">"https://placekitten.com/400/200"</span><span class="paren">)</span>
+  <span class="kw">gui_row</span><span class="paren">()</span>
+    <span class="kw">gui_label</span><span class="paren">(</span><span class="str">"Name: "</span><span class="paren">)</span>
+    <span class="kw">gui_input</span><span class="paren">(</span><span class="str">"Name..."</span><span class="op">,</span> <span class="str">"catName"</span><span class="paren">)</span>
+  <span class="kw">gui_end</span><span class="paren">()</span>
+  <span class="kw">gui_label</span><span class="paren">(</span><span class="str">"Health: <span class="interp">${health}</span>%"</span><span class="paren">)</span>
+  <span class="kw">gui_slider</span><span class="paren">(</span><span class="num">0</span><span class="op">,</span> <span class="num">100</span><span class="op">,</span> <span class="str">"health"</span><span class="paren">)</span>
+<span class="paren">}</span>
+draw()</code></pre>
+
       </div>
 
       <!-- PAGE NAV -->
@@ -1137,17 +2607,18 @@ bubbleSort(data, <span class="num">6</span>)
 
   <!-- FOOTER -->
   <footer class="doc-footer">
-    <div><span class="logo">🐱 MEOW</span> — The Cat Programming Language v2.1</div>
-    <div>Built with 🐾 and caffeine · <a href="meow-ide.html">Open IDE</a> · A fun project by <a href="https://www.linkedin.com/in/rakshitdogra/">rakshitdogra</a></div>
+    <div><span class="logo">🐱 MEOW</span> — The Cat Programming Language v2.1.2</div>
+    <div>Built with 🐾 and caffeine · <a href="meow-ide.html">Open IDE</a> · A fun project by <a
+        href="https://www.linkedin.com/in/rakshitdogra/">rakshitdogra</a></div>
   </footer>
 
   <script>
     // ── INLINE RUNNER (supports full v2 interpreter) ──
     const BUILTINS = {
       fur: a => a[0]?.length ?? 0,
-      whisker: a => { const v = a[0]; if (v === null) return 'nap'; if (v === true) return 'pawsitive'; if (v === false) return 'clawful'; if (Array.isArray(v)) return '[' + v.map(x => BUILTINS.whisker([x])).join(', ') + ']'; if (v && v.__dict) return '{' + Object.keys(v).filter(k=>k!=='__dict').map(k=>`"${k}": ${BUILTINS.whisker([v[k]])}`).join(', ') + '}'; return String(v); },
+      whisker: a => { const v = a[0]; if (v === null) return 'nap'; if (v === true) return 'pawsitive'; if (v === false) return 'clawful'; if (Array.isArray(v)) return '[' + v.map(x => BUILTINS.whisker([x])).join(', ') + ']'; if (v && v.__dict) return '{' + Object.keys(v).filter(k => k !== '__dict').map(k => `"${k}": ${BUILTINS.whisker([v[k]])}`).join(', ') + '}'; return String(v); },
       paw_num: a => Number(a[0]),
-      sniff: a => { const v=a[0]; if(v===null)return'null'; if(v===true||v===false)return'bool'; if(typeof v==='number')return'number'; if(typeof v==='string')return'string'; if(Array.isArray(v))return'array'; if(v&&v.__dict)return'dict'; return typeof v; },
+      sniff: a => { const v = a[0]; if (v === null) return 'null'; if (v === true || v === false) return 'bool'; if (typeof v === 'number') return 'number'; if (typeof v === 'string') return 'string'; if (Array.isArray(v)) return 'array'; if (v && v.__dict) return 'dict'; return typeof v; },
       chase: a => { a[0].push(a[1]); return a[0]; },
       pop: a => a[0].pop() ?? null,
       nuzzle: a => a[0].join(a[1] !== undefined ? a[1] : ', '),
@@ -1160,17 +2631,28 @@ bubbleSort(data, <span class="num">6</span>)
       pow: a => Math.pow(a[0], a[1]),
       max: a => Array.isArray(a[0]) ? Math.max(...a[0]) : Math.max(...a),
       min: a => Array.isArray(a[0]) ? Math.min(...a[0]) : Math.min(...a),
-      sort: a => [...a[0]].sort((x,y)=>x-y),
+      sort: a => [...a[0]].sort((x, y) => x - y),
       reverse: a => [...a[0]].reverse(),
       meow_upper: a => String(a[0]).toUpperCase(),
       meow_lower: a => String(a[0]).toLowerCase(),
       scratch_split: a => String(a[0]).split(a[1] ?? ''),
       tail_slice: a => a[0].slice(a[1], a[2]),
-      keys: a => { if(!a[0]||!a[0].__dict) throw new Error('keys() requires a dict'); return Object.keys(a[0]).filter(k=>k!=='__dict'); },
-      values: a => { if(!a[0]||!a[0].__dict) throw new Error('values() requires a dict'); return Object.keys(a[0]).filter(k=>k!=='__dict').map(k=>a[0][k]); },
-      has: a => { if(!a[0]||!a[0].__dict) throw new Error('has() requires a dict'); return Object.prototype.hasOwnProperty.call(a[0],a[1])&&a[1]!=='__dict'; },
-      del_key: a => { if(!a[0]||!a[0].__dict) throw new Error('del_key() requires a dict'); delete a[0][a[1]]; return a[0]; },
-      ask: a => { return window.prompt(String(a[0]??'')) ?? ''; },
+      keys: a => { if (!a[0] || !a[0].__dict) throw new Error('keys() requires a dict'); return Object.keys(a[0]).filter(k => k !== '__dict'); },
+      values: a => { if (!a[0] || !a[0].__dict) throw new Error('values() requires a dict'); return Object.keys(a[0]).filter(k => k !== '__dict').map(k => a[0][k]); },
+      has: a => { if (!a[0] || !a[0].__dict) throw new Error('has() requires a dict'); return Object.prototype.hasOwnProperty.call(a[0], a[1]) && a[1] !== '__dict'; },
+      del_key: a => { if (!a[0] || !a[0].__dict) throw new Error('del_key() requires a dict'); delete a[0][a[1]]; return a[0]; },
+      ask: a => { return window.prompt(String(a[0] ?? '')) ?? ''; },
+      gui_label: a => { return `[GUI: Label("${String(a[0])}")]`; },
+      gui_button: a => { return `[GUI: Button("${String(a[0])}", CALLBACK:${String(a[1])})]`; },
+      gui_input: a => { return `[GUI: Input(hint:"${String(a[0])}", var:"${String(a[1])}")]`; },
+      gui_slider: a => { return `[GUI: Slider(${a[0]} to ${a[1]}, var:"${String(a[2])}")]`; },
+      gui_image: a => { return `[GUI: Image("${String(a[0])}")]`; },
+      gui_clear: a => { return `[GUI: Panel Cleared]`; },
+      gui_row: a => { return `[GUI: Row Start]`; },
+      gui_column: a => { return `[GUI: Column Start]`; },
+      gui_end: a => { return `[GUI: Container End]`; },
+      gui_set_color: a => { return `[GUI: Color set to ${String(a[0])}]`; },
+      gui_show_modal: a => { return `[GUI: Modal("${String(a[0])}")]`; },
     };
 
     function meowStr(v) {
@@ -1178,160 +2660,160 @@ bubbleSort(data, <span class="num">6</span>)
       if (v === true) return 'pawsitive';
       if (v === false) return 'clawful';
       if (Array.isArray(v)) return '[' + v.map(meowStr).join(', ') + ']';
-      if (v && v.__dict) return '{' + Object.keys(v).filter(k=>k!=='__dict').map(k=>`"${k}": ${meowStr(v[k])}`).join(', ') + '}';
+      if (v && v.__dict) return '{' + Object.keys(v).filter(k => k !== '__dict').map(k => `"${k}": ${meowStr(v[k])}`).join(', ') + '}';
       return String(v);
     }
 
-    const KEYWORDS = { 'purr':'PURR','meow':'MEOW','psspss':'PSSPSS','else':'ELSE','stalk':'STALK','pounce':'POUNCE','claw':'CLAW','paw':'PAW','from':'FROM','to':'TO','litter':'LITTER','den':'DEN','import':'IMPORT','pawsitive':'PAWSITIVE','clawful':'CLAWFUL','nap':'NAP','and':'AND','or':'OR','not':'NOT','scratch':'SCRATCH','knead':'KNEAD' };
+    const KEYWORDS = { 'purr': 'PURR', 'meow': 'MEOW', 'psspss': 'PSSPSS', 'else': 'ELSE', 'stalk': 'STALK', 'pounce': 'POUNCE', 'claw': 'CLAW', 'paw': 'PAW', 'from': 'FROM', 'to': 'TO', 'litter': 'LITTER', 'den': 'DEN', 'import': 'IMPORT', 'pawsitive': 'PAWSITIVE', 'clawful': 'CLAWFUL', 'nap': 'NAP', 'and': 'AND', 'or': 'OR', 'not': 'NOT', 'scratch': 'SCRATCH', 'knead': 'KNEAD' };
 
     class Lx {
-      constructor(s) { this.s=s; this.i=0; this.ln=1; }
+      constructor(s) { this.s = s; this.i = 0; this.ln = 1; }
       tok() {
-        const ts=[];
-        while(this.i<this.s.length) {
+        const ts = [];
+        while (this.i < this.s.length) {
           this.ws();
-          if(this.i>=this.s.length) break;
-          const c=this.s[this.i];
-          if(c==='#'){while(this.i<this.s.length&&this.s[this.i]!=='\n')this.i++;continue;}
-          if(c==='"'||c==="'"){ts.push(this.str(c));continue;}
-          if(/\d/.test(c)){ts.push(this.num());continue;}
-          if(/[a-zA-Z_]/.test(c)){ts.push(this.id());continue;}
-          const n=this.s[this.i+1],l=this.ln;
-          if(c==='+'&&n==='='){ts.push({t:'PLUSASSIGN',l});this.i+=2;continue;}
-          if(c==='+'){ts.push({t:'PLUS',l});this.i++;continue;}
-          if(c==='-'){ts.push({t:'MINUS',l});this.i++;continue;}
-          if(c==='*'){ts.push({t:'MUL',l});this.i++;continue;}
-          if(c==='/'){ts.push({t:'DIV',l});this.i++;continue;}
-          if(c==='%'){ts.push({t:'MOD',l});this.i++;continue;}
-          if(c==='('){ts.push({t:'LP',l});this.i++;continue;}
-          if(c===')'){ts.push({t:'RP',l});this.i++;continue;}
-          if(c==='{'){ts.push({t:'LB',l});this.i++;continue;}
-          if(c==='}'){ts.push({t:'RB',l});this.i++;continue;}
-          if(c==='['){ts.push({t:'LBK',l});this.i++;continue;}
-          if(c===']'){ts.push({t:'RBK',l});this.i++;continue;}
-          if(c===','){ts.push({t:'COMMA',l});this.i++;continue;}
-          if(c===':'&&n!=='='){ts.push({t:'COLON',l});this.i++;continue;}
-          if(c==='='&&n==='='){ts.push({t:'EQ',l});this.i+=2;continue;}
-          if(c==='='&&n!=='='){ts.push({t:'ASSIGN',l});this.i++;continue;}
-          if(c==='!'&&n==='='){ts.push({t:'NEQ',l});this.i+=2;continue;}
-          if(c==='<'&&n==='='){ts.push({t:'LTE',l});this.i+=2;continue;}
-          if(c==='<'){ts.push({t:'LT',l});this.i++;continue;}
-          if(c==='>'&&n==='='){ts.push({t:'GTE',l});this.i+=2;continue;}
-          if(c==='>'){ts.push({t:'GT',l});this.i++;continue;}
+          if (this.i >= this.s.length) break;
+          const c = this.s[this.i];
+          if (c === '#') { while (this.i < this.s.length && this.s[this.i] !== '\n') this.i++; continue; }
+          if (c === '"' || c === "'") { ts.push(this.str(c)); continue; }
+          if (/\d/.test(c)) { ts.push(this.num()); continue; }
+          if (/[a-zA-Z_]/.test(c)) { ts.push(this.id()); continue; }
+          const n = this.s[this.i + 1], l = this.ln;
+          if (c === '+' && n === '=') { ts.push({ t: 'PLUSASSIGN', l }); this.i += 2; continue; }
+          if (c === '+') { ts.push({ t: 'PLUS', l }); this.i++; continue; }
+          if (c === '-') { ts.push({ t: 'MINUS', l }); this.i++; continue; }
+          if (c === '*') { ts.push({ t: 'MUL', l }); this.i++; continue; }
+          if (c === '/') { ts.push({ t: 'DIV', l }); this.i++; continue; }
+          if (c === '%') { ts.push({ t: 'MOD', l }); this.i++; continue; }
+          if (c === '(') { ts.push({ t: 'LP', l }); this.i++; continue; }
+          if (c === ')') { ts.push({ t: 'RP', l }); this.i++; continue; }
+          if (c === '{') { ts.push({ t: 'LB', l }); this.i++; continue; }
+          if (c === '}') { ts.push({ t: 'RB', l }); this.i++; continue; }
+          if (c === '[') { ts.push({ t: 'LBK', l }); this.i++; continue; }
+          if (c === ']') { ts.push({ t: 'RBK', l }); this.i++; continue; }
+          if (c === ',') { ts.push({ t: 'COMMA', l }); this.i++; continue; }
+          if (c === ':' && n !== '=') { ts.push({ t: 'COLON', l }); this.i++; continue; }
+          if (c === '=' && n === '=') { ts.push({ t: 'EQ', l }); this.i += 2; continue; }
+          if (c === '=' && n !== '=') { ts.push({ t: 'ASSIGN', l }); this.i++; continue; }
+          if (c === '!' && n === '=') { ts.push({ t: 'NEQ', l }); this.i += 2; continue; }
+          if (c === '<' && n === '=') { ts.push({ t: 'LTE', l }); this.i += 2; continue; }
+          if (c === '<') { ts.push({ t: 'LT', l }); this.i++; continue; }
+          if (c === '>' && n === '=') { ts.push({ t: 'GTE', l }); this.i += 2; continue; }
+          if (c === '>') { ts.push({ t: 'GT', l }); this.i++; continue; }
           throw new Error(`Unexpected char '${c}' at line ${l}`);
         }
-        ts.push({t:'EOF',l:this.ln}); return ts;
+        ts.push({ t: 'EOF', l: this.ln }); return ts;
       }
-      ws(){while(this.i<this.s.length&&/\s/.test(this.s[this.i])){if(this.s[this.i]==='\n')this.ln++;this.i++;}}
-      str(q){const l=this.ln;this.i++;let v='';while(this.i<this.s.length&&this.s[this.i]!==q){if(this.s[this.i]==='\\'){this.i++;v+=(this.s[this.i]==='n'?'\n':this.s[this.i]==='t'?'\t':this.s[this.i]);}else v+=this.s[this.i];this.i++;}this.i++;return{t:'STR',v,l};}
-      num(){const l=this.ln;let s='';while(this.i<this.s.length&&/[\d.]/.test(this.s[this.i])){s+=this.s[this.i];this.i++;}return{t:'NUM',v:parseFloat(s),l};}
-      id(){const l=this.ln;let s='';while(this.i<this.s.length&&/[a-zA-Z0-9_]/.test(this.s[this.i])){s+=this.s[this.i];this.i++;}return{t:KEYWORDS[s]||'IDENT',v:s,l};}
+      ws() { while (this.i < this.s.length && /\s/.test(this.s[this.i])) { if (this.s[this.i] === '\n') this.ln++; this.i++; } }
+      str(q) { const l = this.ln; this.i++; let v = ''; while (this.i < this.s.length && this.s[this.i] !== q) { if (this.s[this.i] === '\\') { this.i++; v += (this.s[this.i] === 'n' ? '\n' : this.s[this.i] === 't' ? '\t' : this.s[this.i]); } else v += this.s[this.i]; this.i++; } this.i++; return { t: 'STR', v, l }; }
+      num() { const l = this.ln; let s = ''; while (this.i < this.s.length && /[\d.]/.test(this.s[this.i])) { s += this.s[this.i]; this.i++; } return { t: 'NUM', v: parseFloat(s), l }; }
+      id() { const l = this.ln; let s = ''; while (this.i < this.s.length && /[a-zA-Z0-9_]/.test(this.s[this.i])) { s += this.s[this.i]; this.i++; } return { t: KEYWORDS[s] || 'IDENT', v: s, l }; }
     }
 
     class Rt {
-      constructor(t){this.t=t;this.p=0;}
-      pk(){return this.t[this.p];}adv(){return this.t[this.p++];}ck(t){return this.pk().t===t;}
-      ex(t){const k=this.adv();if(k.t!==t)throw new Error(`Expected ${t} at line ${k.l}`);return k;}
-      parse(){const s=[];while(!this.ck('EOF'))s.push(this.st());return{T:'Prog',s};}
-      st(){
-        const t=this.pk(),t2=this.t[this.p+1];
-        if(t.t==='IDENT'&&t2?.t==='ASSIGN'){const n=this.adv().v;this.adv();return{T:'Asgn',n,v:this.expr()};}
-        if(t.t==='IDENT'&&t2?.t==='PLUSASSIGN'){const n=this.adv().v;this.adv();return{T:'Asgn',n,v:{T:'Bin',op:'+',l:{T:'Id',n},r:this.expr()}};}
-        if(t.t==='IDENT'&&t2?.t==='LBK'&&this.isIdxAsgn()){
-          const n=this.adv().v;this.adv();const idx=this.expr();this.ex('RBK');this.ex('ASSIGN');
-          return{T:'IdxAsgn',n,idx,v:this.expr()};
+      constructor(t) { this.t = t; this.p = 0; }
+      pk() { return this.t[this.p]; } adv() { return this.t[this.p++]; } ck(t) { return this.pk().t === t; }
+      ex(t) { const k = this.adv(); if (k.t !== t) throw new Error(`Expected ${t} at line ${k.l}`); return k; }
+      parse() { const s = []; while (!this.ck('EOF')) s.push(this.st()); return { T: 'Prog', s }; }
+      st() {
+        const t = this.pk(), t2 = this.t[this.p + 1];
+        if (t.t === 'IDENT' && t2?.t === 'ASSIGN') { const n = this.adv().v; this.adv(); return { T: 'Asgn', n, v: this.expr() }; }
+        if (t.t === 'IDENT' && t2?.t === 'PLUSASSIGN') { const n = this.adv().v; this.adv(); return { T: 'Asgn', n, v: { T: 'Bin', op: '+', l: { T: 'Id', n }, r: this.expr() } }; }
+        if (t.t === 'IDENT' && t2?.t === 'LBK' && this.isIdxAsgn()) {
+          const n = this.adv().v; this.adv(); const idx = this.expr(); this.ex('RBK'); this.ex('ASSIGN');
+          return { T: 'IdxAsgn', n, idx, v: this.expr() };
         }
-        switch(t.t){
-          case 'PURR':{this.adv();const n=this.ex('IDENT').v;this.ex('ASSIGN');return{T:'Decl',n,v:this.expr()};}
-          case 'MEOW':{this.adv();return{T:'Prnt',e:this.expr()};}
-          case 'PSSPSS':return this.ifS();
-          case 'STALK':{this.adv();this.ex('LP');const c=this.expr();this.ex('RP');return{T:'Whl',c,b:this.blk()};}
-          case 'POUNCE':{this.adv();this.ex('LP');const vn=this.ex('IDENT').v;this.ex('FROM');const f=this.expr();this.ex('TO');const to=this.expr();this.ex('RP');return{T:'For',vn,f,to,b:this.blk()};}
-          case 'CLAW':{this.adv();const n=this.ex('IDENT').v;this.ex('LP');const ps=[];while(!this.ck('RP')){ps.push(this.ex('IDENT').v);if(!this.ck('RP'))this.ex('COMMA');}this.ex('RP');return{T:'Fn',n,ps,b:this.blk()};}
-          case 'PAW':{this.adv();return{T:'Ret',e:this.expr()};}
-          case 'SCRATCH':{this.adv();return{T:'Brk'};}
-          case 'KNEAD':{this.adv();return{T:'Cont'};}
-          case 'IMPORT':{this.adv();return{T:'Imp',f:this.ex('STR').v};}
-          default:return{T:'ExS',e:this.expr()};
+        switch (t.t) {
+          case 'PURR': { this.adv(); const n = this.ex('IDENT').v; this.ex('ASSIGN'); return { T: 'Decl', n, v: this.expr() }; }
+          case 'MEOW': { this.adv(); return { T: 'Prnt', e: this.expr() }; }
+          case 'PSSPSS': return this.ifS();
+          case 'STALK': { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); return { T: 'Whl', c, b: this.blk() }; }
+          case 'POUNCE': { this.adv(); this.ex('LP'); const vn = this.ex('IDENT').v; this.ex('FROM'); const f = this.expr(); this.ex('TO'); const to = this.expr(); this.ex('RP'); return { T: 'For', vn, f, to, b: this.blk() }; }
+          case 'CLAW': { this.adv(); const n = this.ex('IDENT').v; this.ex('LP'); const ps = []; while (!this.ck('RP')) { ps.push(this.ex('IDENT').v); if (!this.ck('RP')) this.ex('COMMA'); } this.ex('RP'); return { T: 'Fn', n, ps, b: this.blk() }; }
+          case 'PAW': { this.adv(); return { T: 'Ret', e: this.expr() }; }
+          case 'SCRATCH': { this.adv(); return { T: 'Brk' }; }
+          case 'KNEAD': { this.adv(); return { T: 'Cont' }; }
+          case 'IMPORT': { this.adv(); return { T: 'Imp', f: this.ex('STR').v }; }
+          default: return { T: 'ExS', e: this.expr() };
         }
       }
-      isIdxAsgn(){let d=0,i=this.p+1;while(i<this.t.length){if(this.t[i].t==='LBK')d++;else if(this.t[i].t==='RBK'){d--;if(d===0)break;}i++;}return this.t[i+1]?.t==='ASSIGN';}
-      ifS(){this.adv();this.ex('LP');const c=this.expr();this.ex('RP');const b=this.blk();let eb=null;if(this.ck('ELSE')){this.adv();eb=this.ck('PSSPSS')?[this.ifS()]:this.blk();}return{T:'If',c,b,eb};}
-      blk(){this.ex('LB');const s=[];while(!this.ck('RB')&&!this.ck('EOF'))s.push(this.st());this.ex('RB');return s;}
-      expr(){return this.or();}
-      or(){let l=this.and();while(this.ck('OR')){this.adv();l={T:'Bin',op:'or',l,r:this.and()};}return l;}
-      and(){let l=this.eq();while(this.ck('AND')){this.adv();l={T:'Bin',op:'and',l,r:this.eq()};}return l;}
-      eq(){let l=this.cmp();while(this.ck('EQ')||this.ck('NEQ')){const op=this.adv().t==='EQ'?'==':'!=';l={T:'Bin',op,l,r:this.cmp()};}return l;}
-      cmp(){let l=this.add();const m={LT:'<',GT:'>',LTE:'<=',GTE:'>='};while(m[this.pk().t]){const op=m[this.adv().t];l={T:'Bin',op,l,r:this.add()};}return l;}
-      add(){let l=this.mul();while(this.ck('PLUS')||this.ck('MINUS')){const op=this.adv().t==='PLUS'?'+':'-';l={T:'Bin',op,l,r:this.mul()};}return l;}
-      mul(){let l=this.un();const m={MUL:'*',DIV:'/',MOD:'%'};while(m[this.pk().t]){const op=m[this.adv().t];l={T:'Bin',op,l,r:this.un()};}return l;}
-      un(){if(this.ck('NOT')){this.adv();return{T:'Un',op:'not',e:this.un()};}if(this.ck('MINUS')){this.adv();return{T:'Un',op:'-',e:this.un()};}return this.post();}
-      post(){let e=this.prim();while(this.ck('LBK')){this.adv();const i=this.expr();this.ex('RBK');e={T:'Idx',o:e,i};}return e;}
-      prim(){
-        const t=this.pk();
-        switch(t.t){
-          case 'NUM':this.adv();return{T:'Lit',v:t.v};
-          case 'STR':this.adv();return{T:'Lit',v:t.v};
-          case 'PAWSITIVE':this.adv();return{T:'Lit',v:true};
-          case 'CLAWFUL':this.adv();return{T:'Lit',v:false};
-          case 'NAP':this.adv();return{T:'Lit',v:null};
-          case 'LP':{this.adv();const e=this.expr();this.ex('RP');return e;}
-          case 'LITTER':{this.adv();this.ex('LBK');const els=[];while(!this.ck('RBK')){els.push(this.expr());if(!this.ck('RBK'))this.ex('COMMA');}this.ex('RBK');return{T:'Arr',els};}
-          case 'DEN':{this.adv();this.ex('LB');const pairs=[];while(!this.ck('RB')){const k=this.expr();this.ex('COLON');const v=this.expr();pairs.push({k,v});if(!this.ck('RB'))this.ex('COMMA');}this.ex('RB');return{T:'Dict',pairs};}
-          case 'IDENT':{this.adv();if(this.ck('LP')){this.adv();const args=[];while(!this.ck('RP')){args.push(this.expr());if(!this.ck('RP'))this.ex('COMMA');}this.ex('RP');return{T:'Call',n:t.v,args};}return{T:'Id',n:t.v};}
-          default:throw new Error(`Unexpected '${t.v||t.t}' at line ${t.l}`);
+      isIdxAsgn() { let d = 0, i = this.p + 1; while (i < this.t.length) { if (this.t[i].t === 'LBK') d++; else if (this.t[i].t === 'RBK') { d--; if (d === 0) break; } i++; } return this.t[i + 1]?.t === 'ASSIGN'; }
+      ifS() { this.adv(); this.ex('LP'); const c = this.expr(); this.ex('RP'); const b = this.blk(); let eb = null; if (this.ck('ELSE')) { this.adv(); eb = this.ck('PSSPSS') ? [this.ifS()] : this.blk(); } return { T: 'If', c, b, eb }; }
+      blk() { this.ex('LB'); const s = []; while (!this.ck('RB') && !this.ck('EOF')) s.push(this.st()); this.ex('RB'); return s; }
+      expr() { return this.or(); }
+      or() { let l = this.and(); while (this.ck('OR')) { this.adv(); l = { T: 'Bin', op: 'or', l, r: this.and() }; } return l; }
+      and() { let l = this.eq(); while (this.ck('AND')) { this.adv(); l = { T: 'Bin', op: 'and', l, r: this.eq() }; } return l; }
+      eq() { let l = this.cmp(); while (this.ck('EQ') || this.ck('NEQ')) { const op = this.adv().t === 'EQ' ? '==' : '!='; l = { T: 'Bin', op, l, r: this.cmp() }; } return l; }
+      cmp() { let l = this.add(); const m = { LT: '<', GT: '>', LTE: '<=', GTE: '>=' }; while (m[this.pk().t]) { const op = m[this.adv().t]; l = { T: 'Bin', op, l, r: this.add() }; } return l; }
+      add() { let l = this.mul(); while (this.ck('PLUS') || this.ck('MINUS')) { const op = this.adv().t === 'PLUS' ? '+' : '-'; l = { T: 'Bin', op, l, r: this.mul() }; } return l; }
+      mul() { let l = this.un(); const m = { MUL: '*', DIV: '/', MOD: '%' }; while (m[this.pk().t]) { const op = m[this.adv().t]; l = { T: 'Bin', op, l, r: this.un() }; } return l; }
+      un() { if (this.ck('NOT')) { this.adv(); return { T: 'Un', op: 'not', e: this.un() }; } if (this.ck('MINUS')) { this.adv(); return { T: 'Un', op: '-', e: this.un() }; } return this.post(); }
+      post() { let e = this.prim(); while (this.ck('LBK')) { this.adv(); const i = this.expr(); this.ex('RBK'); e = { T: 'Idx', o: e, i }; } return e; }
+      prim() {
+        const t = this.pk();
+        switch (t.t) {
+          case 'NUM': this.adv(); return { T: 'Lit', v: t.v };
+          case 'STR': this.adv(); return { T: 'Lit', v: t.v };
+          case 'PAWSITIVE': this.adv(); return { T: 'Lit', v: true };
+          case 'CLAWFUL': this.adv(); return { T: 'Lit', v: false };
+          case 'NAP': this.adv(); return { T: 'Lit', v: null };
+          case 'LP': { this.adv(); const e = this.expr(); this.ex('RP'); return e; }
+          case 'LITTER': { this.adv(); this.ex('LBK'); const els = []; while (!this.ck('RBK')) { els.push(this.expr()); if (!this.ck('RBK')) this.ex('COMMA'); } this.ex('RBK'); return { T: 'Arr', els }; }
+          case 'DEN': { this.adv(); this.ex('LB'); const pairs = []; while (!this.ck('RB')) { const k = this.expr(); this.ex('COLON'); const v = this.expr(); pairs.push({ k, v }); if (!this.ck('RB')) this.ex('COMMA'); } this.ex('RB'); return { T: 'Dict', pairs }; }
+          case 'IDENT': { this.adv(); if (this.ck('LP')) { this.adv(); const args = []; while (!this.ck('RP')) { args.push(this.expr()); if (!this.ck('RP')) this.ex('COMMA'); } this.ex('RP'); return { T: 'Call', n: t.v, args }; } return { T: 'Id', n: t.v }; }
+          default: throw new Error(`Unexpected '${t.v || t.t}' at line ${t.l}`);
         }
       }
     }
 
-    class RetSig{constructor(v){this.v=v;}}class BrkSig{}class CntSig{}
+    class RetSig { constructor(v) { this.v = v; } } class BrkSig { } class CntSig { }
 
     class Interp {
-      constructor(){this.out=[];}
-      run(ast){this.out=[];const env=Object.create(null);try{this.blk(ast.s,env);}catch(e){if(!(e instanceof RetSig))throw e;}return this.out;}
-      blk(ss,env){for(const s of ss)this.exec(s,env);}
-      lk(n,env){let e=env;while(e!==null){if(Object.prototype.hasOwnProperty.call(e,n))return e[n];e=Object.getPrototypeOf(e);}throw new Error(`Unknown variable: '${n}' 😿`);}
-      tr(v){return v!==null&&v!==false&&v!==0&&v!=='';}
-      interp(s,env){return s.replace(/\$\{([^}]+)\}/g,(_,expr)=>{try{const toks=new Lx(expr).tok();const p=new Rt(toks);const node=p.expr();return meowStr(this.ev(node,env));}catch{return`\${${expr}}`;}});}
-      exec(s,env){
-        switch(s.T){
-          case 'Decl':env[s.n]=this.ev(s.v,env);break;
-          case 'Asgn':{const v=this.ev(s.v,env);let e=env;while(e!==null){if(Object.prototype.hasOwnProperty.call(e,s.n)){e[s.n]=v;return;}e=Object.getPrototypeOf(e);}env[s.n]=v;break;}
-          case 'IdxAsgn':{const obj=this.lk(s.n,env);const idx=this.ev(s.idx,env);obj[idx]=this.ev(s.v,env);break;}
-          case 'Prnt':this.out.push(meowStr(this.ev(s.e,env)));break;
-          case 'If':{if(this.tr(this.ev(s.c,env))){this.blk(s.b,Object.create(env));}else if(s.eb){this.blk(s.eb,Object.create(env));}break;}
-          case 'Whl':{let it=0;while(this.tr(this.ev(s.c,env))){if(++it>200000)throw new Error('Infinite loop 😾');try{this.blk(s.b,Object.create(env));}catch(e){if(e instanceof BrkSig)break;if(e instanceof CntSig)continue;throw e;}}break;}
-          case 'For':{const f=this.ev(s.f,env),to=this.ev(s.to,env);for(let i=f;i<=to;i++){const e2=Object.create(env);e2[s.vn]=i;try{this.blk(s.b,e2);}catch(e){if(e instanceof BrkSig)break;if(e instanceof CntSig)continue;throw e;}}break;}
-          case 'Fn':env[s.n]={__fn:true,ps:s.ps,b:s.b,cl:env};break;
-          case 'Ret':throw new RetSig(this.ev(s.e,env));
-          case 'Brk':throw new BrkSig();
-          case 'Cont':throw new CntSig();
-          case 'Imp':this.out.push(`[import "${s.f}" — not supported in docs runner]`);break;
-          case 'ExS':this.ev(s.e,env);break;
+      constructor() { this.out = []; }
+      run(ast) { this.out = []; const env = Object.create(null); try { this.blk(ast.s, env); } catch (e) { if (!(e instanceof RetSig)) throw e; } return this.out; }
+      blk(ss, env) { for (const s of ss) this.exec(s, env); }
+      lk(n, env) { let e = env; while (e !== null) { if (Object.prototype.hasOwnProperty.call(e, n)) return e[n]; e = Object.getPrototypeOf(e); } throw new Error(`Unknown variable: '${n}' 😿`); }
+      tr(v) { return v !== null && v !== false && v !== 0 && v !== ''; }
+      interp(s, env) { return s.replace(/\$\{([^}]+)\}/g, (_, expr) => { try { const toks = new Lx(expr).tok(); const p = new Rt(toks); const node = p.expr(); return meowStr(this.ev(node, env)); } catch { return `\${${expr}}`; } }); }
+      exec(s, env) {
+        switch (s.T) {
+          case 'Decl': env[s.n] = this.ev(s.v, env); break;
+          case 'Asgn': { const v = this.ev(s.v, env); let e = env; while (e !== null) { if (Object.prototype.hasOwnProperty.call(e, s.n)) { e[s.n] = v; return; } e = Object.getPrototypeOf(e); } env[s.n] = v; break; }
+          case 'IdxAsgn': { const obj = this.lk(s.n, env); const idx = this.ev(s.idx, env); obj[idx] = this.ev(s.v, env); break; }
+          case 'Prnt': this.out.push(meowStr(this.ev(s.e, env))); break;
+          case 'If': { if (this.tr(this.ev(s.c, env))) { this.blk(s.b, Object.create(env)); } else if (s.eb) { this.blk(s.eb, Object.create(env)); } break; }
+          case 'Whl': { let it = 0; while (this.tr(this.ev(s.c, env))) { if (++it > 200000) throw new Error('Infinite loop 😾'); try { this.blk(s.b, Object.create(env)); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
+          case 'For': { const f = this.ev(s.f, env), to = this.ev(s.to, env); for (let i = f; i <= to; i++) { const e2 = Object.create(env); e2[s.vn] = i; try { this.blk(s.b, e2); } catch (e) { if (e instanceof BrkSig) break; if (e instanceof CntSig) continue; throw e; } } break; }
+          case 'Fn': env[s.n] = { __fn: true, ps: s.ps, b: s.b, cl: env }; break;
+          case 'Ret': throw new RetSig(this.ev(s.e, env));
+          case 'Brk': throw new BrkSig();
+          case 'Cont': throw new CntSig();
+          case 'Imp': this.out.push(`[import "${s.f}" — not supported in docs runner]`); break;
+          case 'ExS': this.ev(s.e, env); break;
         }
       }
-      ev(e,env){
-        switch(e.T){
-          case 'Lit':{if(typeof e.v==='string'&&e.v.includes('${'))return this.interp(e.v,env);return e.v;}
-          case 'Id':return this.lk(e.n,env);
-          case 'Arr':return e.els.map(x=>this.ev(x,env));
-          case 'Dict':{const d={__dict:true};for(const p of e.pairs)d[String(this.ev(p.k,env)).replace(/^"|"$/g,'')]=this.ev(p.v,env);return d;}
-          case 'Idx':{const o=this.ev(e.o,env);const i=this.ev(e.i,env);if(o==null)throw new Error('Cannot index nap');if(o.__dict)return o[i]??null;if(typeof i==='number'&&(i<0||i>=o.length))throw new Error(`Index ${i} out of bounds (length ${o.length})`);return o[i]??null;}
-          case 'Un':{const v=this.ev(e.e,env);if(e.op==='not')return!this.tr(v);if(e.op==='-')return-v;break;}
-          case 'Bin':{if(e.op==='and'){const l=this.ev(e.l,env);return this.tr(l)?this.ev(e.r,env):l;}if(e.op==='or'){const l=this.ev(e.l,env);return this.tr(l)?l:this.ev(e.r,env);}const l=this.ev(e.l,env),r=this.ev(e.r,env);switch(e.op){case '+':(typeof l==='string'||typeof r==='string');return(typeof l==='string'||typeof r==='string')?String(l)+String(r):l+r;case '-':return l-r;case '*':return l*r;case '/':{if(r===0)throw new Error('Division by zero! 😾');return l/r;}case '%':return l%r;case '==':return l===r;case '!=':return l!==r;case '<':return l<r;case '>':return l>r;case '<=':return l<=r;case '>=':return l>=r;}break;}
-          case 'Call':{const args=e.args.map(a=>this.ev(a,env));if(BUILTINS[e.n])return BUILTINS[e.n](args);const fn=this.lk(e.n,env);if(!fn||!fn.__fn)throw new Error(`'${e.n}' is not a function`);const ce=Object.create(fn.cl);fn.ps.forEach((p,i)=>ce[p]=args[i]??null);try{this.blk(fn.b,ce);}catch(ex){if(ex instanceof RetSig)return ex.v;throw ex;}return null;}
+      ev(e, env) {
+        switch (e.T) {
+          case 'Lit': { if (typeof e.v === 'string' && e.v.includes('${')) return this.interp(e.v, env); return e.v; }
+          case 'Id': return this.lk(e.n, env);
+          case 'Arr': return e.els.map(x => this.ev(x, env));
+          case 'Dict': { const d = { __dict: true }; for (const p of e.pairs) d[String(this.ev(p.k, env)).replace(/^"|"$/g, '')] = this.ev(p.v, env); return d; }
+          case 'Idx': { const o = this.ev(e.o, env); const i = this.ev(e.i, env); if (o == null) throw new Error('Cannot index nap'); if (o.__dict) return o[i] ?? null; if (typeof i === 'number' && (i < 0 || i >= o.length)) throw new Error(`Index ${i} out of bounds (length ${o.length})`); return o[i] ?? null; }
+          case 'Un': { const v = this.ev(e.e, env); if (e.op === 'not') return !this.tr(v); if (e.op === '-') return -v; break; }
+          case 'Bin': { if (e.op === 'and') { const l = this.ev(e.l, env); return this.tr(l) ? this.ev(e.r, env) : l; } if (e.op === 'or') { const l = this.ev(e.l, env); return this.tr(l) ? l : this.ev(e.r, env); } const l = this.ev(e.l, env), r = this.ev(e.r, env); switch (e.op) { case '+': (typeof l === 'string' || typeof r === 'string'); return (typeof l === 'string' || typeof r === 'string') ? String(l) + String(r) : l + r; case '-': return l - r; case '*': return l * r; case '/': { if (r === 0) throw new Error('Division by zero! 😾'); return l / r; } case '%': return l % r; case '==': return l === r; case '!=': return l !== r; case '<': return l < r; case '>': return l > r; case '<=': return l <= r; case '>=': return l >= r; }break; }
+          case 'Call': { const args = e.args.map(a => this.ev(a, env)); if (BUILTINS[e.n]) return BUILTINS[e.n](args); const fn = this.lk(e.n, env); if (!fn || !fn.__fn) throw new Error(`'${e.n}' is not a function`); const ce = Object.create(fn.cl); fn.ps.forEach((p, i) => ce[p] = args[i] ?? null); try { this.blk(fn.b, ce); } catch (ex) { if (ex instanceof RetSig) return ex.v; throw ex; } return null; }
         }
       }
     }
 
     function runInline(btn) {
       const wrapper = btn.closest('.run-example');
-      const outDiv  = wrapper.querySelector('.run-output');
-      const code    = wrapper.querySelector('pre code').textContent;
+      const outDiv = wrapper.querySelector('.run-output');
+      const code = wrapper.querySelector('pre code').textContent;
       outDiv.classList.add('visible');
       try {
         const tokens = new Lx(code).tok();
-        const ast    = new Rt(tokens).parse();
+        const ast = new Rt(tokens).parse();
         const output = new Interp().run(ast);
         outDiv.innerHTML = output.map(line =>
           `<div class="out-line"><span class="out-prefix">🐱</span>${escH(line)}</div>`
@@ -1347,7 +2829,7 @@ bubbleSort(data, <span class="num">6</span>)
       }
     }
 
-    function escH(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function escH(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
     // Active sidebar on scroll
     const observer = new IntersectionObserver(entries => {
@@ -1368,4 +2850,5 @@ bubbleSort(data, <span class="num">6</span>)
     }
   </script>
 </body>
+
 </html>
