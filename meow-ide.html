@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
-  <title>MEOW IDE v2.1.1</title>
+  <title>MEOW IDE v2.1.2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Josefin+Sans:wght@700&display=swap"
@@ -2118,7 +2118,7 @@
   <!-- HEADER -->
   <div class="header">
     <div class="menu-toggle" onclick="toggleMobMenu()" id="mob-toggle">☰</div>
-    <div class="logo"><span class="cat-icon">🐱</span>MEOW<span class="ver">v2.1.1</span></div>
+    <div class="logo"><span class="cat-icon">🐱</span>MEOW<span class="ver">v2.1.2</span></div>
     <div class="hdr-sep hdr-desktop"></div>
     <span class="hdr-sub hdr-desktop">Purrrfect Language to Exist! lol</span>
     <!-- Desktop actions -->
@@ -2514,7 +2514,7 @@
 
   <!-- STATUS BAR -->
   <div class="statusbar">
-    <span>🐱 MEOW <span class="accent">v2.1.1</span> by <span class="accent"><a style="color: var(--orange);"
+    <span>🐱 MEOW <span class="accent">v2.1.2</span> by <span class="accent"><a style="color: var(--orange);"
           href="https://linkedin.com/in/rakshitdogra">rakshitdogra</a></span></span>
     <span>
       <div class="status-dot" id="sb-dot"></div>
@@ -2528,7 +2528,7 @@
   <div class="modal-overlay" id="ref-modal">
     <div class="modal">
       <button class="modal-close" onclick="closeRef()">✕</button>
-      <h2>🐱 MEOW v2.1.1 Language Reference</h2>
+      <h2>🐱 MEOW v2.1.2 Language Reference</h2>
       <div class="kw-grid" style="margin-bottom:18px">
         <div class="kw-card">
           <div class="kn" style="color:var(--orange)">purr</div>
@@ -4061,12 +4061,15 @@
       guiAdd(btn);
     }
 
-    function addGuiInput(placeholder, varName) {
+    function addGuiInput(placeholder, varName, callbackName) {
       openGuiOverlay();
       const input = guiCtx(document.createElement('input'));
       input.className = 'gui-input';
       input.placeholder = meowStr(placeholder);
-      input.oninput = () => { if (interp.finalEnv) interp.finalEnv[varName] = input.value; };
+      input.oninput = () => {
+        if (interp.finalEnv) interp.finalEnv[varName] = input.value;
+        if (callbackName) triggerMeowFunction(callbackName);
+      };
       guiAdd(input);
     }
 
@@ -4100,14 +4103,17 @@
       guiAdd(img);
     }
 
-    function guiSlider(min, max, varName) {
+    function guiSlider(min, max, varName, callbackName) {
       openGuiOverlay();
       const container = document.createElement('div');
       container.className = 'gui-slider-container';
       const slider = guiCtx(document.createElement('input'));
       slider.type = 'range'; slider.className = 'gui-slider';
       slider.min = min; slider.max = max;
-      slider.oninput = () => { if (interp.finalEnv) interp.finalEnv[varName] = Number(slider.value); };
+      slider.oninput = () => {
+        if (interp.finalEnv) interp.finalEnv[varName] = Number(slider.value);
+        if (callbackName) triggerMeowFunction(callbackName);
+      };
       container.appendChild(slider);
       guiAdd(container);
     }
@@ -4267,23 +4273,27 @@
     // IDE — EXAMPLES
     // ============================================================
     const examples = {
-      hello: `# 🐱 Hello World in MEOW v2.1.1!
+      hello: `# 🐱 Hello World in MEOW v2.1.2!
 meow "Hello, World! 🐱"
 purr name = "Whiskers"
-purr version = 2
-meow "Welcome to MEOW v\${version} — now with more features!"
+purr version = 2.1
+purr patch = 2
+meow "Welcome to MEOW v\${version}.\${patch} — now with more features!"
 meow "Running as: \${name}"`,
 
-      fibonacci: `# 🔢 Fibonacci with string interpolation
+      fibonacci: `# 🔢 Fibonacci Sequence
+# Demonstrates recursion and string interpolation
 claw fib(n) {
   psspss (n <= 1) { paw n }
   paw fib(n - 1) + fib(n - 2)
 }
+meow "--- Fibonacci Sequence ---"
 pounce (i from 0 to 12) {
   meow "fib(\${i}) = \${fib(i)}"
 }`,
 
       fizzbuzz: `# 🎉 FizzBuzz — Cat Edition!
+# A classic logic test with a feline twist
 pounce (i from 1 to 30) {
   psspss (i % 15 == 0) {
     meow "PurrBuzz 🐱💫"
@@ -4296,7 +4306,7 @@ pounce (i from 1 to 30) {
   }
 }`,
 
-      functions: `# 🪄 Functions & closures
+      functions: `# 🪄 Functions & Closures
 claw greet(name, title) {
   paw "Hello, \${title} \${name}! 🐱"
 }
@@ -4306,11 +4316,12 @@ claw factorial(n) {
 }
 meow greet("Luna", "Dr.")
 meow greet("Mittens", "Prof.")
+meow "--- Factorials ---"
 pounce (n from 1 to 8) {
   meow "\${n}! = \${factorial(n)}"
 }`,
 
-      arrays: `# 📦 Arrays & operations
+      arrays: `# 📦 Arrays & Operations
 purr cats = litter ["Whiskers", "Luna", "Mittens", "Shadow"]
 purr scores = litter [95, 87, 72, 99]
 meow "Cat roster:"
@@ -4319,8 +4330,8 @@ pounce (i from 0 to 3) {
 }
 chase(cats, "Biscuit")
 meow "After adding Biscuit: \${fur(cats)} cats"
-meow "All: \${nuzzle(cats, ", ")}"
-meow "Sorted scores: \${nuzzle(sort(scores), " < ")}"`,
+meow "All cats: \${nuzzle(cats, ', ')}"
+meow "Sorted scores: \${nuzzle(sort(scores), ' < ')}"`,
 
       dicts: `# 🗂 Dictionaries (den)
 purr cat = den {
@@ -4329,16 +4340,16 @@ purr cat = den {
   "color": "silver",
   "purring": pawsitive
 }
-meow "Name: \${cat["name"]}"
-meow "Age: \${cat["age"]}"
+meow "Name: \${cat['name']}"
+meow "Age: \${cat['age']}"
 cat["age"] = 4
-meow "Updated age: \${cat["age"]}"
-meow "Keys: \${nuzzle(keys(cat), ", ")}"
+meow "Updated age: \${cat['age']}"
+meow "Keys: \${nuzzle(keys(cat), ', ')}"
 psspss (has(cat, "purring")) {
-  meow "Cat is purring: \${cat["purring"]}"
+  meow "Is the cat purring? \${cat['purring']}"
 }
 
-# Dict of dicts
+# Nested Dictionaries
 purr zoo = den {
   "cat": den { "sound": "meow", "legs": 4 },
   "dog": den { "sound": "woof", "legs": 4 },
@@ -4348,10 +4359,11 @@ purr animals = keys(zoo)
 pounce (i from 0 to 2) {
   purr animal = animals[i]
   purr info = zoo[animal]
-  meow "\${animal} says \${info["sound"]} and has \${info["legs"]} legs"
+  meow "The \${animal} says '\${info['sound']}' and has \${info['legs']} legs"
 }`,
 
       interp: `# ✨ String Interpolation
+# Demonstrates embedding expressions inside strings
 purr name = "Luna"
 purr age = 3
 purr score = 9.5
@@ -4368,6 +4380,7 @@ meow describe("cat", "meow")
 meow describe("dog", "woof")`,
 
       catlife: `# 😺 A Day in the Life of a Cat!
+# A complex script combining most language features
 claw eat(food) {
   psspss (food == "tuna") {
     meow "  🐟 TUNA! Pure bliss! +50"
@@ -4389,7 +4402,7 @@ claw knock(item) {
   paw 20
 }
 purr hp = 0
-meow "=== Cat's Day ==="
+meow "=== Cat's Day Started ==="
 meow ""
 meow "🌅 Morning:"
 hp = hp + eat("tuna")
@@ -4405,7 +4418,7 @@ meow "🌙 Evening:"
 hp = hp + knock("book")
 hp = hp + sleep(8)
 meow ""
-meow "=== Summary ==="
+meow "=== Day Summary ==="
 meow "Total happiness: \${hp} points"
 psspss (hp > 100) {
   meow "Status: 😻 MAXIMUM PURRING"
@@ -4415,7 +4428,7 @@ psspss (hp > 100) {
   meow "Status: 😐 Tolerating existence"
 }`,
 
-      bubbleSort: `# 🫧 Bubble Sort
+      bubbleSort: `# 🫧 Bubble Sort Algorithm
 claw bubbleSort(arr, n) {
   pounce (i from 0 to n - 2) {
     pounce (j from 0 to n - i - 2) {
@@ -4428,39 +4441,36 @@ claw bubbleSort(arr, n) {
   }
 }
 purr data = litter [64, 34, 25, 12, 22, 11, 90]
-meow "Original: \${nuzzle(data, ", ")}"
+meow "Original Array: \${nuzzle(data, ', ')}"
 bubbleSort(data, 7)
-meow "Sorted:   \${nuzzle(data, " → ")}"`,
+meow "Sorted Array:   \${nuzzle(data, ' -> ')}"`,
 
       fileops: `# 📄 File Operations
-# write_file creates a new tab with the content
-write_file("data.txt", "Hello from MEOW!\nLine 2\nLine 3")
+# write_file creates/updates a virtual tab
+write_file("data.txt", "Hello from MEOW v2.1.2!\nLine 2\nLine 3")
 meow "Wrote data.txt"
 
-# read it back
+# read it back from the tab state
 purr content = read_file("data.txt")
 meow "Read back: \${content}"
 
-# Use as a data store
+# Append-like logic using a variable
 purr log = ""
 pounce (i from 1 to 5) {
   log = log + "Entry \${i}: item_\${i}\n"
 }
 write_file("log.txt", log)
-meow "Log written! Open log.txt tab to see it."`,
+meow "Log written! Open 'log.txt' tab to see it."`,
 
-      gui_counter: `# 🎨 GUI Counter Example
-# Click 'Run' then open the 'GUI' tab!
+      gui_counter: `# 🎨 GUI: Interactive Counter
+# 1. Click 'Run' to initialize
+# 2. Open the 'GUI' tab to interact!
 
 purr count = 0
 
 claw increment() {
   count = count + 1
-  gui_clear()
-  gui_label("--- MEOW COUNTER ---")
-  gui_label("Current count: \${count}")
-  gui_button("Click to add! 🐾", "increment")
-  gui_button("Reset", "resetCount")
+  renderUI()
   
   psspss (count >= 10) {
     gui_show_modal("😻 WOW! You reached \${count} clicks!")
@@ -4469,14 +4479,21 @@ claw increment() {
 
 claw resetCount() {
   count = 0
-  gui_clear()
-  gui_label("Counter Reset!")
-  gui_button("Start Again", "increment")
+  renderUI()
 }
 
-# Initial UI
-gui_label("Welcome to MEOW GUI!")
-gui_button("Start Counter 🐾", "increment")`,
+claw renderUI() {
+  gui_clear()
+  gui_label("--- MEOW COUNTER v2.1.2 ---")
+  gui_spacer(10)
+  gui_label("Current count: \${count}")
+  gui_spacer(20)
+  gui_button("Click to add! 🐾", "increment")
+  gui_button("Reset", "resetCount")
+}
+
+# Initial UI Render
+renderUI()`,
 
       gui_profile: `# 👤 Advanced GUI: Cat Profile
 # Demonstrates Rows, Columns, Images, and Sliders!
@@ -4488,43 +4505,45 @@ purr catHealth = 80
 claw updateUI() {
   gui_clear()
   
-  # Header Row
+  # Header Row with Color
   gui_row()
     gui_set_color("#FF8C42")
     gui_label("🐾 CAT PROFILE")
     gui_spacer()
-    gui_button("Refresh", "updateUI")
+    gui_button("Refresh View", "updateUI")
   gui_end()
   
   gui_spacer(20)
   
-  # Content Column
+  # Layout Nesting
   gui_column()
     # Image from a placeholder service
     gui_image("https://placekitten.com/400/200", 400, 200)
     
+    gui_spacer(10)
+    
     gui_row()
       gui_label("Name: ")
-      gui_input("Enter name...", "catName")
+      gui_input("Enter name...", "catName", "updateUI")
     gui_end()
     
     gui_row()
       gui_label("Age: \${catAge} years")
-      gui_slider(0, 20, "catAge")
+      gui_slider(0, 20, "catAge", "updateUI")
     gui_end()
     
     gui_row()
       gui_label("Health: \${catHealth}%")
-      gui_slider(0, 100, "catHealth")
+      gui_slider(0, 100, "catHealth", "updateUI")
     gui_end()
     
-    gui_spacer(10)
-    gui_button("Save Profile", "save")
+    gui_spacer(15)
+    gui_button("Save Profile 💾", "saveSettings")
   gui_end()
 }
 
-claw save() {
-  gui_show_modal("Saved \${catName}'s profile! 😺")
+claw saveSettings() {
+  gui_show_modal("Saved \${catName}'s profile successfully!")
 }
 
 # Initial trigger
